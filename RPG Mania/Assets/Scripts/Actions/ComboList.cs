@@ -53,6 +53,9 @@ public class ComboList
 
     private void LifeCheck(CharacterInfo target, int damage)
     {
+
+        if (Random.Range(0, 100) < 5) damage *= 5;
+
         Debug.Log(damage);
 
         target.health -= damage;
