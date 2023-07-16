@@ -31,8 +31,7 @@ public class BattleManager : MonoBehaviour {
     private void Start() {
         player = gameManager.player;
         var characters = new List<CharacterInfo> { player }.Concat(gameManager.enemies);
-        var sortedCharacters = characters.OrderByDescending(c => c.speed);
-        turnOrder = new Queue<CharacterInfo>(sortedCharacters);
+        turnOrder = new Queue<CharacterInfo>(characters);
 
         pCombo.text = player.characterName + "'s Combo Length: " + player.combo;
 
@@ -269,6 +268,7 @@ public class BattleManager : MonoBehaviour {
     private void NextTurn(CharacterInfo activeCharacter)
     {
         UpdateSkills();
+        UpdateCombo();
 
         turnOrder.Dequeue();
         turnOrder.Enqueue(activeCharacter);

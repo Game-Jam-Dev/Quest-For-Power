@@ -5,11 +5,12 @@ public class CharacterInfo : MonoBehaviour {
     public string characterName = "";
     public int maxHealth;
     public int health;
-    public int combo;
     public int stamina;
     public int attack;
     public int defense;
-    public int speed;
+    public int accuracy;
+    public int evasion;
+    public int combo;
     public SkillAction activeSkill;
     protected List<string> comboKeys = new List<string>();
     protected List<string> skillKeys = new List<string>();
@@ -20,11 +21,13 @@ public class CharacterInfo : MonoBehaviour {
     protected virtual void Start() {
         health = maxHealth;
 
-        comboKeys.Add("base");
+        comboKeys.Add("light");
+        comboKeys.Add("medium");
         comboKeys.Add("heavy");
 
         comboActions.Add(ComboList.GetInstance().GetAction(comboKeys[0]));
         comboActions.Add(ComboList.GetInstance().GetAction(comboKeys[1]));
+        comboActions.Add(ComboList.GetInstance().GetAction(comboKeys[2]));
     }
 
     public ComboAction GetAction(int i)
