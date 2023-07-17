@@ -45,5 +45,7 @@ public class SkillList
     public void HealthDrain(CharacterInfo self, CharacterInfo target, int damage)
     {
         self.health += damage/2;
+
+        if (self.health > self.maxHealth) self.health = self.maxHealth;
     }
 }

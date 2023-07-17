@@ -247,7 +247,7 @@ public class BattleManager : MonoBehaviour {
                 } else {
                     comboActions.Add(activeCharacter.GetAction(0));
 
-                    Debug.Log($"{activeCharacter.characterName} used {comboActions[0].Name} at {player.characterName}"); // Display the action's name
+                    Debug.Log($"{activeCharacter.characterName} used {comboActions[0].Name} at {player.characterName}");
                     activeCharacter.DoAction(comboActions[0], player);
                     UpdateHealth();
 
