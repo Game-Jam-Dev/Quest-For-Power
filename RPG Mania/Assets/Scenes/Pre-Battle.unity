@@ -1224,6 +1224,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7575102328849272183, guid: 40286b3be96a7ef44a43ee52d9f29bea,
         type: 3}
+      propertyPath: evasion
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7575102328849272183, guid: 40286b3be96a7ef44a43ee52d9f29bea,
+        type: 3}
+      propertyPath: accuracy
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7575102328849272183, guid: 40286b3be96a7ef44a43ee52d9f29bea,
+        type: 3}
+      propertyPath: maxHealth
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7575102328849272183, guid: 40286b3be96a7ef44a43ee52d9f29bea,
+        type: 3}
       propertyPath: characterName
       value: Bill
       objectReference: {fileID: 0}
@@ -1360,6 +1375,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 601920955503390083, guid: 19c9f2a71fa419f4e964f78ed2b81ef1,
         type: 3}
+      propertyPath: combo
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 601920955503390083, guid: 19c9f2a71fa419f4e964f78ed2b81ef1,
+        type: 3}
       propertyPath: speed
       value: 12
       objectReference: {fileID: 0}
@@ -1375,8 +1395,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 601920955503390083, guid: 19c9f2a71fa419f4e964f78ed2b81ef1,
         type: 3}
+      propertyPath: evasion
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 601920955503390083, guid: 19c9f2a71fa419f4e964f78ed2b81ef1,
+        type: 3}
+      propertyPath: stamina
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 601920955503390083, guid: 19c9f2a71fa419f4e964f78ed2b81ef1,
+        type: 3}
+      propertyPath: accuracy
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 601920955503390083, guid: 19c9f2a71fa419f4e964f78ed2b81ef1,
+        type: 3}
       propertyPath: maxHealth
-      value: 15
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 601920955503390083, guid: 19c9f2a71fa419f4e964f78ed2b81ef1,
         type: 3}
@@ -1623,6 +1658,21 @@ PrefabInstance:
         type: 3}
       propertyPath: attack
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7575102328849272183, guid: 40286b3be96a7ef44a43ee52d9f29bea,
+        type: 3}
+      propertyPath: evasion
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7575102328849272183, guid: 40286b3be96a7ef44a43ee52d9f29bea,
+        type: 3}
+      propertyPath: accuracy
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7575102328849272183, guid: 40286b3be96a7ef44a43ee52d9f29bea,
+        type: 3}
+      propertyPath: maxHealth
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7575102328849272183, guid: 40286b3be96a7ef44a43ee52d9f29bea,
         type: 3}

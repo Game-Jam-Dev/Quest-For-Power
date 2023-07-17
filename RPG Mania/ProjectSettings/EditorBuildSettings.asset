@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Title Screen.unity
     guid: bd4ef0d83fa52cb448551c06220e7ccd
   - enabled: 1
-    path: Assets/Scenes/World.unity
+    path: Assets/Scenes/Pre-Battle.unity
     guid: 1ffab1410ea286843b9cc41b955b07f2
   - enabled: 1
     path: Assets/Scenes/Battle.unity

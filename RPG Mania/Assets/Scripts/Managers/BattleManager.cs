@@ -7,28 +7,103 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 
 public class BattleManager : MonoBehaviour {
-    [SerializeField] private TextMeshProUGUI pHealth, eHealth;
-    [SerializeField] private GameObject eHealthContainer, actionContainer, targetContainer;
-    [SerializeField] private Button actionButton, targetButton;
+    [SerializeField] private TextMeshProUGUI pHealth, pCombo, pStamina, eHealth;
+    [SerializeField] private GameObject eHealthContainer, actionContainer, skillContainer, targetContainer, pickAction;
+    [SerializeField] private Button actionButton, skillButton, targetButton, pickSkillButton, attackButton, escapeButton;
+    private List<Button> targetButtons = new List<Button>();
+    private List<Button> actionButtons = new List<Button>();
+    private List<Button> skillButtons = new List<Button>();
     private GameManager gameManager;
     private int worldScene = 1;
     public int killCount = 0;
 
     private Queue<CharacterInfo> turnOrder = new Queue<CharacterInfo>();
     private bool awaitCommand = false;
+    private int comboLength = 0;
 
-    private CharacterAction action;
+    private List<ComboAction> comboActions = new List<ComboAction>();
     private CharacterInfo target;
+    private PlayerInfo player;
 
     private void Awake() {
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
     }
     private void Start() {
+        player = gameManager.player;
+        var characters = new List<CharacterInfo> { player }.Concat(gameManager.enemies);
+        turnOrder = new Queue<CharacterInfo>(characters);
 
-        var characters = new List<CharacterInfo> { gameManager.player }.Concat(gameManager.enemies);
-        var sortedCharacters = characters.OrderByDescending(c => c.speed);
-        turnOrder = new Queue<CharacterInfo>(sortedCharacters);
+        pCombo.text = player.characterName + "'s Combo Length: " + player.combo;
 
+        attackButton.onClick.AddListener(SelectAttack);
+        pickSkillButton.onClick.AddListener(SelectSkill);
+        escapeButton.onClick.AddListener(Escape);
+
+        SetEnemies();
+        SetActions();
+        SetSkills();
+
+        targetContainer.SetActive(false);
+        skillContainer.SetActive(false);
+        actionContainer.SetActive(false);
+        pickAction.SetActive(false);
+
+        UpdateCombo();
+        UpdateSkills();
+        UpdateHealth();
+
+        StartCoroutine(BattleSequence());
+    }
+
+    private void SelectAttack()
+    {
+        pickAction.SetActive(false);
+        targetContainer.SetActive(true);
+    }
+
+    private void SelectSkill()
+    {
+        pickAction.SetActive(false);
+        skillContainer.SetActive(true);
+    }
+
+    private void Escape()
+    {
+        EndBattle();
+    }
+
+    private void PickTarget(CharacterInfo target)
+    {
+        this.target = target;
+        targetContainer.SetActive(false);
+        awaitCommand = false;
+    }
+
+    private void PickCombo(ComboAction action)
+    {
+        if (action.Cost <= player.combo - comboLength) 
+        {
+            comboActions.Add(action);
+            comboLength += action.Cost;
+        }
+
+        if (comboLength < player.combo) UpdateCombo();
+
+        else awaitCommand = false;
+    }
+
+    private void PickSkill(SkillAction skill)
+    {
+        if (skill.Cost <= player.stamina) player.UseSkill(skill);
+
+        skillContainer.SetActive(false);
+        pickAction.SetActive(true);
+        pickSkillButton.interactable = false;
+        pStamina.text = player.characterName + "'s Stamina: " + player.stamina;
+    }
+
+    private void SetEnemies()
+    {
         for (int i = 0; i < gameManager.enemies.Count; i++)
         {
             EnemyInfo enemy = gameManager.enemies[i];
@@ -42,43 +117,48 @@ public class BattleManager : MonoBehaviour {
             selectEnemy.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = enemy.characterName;
 
             selectEnemy.onClick.AddListener(() => PickTarget(enemy));
-        }
 
-        for (int i = 0; i < gameManager.player.CountActions(); i++)
+            targetButtons.Add(selectEnemy);
+        }
+    }
+
+    private void SetActions()
+    {
+        for (int i = 0; i < player.CountActions(); i++)
         {
-            CharacterAction currentAction = gameManager.player.GetAction(i);
+            ComboAction currentAction = player.GetAction(i);
 
             Button selectAction = Instantiate(actionButton, actionContainer.transform);
 
             selectAction.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = currentAction.Name;
 
-            selectAction.onClick.AddListener(() => PickAction(currentAction));
+            selectAction.onClick.AddListener(() => PickCombo(currentAction));
+
+            actionButtons.Add(selectAction);
+        }
+    }
+
+    private void SetSkills()
+    {
+        for (int i = 0; i < player.CountSkills(); i++)
+        {
+            SkillAction currentSkill = player.GetSkill(i);
+
+            Button selectSkill = Instantiate(skillButton, skillContainer.transform);
+
+            selectSkill.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = currentSkill.Name;
+
+            selectSkill.onClick.AddListener(() => PickSkill(currentSkill));
+
+            skillButtons.Add(selectSkill);
         }
 
-        targetContainer.SetActive(false);
-        actionContainer.SetActive(false);
-
-        UpdateActions();
-        UpdateHealth();
-
-        StartCoroutine(BattleSequence());
-    }
-
-    private void PickTarget(CharacterInfo target)
-    {
-        this.target = target;
-        awaitCommand = false;
-    }
-
-    private void PickAction(CharacterAction action)
-    {
-        this.action = action;
-        awaitCommand = false;
+        pStamina.text = player.characterName + "'s Stamina: " + player.stamina;
     }
 
     private void UpdateHealth()
     {
-        pHealth.text = gameManager.player.characterName + "'s Health: " + gameManager.player.health;
+        pHealth.text = player.characterName + "'s Health: " + player.health;
 
         for (int i = 0; i < gameManager.enemies.Count; i++)
         {
@@ -86,86 +166,115 @@ public class BattleManager : MonoBehaviour {
         }
     }
 
-    private void UpdateActions()
+    private void UpdateCombo()
     {
-        PlayerInfo p = gameManager.player;
-        Button[] buttonList = actionContainer.transform.GetComponentsInChildren<Button>();
-
-        for (int i = 0; i < buttonList.Length; i++) 
+        for (int i = 0; i < actionButtons.Count; i++) 
         {
-            buttonList[i].interactable = p.GetAction(i).MpUse <= p.mp;
+            actionButtons[i].interactable = player.GetAction(i).Cost <= player.combo - comboLength;
         }
+    }
+
+    private void UpdateSkills()
+    {
+        for (int i = 0; i < skillButtons.Count; i++)
+        {
+            skillButtons[i].interactable = player.GetSkill(i).Cost <= player.stamina;
+        }
+
+        player.activeSkill = null;
     }
 
     private IEnumerator BattleSequence()
     {
-        while (true){
+        while (true) {
             if (turnOrder.Count > 0)
             {
-                var activeCharacter = turnOrder.Peek();
+                CharacterInfo activeCharacter = turnOrder.Peek();
 
-                if (activeCharacter == gameManager.player){
+                if (activeCharacter == player){
                     awaitCommand = true;
+                    pickAction.SetActive(true);
+
+                    if (player.stamina <= 0) pickSkillButton.interactable = false;
+
+                    else pickSkillButton.interactable = true;
+
+                    while (awaitCommand)
+                    {
+
+                        yield return null;
+                    }
+                    awaitCommand = true;
+                    
                     actionContainer.SetActive(true);
+                    
                     while (awaitCommand)
                     {
 
-                        
+
                         yield return null;
                     }
-                    awaitCommand = true;
+
                     actionContainer.SetActive(false);
-                    targetContainer.SetActive(true);
-                    while (awaitCommand)
+
+                    foreach (ComboAction a in comboActions)
                     {
+                        Debug.Log($"{activeCharacter.characterName} used {a.Name} at {target.characterName}");
+                        activeCharacter.DoAction(a, target);
+                        UpdateHealth();
 
+                        if (target.health <= 0)
+                        {
+                            killCount++;
 
-                        yield return null;
+                            if (killCount >= gameManager.enemies.Count) EndBattle();
+
+                            int targetIndex = gameManager.enemies.IndexOf(target as EnemyInfo);
+                            
+                            targetContainer.transform.GetChild(targetIndex).GetComponent<Button>().interactable = false;
+
+                            var newTurnOrder = new Queue<CharacterInfo>(turnOrder.Where(x => x != target));
+                            turnOrder = newTurnOrder;
+                            
+                            break;
+                        }
+
+                        yield return new WaitForSeconds(.5f);
                     }
 
-                    targetContainer.SetActive(false);
-
-                    Debug.Log($"{activeCharacter.characterName} used {action.Name} at {target.characterName}"); // Display the action's name
-                    activeCharacter.DoAction(action, target);
-
-                    if (target.health <= 0)
-                    {
-                        killCount++;
-
-                        if (killCount >= gameManager.enemies.Count) EndBattle();
-
-                        int targetIndex = gameManager.enemies.IndexOf(target as EnemyInfo);
-                        
-                        targetContainer.transform.GetChild(targetIndex).GetComponent<Button>().interactable = false;
-
-                        var newTurnOrder = new Queue<CharacterInfo>(turnOrder.Where(x => x != target));
-                        turnOrder = newTurnOrder;
-                        
-                    }
+                    player.activeSkill = null;
 
                 } else {
-                    action = activeCharacter.GetAction(0);
+                    comboActions.Add(activeCharacter.GetAction(0));
 
-                    Debug.Log($"{activeCharacter.characterName} used {action.Name} at {gameManager.player.characterName}"); // Display the action's name
-                    activeCharacter.DoAction(action, gameManager.player);
+                    Debug.Log($"{activeCharacter.characterName} used {comboActions[0].Name} at {player.characterName}");
+                    activeCharacter.DoAction(comboActions[0], player);
+                    UpdateHealth();
 
-                    if (gameManager.player.health <= 0) EndBattle();
+                    if (player.health <= 0) EndBattle();
                 }
 
-                
+                NextTurn(activeCharacter);
 
-                UpdateHealth();
-
-                turnOrder.Dequeue();
-                turnOrder.Enqueue(activeCharacter);
-
-                yield return new WaitForSeconds(1);
+                yield return new WaitForSeconds(.5f);
 
             }
             
             
         }
         
+    }
+
+    private void NextTurn(CharacterInfo activeCharacter)
+    {
+        UpdateSkills();
+        UpdateCombo();
+
+        turnOrder.Dequeue();
+        turnOrder.Enqueue(activeCharacter);
+
+        comboActions.Clear();
+        comboLength = 0;
     }
 
     public void EndBattle()
