@@ -1,15 +1,34 @@
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
-    public float speed = 5f; // Speed of character movement
-    public float sprint = 1.8f; // Speed multipler for sprint
-    public KeyCode sprintButton = KeyCode.LeftShift;
+    public float speed = 5f;
+    public float sprint = 1.8f;
 
+    private InputActions actions;
     private Rigidbody rb;
+    private Vector2 moveInput;
+    private bool isSprinting;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+
+        actions = new InputActions();
+        actions.Gameplay.Enable();
+
+        actions.Gameplay.Move.performed += context => moveInput = context.ReadValue<Vector2>();
+        actions.Gameplay.Move.canceled += context => moveInput = Vector2.zero;
+        actions.Gameplay.Sprint.performed += context => isSprinting = true;
+        actions.Gameplay.Sprint.canceled += context => isSprinting = false;
+    }
+
+    private void OnDisable() {
+        actions.Gameplay.Move.performed -= context => moveInput = context.ReadValue<Vector2>();
+        actions.Gameplay.Move.canceled -= context => moveInput = Vector2.zero;
+        actions.Gameplay.Sprint.performed -= context => isSprinting = true;
+        actions.Gameplay.Sprint.canceled -= context => isSprinting = false;
+
+        actions.Gameplay.Disable();
     }
 
     private void FixedUpdate()
@@ -19,18 +38,10 @@ public class PlayerMovement : MonoBehaviour {
 
     private void Movement()
     {
-        float moveX = Input.GetAxisRaw("Horizontal");
-        float moveZ = Input.GetAxisRaw("Vertical");
-        Vector3 moveDirection = new Vector3(moveX, 0, moveZ).normalized;
-        
+        Vector3 moveDirection = new Vector3(moveInput.x, 0, moveInput.y).normalized;
 
-        float speedToUse = speed;
-        if (Input.GetKey(sprintButton))
-        {
-            speedToUse *= sprint;
-        }
+        float speedToUse = isSprinting ? speed * sprint : speed;
 
         rb.velocity = moveDirection * speedToUse;
-        
     }
 }
