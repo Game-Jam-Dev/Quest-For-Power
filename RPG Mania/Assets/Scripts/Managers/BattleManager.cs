@@ -27,9 +27,11 @@ public class BattleManager : MonoBehaviour {
 
     private void Awake() {
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+        gameObject.SetActive(false);
     }
-    private void Start() {
+    private void OnEnable() {
         player = gameManager.player;
+        player.gameObject.GetComponent<PlayerMovement>().enabled = false;
         var characters = new List<CharacterInfo> { player }.Concat(gameManager.enemies);
         turnOrder = new Queue<CharacterInfo>(characters);
 
@@ -285,6 +287,8 @@ public class BattleManager : MonoBehaviour {
 
         gameManager.enemies.Clear();
 
-        SceneManager.LoadScene(worldScene);
+        player.gameObject.GetComponent<PlayerMovement>().enabled = true;
+
+        gameObject.SetActive(false);
     }
 }

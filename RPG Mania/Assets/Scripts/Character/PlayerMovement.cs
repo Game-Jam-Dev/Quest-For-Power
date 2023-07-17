@@ -14,6 +14,10 @@ public class PlayerMovement : MonoBehaviour {
         rb = GetComponent<Rigidbody>();
 
         actions = new InputActions();
+    }
+
+    private void OnEnable()
+    {
         actions.Gameplay.Enable();
 
         actions.Gameplay.Move.performed += context => moveInput = context.ReadValue<Vector2>();
