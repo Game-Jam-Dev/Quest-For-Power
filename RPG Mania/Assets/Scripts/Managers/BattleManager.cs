@@ -279,16 +279,23 @@ public class BattleManager : MonoBehaviour {
         comboLength = 0;
     }
 
-    public void EndBattle()
-    {
+    private void OnDisable() {
         Debug.Log("End Battle");
 
         StopAllCoroutines();
 
         gameManager.enemies.Clear();
 
-        player.gameObject.GetComponent<PlayerMovement>().enabled = true;
+        foreach (TextMeshProUGUI t in eHealthContainer.GetComponentsInChildren<TextMeshProUGUI>()){
+            Destroy(t.gameObject);
+        }
 
+        if (player != null)
+            player.gameObject.GetComponent<PlayerMovement>().enabled = true;
+    }
+
+    public void EndBattle()
+    {
         gameObject.SetActive(false);
     }
 }

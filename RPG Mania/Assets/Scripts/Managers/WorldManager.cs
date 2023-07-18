@@ -22,13 +22,13 @@ public class WorldManager : MonoBehaviour {
     }
 
     private void Update() {
-        if (!battleUI.activeSelf) battleButton.interactable = true;
+        if (!battleUI.activeSelf) battleButton.gameObject.SetActive(true);
     }
 
     private void StartBattle() {
         foreach (GameObject e in GameObject.FindGameObjectsWithTag("Enemy")) gameManager.enemies.Add(e.GetComponent<EnemyInfo>());
 
         battleUI.SetActive(true);
-        battleButton.interactable = false;
+        battleButton.gameObject.SetActive(false);
     }
 }
