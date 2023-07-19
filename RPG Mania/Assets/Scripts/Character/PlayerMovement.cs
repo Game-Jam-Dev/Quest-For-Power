@@ -33,6 +33,8 @@ public class PlayerMovement : MonoBehaviour {
         actions.Gameplay.Sprint.canceled -= context => isSprinting = false;
 
         actions.Gameplay.Disable();
+
+        rb.velocity = Vector3.zero;
     }
 
     private void FixedUpdate()
