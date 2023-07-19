@@ -553,6 +553,25 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.17999999, y: 0.17999998, z: 0}
   m_Center: {x: 0, y: 0.07999998, z: 0}
+--- !u!1 &1468721262 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 352a55b1762d3d24b818de152ba88525,
+    type: 3}
+  m_PrefabInstance: {fileID: 394448434}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1468721264
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1468721262}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 17.891342, y: 5.5904717, z: 0.24560213}
+  m_Center: {x: -0.027282715, y: 2.7254865, z: 0.9739611}
 --- !u!1 &1678566338 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1727066728369635057, guid: 352a55b1762d3d24b818de152ba88525,
@@ -721,6 +740,7 @@ GameObject:
   - component: {fileID: 1958486161}
   - component: {fileID: 1958486160}
   - component: {fileID: 1958486159}
+  - component: {fileID: 1958486162}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -787,13 +807,36 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1958486158}
   m_LocalRotation: {x: 0.12001994, y: -0, z: -0, w: 0.9927715}
-  m_LocalPosition: {x: 0, y: 3.03, z: -10}
+  m_LocalPosition: {x: 0.03, y: 3.03, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 13.787, y: 0, z: 0}
+--- !u!114 &1958486162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1958486158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6e09d91ca4e5614984d190d50618df0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 2070778612}
+  offset: {x: 0, y: 3.03, z: -10}
+  smoothFactor: 4.31
+  minValues: {x: -3.58, y: 0, z: -10}
+  maxValues: {x: 3.58, y: 3.03, z: 2.21}
+--- !u!4 &2070778612 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8148494517345017233, guid: 19c9f2a71fa419f4e964f78ed2b81ef1,
+    type: 3}
+  m_PrefabInstance: {fileID: 8148494516188841141}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8148494516188841141
 PrefabInstance:
   m_ObjectHideFlags: 0
