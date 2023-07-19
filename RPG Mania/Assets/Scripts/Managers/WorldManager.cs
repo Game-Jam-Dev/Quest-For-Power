@@ -8,6 +8,7 @@ public class WorldManager : MonoBehaviour {
     private GameObject gameController, player;
     private List<GameObject> enemies;
     private GameManager gameManager;
+    [SerializeField] private GameObject battleUI;
     private int battleScene = 2;
 
     private void Start() {
@@ -20,9 +21,14 @@ public class WorldManager : MonoBehaviour {
         battleButton.onClick.AddListener(StartBattle);
     }
 
+    private void Update() {
+        if (!battleUI.activeSelf) battleButton.gameObject.SetActive(true);
+    }
+
     private void StartBattle() {
         foreach (GameObject e in GameObject.FindGameObjectsWithTag("Enemy")) gameManager.enemies.Add(e.GetComponent<EnemyInfo>());
 
-        SceneManager.LoadScene(battleScene);
+        battleUI.SetActive(true);
+        battleButton.gameObject.SetActive(false);
     }
 }

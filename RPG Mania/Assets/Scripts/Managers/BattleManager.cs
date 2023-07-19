@@ -4,11 +4,10 @@ using TMPro;
 using System.Collections.Generic;
 using System.Linq;
 using System.Collections;
-using UnityEngine.SceneManagement;
 
 public class BattleManager : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI pHealth, pCombo, pStamina, eHealth;
-    [SerializeField] private GameObject eHealthContainer, actionContainer, skillContainer, targetContainer, pickAction;
+    [SerializeField] private GameObject eHealthContainer, comboContainer, skillContainer, targetContainer, pickAction;
     [SerializeField] private Button actionButton, skillButton, targetButton, pickSkillButton, attackButton, escapeButton;
     private List<Button> targetButtons = new List<Button>();
     private List<Button> actionButtons = new List<Button>();
@@ -27,9 +26,11 @@ public class BattleManager : MonoBehaviour {
 
     private void Awake() {
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+        gameObject.SetActive(false);
     }
-    private void Start() {
+    private void OnEnable() {
         player = gameManager.player;
+        player.gameObject.GetComponent<PlayerMovement>().enabled = false;
         var characters = new List<CharacterInfo> { player }.Concat(gameManager.enemies);
         turnOrder = new Queue<CharacterInfo>(characters);
 
@@ -45,7 +46,7 @@ public class BattleManager : MonoBehaviour {
 
         targetContainer.SetActive(false);
         skillContainer.SetActive(false);
-        actionContainer.SetActive(false);
+        comboContainer.SetActive(false);
         pickAction.SetActive(false);
 
         UpdateCombo();
@@ -107,17 +108,12 @@ public class BattleManager : MonoBehaviour {
         for (int i = 0; i < gameManager.enemies.Count; i++)
         {
             EnemyInfo enemy = gameManager.enemies[i];
-
             TextMeshProUGUI enemyHealthText = Instantiate(eHealth, eHealthContainer.transform);
-
             enemyHealthText.rectTransform.anchoredPosition = new Vector3(0, -i * 100);
 
             Button selectEnemy = Instantiate(targetButton, targetContainer.transform);
-
             selectEnemy.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = enemy.characterName;
-
             selectEnemy.onClick.AddListener(() => PickTarget(enemy));
-
             targetButtons.Add(selectEnemy);
         }
     }
@@ -127,13 +123,9 @@ public class BattleManager : MonoBehaviour {
         for (int i = 0; i < player.CountActions(); i++)
         {
             ComboAction currentAction = player.GetAction(i);
-
-            Button selectAction = Instantiate(actionButton, actionContainer.transform);
-
+            Button selectAction = Instantiate(actionButton, comboContainer.transform);
             selectAction.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = currentAction.Name;
-
             selectAction.onClick.AddListener(() => PickCombo(currentAction));
-
             actionButtons.Add(selectAction);
         }
     }
@@ -143,13 +135,9 @@ public class BattleManager : MonoBehaviour {
         for (int i = 0; i < player.CountSkills(); i++)
         {
             SkillAction currentSkill = player.GetSkill(i);
-
             Button selectSkill = Instantiate(skillButton, skillContainer.transform);
-
             selectSkill.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = currentSkill.Name;
-
             selectSkill.onClick.AddListener(() => PickSkill(currentSkill));
-
             skillButtons.Add(selectSkill);
         }
 
@@ -206,16 +194,15 @@ public class BattleManager : MonoBehaviour {
                     }
                     awaitCommand = true;
                     
-                    actionContainer.SetActive(true);
+                    comboContainer.SetActive(true);
                     
                     while (awaitCommand)
                     {
 
-
                         yield return null;
                     }
 
-                    actionContainer.SetActive(false);
+                    comboContainer.SetActive(false);
 
                     foreach (ComboAction a in comboActions)
                     {
@@ -259,10 +246,7 @@ public class BattleManager : MonoBehaviour {
                 yield return new WaitForSeconds(.5f);
 
             }
-            
-            
         }
-        
     }
 
     private void NextTurn(CharacterInfo activeCharacter)
@@ -277,14 +261,23 @@ public class BattleManager : MonoBehaviour {
         comboLength = 0;
     }
 
-    public void EndBattle()
-    {
+    private void OnDisable() {
         Debug.Log("End Battle");
 
         StopAllCoroutines();
 
         gameManager.enemies.Clear();
 
-        SceneManager.LoadScene(worldScene);
+        foreach (TextMeshProUGUI t in eHealthContainer.GetComponentsInChildren<TextMeshProUGUI>()){
+            Destroy(t.gameObject);
+        }
+
+        if (player != null)
+            player.gameObject.GetComponent<PlayerMovement>().enabled = true;
+    }
+
+    public void EndBattle()
+    {
+        gameObject.SetActive(false);
     }
 }
