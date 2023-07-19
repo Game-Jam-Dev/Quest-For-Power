@@ -123,6 +123,26 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &50640045 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2856176047129400152, guid: 352a55b1762d3d24b818de152ba88525,
+    type: 3}
+  m_PrefabInstance: {fileID: 394448434}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &50640049
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 50640045}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 625845135098221407, guid: 352a55b1762d3d24b818de152ba88525, type: 3}
 --- !u!1001 &394448434
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -286,6 +306,46 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &616622941 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -7848094714704925764, guid: 352a55b1762d3d24b818de152ba88525,
+    type: 3}
+  m_PrefabInstance: {fileID: 394448434}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &616622945
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 616622941}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -1396742304453900406, guid: 352a55b1762d3d24b818de152ba88525, type: 3}
+--- !u!1 &620153341 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6809236355618041399, guid: 352a55b1762d3d24b818de152ba88525,
+    type: 3}
+  m_PrefabInstance: {fileID: 394448434}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &620153345
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 620153341}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 205866232121530818, guid: 352a55b1762d3d24b818de152ba88525, type: 3}
 --- !u!1001 &625958065
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -474,6 +534,45 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c63db1762ae4a943b5f1f9fc35d49ad, type: 3}
+--- !u!1 &921400668 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -5711052370896006010, guid: 352a55b1762d3d24b818de152ba88525,
+    type: 3}
+  m_PrefabInstance: {fileID: 394448434}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &921400672
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 921400668}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.17999999, y: 0.17999998, z: 0}
+  m_Center: {x: 0, y: 0.07999998, z: 0}
+--- !u!1 &1678566338 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1727066728369635057, guid: 352a55b1762d3d24b818de152ba88525,
+    type: 3}
+  m_PrefabInstance: {fileID: 394448434}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &1678566342
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1678566338}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 1830207050147627316, guid: 352a55b1762d3d24b818de152ba88525, type: 3}
 --- !u!1001 &1681398361
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -756,6 +855,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8148494517345017235, guid: 19c9f2a71fa419f4e964f78ed2b81ef1,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 112
       objectReference: {fileID: 0}
     - target: {fileID: 8148494517345017239, guid: 19c9f2a71fa419f4e964f78ed2b81ef1,
         type: 3}
