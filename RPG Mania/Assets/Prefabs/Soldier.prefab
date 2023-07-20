@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3446468312287349178}
   - component: {fileID: 1769637154394782135}
-  - component: {fileID: 7575102328849272183}
+  - component: {fileID: 3237387295097418039}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: Soldier
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7575102328849272183
+--- !u!114 &3237387295097418039
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,15 +94,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 3036269658535557653}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4da5a5c9cec32b42a0f369147115f4b, type: 3}
+  m_Script: {fileID: 11500000, guid: 8df667204d041db498e8ae19462101d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterName: John
-  maxHealth: 50
+  characterName: Soldier
+  maxHealth: 0
   health: 0
   stamina: 0
-  attack: 7
-  defense: 5
-  accuracy: 5
-  evasion: 5
+  attack: 0
+  defense: 0
+  accuracy: 0
+  evasion: 0
   combo: 0
