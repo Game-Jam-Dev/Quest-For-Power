@@ -1,6 +1,6 @@
 public class SkillAction
 {
-    public delegate void ActionDelegate(CharacterInfo self, CharacterInfo target, int damage);
+    public delegate int ActionDelegate(CharacterInfo self, CharacterInfo target, int damage);
 
     public string Name { get; private set; }
     public int Cost { get; private set; }

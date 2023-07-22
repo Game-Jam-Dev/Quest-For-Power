@@ -45,10 +45,12 @@ public class ComboList
         Debug.Log("This action is null");
     }
 
-    private void SkillCheck(CharacterInfo self, CharacterInfo target, int damage)
+    private int SkillCheck(CharacterInfo self, CharacterInfo target, int damage)
     {
         if (self.activeSkill != null)
-            self.activeSkill.Action(self, target, damage);
+            damage = self.activeSkill.Action(self, target, damage);
+
+        return damage;
     }
 
     private void LifeCheck(CharacterInfo target, int damage)
@@ -67,7 +69,7 @@ public class ComboList
         int damage = self.attack - target.defense;
         if (damage < 0) damage = 0;
 
-        SkillCheck(self, target, damage);
+        damage = SkillCheck(self, target, damage);
 
         LifeCheck(target, damage);
     }
@@ -85,7 +87,7 @@ public class ComboList
             Debug.Log("Miss");
         }
         
-        SkillCheck(self, target, damage);
+        damage = SkillCheck(self, target, damage);
 
         LifeCheck(target, damage);
     }
@@ -104,7 +106,7 @@ public class ComboList
             Debug.Log("Miss");
         }
 
-        SkillCheck(self, target, damage);
+        damage = SkillCheck(self, target, damage);
 
         LifeCheck(target, damage);
     }

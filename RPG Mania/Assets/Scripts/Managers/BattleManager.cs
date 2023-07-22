@@ -54,6 +54,8 @@ public class BattleManager : MonoBehaviour {
         UpdateHealth();
 
         StartCoroutine(BattleSequence());
+
+        if (gameManager.enemies.Count <= 0) EndBattle();
     }
 
     private void SelectAttack()
@@ -214,15 +216,17 @@ public class BattleManager : MonoBehaviour {
                         {
                             killCount++;
 
-                            if (killCount >= gameManager.enemies.Count) EndBattle();
-
                             int targetIndex = gameManager.enemies.IndexOf(target as EnemyInfo);
                             
                             targetContainer.transform.GetChild(targetIndex).GetComponent<Button>().interactable = false;
 
                             var newTurnOrder = new Queue<CharacterInfo>(turnOrder.Where(x => x != target));
                             turnOrder = newTurnOrder;
-                            
+
+                            Destroy(target.gameObject);
+
+                            if (killCount >= gameManager.enemies.Count) EndBattle();
+
                             break;
                         }
 

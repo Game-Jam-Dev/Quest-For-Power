@@ -1,5 +1,5 @@
 using UnityEngine;
 
-public class Soldier : CharacterInfo {
+public class Soldier : EnemyInfo {
     
 }
