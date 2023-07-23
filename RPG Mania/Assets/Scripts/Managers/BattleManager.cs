@@ -6,9 +6,9 @@ using System.Linq;
 using System.Collections;
 
 public class BattleManager : MonoBehaviour {
-    [SerializeField] private TextMeshProUGUI pHealth, pCombo, pStamina, eHealth;
+    [SerializeField] private TextMeshProUGUI pHealth, pCombo, eHealth;
     [SerializeField] private GameObject eHealthContainer, comboContainer, skillContainer, targetContainer, pickAction;
-    [SerializeField] private Button actionButton, skillButton, targetButton, pickSkillButton, attackButton, escapeButton;
+    [SerializeField] private Button actionButton, skillButton, targetButton, pickSkillButton, attackButton, escapeButton, backButton;
     private List<Button> targetButtons = new List<Button>();
     private List<Button> actionButtons = new List<Button>();
     private List<Button> skillButtons = new List<Button>();
@@ -33,12 +33,10 @@ public class BattleManager : MonoBehaviour {
         player.gameObject.GetComponent<PlayerMovement>().enabled = false;
         var characters = new List<CharacterInfo> { player }.Concat(gameManager.enemies);
         turnOrder = new Queue<CharacterInfo>(characters);
-
-        pCombo.text = player.characterName + "'s Combo Length: " + player.combo;
-
+        
         attackButton.onClick.AddListener(SelectAttack);
         pickSkillButton.onClick.AddListener(SelectSkill);
-        escapeButton.onClick.AddListener(Escape);
+        escapeButton.onClick.AddListener(SelectEscape);
 
         SetEnemies();
         SetActions();
@@ -54,122 +52,8 @@ public class BattleManager : MonoBehaviour {
         UpdateHealth();
 
         StartCoroutine(BattleSequence());
-    }
 
-    private void SelectAttack()
-    {
-        pickAction.SetActive(false);
-        targetContainer.SetActive(true);
-    }
-
-    private void SelectSkill()
-    {
-        pickAction.SetActive(false);
-        skillContainer.SetActive(true);
-    }
-
-    private void Escape()
-    {
-        EndBattle();
-    }
-
-    private void PickTarget(CharacterInfo target)
-    {
-        this.target = target;
-        targetContainer.SetActive(false);
-        awaitCommand = false;
-    }
-
-    private void PickCombo(ComboAction action)
-    {
-        if (action.Cost <= player.combo - comboLength) 
-        {
-            comboActions.Add(action);
-            comboLength += action.Cost;
-        }
-
-        if (comboLength < player.combo) UpdateCombo();
-
-        else awaitCommand = false;
-    }
-
-    private void PickSkill(SkillAction skill)
-    {
-        if (skill.Cost <= player.stamina) player.UseSkill(skill);
-
-        skillContainer.SetActive(false);
-        pickAction.SetActive(true);
-        pickSkillButton.interactable = false;
-        pStamina.text = player.characterName + "'s Stamina: " + player.stamina;
-    }
-
-    private void SetEnemies()
-    {
-        for (int i = 0; i < gameManager.enemies.Count; i++)
-        {
-            EnemyInfo enemy = gameManager.enemies[i];
-            TextMeshProUGUI enemyHealthText = Instantiate(eHealth, eHealthContainer.transform);
-            enemyHealthText.rectTransform.anchoredPosition = new Vector3(0, -i * 100);
-
-            Button selectEnemy = Instantiate(targetButton, targetContainer.transform);
-            selectEnemy.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = enemy.characterName;
-            selectEnemy.onClick.AddListener(() => PickTarget(enemy));
-            targetButtons.Add(selectEnemy);
-        }
-    }
-
-    private void SetActions()
-    {
-        for (int i = 0; i < player.CountActions(); i++)
-        {
-            ComboAction currentAction = player.GetAction(i);
-            Button selectAction = Instantiate(actionButton, comboContainer.transform);
-            selectAction.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = currentAction.Name;
-            selectAction.onClick.AddListener(() => PickCombo(currentAction));
-            actionButtons.Add(selectAction);
-        }
-    }
-
-    private void SetSkills()
-    {
-        for (int i = 0; i < player.CountSkills(); i++)
-        {
-            SkillAction currentSkill = player.GetSkill(i);
-            Button selectSkill = Instantiate(skillButton, skillContainer.transform);
-            selectSkill.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = currentSkill.Name;
-            selectSkill.onClick.AddListener(() => PickSkill(currentSkill));
-            skillButtons.Add(selectSkill);
-        }
-
-        pStamina.text = player.characterName + "'s Stamina: " + player.stamina;
-    }
-
-    private void UpdateHealth()
-    {
-        pHealth.text = player.characterName + "'s Health: " + player.health;
-
-        for (int i = 0; i < gameManager.enemies.Count; i++)
-        {
-            eHealthContainer.transform.GetChild(i).GetComponent<TextMeshProUGUI>().text = gameManager.enemies[i].characterName + "'s Health: " + gameManager.enemies[i].health;
-        }
-    }
-
-    private void UpdateCombo()
-    {
-        for (int i = 0; i < actionButtons.Count; i++) 
-        {
-            actionButtons[i].interactable = player.GetAction(i).Cost <= player.combo - comboLength;
-        }
-    }
-
-    private void UpdateSkills()
-    {
-        for (int i = 0; i < skillButtons.Count; i++)
-        {
-            skillButtons[i].interactable = player.GetSkill(i).Cost <= player.stamina;
-        }
-
-        player.activeSkill = null;
+        if (gameManager.enemies.Count <= 0) EndBattle();
     }
 
     private IEnumerator BattleSequence()
@@ -192,17 +76,6 @@ public class BattleManager : MonoBehaviour {
 
                         yield return null;
                     }
-                    awaitCommand = true;
-                    
-                    comboContainer.SetActive(true);
-                    
-                    while (awaitCommand)
-                    {
-
-                        yield return null;
-                    }
-
-                    comboContainer.SetActive(false);
 
                     foreach (ComboAction a in comboActions)
                     {
@@ -214,15 +87,17 @@ public class BattleManager : MonoBehaviour {
                         {
                             killCount++;
 
-                            if (killCount >= gameManager.enemies.Count) EndBattle();
-
                             int targetIndex = gameManager.enemies.IndexOf(target as EnemyInfo);
                             
                             targetContainer.transform.GetChild(targetIndex).GetComponent<Button>().interactable = false;
 
                             var newTurnOrder = new Queue<CharacterInfo>(turnOrder.Where(x => x != target));
                             turnOrder = newTurnOrder;
-                            
+
+                            Destroy(target.gameObject);
+
+                            if (killCount >= gameManager.enemies.Count) EndBattle();
+
                             break;
                         }
 
@@ -249,6 +124,153 @@ public class BattleManager : MonoBehaviour {
         }
     }
 
+    private void SelectAttack()
+    {
+        pickAction.SetActive(false);
+        targetContainer.SetActive(true);
+    }
+
+    private void SelectSkill()
+    {
+        pickAction.SetActive(false);
+        skillContainer.SetActive(true);
+    }
+
+    private void SelectEscape()
+    {
+        EndBattle();
+    }
+
+    private void BackFromSkill()
+    {
+        skillContainer.SetActive(false);
+        pickAction.SetActive(true);
+    }
+
+    private void BackFromTarget()
+    {
+        targetContainer.SetActive(false);
+        pickAction.SetActive(true);
+    }
+
+    private void BackFromCombo()
+    {
+        comboContainer.SetActive(false);
+        comboActions.Clear();
+        comboLength = 0;
+        UpdateCombo();
+        targetContainer.SetActive(true);
+    }
+
+    private void PickTarget(CharacterInfo target)
+    {
+        this.target = target;
+        targetContainer.SetActive(false);
+        comboContainer.SetActive(true);
+    }
+
+    private void PickCombo(ComboAction action)
+    {
+        if (action.Cost <= player.combo - comboLength) 
+        {
+            comboActions.Add(action);
+            comboLength += action.Cost;
+        }
+
+        if (comboLength < player.combo) UpdateCombo();
+
+        else
+        {
+            awaitCommand = false;
+            comboContainer.SetActive(false);
+        } 
+    }
+
+    private void PickSkill(SkillAction skill)
+    {
+        if (skill.Cost <= player.stamina) player.UseSkill(skill);
+
+        BackFromSkill();
+        pickSkillButton.interactable = false;
+    }
+
+    private void SetEnemies()
+    {
+        for (int i = 0; i < gameManager.enemies.Count; i++)
+        {
+            EnemyInfo enemy = gameManager.enemies[i];
+            TextMeshProUGUI enemyHealthText = Instantiate(eHealth, eHealthContainer.transform);
+            enemyHealthText.rectTransform.anchoredPosition = new Vector3(0, -i * 100);
+
+            Button selectEnemy = Instantiate(targetButton, targetContainer.transform);
+            selectEnemy.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = enemy.characterName;
+            selectEnemy.onClick.AddListener(() => PickTarget(enemy));
+            targetButtons.Add(selectEnemy);
+        }
+
+        Button back = Instantiate(backButton, targetContainer.transform);
+        back.onClick.AddListener(BackFromTarget);
+    }
+
+    private void SetActions()
+    {
+        for (int i = 0; i < player.CountActions(); i++)
+        {
+            ComboAction currentAction = player.GetAction(i);
+            Button selectAction = Instantiate(actionButton, comboContainer.transform);
+            selectAction.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = currentAction.Name;
+            selectAction.onClick.AddListener(() => PickCombo(currentAction));
+            actionButtons.Add(selectAction);
+        }
+
+        Button back = Instantiate(backButton, comboContainer.transform);
+        back.onClick.AddListener(BackFromCombo);
+    }
+
+    private void SetSkills()
+    {
+        for (int i = 0; i < player.CountSkills(); i++)
+        {
+            SkillAction currentSkill = player.GetSkill(i);
+            Button selectSkill = Instantiate(skillButton, skillContainer.transform);
+            selectSkill.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = currentSkill.Name;
+            selectSkill.onClick.AddListener(() => PickSkill(currentSkill));
+            skillButtons.Add(selectSkill);
+        }
+        Button back = Instantiate(backButton, skillContainer.transform);
+        back.onClick.AddListener(BackFromSkill);
+    }
+
+    private void UpdateHealth()
+    {
+        pHealth.text = player.characterName + "'s Health: " + player.health;
+
+        for (int i = 0; i < gameManager.enemies.Count; i++)
+        {
+            eHealthContainer.transform.GetChild(i).GetComponent<TextMeshProUGUI>().text = gameManager.enemies[i].characterName + "'s Health: " + gameManager.enemies[i].health;
+        }
+    }
+
+    private void UpdateCombo()
+    {
+        for (int i = 0; i < actionButtons.Count; i++) 
+        {
+            actionButtons[i].interactable = player.GetAction(i).Cost <= player.combo - comboLength;
+        }
+
+        pCombo.text = player.characterName + "'s Combo Length: " + (player.combo - comboLength);
+    }
+
+    private void UpdateSkills()
+    {
+        for (int i = 0; i < skillButtons.Count; i++)
+        {
+            skillButtons[i].interactable = player.GetSkill(i).Cost <= player.stamina;
+        }
+
+        player.activeSkill = null;
+    }
+
     private void NextTurn(CharacterInfo activeCharacter)
     {
         UpdateSkills();
@@ -268,12 +290,32 @@ public class BattleManager : MonoBehaviour {
 
         gameManager.enemies.Clear();
 
+        ClearUI();
+
+        if (player != null)
+            player.gameObject.GetComponent<PlayerMovement>().enabled = true;
+    }
+
+    private void ClearUI()
+    {
         foreach (TextMeshProUGUI t in eHealthContainer.GetComponentsInChildren<TextMeshProUGUI>()){
             Destroy(t.gameObject);
         }
 
-        if (player != null)
-            player.gameObject.GetComponent<PlayerMovement>().enabled = true;
+        for (int i = 0; i < targetContainer.transform.childCount; i++)
+        {
+            Destroy(targetContainer.transform.GetChild(i).gameObject);
+        }
+
+        for (int i = 0; i < skillContainer.transform.childCount; i++)
+        {
+            Destroy(skillContainer.transform.GetChild(i).gameObject);
+        }
+
+        for (int i = 0; i < comboContainer.transform.childCount; i++)
+        {
+            Destroy(comboContainer.transform.GetChild(i).gameObject);
+        }
     }
 
     public void EndBattle()

@@ -9,11 +9,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Title Screen.unity
     guid: bd4ef0d83fa52cb448551c06220e7ccd
   - enabled: 1
-    path: Assets/Scenes/Pre-Battle.unity
-    guid: 1ffab1410ea286843b9cc41b955b07f2
-  - enabled: 1
-    path: Assets/Scenes/Battle.unity
-    guid: 05fb9a0c1274582419589b0d947041c2
+    path: Assets/Scenes/Throne Room.unity
+    guid: 9e712eca0d89a4b46bd7bbc315501996
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 57a94fb8227721a48a1a93a2385a33a8,
       type: 2}
