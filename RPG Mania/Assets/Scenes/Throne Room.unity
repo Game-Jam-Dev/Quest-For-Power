@@ -360,13 +360,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
         type: 3}
+      propertyPath: attack
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
+        type: 3}
+      propertyPath: defense
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
+        type: 3}
       propertyPath: element
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
         type: 3}
+      propertyPath: evasion
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
+        type: 3}
+      propertyPath: accuracy
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
+        type: 3}
       propertyPath: maxHealth
-      value: 100
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
         type: 3}
@@ -592,13 +612,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
         type: 3}
+      propertyPath: attack
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
+        type: 3}
+      propertyPath: defense
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
+        type: 3}
       propertyPath: element
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
         type: 3}
-      propertyPath: maxHealth
+      propertyPath: evasion
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
+        type: 3}
+      propertyPath: accuracy
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
+        type: 3}
+      propertyPath: maxHealth
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
         type: 3}

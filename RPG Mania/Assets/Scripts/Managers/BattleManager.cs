@@ -293,12 +293,32 @@ public class BattleManager : MonoBehaviour {
 
         gameManager.enemies.Clear();
 
+        ClearUI();
+
+        if (player != null)
+            player.gameObject.GetComponent<PlayerMovement>().enabled = true;
+    }
+
+    private void ClearUI()
+    {
         foreach (TextMeshProUGUI t in eHealthContainer.GetComponentsInChildren<TextMeshProUGUI>()){
             Destroy(t.gameObject);
         }
 
-        if (player != null)
-            player.gameObject.GetComponent<PlayerMovement>().enabled = true;
+        for (int i = 0; i < targetContainer.transform.childCount; i++)
+        {
+            Destroy(targetContainer.transform.GetChild(i).gameObject);
+        }
+
+        for (int i = 0; i < skillContainer.transform.childCount; i++)
+        {
+            Destroy(skillContainer.transform.GetChild(i).gameObject);
+        }
+
+        for (int i = 0; i < comboContainer.transform.childCount; i++)
+        {
+            Destroy(comboContainer.transform.GetChild(i).gameObject);
+        }
     }
 
     public void EndBattle()
