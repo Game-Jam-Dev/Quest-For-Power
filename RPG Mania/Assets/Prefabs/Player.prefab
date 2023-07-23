@@ -134,6 +134,7 @@ MonoBehaviour:
   maxHealth: 50
   health: 0
   stamina: 5
+  element: 0
   attack: 8
   defense: 8
   accuracy: 5
