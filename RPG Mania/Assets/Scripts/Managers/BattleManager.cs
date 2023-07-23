@@ -6,7 +6,7 @@ using System.Linq;
 using System.Collections;
 
 public class BattleManager : MonoBehaviour {
-    [SerializeField] private TextMeshProUGUI pHealth, pCombo, pStamina, eHealth;
+    [SerializeField] private TextMeshProUGUI pHealth, pCombo, eHealth;
     [SerializeField] private GameObject eHealthContainer, comboContainer, skillContainer, targetContainer, pickAction;
     [SerializeField] private Button actionButton, skillButton, targetButton, pickSkillButton, attackButton, escapeButton, backButton;
     private List<Button> targetButtons = new List<Button>();
@@ -192,7 +192,6 @@ public class BattleManager : MonoBehaviour {
 
         BackFromSkill();
         pickSkillButton.interactable = false;
-        pStamina.text = player.characterName + "'s Stamina: " + player.stamina;
     }
 
     private void SetEnemies()
@@ -240,8 +239,6 @@ public class BattleManager : MonoBehaviour {
         }
         Button back = Instantiate(backButton, skillContainer.transform);
         back.onClick.AddListener(BackFromSkill);
-
-        pStamina.text = player.characterName + "'s Stamina: " + player.stamina;
     }
 
     private void UpdateHealth()
