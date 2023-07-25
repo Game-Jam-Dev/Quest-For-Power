@@ -170,6 +170,10 @@ public class BattleManager : MonoBehaviour {
 
     private void BackFromTarget()
     {
+        player.activeSkill = null;
+        player.element = SkillList.Element.None;
+        pSkill.text = "";
+        pElement.text = player.characterName + "'s Active Element: " + player.element;
         targetContainer.SetActive(false);
         pickAction.SetActive(true);
     }
@@ -211,8 +215,8 @@ public class BattleManager : MonoBehaviour {
     {
         if (skill.Cost <= player.stamina) player.UseSkill(skill);
 
-        BackFromSkill();
-        pickSkillButton.interactable = false;
+        skillContainer.SetActive(false);
+        targetContainer.SetActive(true);
         pSkill.text = player.characterName + "'s Active Skill: " + player.activeSkill.Name;
         pElement.text = player.characterName + "'s Active Element: " + player.element;
     }
