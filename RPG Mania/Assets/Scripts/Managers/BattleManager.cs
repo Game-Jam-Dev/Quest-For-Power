@@ -96,6 +96,7 @@ public class BattleManager : MonoBehaviour {
                             int targetIndex = gameManager.enemies.IndexOf(target as EnemyInfo);
                             
                             targetContainer.transform.GetChild(targetIndex).GetComponent<Button>().interactable = false;
+                            eHealthContainer.transform.GetChild(targetIndex).GetComponent<TextMeshProUGUI>().text = target.characterName + " is defeated";
 
                             var newTurnOrder = new Queue<CharacterInfo>(turnOrder.Where(x => x != target));
                             turnOrder = newTurnOrder;

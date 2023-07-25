@@ -375,8 +375,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pauseUI: {fileID: 4676544589325300415}
+  battleUI: {fileID: 2755035209799261446}
   resumeButton: {fileID: 4676544589870962280}
   quitButton: {fileID: 4676544588176076424}
+  battleButton: {fileID: 4676544589193904979}
 --- !u!114 &4676544588567442431
 MonoBehaviour:
   m_ObjectHideFlags: 0

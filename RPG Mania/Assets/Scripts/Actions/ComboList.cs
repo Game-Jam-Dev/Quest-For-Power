@@ -68,7 +68,7 @@ public class ComboList
     private bool HitCheck(CharacterInfo self, CharacterInfo target, int moveAccuracy, int comboDepth)
     {
         int r = Random.Range(0,100);
-        int a  = self.accuracy - target.evasion + (moveAccuracy - 5 * comboDepth);
+        int a  = self.accuracy - target.evasion + (moveAccuracy - 3 * comboDepth);
         Debug.Log(a);
         return r < a;
     }
