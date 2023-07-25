@@ -4,8 +4,8 @@ using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 
 public class PauseManager : MonoBehaviour {
-    [SerializeField] private GameObject pauseUI;
-    [SerializeField] private Button resumeButton, quitButton;
+    [SerializeField] private GameObject pauseUI, battleUI;
+    [SerializeField] private Button resumeButton, quitButton, battleButton;
 
     private InputActions actions;
     
@@ -31,20 +31,25 @@ public class PauseManager : MonoBehaviour {
     }
 
     private void TogglePause(InputAction.CallbackContext context) {
-        if (pauseUI.activeSelf)
-            Resume();
-        else
-            Pause();
+        if (!battleUI.activeSelf)
+        {
+            if (pauseUI.activeSelf)
+                Resume();
+            else
+                Pause();
+        }
     }
 
     private void Resume() {
         Time.timeScale = 1; 
         pauseUI.SetActive(false);
+        battleButton.enabled = true;
     }
 
     private void Pause() {
         Time.timeScale = 0; 
         pauseUI.SetActive(true);
+        battleButton.enabled = false;
     }
 
     private void Quit() {

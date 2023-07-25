@@ -19,7 +19,11 @@ public class CharacterInfo : MonoBehaviour {
     protected List<ComboAction> comboActions = new List<ComboAction>();
     protected List<SkillAction> skillActions = new List<SkillAction>();
 
+    private Camera mainCamera;
+
     protected virtual void Start() {
+        mainCamera = Camera.main;
+
         health = maxHealth;
 
         comboKeys.Add("light");
@@ -31,7 +35,11 @@ public class CharacterInfo : MonoBehaviour {
         comboActions.Add(ComboList.GetInstance().GetAction(comboKeys[2]));
     }
 
-    public ComboAction GetAction(int i)
+    private void LateUpdate() {
+        transform.LookAt(mainCamera.transform);
+    }
+
+    public ComboAction GetCombo(int i)
     {
         if (i < comboActions.Count) return comboActions[i];
 
@@ -53,14 +61,15 @@ public class CharacterInfo : MonoBehaviour {
         return skillActions.Count;
     }
 
-    public void DoAction(ComboAction action, CharacterInfo target)
+    public bool DoAction(ComboAction action, CharacterInfo target, int comboDepth)
     {
-        action.Action(this, target);
+        return action.Action(this, target, comboDepth);
     }
 
-    public void UseSkill(SkillAction skill)
+    public virtual void UseSkill(SkillAction skill)
     {
         activeSkill = skill;
-        stamina -= skill.Cost;
     }
+
+    public virtual ComboAction PickEnemyCombo(int currentComboLength){ return GetCombo(0); }
 }

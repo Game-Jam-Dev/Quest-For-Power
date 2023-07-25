@@ -9,7 +9,6 @@ public class WorldManager : MonoBehaviour {
     private List<GameObject> enemies;
     private GameManager gameManager;
     [SerializeField] private GameObject battleUI;
-    private int battleScene = 2;
 
     private void Start() {
         gameController = GameObject.FindGameObjectWithTag("GameController");

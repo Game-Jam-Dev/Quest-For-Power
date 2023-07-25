@@ -6,14 +6,13 @@ using System.Linq;
 using System.Collections;
 
 public class BattleManager : MonoBehaviour {
-    [SerializeField] private TextMeshProUGUI pHealth, pCombo, eHealth;
+    [SerializeField] private TextMeshProUGUI pHealth, pSkill, pElement, pCombo, eHealth, actionText;
     [SerializeField] private GameObject eHealthContainer, comboContainer, skillContainer, targetContainer, pickAction;
     [SerializeField] private Button actionButton, skillButton, targetButton, pickSkillButton, attackButton, escapeButton, backButton;
     private List<Button> targetButtons = new List<Button>();
     private List<Button> actionButtons = new List<Button>();
     private List<Button> skillButtons = new List<Button>();
     private GameManager gameManager;
-    private int worldScene = 1;
     public int killCount = 0;
 
     private Queue<CharacterInfo> turnOrder = new Queue<CharacterInfo>();
@@ -64,10 +63,13 @@ public class BattleManager : MonoBehaviour {
                 CharacterInfo activeCharacter = turnOrder.Peek();
 
                 if (activeCharacter == player){
+                    activeCharacter.element = SkillList.Element.None;
+                    actionText.text = "";
+                    pElement.text = activeCharacter.characterName + "'s Active Element: " + activeCharacter.element;
                     awaitCommand = true;
                     pickAction.SetActive(true);
 
-                    if (player.stamina <= 0) pickSkillButton.interactable = false;
+                    if (activeCharacter.stamina <= 0) pickSkillButton.interactable = false;
 
                     else pickSkillButton.interactable = true;
 
@@ -76,11 +78,15 @@ public class BattleManager : MonoBehaviour {
 
                         yield return null;
                     }
-
+                    int i = 0;
                     foreach (ComboAction a in comboActions)
                     {
-                        Debug.Log($"{activeCharacter.characterName} used {a.Name} at {target.characterName}");
-                        activeCharacter.DoAction(a, target);
+                        actionText.text = $"{activeCharacter.characterName} used {a.Name} at {target.characterName}";
+                        if (!activeCharacter.DoAction(a, target, i))
+                        {
+                            actionText.text = $"{activeCharacter.characterName} missed";
+                            break;
+                        } 
                         UpdateHealth();
 
                         if (target.health <= 0)
@@ -90,6 +96,7 @@ public class BattleManager : MonoBehaviour {
                             int targetIndex = gameManager.enemies.IndexOf(target as EnemyInfo);
                             
                             targetContainer.transform.GetChild(targetIndex).GetComponent<Button>().interactable = false;
+                            eHealthContainer.transform.GetChild(targetIndex).GetComponent<TextMeshProUGUI>().text = target.characterName + " is defeated";
 
                             var newTurnOrder = new Queue<CharacterInfo>(turnOrder.Where(x => x != target));
                             turnOrder = newTurnOrder;
@@ -100,20 +107,38 @@ public class BattleManager : MonoBehaviour {
 
                             break;
                         }
+                        i++;
 
                         yield return new WaitForSeconds(.5f);
                     }
-
-                    player.activeSkill = null;
+                    activeCharacter.activeSkill = null;
 
                 } else {
-                    comboActions.Add(activeCharacter.GetAction(0));
+                    while (comboLength < activeCharacter.combo)
+                    {
+                        ComboAction comboAction = activeCharacter.PickEnemyCombo(comboLength);
+                        comboActions.Add(comboAction);
+                        comboLength += comboAction.Cost;
+                    }
+                    int i = 0;
+                    foreach (ComboAction a in comboActions)
+                    {
+                        actionText.text = $"{activeCharacter.characterName} used {a.Name} at {player.characterName}";
+                        if (!activeCharacter.DoAction(a, player, i))
+                        {
+                            actionText.text = $"{activeCharacter.characterName} missed";
+                            break;
+                        }
 
-                    Debug.Log($"{activeCharacter.characterName} used {comboActions[0].Name} at {player.characterName}");
-                    activeCharacter.DoAction(comboActions[0], player);
-                    UpdateHealth();
+                        UpdateHealth();
 
-                    if (player.health <= 0) EndBattle();
+                        if (player.health <= 0) EndBattle();
+
+                        i++;
+
+                        yield return new WaitForSeconds(.5f);
+                    }
+                    
                 }
 
                 NextTurn(activeCharacter);
@@ -149,6 +174,10 @@ public class BattleManager : MonoBehaviour {
 
     private void BackFromTarget()
     {
+        player.activeSkill = null;
+        player.element = SkillList.Element.None;
+        pSkill.text = "";
+        pElement.text = player.characterName + "'s Active Element: " + player.element;
         targetContainer.SetActive(false);
         pickAction.SetActive(true);
     }
@@ -190,8 +219,10 @@ public class BattleManager : MonoBehaviour {
     {
         if (skill.Cost <= player.stamina) player.UseSkill(skill);
 
-        BackFromSkill();
-        pickSkillButton.interactable = false;
+        skillContainer.SetActive(false);
+        targetContainer.SetActive(true);
+        pSkill.text = player.characterName + "'s Active Skill: " + player.activeSkill.Name;
+        pElement.text = player.characterName + "'s Active Element: " + player.element;
     }
 
     private void SetEnemies()
@@ -216,7 +247,7 @@ public class BattleManager : MonoBehaviour {
     {
         for (int i = 0; i < player.CountActions(); i++)
         {
-            ComboAction currentAction = player.GetAction(i);
+            ComboAction currentAction = player.GetCombo(i);
             Button selectAction = Instantiate(actionButton, comboContainer.transform);
             selectAction.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = currentAction.Name;
             selectAction.onClick.AddListener(() => PickCombo(currentAction));
@@ -255,7 +286,7 @@ public class BattleManager : MonoBehaviour {
     {
         for (int i = 0; i < actionButtons.Count; i++) 
         {
-            actionButtons[i].interactable = player.GetAction(i).Cost <= player.combo - comboLength;
+            actionButtons[i].interactable = player.GetCombo(i).Cost <= player.combo - comboLength;
         }
 
         pCombo.text = player.characterName + "'s Combo Length: " + (player.combo - comboLength);
@@ -269,18 +300,21 @@ public class BattleManager : MonoBehaviour {
         }
 
         player.activeSkill = null;
+        pSkill.text = "";
     }
 
     private void NextTurn(CharacterInfo activeCharacter)
     {
-        UpdateSkills();
-        UpdateCombo();
-
         turnOrder.Dequeue();
         turnOrder.Enqueue(activeCharacter);
 
         comboActions.Clear();
         comboLength = 0;
+
+        UpdateSkills();
+        UpdateCombo();
+
+        if (gameManager.enemies.Count <= 0) EndBattle();
     }
 
     private void OnDisable() {
@@ -293,7 +327,10 @@ public class BattleManager : MonoBehaviour {
         ClearUI();
 
         if (player != null)
+        {
             player.gameObject.GetComponent<PlayerMovement>().enabled = true;
+            player.element = SkillList.Element.None;
+        }
     }
 
     private void ClearUI()
