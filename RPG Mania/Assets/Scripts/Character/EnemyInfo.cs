@@ -3,7 +3,6 @@ using UnityEngine;
 public class EnemyInfo : CharacterInfo {
     public override ComboAction PickEnemyCombo(int currentComboLength)
     {
-        Debug.Log("switch: " + (combo - currentComboLength));
         switch (combo - currentComboLength)
         {
             case 1:

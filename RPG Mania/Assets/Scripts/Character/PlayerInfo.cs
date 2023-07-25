@@ -20,7 +20,7 @@ public class PlayerInfo : CharacterInfo {
     public override void UseSkill(SkillAction skill)
     {
         activeSkill = skill;
-        stamina -= skill.Cost;
+        // stamina -= skill.Cost;
         
         if (activeSkill == SkillList.GetInstance().GetAction("water"))
         {

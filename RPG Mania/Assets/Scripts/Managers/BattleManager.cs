@@ -6,7 +6,7 @@ using System.Linq;
 using System.Collections;
 
 public class BattleManager : MonoBehaviour {
-    [SerializeField] private TextMeshProUGUI pHealth, pCombo, pElement, eHealth;
+    [SerializeField] private TextMeshProUGUI pHealth, pSkill, pElement, pCombo, eHealth, actionText;
     [SerializeField] private GameObject eHealthContainer, comboContainer, skillContainer, targetContainer, pickAction;
     [SerializeField] private Button actionButton, skillButton, targetButton, pickSkillButton, attackButton, escapeButton, backButton;
     private List<Button> targetButtons = new List<Button>();
@@ -64,6 +64,7 @@ public class BattleManager : MonoBehaviour {
 
                 if (activeCharacter == player){
                     activeCharacter.element = SkillList.Element.None;
+                    actionText.text = "";
                     pElement.text = activeCharacter.characterName + "'s Active Element: " + activeCharacter.element;
                     awaitCommand = true;
                     pickAction.SetActive(true);
@@ -80,10 +81,10 @@ public class BattleManager : MonoBehaviour {
 
                     foreach (ComboAction a in comboActions)
                     {
-                        Debug.Log($"{activeCharacter.characterName} used {a.Name} at {target.characterName}");
+                        actionText.text = $"{activeCharacter.characterName} used {a.Name} at {target.characterName}";
                         if (!activeCharacter.DoAction(a, target))
                         {
-                            Debug.Log("Combo Dropped");
+                            actionText.text = $"{activeCharacter.characterName} missed";
                             break;
                         } 
                         UpdateHealth();
@@ -120,10 +121,10 @@ public class BattleManager : MonoBehaviour {
 
                     foreach (ComboAction a in comboActions)
                     {
-                        Debug.Log($"{activeCharacter.characterName} used {a.Name} at {player.characterName}");
+                        actionText.text = $"{activeCharacter.characterName} used {a.Name} at {player.characterName}";
                         if (!activeCharacter.DoAction(a, player))
                         {
-                            Debug.Log("Combo Dropped");
+                            actionText.text = $"{activeCharacter.characterName} missed";
                             break;
                         }
 
@@ -212,6 +213,7 @@ public class BattleManager : MonoBehaviour {
 
         BackFromSkill();
         pickSkillButton.interactable = false;
+        pSkill.text = player.characterName + "'s Active Skill: " + player.activeSkill.Name;
         pElement.text = player.characterName + "'s Active Element: " + player.element;
     }
 
@@ -290,6 +292,7 @@ public class BattleManager : MonoBehaviour {
         }
 
         player.activeSkill = null;
+        pSkill.text = "";
     }
 
     private void NextTurn(CharacterInfo activeCharacter)

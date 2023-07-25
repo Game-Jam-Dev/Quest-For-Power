@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7d0e1b034143bf4fa687c05d41d1e11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterName: Steve
+  characterName: Arkanos
   maxHealth: 50
   health: 0
   stamina: 5
