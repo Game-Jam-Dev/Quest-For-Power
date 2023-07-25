@@ -19,7 +19,11 @@ public class CharacterInfo : MonoBehaviour {
     protected List<ComboAction> comboActions = new List<ComboAction>();
     protected List<SkillAction> skillActions = new List<SkillAction>();
 
+    private Camera mainCamera;
+
     protected virtual void Start() {
+        mainCamera = Camera.main;
+
         health = maxHealth;
 
         comboKeys.Add("light");
@@ -29,6 +33,10 @@ public class CharacterInfo : MonoBehaviour {
         comboActions.Add(ComboList.GetInstance().GetAction(comboKeys[0]));
         comboActions.Add(ComboList.GetInstance().GetAction(comboKeys[1]));
         comboActions.Add(ComboList.GetInstance().GetAction(comboKeys[2]));
+    }
+
+    private void LateUpdate() {
+        transform.LookAt(mainCamera.transform);
     }
 
     public ComboAction GetCombo(int i)
