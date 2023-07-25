@@ -58,10 +58,9 @@ public class CharacterInfo : MonoBehaviour {
         return action.Action(this, target);
     }
 
-    public void UseSkill(SkillAction skill)
+    public virtual void UseSkill(SkillAction skill)
     {
         activeSkill = skill;
-        stamina -= skill.Cost;
     }
 
     public virtual ComboAction PickEnemyCombo(int currentComboLength){ return GetCombo(0); }

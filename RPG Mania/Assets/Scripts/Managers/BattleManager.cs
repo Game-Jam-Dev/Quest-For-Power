@@ -6,14 +6,13 @@ using System.Linq;
 using System.Collections;
 
 public class BattleManager : MonoBehaviour {
-    [SerializeField] private TextMeshProUGUI pHealth, pCombo, eHealth;
+    [SerializeField] private TextMeshProUGUI pHealth, pCombo, pElement, eHealth;
     [SerializeField] private GameObject eHealthContainer, comboContainer, skillContainer, targetContainer, pickAction;
     [SerializeField] private Button actionButton, skillButton, targetButton, pickSkillButton, attackButton, escapeButton, backButton;
     private List<Button> targetButtons = new List<Button>();
     private List<Button> actionButtons = new List<Button>();
     private List<Button> skillButtons = new List<Button>();
     private GameManager gameManager;
-    private int worldScene = 1;
     public int killCount = 0;
 
     private Queue<CharacterInfo> turnOrder = new Queue<CharacterInfo>();
@@ -64,10 +63,12 @@ public class BattleManager : MonoBehaviour {
                 CharacterInfo activeCharacter = turnOrder.Peek();
 
                 if (activeCharacter == player){
+                    activeCharacter.element = SkillList.Element.None;
+                    pElement.text = activeCharacter.characterName + "'s Active Element: " + activeCharacter.element;
                     awaitCommand = true;
                     pickAction.SetActive(true);
 
-                    if (player.stamina <= 0) pickSkillButton.interactable = false;
+                    if (activeCharacter.stamina <= 0) pickSkillButton.interactable = false;
 
                     else pickSkillButton.interactable = true;
 
@@ -107,6 +108,7 @@ public class BattleManager : MonoBehaviour {
 
                         yield return new WaitForSeconds(.5f);
                     }
+                    activeCharacter.activeSkill = null;
 
                 } else {
                     while (comboLength < activeCharacter.combo)
@@ -210,6 +212,7 @@ public class BattleManager : MonoBehaviour {
 
         BackFromSkill();
         pickSkillButton.interactable = false;
+        pElement.text = player.characterName + "'s Active Element: " + player.element;
     }
 
     private void SetEnemies()
@@ -313,7 +316,10 @@ public class BattleManager : MonoBehaviour {
         ClearUI();
 
         if (player != null)
+        {
             player.gameObject.GetComponent<PlayerMovement>().enabled = true;
+            player.element = SkillList.Element.None;
+        }
     }
 
     private void ClearUI()

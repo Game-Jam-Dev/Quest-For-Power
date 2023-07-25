@@ -950,25 +950,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4676544588567442429}
     m_Modifications:
-    - target: {fileID: 4437018505528952579, guid: 98026f27e9cea724f819ab3e5e62eeea,
+    - target: {fileID: 4437018505484410450, guid: 98026f27e9cea724f819ab3e5e62eeea,
         type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -770
-      objectReference: {fileID: 0}
-    - target: {fileID: 4437018505528952579, guid: 98026f27e9cea724f819ab3e5e62eeea,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 435
-      objectReference: {fileID: 0}
-    - target: {fileID: 4437018506638830642, guid: 98026f27e9cea724f819ab3e5e62eeea,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 627
-      objectReference: {fileID: 0}
-    - target: {fileID: 4437018506638830642, guid: 98026f27e9cea724f819ab3e5e62eeea,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 370
+      propertyPath: m_PresetInfoIsWorld
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4437018506832509062, guid: 98026f27e9cea724f819ab3e5e62eeea,
         type: 3}
@@ -1085,20 +1070,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Battle UI
       objectReference: {fileID: 0}
-    - target: {fileID: 4437018507126816759, guid: 98026f27e9cea724f819ab3e5e62eeea,
+    - target: {fileID: 4437018507030381578, guid: 98026f27e9cea724f819ab3e5e62eeea,
         type: 3}
       propertyPath: m_PresetInfoIsWorld
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4532333333418016011, guid: 98026f27e9cea724f819ab3e5e62eeea,
+    - target: {fileID: 4437018507126816759, guid: 98026f27e9cea724f819ab3e5e62eeea,
         type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -770
-      objectReference: {fileID: 0}
-    - target: {fileID: 4532333333418016011, guid: 98026f27e9cea724f819ab3e5e62eeea,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 344
+      propertyPath: m_PresetInfoIsWorld
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 98026f27e9cea724f819ab3e5e62eeea, type: 3}

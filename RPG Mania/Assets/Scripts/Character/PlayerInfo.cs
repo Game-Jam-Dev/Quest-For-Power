@@ -6,8 +6,8 @@ public class PlayerInfo : CharacterInfo {
 
         skillKeys.Add("health drain");
         skillKeys.Add("water");
-        skillKeys.Add("wind");
         skillKeys.Add("fire");
+        skillKeys.Add("wind");
         skillKeys.Add("earth");
 
         skillActions.Add(SkillList.GetInstance().GetAction(skillKeys[0]));
@@ -15,5 +15,25 @@ public class PlayerInfo : CharacterInfo {
         skillActions.Add(SkillList.GetInstance().GetAction(skillKeys[2]));
         skillActions.Add(SkillList.GetInstance().GetAction(skillKeys[3]));
         skillActions.Add(SkillList.GetInstance().GetAction(skillKeys[4]));
+    }
+
+    public override void UseSkill(SkillAction skill)
+    {
+        activeSkill = skill;
+        stamina -= skill.Cost;
+        
+        if (activeSkill == SkillList.GetInstance().GetAction("water"))
+        {
+            element = SkillList.Element.Water;
+        } else if (activeSkill == SkillList.GetInstance().GetAction("fire"))
+        {
+            element = SkillList.Element.Fire;
+        } else if (activeSkill == SkillList.GetInstance().GetAction("wind"))
+        {
+            element = SkillList.Element.Wind;
+        } else if (activeSkill == SkillList.GetInstance().GetAction("earth"))
+        {
+            element = SkillList.Element.Earth;
+        }
     }
 }
