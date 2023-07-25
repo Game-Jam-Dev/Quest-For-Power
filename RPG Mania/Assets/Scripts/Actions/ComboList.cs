@@ -95,7 +95,7 @@ public class ComboList
         if (!HitCheck(self, target, 80)) return false;
 
         else {
-            Attack(self, target, 2.5f);
+            Attack(self, target, 1.5f);
             return true;
         }
     }
@@ -105,7 +105,7 @@ public class ComboList
         if (!HitCheck(self, target, 60)) return false;
 
         else {
-            Attack(self, target, 5);
+            Attack(self, target, 2);
             return true;
         }
     }

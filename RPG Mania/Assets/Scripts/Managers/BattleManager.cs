@@ -108,16 +108,30 @@ public class BattleManager : MonoBehaviour {
                         yield return new WaitForSeconds(.5f);
                     }
 
-                    player.activeSkill = null;
-
                 } else {
-                    comboActions.Add(activeCharacter.GetAction(0));
+                    while (comboLength < activeCharacter.combo)
+                    {
+                        ComboAction comboAction = activeCharacter.PickEnemyCombo(comboLength);
+                        comboActions.Add(comboAction);
+                        comboLength += comboAction.Cost;
+                    }
 
-                    Debug.Log($"{activeCharacter.characterName} used {comboActions[0].Name} at {player.characterName}");
-                    activeCharacter.DoAction(comboActions[0], player);
-                    UpdateHealth();
+                    foreach (ComboAction a in comboActions)
+                    {
+                        Debug.Log($"{activeCharacter.characterName} used {a.Name} at {player.characterName}");
+                        if (!activeCharacter.DoAction(a, player))
+                        {
+                            Debug.Log("Combo Dropped");
+                            break;
+                        }
 
-                    if (player.health <= 0) EndBattle();
+                        UpdateHealth();
+
+                        if (player.health <= 0) EndBattle();
+
+                        yield return new WaitForSeconds(.5f);
+                    }
+                    
                 }
 
                 NextTurn(activeCharacter);
@@ -220,7 +234,7 @@ public class BattleManager : MonoBehaviour {
     {
         for (int i = 0; i < player.CountActions(); i++)
         {
-            ComboAction currentAction = player.GetAction(i);
+            ComboAction currentAction = player.GetCombo(i);
             Button selectAction = Instantiate(actionButton, comboContainer.transform);
             selectAction.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = currentAction.Name;
             selectAction.onClick.AddListener(() => PickCombo(currentAction));
@@ -259,7 +273,7 @@ public class BattleManager : MonoBehaviour {
     {
         for (int i = 0; i < actionButtons.Count; i++) 
         {
-            actionButtons[i].interactable = player.GetAction(i).Cost <= player.combo - comboLength;
+            actionButtons[i].interactable = player.GetCombo(i).Cost <= player.combo - comboLength;
         }
 
         pCombo.text = player.characterName + "'s Combo Length: " + (player.combo - comboLength);
@@ -277,14 +291,16 @@ public class BattleManager : MonoBehaviour {
 
     private void NextTurn(CharacterInfo activeCharacter)
     {
-        UpdateSkills();
-        UpdateCombo();
-
         turnOrder.Dequeue();
         turnOrder.Enqueue(activeCharacter);
 
         comboActions.Clear();
         comboLength = 0;
+
+        UpdateSkills();
+        UpdateCombo();
+
+        if (gameManager.enemies.Count <= 0) EndBattle();
     }
 
     private void OnDisable() {

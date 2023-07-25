@@ -31,7 +31,7 @@ public class CharacterInfo : MonoBehaviour {
         comboActions.Add(ComboList.GetInstance().GetAction(comboKeys[2]));
     }
 
-    public ComboAction GetAction(int i)
+    public ComboAction GetCombo(int i)
     {
         if (i < comboActions.Count) return comboActions[i];
 
@@ -63,4 +63,6 @@ public class CharacterInfo : MonoBehaviour {
         activeSkill = skill;
         stamina -= skill.Cost;
     }
+
+    public virtual ComboAction PickEnemyCombo(int currentComboLength){ return GetCombo(0); }
 }
