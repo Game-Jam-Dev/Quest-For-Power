@@ -80,7 +80,11 @@ public class BattleManager : MonoBehaviour {
                     foreach (ComboAction a in comboActions)
                     {
                         Debug.Log($"{activeCharacter.characterName} used {a.Name} at {target.characterName}");
-                        activeCharacter.DoAction(a, target);
+                        if (!activeCharacter.DoAction(a, target))
+                        {
+                            Debug.Log("Combo Dropped");
+                            break;
+                        } 
                         UpdateHealth();
 
                         if (target.health <= 0)

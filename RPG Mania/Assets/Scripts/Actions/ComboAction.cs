@@ -1,6 +1,6 @@
 public class ComboAction
 {
-    public delegate void ActionDelegate(CharacterInfo self, CharacterInfo target);
+    public delegate bool ActionDelegate(CharacterInfo self, CharacterInfo target);
 
     public string Name { get; private set; }
     public int Cost { get; private set; }

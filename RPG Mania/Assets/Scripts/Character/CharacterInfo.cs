@@ -53,9 +53,9 @@ public class CharacterInfo : MonoBehaviour {
         return skillActions.Count;
     }
 
-    public void DoAction(ComboAction action, CharacterInfo target)
+    public bool DoAction(ComboAction action, CharacterInfo target)
     {
-        action.Action(this, target);
+        return action.Action(this, target);
     }
 
     public void UseSkill(SkillAction skill)

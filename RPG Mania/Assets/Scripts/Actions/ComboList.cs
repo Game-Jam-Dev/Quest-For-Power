@@ -40,9 +40,10 @@ public class ComboList
         };
     }
 
-    public void EmptyAction(CharacterInfo self, CharacterInfo target)
+    public bool EmptyAction(CharacterInfo self, CharacterInfo target)
     {
         Debug.Log("This action is null");
+        return false;
     }
 
     private int SkillCheck(CharacterInfo self, CharacterInfo target, int damage)
@@ -64,9 +65,14 @@ public class ComboList
         if (target.health < 0) target.health = 0;
     }
 
-    public void LightAttack(CharacterInfo self, CharacterInfo target)
+    private bool HitCheck(CharacterInfo self, CharacterInfo target, int i)
     {
-        int damage = self.attack - target.defense;
+        return Random.Range(0,100) < (self.accuracy - target.evasion + i);
+    }
+
+    private void Attack(CharacterInfo self, CharacterInfo target, float d)
+    {
+        int damage = (int)(self.attack * d - target.defense);
         if (damage < 0) damage = 0;
 
         damage = SkillCheck(self, target, damage);
@@ -74,40 +80,33 @@ public class ComboList
         LifeCheck(target, damage);
     }
 
-    public void MediumAttack(CharacterInfo self, CharacterInfo target)
+    public bool LightAttack(CharacterInfo self, CharacterInfo target)
     {
-        int damage = 0;
+        if (!HitCheck(self, target, 100)) return false;
 
-        if (Random.Range(0, 100) < (self.accuracy - target.evasion + 80))
-        {
-            damage = (int)(self.attack * 2.5) - target.defense;
-            if (damage < 0) damage = 0;
-
-        } else {
-            Debug.Log("Miss");
+        else {
+            Attack(self, target, 1);
+            return true;
         }
-        
-        damage = SkillCheck(self, target, damage);
-
-        LifeCheck(target, damage);
     }
 
-    public void HeavyAttack(CharacterInfo self, CharacterInfo target)
+    public bool MediumAttack(CharacterInfo self, CharacterInfo target)
     {
-        int damage = 0;
+        if (!HitCheck(self, target, 80)) return false;
 
-        if (Random.Range(0, 100) < (self.accuracy - target.evasion + 60))
-        {
-            damage = self.attack * 5 - target.defense;
-            if (damage < 0) damage = 0;
-
-        } else 
-        {
-            Debug.Log("Miss");
+        else {
+            Attack(self, target, 2.5f);
+            return true;
         }
+    }
 
-        damage = SkillCheck(self, target, damage);
+    public bool HeavyAttack(CharacterInfo self, CharacterInfo target)
+    {
+        if (!HitCheck(self, target, 60)) return false;
 
-        LifeCheck(target, damage);
+        else {
+            Attack(self, target, 5);
+            return true;
+        }
     }
 }
