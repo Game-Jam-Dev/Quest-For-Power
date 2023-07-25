@@ -40,7 +40,7 @@ public class ComboList
         };
     }
 
-    public bool EmptyAction(CharacterInfo self, CharacterInfo target)
+    public bool EmptyAction(CharacterInfo self, CharacterInfo target, int comboDepth)
     {
         Debug.Log("This action is null");
         return false;
@@ -57,7 +57,7 @@ public class ComboList
     private void LifeCheck(CharacterInfo target, int damage)
     {
 
-        if (Random.Range(0, 100) < 5) damage *= 5;
+        if (Random.Range(0, 100) < 3) damage *= 2;
 
         Debug.Log(damage);
 
@@ -65,9 +65,12 @@ public class ComboList
         if (target.health < 0) target.health = 0;
     }
 
-    private bool HitCheck(CharacterInfo self, CharacterInfo target, int i)
+    private bool HitCheck(CharacterInfo self, CharacterInfo target, int moveAccuracy, int comboDepth)
     {
-        return Random.Range(0,100) < (self.accuracy - target.evasion + i);
+        int r = Random.Range(0,100);
+        int a  = self.accuracy - target.evasion + (moveAccuracy - 5 * comboDepth);
+        Debug.Log(a);
+        return r < a;
     }
 
     private void Attack(CharacterInfo self, CharacterInfo target, float d)
@@ -80,9 +83,9 @@ public class ComboList
         LifeCheck(target, damage);
     }
 
-    public bool LightAttack(CharacterInfo self, CharacterInfo target)
+    public bool LightAttack(CharacterInfo self, CharacterInfo target, int comboDepth)
     {
-        if (!HitCheck(self, target, 100)) return false;
+        if (!HitCheck(self, target, 100, comboDepth)) return false;
 
         else {
             Attack(self, target, 1);
@@ -90,9 +93,9 @@ public class ComboList
         }
     }
 
-    public bool MediumAttack(CharacterInfo self, CharacterInfo target)
+    public bool MediumAttack(CharacterInfo self, CharacterInfo target, int comboDepth)
     {
-        if (!HitCheck(self, target, 80)) return false;
+        if (!HitCheck(self, target, 80, comboDepth)) return false;
 
         else {
             Attack(self, target, 1.5f);
@@ -100,9 +103,9 @@ public class ComboList
         }
     }
 
-    public bool HeavyAttack(CharacterInfo self, CharacterInfo target)
+    public bool HeavyAttack(CharacterInfo self, CharacterInfo target, int comboDepth)
     {
-        if (!HitCheck(self, target, 60)) return false;
+        if (!HitCheck(self, target, 60, comboDepth)) return false;
 
         else {
             Attack(self, target, 2);

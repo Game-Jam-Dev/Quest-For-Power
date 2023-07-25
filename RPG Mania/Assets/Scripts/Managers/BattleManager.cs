@@ -78,11 +78,11 @@ public class BattleManager : MonoBehaviour {
 
                         yield return null;
                     }
-
+                    int i = 0;
                     foreach (ComboAction a in comboActions)
                     {
                         actionText.text = $"{activeCharacter.characterName} used {a.Name} at {target.characterName}";
-                        if (!activeCharacter.DoAction(a, target))
+                        if (!activeCharacter.DoAction(a, target, i))
                         {
                             actionText.text = $"{activeCharacter.characterName} missed";
                             break;
@@ -106,6 +106,7 @@ public class BattleManager : MonoBehaviour {
 
                             break;
                         }
+                        i++;
 
                         yield return new WaitForSeconds(.5f);
                     }
@@ -118,11 +119,11 @@ public class BattleManager : MonoBehaviour {
                         comboActions.Add(comboAction);
                         comboLength += comboAction.Cost;
                     }
-
+                    int i = 0;
                     foreach (ComboAction a in comboActions)
                     {
                         actionText.text = $"{activeCharacter.characterName} used {a.Name} at {player.characterName}";
-                        if (!activeCharacter.DoAction(a, player))
+                        if (!activeCharacter.DoAction(a, player, i))
                         {
                             actionText.text = $"{activeCharacter.characterName} missed";
                             break;
@@ -131,6 +132,8 @@ public class BattleManager : MonoBehaviour {
                         UpdateHealth();
 
                         if (player.health <= 0) EndBattle();
+
+                        i++;
 
                         yield return new WaitForSeconds(.5f);
                     }
