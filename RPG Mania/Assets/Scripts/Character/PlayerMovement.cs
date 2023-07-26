@@ -47,7 +47,9 @@ public class PlayerMovement : MonoBehaviour {
         moveInput = context.ReadValue<Vector2>();
         anim.SetBool("Moving", true);
 
-        sr.flipX = moveInput.x > 0;
+        if (moveInput.x > 0) sr.flipX = true;
+
+        if (moveInput.x < 0) sr.flipX = false;
     }
     private void StopCharacter(InputAction.CallbackContext context)
     {
