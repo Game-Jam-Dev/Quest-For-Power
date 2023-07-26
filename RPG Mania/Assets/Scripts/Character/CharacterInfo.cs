@@ -5,7 +5,6 @@ public class CharacterInfo : MonoBehaviour {
     public string characterName = "";
     public int maxHealth;
     public int health;
-    public int stamina;
     public SkillList.Element element;
     public int attack;
     public int defense;
@@ -17,7 +16,7 @@ public class CharacterInfo : MonoBehaviour {
     protected List<string> skillKeys = new List<string>();
 
     protected List<ComboAction> comboActions = new List<ComboAction>();
-    protected List<SkillAction> skillActions = new List<SkillAction>();
+    protected List<(SkillAction, int)> skillActions = new List<(SkillAction, int)>();
 
     private Camera mainCamera;
 
@@ -47,9 +46,9 @@ public class CharacterInfo : MonoBehaviour {
     }
     public SkillAction GetSkill(int i)
     {
-        if (i < skillActions.Count) return skillActions[i];
+        if (i < skillActions.Count) return skillActions[i].Item1;
 
-        else return skillActions[0];
+        else return skillActions[0].Item1;
     }
 
     public int CountActions()

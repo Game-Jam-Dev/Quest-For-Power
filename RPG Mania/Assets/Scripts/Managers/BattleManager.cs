@@ -39,20 +39,21 @@ public class BattleManager : MonoBehaviour {
 
         SetEnemies();
         SetActions();
-        SetSkills();
+
+        UpdateCombo();
+        UpdateSkills();
+        UpdateHealth();
 
         targetContainer.SetActive(false);
         skillContainer.SetActive(false);
         comboContainer.SetActive(false);
         pickAction.SetActive(false);
 
-        UpdateCombo();
-        UpdateSkills();
-        UpdateHealth();
-
-        StartCoroutine(BattleSequence());
+        player.SetAllSkillAmounts(1);
 
         if (gameManager.enemies.Count <= 0) EndBattle();
+
+        StartCoroutine(BattleSequence());
     }
 
     private IEnumerator BattleSequence()
@@ -62,22 +63,15 @@ public class BattleManager : MonoBehaviour {
             {
                 CharacterInfo activeCharacter = turnOrder.Peek();
 
-                if (activeCharacter == player){
-                    activeCharacter.element = SkillList.Element.None;
-                    actionText.text = "";
-                    pElement.text = activeCharacter.characterName + "'s Active Element: " + activeCharacter.element;
-                    awaitCommand = true;
-                    pickAction.SetActive(true);
-
-                    if (activeCharacter.stamina <= 0) pickSkillButton.interactable = false;
-
-                    else pickSkillButton.interactable = true;
-
+                if (activeCharacter == player)
+                {
+                    InitializePlayer();
                     while (awaitCommand)
                     {
 
                         yield return null;
                     }
+
                     int i = 0;
                     foreach (ComboAction a in comboActions)
                     {
@@ -111,7 +105,6 @@ public class BattleManager : MonoBehaviour {
 
                         yield return new WaitForSeconds(.5f);
                     }
-                    activeCharacter.activeSkill = null;
 
                 } else {
                     while (comboLength < activeCharacter.combo)
@@ -147,6 +140,15 @@ public class BattleManager : MonoBehaviour {
 
             }
         }
+    }
+
+    private void InitializePlayer()
+    {
+        UpdateSkills();
+        actionText.text = "";
+        pElement.text = player.characterName + "'s Active Element: " + player.element;
+        awaitCommand = true;
+        pickAction.SetActive(true);
     }
 
     private void SelectAttack()
@@ -217,7 +219,7 @@ public class BattleManager : MonoBehaviour {
 
     private void PickSkill(SkillAction skill)
     {
-        if (skill.Cost <= player.stamina) player.UseSkill(skill);
+        player.UseSkill(skill);
 
         skillContainer.SetActive(false);
         targetContainer.SetActive(true);
@@ -258,15 +260,26 @@ public class BattleManager : MonoBehaviour {
         back.onClick.AddListener(BackFromCombo);
     }
 
-    private void SetSkills()
+    private void UpdateSkills()
     {
+        for (int i = 0; i < skillContainer.transform.childCount; i++)
+        {
+            Destroy(skillContainer.transform.GetChild(i).gameObject);
+        }
+        player.LoseSkill();
+
+        pSkill.text = "";
+
         for (int i = 0; i < player.CountSkills(); i++)
         {
             SkillAction currentSkill = player.GetSkill(i);
-            Button selectSkill = Instantiate(skillButton, skillContainer.transform);
-            selectSkill.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = currentSkill.Name;
-            selectSkill.onClick.AddListener(() => PickSkill(currentSkill));
-            skillButtons.Add(selectSkill);
+            if (player.CanUseSkill(currentSkill))
+            {   
+                Button selectSkill = Instantiate(skillButton, skillContainer.transform);
+                selectSkill.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = currentSkill.Name;
+                selectSkill.onClick.AddListener(() => PickSkill(currentSkill));
+                skillButtons.Add(selectSkill);
+            }
         }
         Button back = Instantiate(backButton, skillContainer.transform);
         back.onClick.AddListener(BackFromSkill);
@@ -292,17 +305,6 @@ public class BattleManager : MonoBehaviour {
         pCombo.text = player.characterName + "'s Combo Length: " + (player.combo - comboLength);
     }
 
-    private void UpdateSkills()
-    {
-        for (int i = 0; i < skillButtons.Count; i++)
-        {
-            skillButtons[i].interactable = player.GetSkill(i).Cost <= player.stamina;
-        }
-
-        player.activeSkill = null;
-        pSkill.text = "";
-    }
-
     private void NextTurn(CharacterInfo activeCharacter)
     {
         turnOrder.Dequeue();
@@ -311,7 +313,6 @@ public class BattleManager : MonoBehaviour {
         comboActions.Clear();
         comboLength = 0;
 
-        UpdateSkills();
         UpdateCombo();
 
         if (gameManager.enemies.Count <= 0) EndBattle();

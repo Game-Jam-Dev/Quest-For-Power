@@ -33,7 +33,7 @@ public class SkillList
     {
         if (skillList.ContainsKey(key)) return skillList[key];
 
-        else return new SkillAction("Null", 0, EmptyAction);
+        else return new SkillAction("Null", EmptyAction);
     }
 
 
@@ -41,11 +41,11 @@ public class SkillList
     {
         skillList = new Dictionary<string, SkillAction>()
         {
-            {"health drain", new SkillAction("Health Drain", 5, HealthDrain)},
-            {"water", new SkillAction("Water", 3, InfuseWater)},
-            {"wind", new SkillAction("Wind", 3, InfuseWind)},
-            {"earth", new SkillAction("Earth", 3, InfuseEarth)},
-            {"fire", new SkillAction("Fire", 3, InfuseFire)},
+            {"health drain", new SkillAction("Health Drain", HealthDrain)},
+            {"water", new SkillAction("Water", InfuseWater)},
+            {"wind", new SkillAction("Wind", InfuseWind)},
+            {"earth", new SkillAction("Earth", InfuseEarth)},
+            {"fire", new SkillAction("Fire", InfuseFire)},
         };
     }
 
