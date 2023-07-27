@@ -78,7 +78,14 @@ public class BattleThroneManager : MonoBehaviour {
                         {
                             actionText.text = $"{activeCharacter.characterName} missed";
                             break;
-                        } 
+                        }
+
+                        while (player.isAttacking)
+                        {
+                            
+                            yield return null;
+                        }
+
                         UpdateHealth();
 
                         if (target.health <= 0)
@@ -100,8 +107,6 @@ public class BattleThroneManager : MonoBehaviour {
                             break;
                         }
                         i++;
-
-                        yield return new WaitForSeconds(.5f);
                     }
 
                 } else {
@@ -356,6 +361,7 @@ public class BattleThroneManager : MonoBehaviour {
 
     public void EndBattle()
     {
+        player.EndCombat();
         gameObject.SetActive(false);
     }
 }

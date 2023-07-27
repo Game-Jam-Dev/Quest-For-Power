@@ -73,8 +73,18 @@ public class ComboList
         return r < a;
     }
 
-    private void Attack(CharacterInfo self, CharacterInfo target, float d)
+    private void Attack(CharacterInfo self, CharacterInfo target, float d, string triggerName)
     {
+        Animator anim = self.GetAnimator();
+        
+        if (anim != null && TriggerExists(triggerName, anim)) 
+        {   
+            self.currentTrigger = triggerName;
+            self.isAttacking = true;
+        
+            anim.SetTrigger(triggerName);
+        }
+
         int damage = (int)(self.attack * d - target.defense);
         if (damage < 0) damage = 0;
 
@@ -88,7 +98,7 @@ public class ComboList
         if (!HitCheck(self, target, 100, comboDepth)) return false;
 
         else {
-            Attack(self, target, 1);
+            Attack(self, target, 1, "Light Attack");
             return true;
         }
     }
@@ -98,7 +108,7 @@ public class ComboList
         if (!HitCheck(self, target, 80, comboDepth)) return false;
 
         else {
-            Attack(self, target, 1.5f);
+            Attack(self, target, 1.5f, "Medium Attack");
             return true;
         }
     }
@@ -108,8 +118,20 @@ public class ComboList
         if (!HitCheck(self, target, 60, comboDepth)) return false;
 
         else {
-            Attack(self, target, 2);
+            Attack(self, target, 2, "Heavy Attack");
             return true;
         }
+    }
+
+    private bool TriggerExists(string triggerName, Animator anim) 
+    {
+        int hash = Animator.StringToHash(triggerName);
+        for (int i = 0; i < anim.parameterCount; i++)
+        {
+            AnimatorControllerParameter param = anim.GetParameter(i);
+            if (param.nameHash == hash && param.type == AnimatorControllerParameterType.Trigger)
+                return true;
+        }
+        return false;
     }
 }

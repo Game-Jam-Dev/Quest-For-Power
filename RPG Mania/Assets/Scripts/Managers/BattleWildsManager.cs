@@ -91,7 +91,14 @@ public class BattleWildsManager : MonoBehaviour {
                             {
                                 actionText.text = $"{activeCharacter.characterName} missed";
                                 break;
-                            } 
+                            }
+
+                            while (activeCharacter.isAttacking)
+                            {
+                                
+                                yield return null;
+                            }
+
                             UpdateHealth();
 
                             if (target.health <= 0)
@@ -115,8 +122,6 @@ public class BattleWildsManager : MonoBehaviour {
                                 break;
                             }
                             i++;
-
-                            yield return new WaitForSeconds(.5f);
                         }
                     }
                 } else {
@@ -390,6 +395,7 @@ public class BattleWildsManager : MonoBehaviour {
 
     public void EndBattle()
     {
+        player.EndCombat();
         gameObject.SetActive(false);
     }
 

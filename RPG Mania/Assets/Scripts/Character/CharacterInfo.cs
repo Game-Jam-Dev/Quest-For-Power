@@ -12,16 +12,23 @@ public class CharacterInfo : MonoBehaviour {
     public int evasion;
     public int combo;
     public SkillAction activeSkill;
+    public string currentTrigger = "";
+    public bool isAttacking = false;
     protected List<string> comboKeys = new List<string>();
     protected List<string> skillKeys = new List<string>();
 
     protected List<ComboAction> comboActions = new List<ComboAction>();
     protected List<(SkillAction, int)> skillActions = new List<(SkillAction, int)>();
 
+    private Animator anim;
+    private SpriteRenderer sr;
     private Camera mainCamera;
 
     protected virtual void Start() {
         mainCamera = Camera.main;
+
+        TryGetComponent<Animator>(out anim);
+        TryGetComponent<SpriteRenderer>(out sr);
 
         health = maxHealth;
 
@@ -32,6 +39,21 @@ public class CharacterInfo : MonoBehaviour {
         comboActions.Add(ComboList.GetInstance().GetAction(comboKeys[0]));
         comboActions.Add(ComboList.GetInstance().GetAction(comboKeys[1]));
         comboActions.Add(ComboList.GetInstance().GetAction(comboKeys[2]));
+    }
+
+    public void PrepareCombat()
+    {
+        if (anim != null)
+        {
+            sr.flipX = true;
+            anim.SetBool("Combat", true);
+        }
+        
+    }
+
+    public void EndCombat()
+    {
+        if (anim != null) anim.SetBool("Combat", false);
     }
 
     private void LateUpdate() {
@@ -68,6 +90,17 @@ public class CharacterInfo : MonoBehaviour {
     public virtual void UseSkill(SkillAction skill)
     {
         activeSkill = skill;
+    }
+
+    public Animator GetAnimator() {return anim;}
+
+    public void ResetTrigger()
+    {
+        if (anim != null)
+        {
+            anim.ResetTrigger(currentTrigger);
+            isAttacking = false;
+        }
     }
 
     public virtual ComboAction PickEnemyCombo(int currentComboLength){ return GetCombo(0); }

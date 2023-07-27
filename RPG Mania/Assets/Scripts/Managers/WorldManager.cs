@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class WorldManager : MonoBehaviour {
     [SerializeField] private Button battleButton;
     private GameObject gameController, player;
+    private PlayerInfo playerInfo;
     private List<GameObject> enemies;
     private GameManager gameManager;
     [SerializeField] private GameObject battleUI;
@@ -16,6 +17,7 @@ public class WorldManager : MonoBehaviour {
 
         player = GameObject.FindGameObjectWithTag("Player");
         gameManager.SetPlayer(player);
+        playerInfo = player.GetComponent<PlayerInfo>();
 
         battleButton.onClick.AddListener(StartBattle);
     }
@@ -25,6 +27,8 @@ public class WorldManager : MonoBehaviour {
     }
 
     private void StartBattle() {
+        playerInfo.PrepareCombat();
+
         foreach (GameObject e in GameObject.FindGameObjectsWithTag("Enemy")) gameManager.enemies.Add(e.GetComponent<EnemyInfo>());
 
         battleUI.SetActive(true);
