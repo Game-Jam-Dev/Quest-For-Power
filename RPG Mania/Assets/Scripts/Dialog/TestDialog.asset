@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: TestDialog
   m_EditorClassIdentifier: 
   dialogLines:
-  - {fileID: 0}
+  - dialog: Thus is the first line.
+  - dialog: Testing dialog functionality :D

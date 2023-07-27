@@ -486,6 +486,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogBox: {fileID: 1627318887244746676}
   dialogText: {fileID: 8523279246317377008}
+  textSpeed: 0.1
   currentDialog: {fileID: 11400000, guid: e0f1d46cb8131164ea3dcab0c5ebd739, type: 2}
 --- !u!1 &4676544588874010738
 GameObject:
