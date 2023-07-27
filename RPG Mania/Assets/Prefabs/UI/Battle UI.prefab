@@ -985,7 +985,7 @@ GameObject:
   - component: {fileID: 4437018506832509081}
   - component: {fileID: 4437018506832509080}
   - component: {fileID: 4437018506832509083}
-  - component: {fileID: 4437018506832509063}
+  - component: {fileID: 6457924424858749588}
   m_Layer: 5
   m_Name: Battle UI
   m_TagString: BattleController
@@ -1077,7 +1077,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &4437018506832509063
+--- !u!114 &6457924424858749588
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1086,7 +1086,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4437018506832509085}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3f3b70965151c749bd8a89a9d7c1e00, type: 3}
+  m_Script: {fileID: 11500000, guid: e99851d7b86a3534ba801962fac917ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pHealth: {fileID: 4437018505528952576}
@@ -1100,9 +1100,10 @@ MonoBehaviour:
   skillContainer: {fileID: 4437018507383861896}
   targetContainer: {fileID: 4437018505397472564}
   pickAction: {fileID: 4437018507030381583}
-  actionButton: {fileID: 8435136807521846455, guid: f65e6af6fca6f794c9a41a403ba041b0,
+  comboButton: {fileID: 8435136807521846455, guid: f65e6af6fca6f794c9a41a403ba041b0,
     type: 3}
-  skillButton: {fileID: 4437018506809299914}
+  skillButton: {fileID: 1104211911853846905, guid: 4e9d0c08d92f09945a295f5ec36ea26e,
+    type: 3}
   targetButton: {fileID: 1104211911853846905, guid: fdd98018acee60c48aad000fc3ed353d,
     type: 3}
   pickSkillButton: {fileID: 4437018506809299914}
@@ -1529,7 +1530,7 @@ GameObject:
   - component: {fileID: 4437018507471472262}
   - component: {fileID: 4437018507471472263}
   m_Layer: 5
-  m_Name: Actions
+  m_Name: Combos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
