@@ -8,7 +8,7 @@ using System.Collections;
 public class BattleWildsManager : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI pHealth, pSkill, pElement, pCombo, eHealth, actionText;
     [SerializeField] private GameObject eHealthContainer, comboContainer, skillContainer, targetContainer, pickAction;
-    [SerializeField] private Button comboButton, skillButton, targetButton, pickSkillButton, attackButton, escapeButton, backButton;
+    [SerializeField] private Button comboButton, skillButton, targetButton, attackButton, absorbButton, pickSkillButton, escapeButton, backButton;
     private List<Button> targetButtons = new List<Button>();
     private List<Button> comboButtons = new List<Button>();
     private List<Button> skillButtons = new List<Button>();
@@ -18,6 +18,8 @@ public class BattleWildsManager : MonoBehaviour {
     private Queue<CharacterInfo> turnOrder = new Queue<CharacterInfo>();
     private bool awaitCommand = false;
     private int comboLength = 0;
+    private bool canCombo = true;
+    private int absorbCounter = 0;
 
     private List<ComboAction> comboActions = new List<ComboAction>();
     private CharacterInfo target;
@@ -34,6 +36,7 @@ public class BattleWildsManager : MonoBehaviour {
         turnOrder = new Queue<CharacterInfo>(characters);
         
         attackButton.onClick.AddListener(SelectAttack);
+        absorbButton.onClick.AddListener(SelectAbsorb);
         pickSkillButton.onClick.AddListener(SelectSkill);
         escapeButton.onClick.AddListener(SelectEscape);
 
@@ -49,7 +52,9 @@ public class BattleWildsManager : MonoBehaviour {
         comboContainer.SetActive(false);
         pickAction.SetActive(false);
 
-        player.SetAllSkillAmounts(1);
+        player.SetAllSkillAmounts(0);
+
+        absorbCounter = 0;
 
         if (gameManager.enemies.Count <= 0) EndBattle();
 
@@ -72,40 +77,49 @@ public class BattleWildsManager : MonoBehaviour {
                         yield return null;
                     }
 
-                    int i = 0;
-                    foreach (ComboAction a in comboActions)
+                    if (!canCombo)
                     {
-                        actionText.text = $"{activeCharacter.characterName} used {a.Name} at {target.characterName}";
-                        if (!activeCharacter.DoAction(a, target, i))
+                        player.AbsorbSkill(target.element);
+                        absorbCounter += 1;
+
+                        if (absorbCounter >= 3) absorbButton.interactable = false;
+                    } 
+                    else
+                    {
+                        int i = 0;
+                        foreach (ComboAction a in comboActions)
                         {
-                            actionText.text = $"{activeCharacter.characterName} missed";
-                            break;
-                        } 
-                        UpdateHealth();
+                            actionText.text = $"{activeCharacter.characterName} used {a.Name} at {target.characterName}";
+                            if (!activeCharacter.DoAction(a, target, i))
+                            {
+                                actionText.text = $"{activeCharacter.characterName} missed";
+                                break;
+                            } 
+                            UpdateHealth();
 
-                        if (target.health <= 0)
-                        {
-                            killCount++;
+                            if (target.health <= 0)
+                            {
+                                killCount++;
 
-                            int targetIndex = gameManager.enemies.IndexOf(target as EnemyInfo);
-                            
-                            targetContainer.transform.GetChild(targetIndex).GetComponent<Button>().interactable = false;
-                            eHealthContainer.transform.GetChild(targetIndex).GetComponent<TextMeshProUGUI>().text = target.characterName + " is defeated";
+                                int targetIndex = gameManager.enemies.IndexOf(target as EnemyInfo);
+                                
+                                targetContainer.transform.GetChild(targetIndex).GetComponent<Button>().interactable = false;
+                                eHealthContainer.transform.GetChild(targetIndex).GetComponent<TextMeshProUGUI>().text = target.characterName + " is defeated";
 
-                            var newTurnOrder = new Queue<CharacterInfo>(turnOrder.Where(x => x != target));
-                            turnOrder = newTurnOrder;
+                                var newTurnOrder = new Queue<CharacterInfo>(turnOrder.Where(x => x != target));
+                                turnOrder = newTurnOrder;
 
-                            Destroy(target.gameObject);
+                                Destroy(target.gameObject);
 
-                            if (killCount >= gameManager.enemies.Count) EndBattle();
+                                if (killCount >= gameManager.enemies.Count) EndBattle();
 
-                            break;
+                                break;
+                            }
+                            i++;
+
+                            yield return new WaitForSeconds(.5f);
                         }
-                        i++;
-
-                        yield return new WaitForSeconds(.5f);
                     }
-
                 } else {
                     while (comboLength < activeCharacter.combo)
                     {
@@ -153,12 +167,21 @@ public class BattleWildsManager : MonoBehaviour {
 
     private void SelectAttack()
     {
+        canCombo = true;
+        pickAction.SetActive(false);
+        targetContainer.SetActive(true);
+    }
+
+    private void SelectAbsorb()
+    {
+        canCombo = false;
         pickAction.SetActive(false);
         targetContainer.SetActive(true);
     }
 
     private void SelectSkill()
     {
+        canCombo = true;
         pickAction.SetActive(false);
         skillContainer.SetActive(true);
     }
@@ -197,7 +220,10 @@ public class BattleWildsManager : MonoBehaviour {
     {
         this.target = target;
         targetContainer.SetActive(false);
-        comboContainer.SetActive(true);
+
+        if (canCombo) comboContainer.SetActive(true);
+
+        else awaitCommand = false;
     }
 
     private void PickCombo(ComboAction action)
@@ -269,6 +295,8 @@ public class BattleWildsManager : MonoBehaviour {
         player.LoseSkill();
 
         pSkill.text = "";
+
+
 
         for (int i = 0; i < player.CountSkills(); i++)
         {

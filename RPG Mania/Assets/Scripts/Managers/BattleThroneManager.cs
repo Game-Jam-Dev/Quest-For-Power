@@ -8,7 +8,7 @@ using System.Collections;
 public class BattleThroneManager : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI pHealth, pSkill, pElement, pCombo, eHealth, actionText;
     [SerializeField] private GameObject eHealthContainer, comboContainer, skillContainer, targetContainer, pickAction;
-    [SerializeField] private Button comboButton, skillButton, targetButton, pickSkillButton, attackButton, escapeButton, backButton;
+    [SerializeField] private Button comboButton, skillButton, targetButton, attackButton, pickSkillButton, escapeButton, backButton;
     private List<Button> targetButtons = new List<Button>();
     private List<Button> comboButtons = new List<Button>();
     private List<Button> skillButtons = new List<Button>();
