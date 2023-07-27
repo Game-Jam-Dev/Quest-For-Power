@@ -5,12 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Collections;
 
-public class BattleManager : MonoBehaviour {
+public class BattleWildsManager : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI pHealth, pSkill, pElement, pCombo, eHealth, actionText;
     [SerializeField] private GameObject eHealthContainer, comboContainer, skillContainer, targetContainer, pickAction;
-    [SerializeField] private Button actionButton, skillButton, targetButton, pickSkillButton, attackButton, escapeButton, backButton;
+    [SerializeField] private Button comboButton, skillButton, targetButton, pickSkillButton, attackButton, escapeButton, backButton;
     private List<Button> targetButtons = new List<Button>();
-    private List<Button> actionButtons = new List<Button>();
+    private List<Button> comboButtons = new List<Button>();
     private List<Button> skillButtons = new List<Button>();
     private GameManager gameManager;
     public int killCount = 0;
@@ -38,7 +38,7 @@ public class BattleManager : MonoBehaviour {
         escapeButton.onClick.AddListener(SelectEscape);
 
         SetEnemies();
-        SetActions();
+        SetCombos();
 
         UpdateCombo();
         UpdateSkills();
@@ -245,15 +245,15 @@ public class BattleManager : MonoBehaviour {
         back.onClick.AddListener(BackFromTarget);
     }
 
-    private void SetActions()
+    private void SetCombos()
     {
         for (int i = 0; i < player.CountActions(); i++)
         {
-            ComboAction currentAction = player.GetCombo(i);
-            Button selectAction = Instantiate(actionButton, comboContainer.transform);
-            selectAction.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = currentAction.Name;
-            selectAction.onClick.AddListener(() => PickCombo(currentAction));
-            actionButtons.Add(selectAction);
+            ComboAction currentCombo = player.GetCombo(i);
+            Button selectCombo = Instantiate(comboButton, comboContainer.transform);
+            selectCombo.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = currentCombo.Name;
+            selectCombo.onClick.AddListener(() => PickCombo(currentCombo));
+            comboButtons.Add(selectCombo);
         }
 
         Button back = Instantiate(backButton, comboContainer.transform);
@@ -297,9 +297,9 @@ public class BattleManager : MonoBehaviour {
 
     private void UpdateCombo()
     {
-        for (int i = 0; i < actionButtons.Count; i++) 
+        for (int i = 0; i < comboButtons.Count; i++) 
         {
-            actionButtons[i].interactable = player.GetCombo(i).Cost <= player.combo - comboLength;
+            comboButtons[i].interactable = player.GetCombo(i).Cost <= player.combo - comboLength;
         }
 
         pCombo.text = player.characterName + "'s Combo Length: " + (player.combo - comboLength);
