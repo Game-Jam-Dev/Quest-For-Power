@@ -939,6 +939,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 4676544588567442417, guid: 4c63db1762ae4a943b5f1f9fc35d49ad,
+        type: 3}
+      propertyPath: m_TagString
+      value: Canvas
+      objectReference: {fileID: 0}
     - target: {fileID: 4676544588567442429, guid: 4c63db1762ae4a943b5f1f9fc35d49ad,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1916,6 +1921,7 @@ MonoBehaviour:
   backButton: {fileID: 1104211911853846905, guid: e5533a998ad82d7478e68b172a7c98a6,
     type: 3}
   killCount: 0
+  enemies: []
 --- !u!1001 &8148494516188841141
 PrefabInstance:
   m_ObjectHideFlags: 0

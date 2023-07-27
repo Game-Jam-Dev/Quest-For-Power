@@ -16,6 +16,7 @@ public class BattleThroneManager : MonoBehaviour {
     public int killCount = 0;
 
     private Queue<CharacterInfo> turnOrder = new Queue<CharacterInfo>();
+    public List<EnemyInfo> enemies = new List<EnemyInfo>();
     private bool awaitCommand = false;
     private int comboLength = 0;
 
@@ -30,7 +31,7 @@ public class BattleThroneManager : MonoBehaviour {
     private void OnEnable() {
         player = gameManager.player;
         player.gameObject.GetComponent<PlayerMovement>().enabled = false;
-        var characters = new List<CharacterInfo> { player }.Concat(gameManager.enemies);
+        var characters = new List<CharacterInfo> { player }.Concat(enemies);
         turnOrder = new Queue<CharacterInfo>(characters);
         
         attackButton.onClick.AddListener(SelectAttack);
@@ -49,7 +50,7 @@ public class BattleThroneManager : MonoBehaviour {
         comboContainer.SetActive(false);
         pickAction.SetActive(false);
 
-        if (gameManager.enemies.Count <= 0) EndBattle();
+        if (enemies.Count <= 0) EndBattle();
 
         StartCoroutine(BattleSequence());
     }
@@ -92,7 +93,7 @@ public class BattleThroneManager : MonoBehaviour {
                         {
                             killCount++;
 
-                            int targetIndex = gameManager.enemies.IndexOf(target as EnemyInfo);
+                            int targetIndex = enemies.IndexOf(target as EnemyInfo);
                             
                             targetContainer.transform.GetChild(targetIndex).GetComponent<Button>().interactable = false;
                             eHealthContainer.transform.GetChild(targetIndex).GetComponent<TextMeshProUGUI>().text = target.characterName + " is defeated";
@@ -102,7 +103,7 @@ public class BattleThroneManager : MonoBehaviour {
 
                             Destroy(target.gameObject);
 
-                            if (killCount >= gameManager.enemies.Count) EndBattle();
+                            if (killCount >= enemies.Count) EndBattle();
 
                             break;
                         }
@@ -233,9 +234,9 @@ public class BattleThroneManager : MonoBehaviour {
 
     private void SetEnemies()
     {
-        for (int i = 0; i < gameManager.enemies.Count; i++)
+        for (int i = 0; i < enemies.Count; i++)
         {
-            EnemyInfo enemy = gameManager.enemies[i];
+            EnemyInfo enemy = enemies[i];
             TextMeshProUGUI enemyHealthText = Instantiate(eHealth, eHealthContainer.transform);
             enemyHealthText.rectTransform.anchoredPosition = new Vector3(0, -i * 100);
 
@@ -289,9 +290,9 @@ public class BattleThroneManager : MonoBehaviour {
     {
         pHealth.text = player.characterName + "'s Health: " + player.health;
 
-        for (int i = 0; i < gameManager.enemies.Count; i++)
+        for (int i = 0; i < enemies.Count; i++)
         {
-            EnemyInfo enemy = gameManager.enemies[i];
+            EnemyInfo enemy = enemies[i];
 
             if (enemy.health > 0)
                 eHealthContainer.transform.GetChild(i).GetComponent<TextMeshProUGUI>().text = enemy.characterName + "'s Health: " + enemy.health;
@@ -318,7 +319,7 @@ public class BattleThroneManager : MonoBehaviour {
 
         UpdateCombo();
 
-        if (gameManager.enemies.Count <= 0) EndBattle();
+        if (enemies.Count <= 0) EndBattle();
     }
 
     private void OnDisable() {
@@ -326,7 +327,7 @@ public class BattleThroneManager : MonoBehaviour {
 
         StopAllCoroutines();
 
-        gameManager.enemies.Clear();
+        enemies.Clear();
 
         ClearUI();
 
@@ -357,6 +358,8 @@ public class BattleThroneManager : MonoBehaviour {
         {
             Destroy(comboContainer.transform.GetChild(i).gameObject);
         }
+
+        comboButtons.Clear();
     }
 
     public void EndBattle()

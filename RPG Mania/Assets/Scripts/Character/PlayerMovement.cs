@@ -39,6 +39,8 @@ public class PlayerMovement : MonoBehaviour {
 
         actions.Gameplay.Disable();
 
+        CancelMovement();
+        
         rb.velocity = Vector3.zero;
     }
 
@@ -52,6 +54,11 @@ public class PlayerMovement : MonoBehaviour {
         if (moveInput.x < 0) sr.flipX = false;
     }
     private void StopCharacter(InputAction.CallbackContext context)
+    {
+        CancelMovement();
+    }
+
+    private void CancelMovement()
     {
         moveInput = Vector2.zero;
         anim.SetBool("Moving", false);
