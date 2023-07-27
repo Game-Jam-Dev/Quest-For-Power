@@ -210,6 +210,7 @@ public class BattleThroneManager : MonoBehaviour {
 
         else
         {
+            pCombo.text = player.characterName + "'s Combo Length: " + (player.combo - comboLength);
             awaitCommand = false;
             comboContainer.SetActive(false);
         } 
@@ -285,7 +286,10 @@ public class BattleThroneManager : MonoBehaviour {
 
         for (int i = 0; i < gameManager.enemies.Count; i++)
         {
-            eHealthContainer.transform.GetChild(i).GetComponent<TextMeshProUGUI>().text = gameManager.enemies[i].characterName + "'s Health: " + gameManager.enemies[i].health;
+            EnemyInfo enemy = gameManager.enemies[i];
+
+            if (enemy.health > 0)
+                eHealthContainer.transform.GetChild(i).GetComponent<TextMeshProUGUI>().text = enemy.characterName + "'s Health: " + enemy.health;
         }
     }
 

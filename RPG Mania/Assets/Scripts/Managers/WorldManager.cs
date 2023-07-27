@@ -15,7 +15,7 @@ public class WorldManager : MonoBehaviour {
         gameManager = gameController.GetComponent<GameManager>();
 
         player = GameObject.FindGameObjectWithTag("Player");
-        gameManager.player = player.GetComponent<PlayerInfo>();
+        gameManager.SetPlayer(player);
 
         battleButton.onClick.AddListener(StartBattle);
     }

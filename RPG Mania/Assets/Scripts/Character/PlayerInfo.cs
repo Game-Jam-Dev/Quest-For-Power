@@ -1,6 +1,8 @@
 using UnityEngine;
 
 public class PlayerInfo : CharacterInfo {
+    private int experience = 0;
+    public int level {get; private set;}
     protected override void Start() {
         base.Start();
 
@@ -15,6 +17,32 @@ public class PlayerInfo : CharacterInfo {
         skillActions.Add((SkillList.GetInstance().GetAction(skillKeys[2]), 0));
         skillActions.Add((SkillList.GetInstance().GetAction(skillKeys[3]), 0));
         skillActions.Add((SkillList.GetInstance().GetAction(skillKeys[4]), 0));
+    }
+
+    public void WinBattle(int xp, int kills)
+    {
+        experience += xp;
+        if (experience > level * 11) LevelUp();
+
+        health = (maxHealth/10) * kills;
+        if (health > maxHealth) health = maxHealth;
+    }
+
+    private void LevelUp()
+    {
+        SetStats(level + 1);
+
+        Debug.Log("Now level " + level);
+    }
+
+    public void SetStats(int l)
+    {
+        level = l;
+        experience = level * 10;
+
+        maxHealth = level * 20;
+        attack = level * 2;
+        defense = accuracy = evasion = level;
     }
 
     public override void UseSkill(SkillAction skill)

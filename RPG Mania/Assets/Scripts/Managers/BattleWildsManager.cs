@@ -14,6 +14,7 @@ public class BattleWildsManager : MonoBehaviour {
     private List<Button> skillButtons = new List<Button>();
     private GameManager gameManager;
     public int killCount = 0;
+    private int xpGain = 0;
 
     private Queue<CharacterInfo> turnOrder = new Queue<CharacterInfo>();
     private bool awaitCommand = false;
@@ -51,10 +52,6 @@ public class BattleWildsManager : MonoBehaviour {
         skillContainer.SetActive(false);
         comboContainer.SetActive(false);
         pickAction.SetActive(false);
-
-        player.SetAllSkillAmounts(0);
-
-        absorbCounter = 0;
 
         if (gameManager.enemies.Count <= 0) EndBattle();
 
@@ -101,6 +98,8 @@ public class BattleWildsManager : MonoBehaviour {
                             {
                                 killCount++;
 
+                                xpGain += (target as EnemyInfo).XPFromKill(player.level);
+
                                 int targetIndex = gameManager.enemies.IndexOf(target as EnemyInfo);
                                 
                                 targetContainer.transform.GetChild(targetIndex).GetComponent<Button>().interactable = false;
@@ -111,7 +110,7 @@ public class BattleWildsManager : MonoBehaviour {
 
                                 Destroy(target.gameObject);
 
-                                if (killCount >= gameManager.enemies.Count) EndBattle();
+                                if (killCount >= gameManager.enemies.Count) WinBattle();
 
                                 break;
                             }
@@ -139,7 +138,7 @@ public class BattleWildsManager : MonoBehaviour {
 
                         UpdateHealth();
 
-                        if (player.health <= 0) EndBattle();
+                        if (player.health <= 0) LoseBattle();
 
                         i++;
 
@@ -238,6 +237,7 @@ public class BattleWildsManager : MonoBehaviour {
 
         else
         {
+            pCombo.text = player.characterName + "'s Combo Length: " + (player.combo - comboLength);
             awaitCommand = false;
             comboContainer.SetActive(false);
         } 
@@ -296,8 +296,6 @@ public class BattleWildsManager : MonoBehaviour {
 
         pSkill.text = "";
 
-
-
         for (int i = 0; i < player.CountSkills(); i++)
         {
             SkillAction currentSkill = player.GetSkill(i);
@@ -315,11 +313,14 @@ public class BattleWildsManager : MonoBehaviour {
 
     private void UpdateHealth()
     {
-        pHealth.text = player.characterName + "'s Health: " + player.health;
+        pHealth.text = player.characterName + "'s Health: " + player.health + " Level " + player.level;
 
         for (int i = 0; i < gameManager.enemies.Count; i++)
         {
-            eHealthContainer.transform.GetChild(i).GetComponent<TextMeshProUGUI>().text = gameManager.enemies[i].characterName + "'s Health: " + gameManager.enemies[i].health;
+            EnemyInfo enemy = gameManager.enemies[i];
+
+            if (enemy.health > 0)
+                eHealthContainer.transform.GetChild(i).GetComponent<TextMeshProUGUI>().text = enemy.characterName + "'s Health: " + enemy.health;
         }
     }
 
@@ -352,6 +353,9 @@ public class BattleWildsManager : MonoBehaviour {
         StopAllCoroutines();
 
         gameManager.enemies.Clear();
+
+        xpGain = 0;
+        absorbCounter = 0;
 
         ClearUI();
 
@@ -387,5 +391,16 @@ public class BattleWildsManager : MonoBehaviour {
     public void EndBattle()
     {
         gameObject.SetActive(false);
+    }
+
+    public void WinBattle()
+    {
+        player.WinBattle(xpGain, killCount);
+        EndBattle();
+    }
+
+    public void LoseBattle()
+    {
+        EndBattle();
     }
 }
