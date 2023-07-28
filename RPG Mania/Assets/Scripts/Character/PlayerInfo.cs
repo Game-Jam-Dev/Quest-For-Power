@@ -45,6 +45,11 @@ public class PlayerInfo : CharacterInfo {
         defense = accuracy = evasion = level;
     }
 
+    public void ResetHealth()
+    {
+        health = maxHealth;
+    }
+
     public override void UseSkill(SkillAction skill)
     {
         activeSkill = skill;

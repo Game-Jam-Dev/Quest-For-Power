@@ -41,7 +41,7 @@ public class CharacterInfo : MonoBehaviour {
         comboActions.Add(ComboList.GetInstance().GetAction(comboKeys[2]));
     }
 
-    public void PrepareCombat()
+    public virtual void PrepareCombat()
     {
         if (anim != null)
         {

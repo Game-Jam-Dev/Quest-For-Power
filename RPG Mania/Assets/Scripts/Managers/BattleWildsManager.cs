@@ -17,6 +17,8 @@ public class BattleWildsManager : MonoBehaviour {
     private int xpGain = 0;
 
     private Queue<CharacterInfo> turnOrder = new Queue<CharacterInfo>();
+    public List<EnemyInfo> enemies = new List<EnemyInfo>();
+
     private bool awaitCommand = false;
     private int comboLength = 0;
     private bool canCombo = true;
@@ -30,10 +32,11 @@ public class BattleWildsManager : MonoBehaviour {
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         gameObject.SetActive(false);
     }
+
     private void OnEnable() {
         player = gameManager.player;
         player.gameObject.GetComponent<PlayerMovement>().enabled = false;
-        var characters = new List<CharacterInfo> { player }.Concat(gameManager.enemies);
+        var characters = new List<CharacterInfo> { player }.Concat(enemies);
         turnOrder = new Queue<CharacterInfo>(characters);
         
         attackButton.onClick.AddListener(SelectAttack);
@@ -53,7 +56,7 @@ public class BattleWildsManager : MonoBehaviour {
         comboContainer.SetActive(false);
         pickAction.SetActive(false);
 
-        if (gameManager.enemies.Count <= 0) EndBattle();
+        if (enemies.Count <= 0) EndBattle();
 
         StartCoroutine(BattleSequence());
     }
@@ -90,7 +93,6 @@ public class BattleWildsManager : MonoBehaviour {
                             if (!activeCharacter.DoAction(a, target, i))
                             {
                                 actionText.text = $"{activeCharacter.characterName} missed";
-                                break;
                             }
 
                             while (activeCharacter.isAttacking)
@@ -107,7 +109,7 @@ public class BattleWildsManager : MonoBehaviour {
 
                                 xpGain += (target as EnemyInfo).XPFromKill(player.level);
 
-                                int targetIndex = gameManager.enemies.IndexOf(target as EnemyInfo);
+                                int targetIndex = enemies.IndexOf(target as EnemyInfo);
                                 
                                 targetContainer.transform.GetChild(targetIndex).GetComponent<Button>().interactable = false;
                                 eHealthContainer.transform.GetChild(targetIndex).GetComponent<TextMeshProUGUI>().text = target.characterName + " is defeated";
@@ -117,7 +119,7 @@ public class BattleWildsManager : MonoBehaviour {
 
                                 Destroy(target.gameObject);
 
-                                if (killCount >= gameManager.enemies.Count) WinBattle();
+                                if (killCount >= enemies.Count) WinBattle();
 
                                 break;
                             }
@@ -164,6 +166,7 @@ public class BattleWildsManager : MonoBehaviour {
     {
         UpdateSkills();
         actionText.text = "";
+        player.element = SkillList.Element.None;
         pElement.text = player.characterName + "'s Active Element: " + player.element;
         awaitCommand = true;
         pickAction.SetActive(true);
@@ -260,9 +263,9 @@ public class BattleWildsManager : MonoBehaviour {
 
     private void SetEnemies()
     {
-        for (int i = 0; i < gameManager.enemies.Count; i++)
+        for (int i = 0; i < enemies.Count; i++)
         {
-            EnemyInfo enemy = gameManager.enemies[i];
+            EnemyInfo enemy = enemies[i];
             TextMeshProUGUI enemyHealthText = Instantiate(eHealth, eHealthContainer.transform);
             enemyHealthText.rectTransform.anchoredPosition = new Vector3(0, -i * 100);
 
@@ -320,9 +323,9 @@ public class BattleWildsManager : MonoBehaviour {
     {
         pHealth.text = player.characterName + "'s Health: " + player.health + " Level " + player.level;
 
-        for (int i = 0; i < gameManager.enemies.Count; i++)
+        for (int i = 0; i < enemies.Count; i++)
         {
-            EnemyInfo enemy = gameManager.enemies[i];
+            EnemyInfo enemy = enemies[i];
 
             if (enemy.health > 0)
                 eHealthContainer.transform.GetChild(i).GetComponent<TextMeshProUGUI>().text = enemy.characterName + "'s Health: " + enemy.health;
@@ -349,7 +352,7 @@ public class BattleWildsManager : MonoBehaviour {
 
         UpdateCombo();
 
-        if (gameManager.enemies.Count <= 0) EndBattle();
+        if (enemies.Count <= 0) EndBattle();
     }
 
     private void OnDisable() {
@@ -357,7 +360,7 @@ public class BattleWildsManager : MonoBehaviour {
 
         StopAllCoroutines();
 
-        gameManager.enemies.Clear();
+        enemies.Clear();
 
         xpGain = 0;
         absorbCounter = 0;
@@ -391,6 +394,8 @@ public class BattleWildsManager : MonoBehaviour {
         {
             Destroy(comboContainer.transform.GetChild(i).gameObject);
         }
+
+        comboButtons.Clear();
     }
 
     public void EndBattle()
