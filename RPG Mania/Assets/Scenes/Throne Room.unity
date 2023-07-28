@@ -189,7 +189,7 @@ PrefabInstance:
     - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
         type: 3}
       propertyPath: evasion
-      value: 50
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
         type: 3}
@@ -647,12 +647,12 @@ PrefabInstance:
     - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
         type: 3}
       propertyPath: evasion
-      value: 50
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
         type: 3}
       propertyPath: accuracy
-      value: 50
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
         type: 3}
@@ -1137,12 +1137,12 @@ PrefabInstance:
     - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
         type: 3}
       propertyPath: evasion
-      value: 50
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
         type: 3}
       propertyPath: accuracy
-      value: 50
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
         type: 3}
@@ -1696,12 +1696,12 @@ PrefabInstance:
     - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
         type: 3}
       propertyPath: evasion
-      value: 50
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
         type: 3}
       propertyPath: accuracy
-      value: 50
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
         type: 3}
@@ -1891,6 +1891,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2501267450143586671, guid: d0bea8f35265c9143a384cfea304ba30,
+        type: 3}
+      propertyPath: attack
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 2501267450143586671, guid: d0bea8f35265c9143a384cfea304ba30,
+        type: 3}
+      propertyPath: defense
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 5008437861995460156, guid: d0bea8f35265c9143a384cfea304ba30,
         type: 3}
       propertyPath: m_RootOrder

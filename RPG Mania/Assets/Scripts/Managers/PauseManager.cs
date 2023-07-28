@@ -31,13 +31,10 @@ public class PauseManager : MonoBehaviour {
     }
 
     private void TogglePause(InputAction.CallbackContext context) {
-        if (!battleUI.activeSelf)
-        {
-            if (pauseUI.activeSelf)
-                Resume();
-            else
-                Pause();
-        }
+        if (pauseUI.activeSelf)
+            Resume();
+        else
+            Pause();
     }
 
     private void Resume() {

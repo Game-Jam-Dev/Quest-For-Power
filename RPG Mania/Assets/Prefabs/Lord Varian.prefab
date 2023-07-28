@@ -101,11 +101,11 @@ MonoBehaviour:
   maxHealth: 1000
   health: 0
   element: 0
-  attack: 100
-  defense: 50
+  attack: 80
+  defense: 40
   accuracy: 50
   evasion: 50
-  combo: 5
+  combo: 4
   currentTrigger: 
   isAttacking: 0
   level: 1
