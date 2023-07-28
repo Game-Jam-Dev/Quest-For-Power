@@ -68,7 +68,6 @@ public class ComboList
     private void DoAnimation(CharacterInfo self, string triggerName)
     {
         Animator anim = self.GetAnimator();
-        triggerName = "Light Attack";
         
         if (anim != null && TriggerExists(triggerName, anim)) 
         {   
