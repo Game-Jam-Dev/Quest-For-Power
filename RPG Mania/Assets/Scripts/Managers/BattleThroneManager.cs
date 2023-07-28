@@ -79,7 +79,7 @@ public class BattleThroneManager : MonoBehaviour {
                             actionText.text = $"{activeCharacter.characterName} missed";
                         }
 
-                        while (player.isAttacking)
+                        while (activeCharacter.GetIsAttacking())
                         {
                             
                             yield return null;
@@ -131,16 +131,18 @@ public class BattleThroneManager : MonoBehaviour {
 
                         i++;
 
-                        yield return new WaitForSeconds(.5f);
+                        yield return new WaitForSeconds(1f);
                     }
+
+                    yield return new WaitForSeconds(.5f);
                     
                 }
 
                 NextTurn(activeCharacter);
 
-                yield return new WaitForSeconds(.5f);
-
             }
+
+            yield return null;
         }
     }
 

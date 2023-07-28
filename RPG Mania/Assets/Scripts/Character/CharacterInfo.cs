@@ -12,24 +12,15 @@ public class CharacterInfo : MonoBehaviour {
     public int evasion;
     public int combo;
     public SkillAction activeSkill;
-    public string currentTrigger = "";
-    public bool isAttacking = false;
     protected List<string> comboKeys = new List<string>();
     protected List<string> skillKeys = new List<string>();
 
     protected List<ComboAction> comboActions = new List<ComboAction>();
     protected List<(SkillAction, int)> skillActions = new List<(SkillAction, int)>();
 
-    private Animator anim;
-    private SpriteRenderer sr;
-    private Camera mainCamera;
+    [SerializeField] private CharacterAnimation ca;
 
     protected virtual void Start() {
-        mainCamera = Camera.main;
-
-        TryGetComponent<Animator>(out anim);
-        TryGetComponent<SpriteRenderer>(out sr);
-
         health = maxHealth;
 
         comboKeys.Add("light");
@@ -43,21 +34,12 @@ public class CharacterInfo : MonoBehaviour {
 
     public virtual void PrepareCombat()
     {
-        if (anim != null)
-        {
-            sr.flipX = true;
-            anim.SetBool("Combat", true);
-        }
-        
+        ca.SwitchToCombat();
     }
 
     public void EndCombat()
     {
-        if (anim != null) anim.SetBool("Combat", false);
-    }
-
-    private void LateUpdate() {
-        transform.LookAt(mainCamera.transform);
+        ca.SwitchFromCombat();
     }
 
     public ComboAction GetCombo(int i)
@@ -92,15 +74,13 @@ public class CharacterInfo : MonoBehaviour {
         activeSkill = skill;
     }
 
-    public Animator GetAnimator() {return anim;}
+    public Animator GetAnimator() {return ca.GetAnimator();}
 
-    public void ResetTrigger()
+    public bool GetIsAttacking() {return ca.isAttacking;}
+
+    public void SetUpTrigger(string triggerName)
     {
-        if (anim != null)
-        {
-            anim.ResetTrigger(currentTrigger);
-            isAttacking = false;
-        }
+        ca.SetUpTrigger(triggerName);
     }
 
     public virtual ComboAction PickEnemyCombo(int currentComboLength){ return GetCombo(0); }

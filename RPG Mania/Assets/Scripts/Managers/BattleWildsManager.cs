@@ -95,7 +95,7 @@ public class BattleWildsManager : MonoBehaviour {
                                 actionText.text = $"{activeCharacter.characterName} missed";
                             }
 
-                            while (activeCharacter.isAttacking)
+                            while (activeCharacter.GetIsAttacking())
                             {
                                 
                                 yield return null;
@@ -149,15 +149,14 @@ public class BattleWildsManager : MonoBehaviour {
 
                         i++;
 
-                        yield return new WaitForSeconds(.5f);
+                        yield return new WaitForSeconds(1f);
                     }
+
+                    yield return new WaitForSeconds(.5f);
                     
                 }
 
                 NextTurn(activeCharacter);
-
-                yield return new WaitForSeconds(.5f);
-
             }
         }
     }

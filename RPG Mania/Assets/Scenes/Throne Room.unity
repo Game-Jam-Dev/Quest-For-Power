@@ -168,16 +168,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
         type: 3}
-      propertyPath: level
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
-        type: 3}
-      propertyPath: attack
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
-        type: 3}
       propertyPath: defense
       value: 40
       objectReference: {fileID: 0}
@@ -185,21 +175,6 @@ PrefabInstance:
         type: 3}
       propertyPath: element
       value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
-        type: 3}
-      propertyPath: evasion
-      value: 45
-      objectReference: {fileID: 0}
-    - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
-        type: 3}
-      propertyPath: accuracy
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
-        type: 3}
-      propertyPath: maxHealth
-      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
         type: 3}
@@ -267,7 +242,7 @@ PrefabInstance:
       value: Solder 2
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 4930510028531210733, guid: 40286b3be96a7ef44a43ee52d9f29bea, type: 3}
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 40286b3be96a7ef44a43ee52d9f29bea, type: 3}
 --- !u!1 &270088812
 GameObject:
@@ -626,38 +601,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
         type: 3}
-      propertyPath: level
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
-        type: 3}
-      propertyPath: attack
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
-        type: 3}
-      propertyPath: defense
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
-        type: 3}
       propertyPath: element
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
-        type: 3}
-      propertyPath: evasion
-      value: 45
-      objectReference: {fileID: 0}
-    - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
-        type: 3}
-      propertyPath: accuracy
-      value: 45
-      objectReference: {fileID: 0}
-    - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
-        type: 3}
-      propertyPath: maxHealth
-      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
         type: 3}
@@ -724,9 +669,14 @@ PrefabInstance:
       propertyPath: characterName
       value: Solder 1
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4930510028531210733, guid: 40286b3be96a7ef44a43ee52d9f29bea, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40286b3be96a7ef44a43ee52d9f29bea, type: 3}
+--- !u!1 &748366822 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8148494517345017239, guid: 19c9f2a71fa419f4e964f78ed2b81ef1,
+    type: 3}
+  m_PrefabInstance: {fileID: 8148494516188841141}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &921400668 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -5711052370896006010, guid: 352a55b1762d3d24b818de152ba88525,
@@ -1215,7 +1165,7 @@ PrefabInstance:
       value: Solder 2
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 4930510028531210733, guid: 40286b3be96a7ef44a43ee52d9f29bea, type: 3}
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 40286b3be96a7ef44a43ee52d9f29bea, type: 3}
 --- !u!1 &1404643276
 GameObject:
@@ -1675,38 +1625,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
         type: 3}
-      propertyPath: level
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
-        type: 3}
-      propertyPath: attack
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
-        type: 3}
-      propertyPath: defense
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
-        type: 3}
       propertyPath: element
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
-        type: 3}
-      propertyPath: evasion
-      value: 45
-      objectReference: {fileID: 0}
-    - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
-        type: 3}
-      propertyPath: accuracy
-      value: 45
-      objectReference: {fileID: 0}
-    - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
-        type: 3}
-      propertyPath: maxHealth
-      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
         type: 3}
@@ -1774,7 +1694,7 @@ PrefabInstance:
       value: Solder 2
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 4930510028531210733, guid: 40286b3be96a7ef44a43ee52d9f29bea, type: 3}
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 40286b3be96a7ef44a43ee52d9f29bea, type: 3}
 --- !u!1 &1958486158
 GameObject:
@@ -1884,6 +1804,20 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8148494516188841141}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2070778619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 748366822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d32d2f2644797a42b8bc0ded111ee44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentTrigger: 
+  isAttacking: 0
 --- !u!1001 &7729118475600730603
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1891,16 +1825,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2501267450143586671, guid: d0bea8f35265c9143a384cfea304ba30,
-        type: 3}
-      propertyPath: attack
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2501267450143586671, guid: d0bea8f35265c9143a384cfea304ba30,
-        type: 3}
-      propertyPath: defense
-      value: 50
-      objectReference: {fileID: 0}
     - target: {fileID: 5008437861995460156, guid: d0bea8f35265c9143a384cfea304ba30,
         type: 3}
       propertyPath: m_RootOrder
@@ -1970,6 +1894,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1432249075295030602, guid: 19c9f2a71fa419f4e964f78ed2b81ef1,
+        type: 3}
+      propertyPath: ca
+      value: 
+      objectReference: {fileID: 2070778619}
     - target: {fileID: 1432249075295030602, guid: 19c9f2a71fa419f4e964f78ed2b81ef1,
         type: 3}
       propertyPath: attack

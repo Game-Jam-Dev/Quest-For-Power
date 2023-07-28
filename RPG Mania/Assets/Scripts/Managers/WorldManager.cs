@@ -45,11 +45,15 @@ public class WorldManager : MonoBehaviour {
                 allButton.gameObject.SetActive(true);
             }
             
-            foreach (EnemyInfo e in enemies)
+            if (enemies.Count > 0)
             {
+                foreach (EnemyInfo e in enemies)
+                {
 
-                e.gameObject.SetActive(true);
+                    e.gameObject.SetActive(true);
+                }
             }
+            
             
         }
     }

@@ -79,10 +79,7 @@ public class ComboList
         
         if (anim != null && TriggerExists(triggerName, anim)) 
         {   
-            self.currentTrigger = triggerName;
-            self.isAttacking = true;
-        
-            anim.SetTrigger(triggerName);
+            self.SetUpTrigger(triggerName);
         }
 
         int damage = (int)(self.attack * d - target.defense);

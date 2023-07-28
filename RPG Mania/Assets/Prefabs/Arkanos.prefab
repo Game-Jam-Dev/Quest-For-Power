@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: 560796370, guid: 2d86c5cfd593d5d468db914f5d315efc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 1
+  m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1.38, y: 2.3}
@@ -140,8 +140,7 @@ MonoBehaviour:
   accuracy: 5
   evasion: 5
   combo: 5
-  currentTrigger: 
-  isAttacking: 0
+  ca: {fileID: 0}
 --- !u!136 &6508373658773333739
 CapsuleCollider:
   m_ObjectHideFlags: 0

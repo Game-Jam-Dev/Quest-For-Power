@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 3446468312287349178}
   - component: {fileID: 1769637154394782135}
   - component: {fileID: 3237387295097418039}
-  - component: {fileID: 4930510028531210733}
+  - component: {fileID: 4656084142133030616}
   m_Layer: 0
-  m_Name: Soldier
+  m_Name: Soldier Throne
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99,29 +99,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterName: Soldier
-  maxHealth: 0
+  maxHealth: 400
   health: 0
   element: 0
-  attack: 0
-  defense: 0
-  accuracy: 0
-  evasion: 0
+  attack: 80
+  defense: 40
+  accuracy: 45
+  evasion: 45
   combo: 2
-  currentTrigger: 
-  isAttacking: 0
-  level: 0
+  ca: {fileID: 4656084142133030616}
+  level: 50
   detectRange: 0.5
---- !u!136 &4930510028531210733
-CapsuleCollider:
+--- !u!114 &4656084142133030616
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3036269658535557653}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 2
-  m_Height: 2.7
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d32d2f2644797a42b8bc0ded111ee44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentTrigger: 
+  isAttacking: 0
