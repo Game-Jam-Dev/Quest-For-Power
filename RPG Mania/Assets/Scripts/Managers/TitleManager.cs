@@ -3,17 +3,19 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class TitleManager : MonoBehaviour {
-    [SerializeField] private Button newButton, loadButton, settingsButton, quitButton;
+    [SerializeField] private Button newButton, loadButton, settingsButton, creditsButton, quitButton;
     private int nextScene = 1;
 
     private void Awake() {
         newButton.onClick.AddListener(StartGame);
         loadButton.onClick.AddListener(LoadGame);
         settingsButton.onClick.AddListener(Settings);
+        creditsButton.onClick.AddListener(Credits);
         quitButton.onClick.AddListener(QuitGame);
 
         loadButton.interactable = false;
         settingsButton.interactable = false;
+        creditsButton.interactable = false;
     }
 
     private void StartGame(){
@@ -26,6 +28,8 @@ public class TitleManager : MonoBehaviour {
     }
 
     private void Settings(){}
+
+    private void Credits(){}
 
     private void QuitGame(){
         #if UNITY_EDITOR
