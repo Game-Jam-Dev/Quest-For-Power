@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 
 public class WorldManager : MonoBehaviour {
-    [SerializeField] private Button battleButton;
+    [SerializeField] private Button battleButton, bossButton, allButton;
     private GameObject gameController, player;
     private PlayerInfo playerInfo;
     private List<EnemyInfo> enemies = new List<EnemyInfo>();
@@ -12,6 +12,7 @@ public class WorldManager : MonoBehaviour {
     private GameManager gameManager;
     [SerializeField] private GameObject battleUI;
     private BattleWildsManager battleManager;
+    private BattleThroneManager throneBattleManager;
 
     private void Start() {
         gameController = GameObject.FindGameObjectWithTag("GameController");
@@ -22,16 +23,28 @@ public class WorldManager : MonoBehaviour {
         playerInfo = player.GetComponent<PlayerInfo>();
 
         battleManager = battleUI.GetComponent<BattleWildsManager>();
+        throneBattleManager = battleUI.GetComponentInChildren<BattleThroneManager>();
 
         SpawnEnemies();
 
-        battleButton.onClick.AddListener(StartBattle);
+        if (battleButton != null)
+        {
+            battleButton.onClick.AddListener(StartBattle);
+            bossButton.onClick.AddListener(BossFight);
+            allButton.onClick.AddListener(FIghtAll);
+        }   
     }
 
     private void Update() {
         if (!battleUI.activeSelf) 
         {
-            battleButton.gameObject.SetActive(true);
+            if (battleButton != null)
+            {
+                battleButton.gameObject.SetActive(true);
+                bossButton.gameObject.SetActive(true);
+                allButton.gameObject.SetActive(true);
+            }
+            
             foreach (EnemyInfo e in enemies)
             {
 
@@ -71,11 +84,40 @@ public class WorldManager : MonoBehaviour {
         StartBattle();
     }
 
-    private void StartBattle() {
+    private void BossFight()
+    {
         playerInfo.PrepareCombat();
-        
-        battleManager.enemies = battleEnemies;
+
+        throneBattleManager.enemies = new List<EnemyInfo>{GameObject.FindGameObjectWithTag("Boss").GetComponent<EnemyInfo>()};
+        playerInfo.SetStats(50);
+        playerInfo.ResetHealth();
+
         battleUI.SetActive(true);
         battleButton.gameObject.SetActive(false);
+        bossButton.gameObject.SetActive(false);
+        allButton.gameObject.SetActive(false);    }
+
+    private void FIghtAll()
+    {
+        enemies.Add(GameObject.FindGameObjectWithTag("Boss").GetComponent<EnemyInfo>());
+        StartBattle();
+    }
+
+    private void StartBattle() {
+        playerInfo.PrepareCombat();
+        if (battleManager != null)
+            battleManager.enemies = battleEnemies;
+        else 
+        {
+            throneBattleManager.enemies = enemies;
+            playerInfo.SetStats(50);
+            playerInfo.ResetHealth();
+            battleButton.gameObject.SetActive(false);
+            bossButton.gameObject.SetActive(false);
+            allButton.gameObject.SetActive(false);
+        }
+        
+        battleUI.SetActive(true);
+        
     }
 }

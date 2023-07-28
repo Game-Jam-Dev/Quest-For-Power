@@ -7,7 +7,8 @@ public class GameManager : MonoBehaviour {
     public void SetPlayer(GameObject player)
     {
         this.player = player.GetComponent<PlayerInfo>();
-        this.player.SetStats(50);
+        this.player.SetStats(1);
+        this.player.ResetHealth();
     }
 
     private void Awake() {

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6508373658773333739}
   - component: {fileID: 689032297376394089}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Arkanos
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -140,6 +140,8 @@ MonoBehaviour:
   accuracy: 5
   evasion: 5
   combo: 5
+  currentTrigger: 
+  isAttacking: 0
 --- !u!136 &6508373658773333739
 CapsuleCollider:
   m_ObjectHideFlags: 0

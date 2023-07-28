@@ -8,7 +8,7 @@ using System.Collections;
 public class BattleThroneManager : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI pHealth, pSkill, pElement, pCombo, eHealth, actionText;
     [SerializeField] private GameObject eHealthContainer, comboContainer, skillContainer, targetContainer, pickAction;
-    [SerializeField] private Button comboButton, skillButton, targetButton, attackButton, pickSkillButton, escapeButton, backButton;
+    [SerializeField] private Button comboButton, skillButton, targetButton, attackButton, pickSkillButton, backButton;
     private List<Button> targetButtons = new List<Button>();
     private List<Button> comboButtons = new List<Button>();
     private List<Button> skillButtons = new List<Button>();
@@ -36,7 +36,6 @@ public class BattleThroneManager : MonoBehaviour {
         
         attackButton.onClick.AddListener(SelectAttack);
         pickSkillButton.onClick.AddListener(SelectSkill);
-        escapeButton.onClick.AddListener(SelectEscape);
 
         SetEnemies();
         SetCombos();
@@ -78,7 +77,6 @@ public class BattleThroneManager : MonoBehaviour {
                         if (!activeCharacter.DoAction(a, target, i))
                         {
                             actionText.text = $"{activeCharacter.characterName} missed";
-                            break;
                         }
 
                         while (player.isAttacking)
@@ -165,11 +163,6 @@ public class BattleThroneManager : MonoBehaviour {
     {
         pickAction.SetActive(false);
         skillContainer.SetActive(true);
-    }
-
-    private void SelectEscape()
-    {
-        EndBattle();
     }
 
     private void BackFromSkill()

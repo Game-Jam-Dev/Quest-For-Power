@@ -94,7 +94,7 @@ public class SkillList
 
     public int HealthDrain(CharacterInfo self, CharacterInfo target, int damage)
     {
-        self.health += damage/3;
+        self.health += damage;
 
         if (self.health > self.maxHealth) self.health = self.maxHealth;
 

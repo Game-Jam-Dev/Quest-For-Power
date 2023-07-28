@@ -93,7 +93,6 @@ public class BattleWildsManager : MonoBehaviour {
                             if (!activeCharacter.DoAction(a, target, i))
                             {
                                 actionText.text = $"{activeCharacter.characterName} missed";
-                                break;
                             }
 
                             while (activeCharacter.isAttacking)

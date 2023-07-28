@@ -69,13 +69,13 @@ public class ComboList
     {
         int r = Random.Range(0,100);
         int a  = self.accuracy - target.evasion + (moveAccuracy - 3 * comboDepth);
-        Debug.Log(a);
         return r < a;
     }
 
     private void Attack(CharacterInfo self, CharacterInfo target, float d, string triggerName)
     {
         Animator anim = self.GetAnimator();
+        triggerName = "Light Attack";
         
         if (anim != null && TriggerExists(triggerName, anim)) 
         {   
@@ -108,7 +108,7 @@ public class ComboList
         if (!HitCheck(self, target, 80, comboDepth)) return false;
 
         else {
-            Attack(self, target, 1.5f, "Medium Attack");
+            Attack(self, target, 2.5f, "Medium Attack");
             return true;
         }
     }
@@ -118,7 +118,7 @@ public class ComboList
         if (!HitCheck(self, target, 60, comboDepth)) return false;
 
         else {
-            Attack(self, target, 2, "Heavy Attack");
+            Attack(self, target, 4, "Heavy Attack");
             return true;
         }
     }
