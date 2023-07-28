@@ -68,7 +68,7 @@ public class ComboList
     private bool HitCheck(CharacterInfo self, CharacterInfo target, int moveAccuracy, int comboDepth)
     {
         int r = Random.Range(0,100);
-        int a  = self.accuracy - target.evasion + (moveAccuracy - 3 * comboDepth);
+        float a  = self.accuracy - target.evasion + (moveAccuracy - 3 * comboDepth);
         return r < a;
     }
 
@@ -82,7 +82,7 @@ public class ComboList
             self.SetUpTrigger(triggerName);
         }
 
-        int damage = (int)(self.attack * d - target.defense);
+        int damage = Mathf.RoundToInt(self.attack * d - target.defense);
         if (damage < 0) damage = 0;
 
         damage = SkillCheck(self, target, damage);

@@ -6,10 +6,10 @@ public class CharacterInfo : MonoBehaviour {
     public int maxHealth;
     public int health;
     public SkillList.Element element;
-    public int attack;
-    public int defense;
-    public int accuracy;
-    public int evasion;
+    public float attack;
+    public float defense;
+    public float accuracy;
+    public float evasion;
     public int combo;
     public SkillAction activeSkill;
     protected List<string> comboKeys = new List<string>();

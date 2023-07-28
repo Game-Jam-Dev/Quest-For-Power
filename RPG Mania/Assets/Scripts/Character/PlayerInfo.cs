@@ -35,14 +35,16 @@ public class PlayerInfo : CharacterInfo {
         Debug.Log("Now level " + level);
     }
 
-    public void SetStats(int l)
+    public void SetStats(int level)
     {
-        level = l;
+        this.level = level;
         experience = level * 10;
 
         maxHealth = level * 20;
         attack = level * 2;
         defense = accuracy = evasion = level;
+
+        combo = (level / 25) + 3;
     }
 
     public void ResetHealth()

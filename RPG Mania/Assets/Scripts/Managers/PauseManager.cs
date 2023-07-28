@@ -40,13 +40,13 @@ public class PauseManager : MonoBehaviour {
     private void Resume() {
         Time.timeScale = 1; 
         pauseUI.SetActive(false);
-        battleButton.enabled = true;
+        if (battleButton != null) battleButton.enabled = true;
     }
 
     private void Pause() {
         Time.timeScale = 0; 
         pauseUI.SetActive(true);
-        battleButton.enabled = false;
+        if (battleButton != null) battleButton.enabled = false;
     }
 
     private void Quit() {

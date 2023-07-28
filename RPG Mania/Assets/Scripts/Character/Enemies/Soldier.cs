@@ -1,9 +1,40 @@
 using UnityEngine;
 
 public class Soldier : EnemyInfo {
+    private Collider col;
     protected override void Start()
     {
         base.Start();
+
+        AssignElement();
+    }
+
+    public override void PrepareCombat()
+    {
+        if (col != null) col.enabled = false;
+        
+        SetStats(player.GetComponent<PlayerInfo>().level);
+
+        base.PrepareCombat();
+    }
+
+    private void SetStats(int level)
+    {
+        this.level = level;
+        
+        maxHealth = level * 8;
+        health = maxHealth;
+        attack = level * 1.6f;
+        defense = accuracy = evasion = level * .8f;
+
+    }
+
+    private void AssignElement()
+    {
+        if (element == SkillList.Element.None)
+        {
+            element = (SkillList.Element)Random.Range(1, System.Enum.GetValues(typeof(SkillList.Element)).Length);
+        }
 
         switch (element)
         {

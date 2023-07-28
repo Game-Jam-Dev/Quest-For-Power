@@ -4,15 +4,16 @@ public class EnemyInfo : CharacterInfo {
     public int level = 1;
     public float detectRange = .5f;
     private WorldManager worldController;
-    private Collider col;
+    protected GameObject player;
 
     protected override void Start()
     {
         base.Start();
 
+        player = GameObject.FindGameObjectWithTag("Player");
         worldController = GameObject.FindGameObjectWithTag("Canvas").GetComponent<WorldManager>();
-        col = GetComponent<CapsuleCollider>();
     }
+
     public override ComboAction PickEnemyCombo(int currentComboLength)
     {
         switch (combo - currentComboLength)
@@ -24,13 +25,6 @@ public class EnemyInfo : CharacterInfo {
             default:
             return GetCombo(Random.Range(0,3));
         }
-    }
-
-    public override void PrepareCombat()
-    {
-        col.enabled = false;
-
-        base.PrepareCombat();
     }
 
     private void OnTriggerEnter(Collider other) {

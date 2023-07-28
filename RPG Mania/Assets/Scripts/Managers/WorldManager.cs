@@ -114,11 +114,12 @@ public class WorldManager : MonoBehaviour {
         else 
         {
             throneBattleManager.enemies = enemies;
-            playerInfo.SetStats(50);
-            playerInfo.ResetHealth();
-            battleButton.gameObject.SetActive(false);
-            bossButton.gameObject.SetActive(false);
-            allButton.gameObject.SetActive(false);
+            // playerInfo.SetStats(50);
+            // playerInfo.ResetHealth();
+            // foreach(EnemyInfo e in throneBattleManager.enemies) e.PrepareCombat();
+            // battleButton.gameObject.SetActive(false);
+            // bossButton.gameObject.SetActive(false);
+            // allButton.gameObject.SetActive(false);
         }
         
         battleUI.SetActive(true);

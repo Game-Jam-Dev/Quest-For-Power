@@ -168,11 +168,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
         type: 3}
-      propertyPath: defense
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
-        type: 3}
       propertyPath: element
       value: 4
       objectReference: {fileID: 0}
@@ -1066,38 +1061,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
         type: 3}
-      propertyPath: level
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
-        type: 3}
-      propertyPath: attack
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
-        type: 3}
-      propertyPath: defense
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
-        type: 3}
       propertyPath: element
       value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
-        type: 3}
-      propertyPath: evasion
-      value: 45
-      objectReference: {fileID: 0}
-    - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
-        type: 3}
-      propertyPath: accuracy
-      value: 45
-      objectReference: {fileID: 0}
-    - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
-        type: 3}
-      propertyPath: maxHealth
-      value: 400
       objectReference: {fileID: 0}
     - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
         type: 3}
@@ -1899,31 +1864,6 @@ PrefabInstance:
       propertyPath: ca
       value: 
       objectReference: {fileID: 2070778619}
-    - target: {fileID: 1432249075295030602, guid: 19c9f2a71fa419f4e964f78ed2b81ef1,
-        type: 3}
-      propertyPath: attack
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 1432249075295030602, guid: 19c9f2a71fa419f4e964f78ed2b81ef1,
-        type: 3}
-      propertyPath: defense
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 1432249075295030602, guid: 19c9f2a71fa419f4e964f78ed2b81ef1,
-        type: 3}
-      propertyPath: evasion
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 1432249075295030602, guid: 19c9f2a71fa419f4e964f78ed2b81ef1,
-        type: 3}
-      propertyPath: accuracy
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 1432249075295030602, guid: 19c9f2a71fa419f4e964f78ed2b81ef1,
-        type: 3}
-      propertyPath: maxHealth
-      value: 1000
-      objectReference: {fileID: 0}
     - target: {fileID: 8148494517345017233, guid: 19c9f2a71fa419f4e964f78ed2b81ef1,
         type: 3}
       propertyPath: m_RootOrder
@@ -1937,7 +1877,7 @@ PrefabInstance:
     - target: {fileID: 8148494517345017233, guid: 19c9f2a71fa419f4e964f78ed2b81ef1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.19
+      value: 1.3
       objectReference: {fileID: 0}
     - target: {fileID: 8148494517345017233, guid: 19c9f2a71fa419f4e964f78ed2b81ef1,
         type: 3}
