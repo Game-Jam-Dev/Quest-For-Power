@@ -327,7 +327,7 @@ public class BattleWildsManager : MonoBehaviour {
             EnemyInfo enemy = enemies[i];
 
             if (enemy.health > 0)
-                eHealthContainer.transform.GetChild(i).GetComponent<TextMeshProUGUI>().text = enemy.characterName + "'s Health: " + enemy.health;
+                eHealthContainer.transform.GetChild(i).GetComponent<TextMeshProUGUI>().text = enemy.element + " " + enemy.characterName + "'s Health: " + enemy.health;
         }
     }
 

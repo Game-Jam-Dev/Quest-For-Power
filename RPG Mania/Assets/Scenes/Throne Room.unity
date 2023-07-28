@@ -171,11 +171,6 @@ PrefabInstance:
       propertyPath: element
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
-        type: 3}
-      propertyPath: characterName
-      value: Wind Soldier
-      objectReference: {fileID: 0}
     - target: {fileID: 3446468312287349178, guid: 40286b3be96a7ef44a43ee52d9f29bea,
         type: 3}
       propertyPath: m_RootOrder
@@ -598,11 +593,6 @@ PrefabInstance:
         type: 3}
       propertyPath: element
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
-        type: 3}
-      propertyPath: characterName
-      value: Water Soldier
       objectReference: {fileID: 0}
     - target: {fileID: 3446468312287349178, guid: 40286b3be96a7ef44a43ee52d9f29bea,
         type: 3}
@@ -1063,11 +1053,6 @@ PrefabInstance:
         type: 3}
       propertyPath: element
       value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
-        type: 3}
-      propertyPath: characterName
-      value: Earth Soldier
       objectReference: {fileID: 0}
     - target: {fileID: 3446468312287349178, guid: 40286b3be96a7ef44a43ee52d9f29bea,
         type: 3}
@@ -1592,11 +1577,6 @@ PrefabInstance:
         type: 3}
       propertyPath: element
       value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3237387295097418039, guid: 40286b3be96a7ef44a43ee52d9f29bea,
-        type: 3}
-      propertyPath: characterName
-      value: Fire Soldier
       objectReference: {fileID: 0}
     - target: {fileID: 3446468312287349178, guid: 40286b3be96a7ef44a43ee52d9f29bea,
         type: 3}
