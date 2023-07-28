@@ -31,7 +31,7 @@ public class WorldManager : MonoBehaviour {
         {
             battleButton.onClick.AddListener(StartBattle);
             bossButton.onClick.AddListener(BossFight);
-            allButton.onClick.AddListener(FIghtAll);
+            allButton.onClick.AddListener(FightAll);
         }   
     }
 
@@ -45,11 +45,15 @@ public class WorldManager : MonoBehaviour {
                 allButton.gameObject.SetActive(true);
             }
             
-            foreach (EnemyInfo e in enemies)
+            if (enemies.Count > 0)
             {
+                foreach (EnemyInfo e in enemies)
+                {
 
-                e.gameObject.SetActive(true);
+                    e.gameObject.SetActive(true);
+                }
             }
+            
             
         }
     }
@@ -97,7 +101,7 @@ public class WorldManager : MonoBehaviour {
         bossButton.gameObject.SetActive(false);
         allButton.gameObject.SetActive(false);    }
 
-    private void FIghtAll()
+    private void FightAll()
     {
         enemies.Add(GameObject.FindGameObjectWithTag("Boss").GetComponent<EnemyInfo>());
         StartBattle();
@@ -112,6 +116,7 @@ public class WorldManager : MonoBehaviour {
             throneBattleManager.enemies = enemies;
             playerInfo.SetStats(50);
             playerInfo.ResetHealth();
+            foreach(EnemyInfo e in throneBattleManager.enemies) e.PrepareCombat();
             battleButton.gameObject.SetActive(false);
             bossButton.gameObject.SetActive(false);
             allButton.gameObject.SetActive(false);

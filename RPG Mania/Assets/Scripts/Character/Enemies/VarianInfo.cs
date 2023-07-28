@@ -1,13 +1,13 @@
 using UnityEngine;
 
 public class VarianInfo : EnemyInfo {
-    private PlayerInfo player;
+    private PlayerInfo playerInfo;
 
     protected override void Start()
     {
         base.Start();
 
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInfo>();
+        playerInfo = player.GetComponent<PlayerInfo>();
 
         skillKeys.Add("water");
         skillKeys.Add("fire");
@@ -41,9 +41,9 @@ public class VarianInfo : EnemyInfo {
 
     public override ComboAction PickEnemyCombo(int currentComboLength)
     {
-        if (currentComboLength == 0 && player.element != SkillList.Element.None)
+        if (currentComboLength == 0 && playerInfo.element != SkillList.Element.None)
         {
-            switch (player.element)
+            switch (playerInfo.element)
             {
                 case SkillList.Element.Water:
                 UseSkill(skillActions[3].Item1);

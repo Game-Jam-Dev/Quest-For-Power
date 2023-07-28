@@ -24,7 +24,7 @@ public class PlayerInfo : CharacterInfo {
         experience += xp;
         if (experience > level * 11) LevelUp();
 
-        health = (maxHealth/10) * kills;
+        health += (maxHealth/3) * kills;
         if (health > maxHealth) health = maxHealth;
     }
 
@@ -35,14 +35,16 @@ public class PlayerInfo : CharacterInfo {
         Debug.Log("Now level " + level);
     }
 
-    public void SetStats(int l)
+    public void SetStats(int level)
     {
-        level = l;
-        experience = level * 10;
+        this.level = level;
+        experience = level * 10 - 10;
 
         maxHealth = level * 20;
         attack = level * 2;
         defense = accuracy = evasion = level;
+
+        combo = (level / 25) + 3;
     }
 
     public void ResetHealth()

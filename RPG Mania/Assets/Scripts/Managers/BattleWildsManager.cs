@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 using System.Collections.Generic;
 using System.Linq;
@@ -90,15 +91,19 @@ public class BattleWildsManager : MonoBehaviour {
                         foreach (ComboAction a in comboActions)
                         {
                             actionText.text = $"{activeCharacter.characterName} used {a.Name} at {target.characterName}";
-                            if (!activeCharacter.DoAction(a, target, i))
-                            {
-                                actionText.text = $"{activeCharacter.characterName} missed";
-                            }
+                            bool hit = activeCharacter.DoAction(a, target, i);
+                            
 
-                            while (activeCharacter.isAttacking)
+                            while (activeCharacter.GetIsAttacking())
                             {
                                 
                                 yield return null;
+                            }
+
+                            if (!hit)
+                            {
+                                actionText.text = $"{activeCharacter.characterName} missed";
+                                break;
                             }
 
                             UpdateHealth();
@@ -149,15 +154,14 @@ public class BattleWildsManager : MonoBehaviour {
 
                         i++;
 
-                        yield return new WaitForSeconds(.5f);
+                        yield return new WaitForSeconds(1f);
                     }
+
+                    yield return new WaitForSeconds(.5f);
                     
                 }
 
                 NextTurn(activeCharacter);
-
-                yield return new WaitForSeconds(.5f);
-
             }
         }
     }
@@ -270,7 +274,7 @@ public class BattleWildsManager : MonoBehaviour {
             enemyHealthText.rectTransform.anchoredPosition = new Vector3(0, -i * 100);
 
             Button selectEnemy = Instantiate(targetButton, targetContainer.transform);
-            selectEnemy.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = enemy.characterName;
+            selectEnemy.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = enemy.element + " " + enemy.characterName;
             selectEnemy.onClick.AddListener(() => PickTarget(enemy));
             targetButtons.Add(selectEnemy);
         }
@@ -328,7 +332,7 @@ public class BattleWildsManager : MonoBehaviour {
             EnemyInfo enemy = enemies[i];
 
             if (enemy.health > 0)
-                eHealthContainer.transform.GetChild(i).GetComponent<TextMeshProUGUI>().text = enemy.characterName + "'s Health: " + enemy.health;
+                eHealthContainer.transform.GetChild(i).GetComponent<TextMeshProUGUI>().text = enemy.element + " " + enemy.characterName + "'s Health: " + enemy.health;
         }
     }
 
@@ -413,5 +417,6 @@ public class BattleWildsManager : MonoBehaviour {
     public void LoseBattle()
     {
         EndBattle();
+        SceneManager.LoadScene("Title Screen");
     }
 }

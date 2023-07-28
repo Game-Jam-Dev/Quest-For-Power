@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 using System.Collections.Generic;
 using System.Linq;
@@ -79,7 +80,7 @@ public class BattleThroneManager : MonoBehaviour {
                             actionText.text = $"{activeCharacter.characterName} missed";
                         }
 
-                        while (player.isAttacking)
+                        while (activeCharacter.GetIsAttacking())
                         {
                             
                             yield return null;
@@ -119,7 +120,15 @@ public class BattleThroneManager : MonoBehaviour {
                     foreach (ComboAction a in comboActions)
                     {
                         actionText.text = $"{activeCharacter.characterName} used {a.Name} at {player.characterName}";
-                        if (!activeCharacter.DoAction(a, player, i))
+                        bool hit = activeCharacter.DoAction(a, player, i);
+                            
+                        while (activeCharacter.GetIsAttacking())
+                        {
+                            
+                            yield return null;
+                        }
+
+                        if (!hit)
                         {
                             actionText.text = $"{activeCharacter.characterName} missed";
                             break;
@@ -127,20 +136,22 @@ public class BattleThroneManager : MonoBehaviour {
 
                         UpdateHealth();
 
-                        if (player.health <= 0) EndBattle();
+                        if (player.health <= 0) LoseBattle();
 
                         i++;
 
-                        yield return new WaitForSeconds(.5f);
+                        yield return new WaitForSeconds(1f);
                     }
+
+                    yield return new WaitForSeconds(.5f);
                     
                 }
 
                 NextTurn(activeCharacter);
 
-                yield return new WaitForSeconds(.5f);
-
             }
+
+            yield return null;
         }
     }
 
@@ -234,7 +245,10 @@ public class BattleThroneManager : MonoBehaviour {
             enemyHealthText.rectTransform.anchoredPosition = new Vector3(0, -i * 100);
 
             Button selectEnemy = Instantiate(targetButton, targetContainer.transform);
-            selectEnemy.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = enemy.characterName;
+            string elementText = "";
+            if (enemy.element != SkillList.Element.None) elementText = enemy.element + " ";
+
+            selectEnemy.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = elementText + enemy.characterName;
             selectEnemy.onClick.AddListener(() => PickTarget(enemy));
             targetButtons.Add(selectEnemy);
         }
@@ -288,7 +302,11 @@ public class BattleThroneManager : MonoBehaviour {
             EnemyInfo enemy = enemies[i];
 
             if (enemy.health > 0)
-                eHealthContainer.transform.GetChild(i).GetComponent<TextMeshProUGUI>().text = enemy.characterName + "'s Health: " + enemy.health;
+            {
+                string elementText = "";
+                if (enemy.element != SkillList.Element.None) elementText = enemy.element + " ";
+                eHealthContainer.transform.GetChild(i).GetComponent<TextMeshProUGUI>().text = elementText + enemy.characterName + "'s Health: " + enemy.health;
+            }
         }
     }
 
@@ -353,6 +371,12 @@ public class BattleThroneManager : MonoBehaviour {
         }
 
         comboButtons.Clear();
+    }
+
+    private void LoseBattle()
+    {
+        EndBattle();
+        SceneManager.LoadScene("Title Screen");
     }
 
     public void EndBattle()

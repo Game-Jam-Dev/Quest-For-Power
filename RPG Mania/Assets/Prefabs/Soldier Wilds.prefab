@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 3446468312287349178}
   - component: {fileID: 1769637154394782135}
   - component: {fileID: 3237387295097418039}
+  - component: {fileID: 98070693227498020}
   - component: {fileID: 4930510028531210733}
   m_Layer: 0
-  m_Name: Soldier
+  m_Name: Soldier Wilds
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -107,10 +108,23 @@ MonoBehaviour:
   accuracy: 0
   evasion: 0
   combo: 2
+  ca: {fileID: 98070693227498020}
+  level: 0
+  detectRange: 3
+--- !u!114 &98070693227498020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3036269658535557653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 072300f30d5a115479218dec6cd5e6aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   currentTrigger: 
   isAttacking: 0
-  level: 0
-  detectRange: 0.5
 --- !u!136 &4930510028531210733
 CapsuleCollider:
   m_ObjectHideFlags: 0

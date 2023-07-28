@@ -4,15 +4,16 @@ public class EnemyInfo : CharacterInfo {
     public int level = 1;
     public float detectRange = .5f;
     private WorldManager worldController;
-    private Collider col;
+    protected GameObject player;
 
     protected override void Start()
     {
         base.Start();
 
+        player = GameObject.FindGameObjectWithTag("Player");
         worldController = GameObject.FindGameObjectWithTag("Canvas").GetComponent<WorldManager>();
-        col = GetComponent<CapsuleCollider>();
     }
+
     public override ComboAction PickEnemyCombo(int currentComboLength)
     {
         switch (combo - currentComboLength)
@@ -26,13 +27,6 @@ public class EnemyInfo : CharacterInfo {
         }
     }
 
-    public override void PrepareCombat()
-    {
-        col.enabled = false;
-
-        base.PrepareCombat();
-    }
-
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.CompareTag("Player"))
         {
@@ -42,7 +36,7 @@ public class EnemyInfo : CharacterInfo {
 
     public int XPFromKill(int playerLevel)
     {
-        int xp = 2;
+        int xp = 5;
 
         int levelBonus = (level - playerLevel) * 2;
 
