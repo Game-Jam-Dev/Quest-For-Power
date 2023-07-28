@@ -24,7 +24,7 @@ public class PlayerInfo : CharacterInfo {
         experience += xp;
         if (experience > level * 11) LevelUp();
 
-        health = (maxHealth/3) * kills;
+        health += (maxHealth/3) * kills;
         if (health > maxHealth) health = maxHealth;
     }
 

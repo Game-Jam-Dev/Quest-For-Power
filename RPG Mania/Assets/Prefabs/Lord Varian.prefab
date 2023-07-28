@@ -99,13 +99,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterName: Lord Varian
-  maxHealth: 2000
+  maxHealth: 1000
   health: 0
   element: 0
-  attack: 160
-  defense: 80
-  accuracy: 100
-  evasion: 100
+  attack: 80
+  defense: 40
+  accuracy: 50
+  evasion: 50
   combo: 4
   ca: {fileID: 4598856092647899261}
   level: 50

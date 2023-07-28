@@ -119,8 +119,8 @@ public class BattleThroneManager : MonoBehaviour {
                     int i = 0;
                     foreach (ComboAction a in comboActions)
                     {
-                        actionText.text = $"{activeCharacter.characterName} used {a.Name} at {target.characterName}";
-                        bool hit = activeCharacter.DoAction(a, target, i);
+                        actionText.text = $"{activeCharacter.characterName} used {a.Name} at {player.characterName}";
+                        bool hit = activeCharacter.DoAction(a, player, i);
                             
                         while (activeCharacter.GetIsAttacking())
                         {
@@ -245,7 +245,10 @@ public class BattleThroneManager : MonoBehaviour {
             enemyHealthText.rectTransform.anchoredPosition = new Vector3(0, -i * 100);
 
             Button selectEnemy = Instantiate(targetButton, targetContainer.transform);
-            selectEnemy.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = enemy.element + " " + enemy.characterName;
+            string elementText = "";
+            if (enemy.element != SkillList.Element.None) elementText = enemy.element + " ";
+
+            selectEnemy.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = elementText + enemy.characterName;
             selectEnemy.onClick.AddListener(() => PickTarget(enemy));
             targetButtons.Add(selectEnemy);
         }
@@ -299,7 +302,11 @@ public class BattleThroneManager : MonoBehaviour {
             EnemyInfo enemy = enemies[i];
 
             if (enemy.health > 0)
-                eHealthContainer.transform.GetChild(i).GetComponent<TextMeshProUGUI>().text = enemy.element + " " + enemy.characterName + "'s Health: " + enemy.health;
+            {
+                string elementText = "";
+                if (enemy.element != SkillList.Element.None) elementText = enemy.element + " ";
+                eHealthContainer.transform.GetChild(i).GetComponent<TextMeshProUGUI>().text = elementText + enemy.characterName + "'s Health: " + enemy.health;
+            }
         }
     }
 
