@@ -32,7 +32,7 @@ public class CharacterInfo : MonoBehaviour {
         comboActions.Add(ComboList.GetInstance().GetAction(comboKeys[2]));
     }
 
-    public virtual void PrepareCombat()
+    public virtual void PrepareCombat(int l = 1)
     {
         ca.SwitchToCombat();
     }

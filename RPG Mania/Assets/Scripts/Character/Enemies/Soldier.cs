@@ -6,19 +6,21 @@ public class Soldier : EnemyInfo {
     {
         base.Start();
 
+        
+
         AssignElement();
     }
 
-    public override void PrepareCombat()
+    public override void PrepareCombat(int l = 1)
     {
         if (col != null) col.enabled = false;
-        
-        SetStats(player.GetComponent<PlayerInfo>().level);
 
+        SetStats(l);
+        
         base.PrepareCombat();
     }
 
-    private void SetStats(int level)
+    public void SetStats(int level)
     {
         this.level = level;
         

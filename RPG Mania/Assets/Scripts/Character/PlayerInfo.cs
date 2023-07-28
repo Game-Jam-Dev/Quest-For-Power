@@ -22,7 +22,7 @@ public class PlayerInfo : CharacterInfo {
     public void WinBattle(int xp, int kills)
     {
         experience += xp;
-        if (experience > level * 11) LevelUp();
+        if (experience >= level * 10) LevelUp();
 
         health += (maxHealth/3) * kills;
         if (health > maxHealth) health = maxHealth;
@@ -44,7 +44,7 @@ public class PlayerInfo : CharacterInfo {
         attack = level * 2;
         defense = accuracy = evasion = level;
 
-        combo = (level / 25) + 3;
+        combo = (level / 50) + 4;
     }
 
     public void ResetHealth()

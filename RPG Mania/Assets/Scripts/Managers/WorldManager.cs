@@ -116,7 +116,10 @@ public class WorldManager : MonoBehaviour {
             throneBattleManager.enemies = enemies;
             playerInfo.SetStats(50);
             playerInfo.ResetHealth();
-            foreach(EnemyInfo e in throneBattleManager.enemies) e.PrepareCombat();
+            foreach(EnemyInfo e in throneBattleManager.enemies) 
+            {
+                e.PrepareCombat(50);
+            }
             battleButton.gameObject.SetActive(false);
             bossButton.gameObject.SetActive(false);
             allButton.gameObject.SetActive(false);

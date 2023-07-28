@@ -38,8 +38,10 @@ public class EnemyInfo : CharacterInfo {
     {
         int xp = 5;
 
-        int levelBonus = (level - playerLevel) * 2;
+        return xp;
 
-        return Mathf.Max(xp + levelBonus, 0);
+        // int levelBonus = (level - playerLevel) * 2;
+
+        // return Mathf.Max(xp + levelBonus, 0);
     }
 }
