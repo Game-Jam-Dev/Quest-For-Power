@@ -110,7 +110,7 @@ MonoBehaviour:
   combo: 2
   ca: {fileID: 98070693227498020}
   level: 0
-  detectRange: 0.5
+  detectRange: 3
 --- !u!114 &98070693227498020
 MonoBehaviour:
   m_ObjectHideFlags: 0

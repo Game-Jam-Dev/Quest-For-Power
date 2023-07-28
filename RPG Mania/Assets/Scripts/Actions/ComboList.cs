@@ -65,14 +65,7 @@ public class ComboList
         if (target.health < 0) target.health = 0;
     }
 
-    private bool HitCheck(CharacterInfo self, CharacterInfo target, int moveAccuracy, int comboDepth)
-    {
-        int r = Random.Range(0,100);
-        float a  = self.accuracy - target.evasion + (moveAccuracy - 3 * comboDepth);
-        return r < a;
-    }
-
-    private void Attack(CharacterInfo self, CharacterInfo target, float d, string triggerName)
+    private void DoAnimation(CharacterInfo self, string triggerName)
     {
         Animator anim = self.GetAnimator();
         triggerName = "Light Attack";
@@ -81,7 +74,17 @@ public class ComboList
         {   
             self.SetUpTrigger(triggerName);
         }
+    }
 
+    private bool HitCheck(CharacterInfo self, CharacterInfo target, int moveAccuracy, int comboDepth)
+    {
+        int r = Random.Range(0,100);
+        float a  = self.accuracy - target.evasion + (moveAccuracy - 3 * comboDepth);
+        return r < a;
+    }
+
+    private void Attack(CharacterInfo self, CharacterInfo target, float d)
+    {
         int damage = Mathf.RoundToInt(self.attack * d - target.defense);
         if (damage < 0) damage = 0;
 
@@ -92,30 +95,36 @@ public class ComboList
 
     public bool LightAttack(CharacterInfo self, CharacterInfo target, int comboDepth)
     {
+        DoAnimation(self, "Light Attack");
+
         if (!HitCheck(self, target, 100, comboDepth)) return false;
 
         else {
-            Attack(self, target, 1, "Light Attack");
+            Attack(self, target, 1);
             return true;
         }
     }
 
     public bool MediumAttack(CharacterInfo self, CharacterInfo target, int comboDepth)
     {
+        DoAnimation(self, "Medium Attack");
+
         if (!HitCheck(self, target, 80, comboDepth)) return false;
 
         else {
-            Attack(self, target, 2.5f, "Medium Attack");
+            Attack(self, target, 2.5f);
             return true;
         }
     }
 
     public bool HeavyAttack(CharacterInfo self, CharacterInfo target, int comboDepth)
     {
+        DoAnimation(self, "Heavy Attack");
+
         if (!HitCheck(self, target, 60, comboDepth)) return false;
 
         else {
-            Attack(self, target, 4, "Heavy Attack");
+            Attack(self, target, 4);
             return true;
         }
     }

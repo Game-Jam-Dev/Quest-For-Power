@@ -36,7 +36,7 @@ public class EnemyInfo : CharacterInfo {
 
     public int XPFromKill(int playerLevel)
     {
-        int xp = 2;
+        int xp = 5;
 
         int levelBonus = (level - playerLevel) * 2;
 

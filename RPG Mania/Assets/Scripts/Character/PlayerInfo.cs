@@ -24,7 +24,7 @@ public class PlayerInfo : CharacterInfo {
         experience += xp;
         if (experience > level * 11) LevelUp();
 
-        health = (maxHealth/10) * kills;
+        health = (maxHealth/3) * kills;
         if (health > maxHealth) health = maxHealth;
     }
 
@@ -38,7 +38,7 @@ public class PlayerInfo : CharacterInfo {
     public void SetStats(int level)
     {
         this.level = level;
-        experience = level * 10;
+        experience = level * 10 - 10;
 
         maxHealth = level * 20;
         attack = level * 2;
