@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3446468312287349178}
   - component: {fileID: 1769637154394782135}
   - component: {fileID: 3237387295097418039}
-  - component: {fileID: 4656084142133030616}
+  - component: {fileID: 2966693440811833630}
   m_Layer: 0
   m_Name: Soldier Throne
   m_TagString: Enemy
@@ -107,10 +107,10 @@ MonoBehaviour:
   accuracy: 80
   evasion: 80
   combo: 2
-  ca: {fileID: 4656084142133030616}
   level: 50
   detectRange: 0.5
---- !u!114 &4656084142133030616
+  ea: {fileID: 2966693440811833630}
+--- !u!114 &2966693440811833630
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -119,8 +119,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 3036269658535557653}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d32d2f2644797a42b8bc0ded111ee44, type: 3}
+  m_Script: {fileID: 11500000, guid: e10645ac2c0aa8b42b83e09055397b20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentTrigger: 
-  isAttacking: 0
