@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CharacterAnimationWilds : CharacterAnimation {
+public class PlayerAnimationWilds : PlayerAnimation {
     private void LateUpdate() {
         Vector3 direction = mainCamera.transform.position - transform.position;
         direction.x = direction.z = 0;

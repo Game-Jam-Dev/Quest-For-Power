@@ -18,8 +18,6 @@ public class CharacterInfo : MonoBehaviour {
     protected List<ComboAction> comboActions = new List<ComboAction>();
     protected List<(SkillAction, int)> skillActions = new List<(SkillAction, int)>();
 
-    [SerializeField] private CharacterAnimation ca;
-
     protected virtual void Start() {
         health = maxHealth;
 
@@ -32,15 +30,7 @@ public class CharacterInfo : MonoBehaviour {
         comboActions.Add(ComboList.GetInstance().GetAction(comboKeys[2]));
     }
 
-    public virtual void PrepareCombat(int l = 1)
-    {
-        ca.SwitchToCombat();
-    }
-
-    public void EndCombat()
-    {
-        ca.SwitchFromCombat();
-    }
+    public virtual void PrepareCombat(int l = 1) {}
 
     public ComboAction GetCombo(int i)
     {
@@ -74,14 +64,11 @@ public class CharacterInfo : MonoBehaviour {
         activeSkill = skill;
     }
 
-    public Animator GetAnimator() {return ca.GetAnimator();}
+    public virtual void SetUpTrigger(string triggerName) {}
 
-    public bool GetIsAttacking() {return ca.isAttacking;}
+    public virtual Animator GetAnimator() {return null;}
 
-    public void SetUpTrigger(string triggerName)
-    {
-        ca.SetUpTrigger(triggerName);
-    }
+    public virtual bool GetIsAttacking() {return false;}
 
     public virtual ComboAction PickEnemyCombo(int currentComboLength){ return GetCombo(0); }
 }

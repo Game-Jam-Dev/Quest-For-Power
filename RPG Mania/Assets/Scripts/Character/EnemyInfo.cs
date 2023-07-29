@@ -6,6 +6,8 @@ public class EnemyInfo : CharacterInfo {
     private WorldManager worldController;
     protected GameObject player;
 
+    [SerializeField] protected EnemyAnimation ea;
+
     protected override void Start()
     {
         base.Start();

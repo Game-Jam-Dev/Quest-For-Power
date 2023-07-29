@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CharacterAnimation : MonoBehaviour {
+public class PlayerAnimation : MonoBehaviour {
 
     protected Camera mainCamera;
     protected Animator anim;

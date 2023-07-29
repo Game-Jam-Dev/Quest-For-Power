@@ -3,6 +3,8 @@ using UnityEngine;
 public class PlayerInfo : CharacterInfo {
     private int experience = 0;
     public int level {get; private set;}
+
+    [SerializeField] private PlayerAnimation pa;
     protected override void Start() {
         base.Start();
 
@@ -19,6 +21,11 @@ public class PlayerInfo : CharacterInfo {
         skillActions.Add((SkillList.GetInstance().GetAction(skillKeys[4]), 0));
     }
 
+    public override void PrepareCombat(int l = 1)
+    {
+        pa.SwitchToCombat();
+    }
+
     public void WinBattle(int xp, int kills)
     {
         experience += xp;
@@ -33,6 +40,16 @@ public class PlayerInfo : CharacterInfo {
         SetStats(level + 1);
 
         Debug.Log("Now level " + level);
+    }
+
+    public void EndCombat()
+    {
+        pa.SwitchFromCombat();
+    }
+
+    public override void SetUpTrigger(string triggerName)
+    {
+        pa.SetUpTrigger(triggerName);
     }
 
     public void SetStats(int level)
@@ -130,4 +147,8 @@ public class PlayerInfo : CharacterInfo {
             skillActions[i] = (skillActions[i].Item1, n);
         }
     }
+
+    public override Animator GetAnimator() {return pa.GetAnimator();}
+
+    public override bool GetIsAttacking() {return pa.isAttacking;}
 }
