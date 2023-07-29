@@ -69,7 +69,7 @@ public class ComboList
     {
         Animator anim = self.GetAnimator();
         
-        if (anim != null && TriggerExists(triggerName, anim)) 
+        if (anim != null) 
         {   
             self.SetUpTrigger(triggerName);
         }
@@ -84,6 +84,8 @@ public class ComboList
 
     private void Attack(CharacterInfo self, CharacterInfo target, float d)
     {
+        target.SetUpTrigger("Attacked");
+
         int damage = Mathf.RoundToInt(self.attack * d - target.defense);
         if (damage < 0) damage = 0;
 
@@ -126,17 +128,5 @@ public class ComboList
             Attack(self, target, 4);
             return true;
         }
-    }
-
-    private bool TriggerExists(string triggerName, Animator anim) 
-    {
-        int hash = Animator.StringToHash(triggerName);
-        for (int i = 0; i < anim.parameterCount; i++)
-        {
-            AnimatorControllerParameter param = anim.GetParameter(i);
-            if (param.nameHash == hash && param.type == AnimatorControllerParameterType.Trigger)
-                return true;
-        }
-        return false;
     }
 }

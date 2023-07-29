@@ -30,7 +30,7 @@ public class CharacterInfo : MonoBehaviour {
         comboActions.Add(ComboList.GetInstance().GetAction(comboKeys[2]));
     }
 
-    public virtual void PrepareCombat(int l = 1) {}
+    public virtual void PrepareCombat(int l = 1){}
 
     public ComboAction GetCombo(int i)
     {
@@ -69,6 +69,8 @@ public class CharacterInfo : MonoBehaviour {
     public virtual Animator GetAnimator() {return null;}
 
     public virtual bool GetIsAttacking() {return false;}
+
+    public virtual void Recover(){}
 
     public virtual ComboAction PickEnemyCombo(int currentComboLength){ return GetCombo(0); }
 }

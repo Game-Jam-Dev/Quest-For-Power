@@ -32,7 +32,7 @@ public class PlayerAnimation : MonoBehaviour {
 
     public void SetUpTrigger(string triggerName)
     {
-        if (anim != null)
+        if (anim != null && TriggerExists(triggerName, anim))
         {
             currentTrigger = triggerName;
             isAttacking = true;
@@ -47,6 +47,18 @@ public class PlayerAnimation : MonoBehaviour {
             anim.ResetTrigger(currentTrigger);
             isAttacking = false;
         }
+    }
+
+    private bool TriggerExists(string triggerName, Animator anim) 
+    {
+        int hash = Animator.StringToHash(triggerName);
+        for (int i = 0; i < anim.parameterCount; i++)
+        {
+            AnimatorControllerParameter param = anim.GetParameter(i);
+            if (param.nameHash == hash && param.type == AnimatorControllerParameterType.Trigger)
+                return true;
+        }
+        return false;
     }
     
     public Animator GetAnimator() {return anim;}
