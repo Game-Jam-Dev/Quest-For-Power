@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3237387295097418039}
   - component: {fileID: 4930510028531210733}
   - component: {fileID: 6267649557001182488}
+  - component: {fileID: 3546035313566299711}
   m_Layer: 0
   m_Name: Soldier Wilds
   m_TagString: Enemy
@@ -76,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 81363362cb2c6d74e89a1da984e01196, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ce52a4c811146e841a59e153f8dda508, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -137,3 +138,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e10645ac2c0aa8b42b83e09055397b20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAttacking: 0
+--- !u!95 &3546035313566299711
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3036269658535557653}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e9f3617b9fd6e17429584c25d315480c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
