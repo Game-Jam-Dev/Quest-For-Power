@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5008437861995460156}
   - component: {fileID: 7838277320961498730}
   - component: {fileID: 2501267450143586671}
-  - component: {fileID: 4598856092647899261}
+  - component: {fileID: 8720936053241364502}
   m_Layer: 0
   m_Name: Lord Varian
   m_TagString: Boss
@@ -107,10 +107,10 @@ MonoBehaviour:
   accuracy: 50
   evasion: 50
   combo: 4
-  ca: {fileID: 4598856092647899261}
   level: 50
   detectRange: 0.5
---- !u!114 &4598856092647899261
+  ea: {fileID: 8720936053241364502}
+--- !u!114 &8720936053241364502
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -119,8 +119,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7774199283527923811}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d32d2f2644797a42b8bc0ded111ee44, type: 3}
+  m_Script: {fileID: 11500000, guid: e10645ac2c0aa8b42b83e09055397b20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentTrigger: 
   isAttacking: 0

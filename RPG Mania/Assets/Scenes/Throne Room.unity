@@ -1750,7 +1750,7 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8148494516188841141}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2070778619
+--- !u!114 &2070778626
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1759,7 +1759,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 748366822}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d32d2f2644797a42b8bc0ded111ee44, type: 3}
+  m_Script: {fileID: 11500000, guid: 0b8fc70c7996eae48a3142c305fd97df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   currentTrigger: 
@@ -1831,7 +1831,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lord Varian
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4598856092647899261, guid: d0bea8f35265c9143a384cfea304ba30, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: d0bea8f35265c9143a384cfea304ba30, type: 3}
 --- !u!1001 &8148494516188841141
 PrefabInstance:
@@ -1844,7 +1845,12 @@ PrefabInstance:
         type: 3}
       propertyPath: ca
       value: 
-      objectReference: {fileID: 2070778619}
+      objectReference: {fileID: 0}
+    - target: {fileID: 1432249075295030602, guid: 19c9f2a71fa419f4e964f78ed2b81ef1,
+        type: 3}
+      propertyPath: pa
+      value: 
+      objectReference: {fileID: 2070778626}
     - target: {fileID: 8148494517345017233, guid: 19c9f2a71fa419f4e964f78ed2b81ef1,
         type: 3}
       propertyPath: m_RootOrder
@@ -1898,6 +1904,11 @@ PrefabInstance:
     - target: {fileID: 8148494517345017233, guid: 19c9f2a71fa419f4e964f78ed2b81ef1,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8148494517345017238, guid: 19c9f2a71fa419f4e964f78ed2b81ef1,
+        type: 3}
+      propertyPath: m_SpriteSortPoint
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8148494517345017239, guid: 19c9f2a71fa419f4e964f78ed2b81ef1,

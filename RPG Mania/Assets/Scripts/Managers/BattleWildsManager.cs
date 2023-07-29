@@ -44,6 +44,7 @@ public class BattleWildsManager : MonoBehaviour {
         absorbButton.onClick.AddListener(SelectAbsorb);
         pickSkillButton.onClick.AddListener(SelectSkill);
         escapeButton.onClick.AddListener(SelectEscape);
+        absorbButton.interactable = true;
 
         SetEnemies();
         SetCombos();
@@ -100,6 +101,8 @@ public class BattleWildsManager : MonoBehaviour {
                                 yield return null;
                             }
 
+                            target.Recover();
+
                             if (!hit)
                             {
                                 actionText.text = $"{activeCharacter.characterName} missed";
@@ -142,7 +145,16 @@ public class BattleWildsManager : MonoBehaviour {
                     foreach (ComboAction a in comboActions)
                     {
                         actionText.text = $"{activeCharacter.characterName} used {a.Name} at {player.characterName}";
-                        if (!activeCharacter.DoAction(a, player, i))
+                        bool hit = activeCharacter.DoAction(a, player, i);
+                            
+                        while (activeCharacter.GetIsAttacking())
+                        {
+                            yield return null;
+                        }
+
+                        target.Recover();
+
+                        if (!hit)
                         {
                             actionText.text = $"{activeCharacter.characterName} missed";
                             break;
@@ -153,8 +165,6 @@ public class BattleWildsManager : MonoBehaviour {
                         if (player.health <= 0) LoseBattle();
 
                         i++;
-
-                        yield return new WaitForSeconds(1f);
                     }
 
                     yield return new WaitForSeconds(.5f);

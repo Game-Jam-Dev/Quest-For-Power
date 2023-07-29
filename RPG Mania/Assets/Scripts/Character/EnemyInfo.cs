@@ -5,6 +5,9 @@ public class EnemyInfo : CharacterInfo {
     public float detectRange = .5f;
     private WorldManager worldController;
     protected GameObject player;
+    protected bool isAttacking;
+
+    [SerializeField] protected EnemyAnimation ea;
 
     protected override void Start()
     {
@@ -27,6 +30,26 @@ public class EnemyInfo : CharacterInfo {
         }
     }
 
+    public override void SetUpTrigger(string triggerName)
+    {
+        ea.SetUpTrigger(triggerName);
+    }
+
+    public override void Recover()
+    {
+        ea.Attacked(false);
+    }
+
+    public override bool GetIsAttacking()
+    {
+        return ea.isAttacking;
+    }
+
+    public override Animator GetAnimator()
+    {
+        return ea.GetAnimator();
+    }
+
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.CompareTag("Player"))
         {
@@ -39,9 +62,5 @@ public class EnemyInfo : CharacterInfo {
         int xp = 5;
 
         return xp;
-
-        // int levelBonus = (level - playerLevel) * 2;
-
-        // return Mathf.Max(xp + levelBonus, 0);
     }
 }

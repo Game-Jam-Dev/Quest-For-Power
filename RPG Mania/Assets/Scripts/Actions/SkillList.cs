@@ -10,8 +10,8 @@ public class SkillList
         None,
         Water,
         Fire,
-        Earth,
         Wind,
+        Earth,
     }
 
     private SkillList()

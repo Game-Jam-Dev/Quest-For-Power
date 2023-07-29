@@ -75,15 +75,28 @@ public class BattleThroneManager : MonoBehaviour {
                     foreach (ComboAction a in comboActions)
                     {
                         actionText.text = $"{activeCharacter.characterName} used {a.Name} at {target.characterName}";
-                        if (!activeCharacter.DoAction(a, target, i))
+                        bool hit = activeCharacter.DoAction(a, player, i);
+                            
+                        while (activeCharacter.GetIsAttacking())
                         {
-                            actionText.text = $"{activeCharacter.characterName} missed";
+                            
+                            yield return null;
                         }
 
                         while (activeCharacter.GetIsAttacking())
                         {
                             
                             yield return null;
+                        }
+
+                        if (hit)
+                        {
+                            target.Recover();
+                        }
+                        else
+                        {
+                            actionText.text = $"{activeCharacter.characterName} missed";
+                            break;
                         }
 
                         UpdateHealth();
@@ -128,6 +141,8 @@ public class BattleThroneManager : MonoBehaviour {
                             yield return null;
                         }
 
+                        target.Recover();
+
                         if (!hit)
                         {
                             actionText.text = $"{activeCharacter.characterName} missed";
@@ -139,8 +154,6 @@ public class BattleThroneManager : MonoBehaviour {
                         if (player.health <= 0) LoseBattle();
 
                         i++;
-
-                        yield return new WaitForSeconds(1f);
                     }
 
                     yield return new WaitForSeconds(.5f);
@@ -159,6 +172,7 @@ public class BattleThroneManager : MonoBehaviour {
     {
         UpdateSkills();
         actionText.text = "";
+        player.element = SkillList.Element.None;
         pElement.text = player.characterName + "'s Active Element: " + player.element;
         awaitCommand = true;
         pickAction.SetActive(true);

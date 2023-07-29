@@ -6,7 +6,7 @@ TextureImporter:
   serializedVersion: 12
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -36,24 +36,24 @@ TextureImporter:
     filterMode: 1
     aniso: 1
     mipBias: 0
-    wrapU: 0
-    wrapV: 0
+    wrapU: 1
+    wrapV: 1
     wrapW: 0
-  nPOTScale: 1
+  nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 0
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 205
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 0
+  textureType: 8
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -115,18 +115,172 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: emperor_FIGHT_Medium_Attack_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 712
+        height: 736
+      alignment: 9
+      pivot: {x: 0.5357, y: 0.3478}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f5a42a3bf1a617458181674d49007f8
+      internalID: 1252558402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: emperor_FIGHT_Medium_Attack_1
+      rect:
+        serializedVersion: 2
+        x: 712
+        y: 0
+        width: 712
+        height: 736
+      alignment: 9
+      pivot: {x: 0.5357, y: 0.3478}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ca6b4d8de0580340b8318ad7672f569
+      internalID: 1949049622
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: emperor_FIGHT_Medium_Attack_2
+      rect:
+        serializedVersion: 2
+        x: 1424
+        y: 0
+        width: 712
+        height: 736
+      alignment: 9
+      pivot: {x: 0.5357, y: 0.3478}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a8da3126919644449ff2cfb232fff32
+      internalID: 710208912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: emperor_FIGHT_Medium_Attack_3
+      rect:
+        serializedVersion: 2
+        x: 2136
+        y: 0
+        width: 712
+        height: 736
+      alignment: 9
+      pivot: {x: 0.5357, y: 0.3478}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30b82b51d46e54241a421da5780a1dfe
+      internalID: -621053344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: emperor_FIGHT_Medium_Attack_4
+      rect:
+        serializedVersion: 2
+        x: 2848
+        y: 0
+        width: 712
+        height: 736
+      alignment: 9
+      pivot: {x: 0.5357, y: 0.3478}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2791cb0bb51abc54bb2b138d02e17953
+      internalID: -56253938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: emperor_FIGHT_Medium_Attack_5
+      rect:
+        serializedVersion: 2
+        x: 3560
+        y: 0
+        width: 712
+        height: 736
+      alignment: 9
+      pivot: {x: 0.5357, y: 0.3478}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35e242441890e964b9afff71daab7e7c
+      internalID: -846274612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: emperor_FIGHT_Medium_Attack_6
+      rect:
+        serializedVersion: 2
+        x: 4272
+        y: 0
+        width: 712
+        height: 736
+      alignment: 9
+      pivot: {x: 0.5357, y: 0.3478}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb691a68e066ac44781ccb597459ba01
+      internalID: 1556870337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: a2f8c818229c0ba4b84d2783f903a1ce
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      emperor_FIGHT_Medium_Attack_0: 1252558402
+      emperor_FIGHT_Medium_Attack_1: 1949049622
+      emperor_FIGHT_Medium_Attack_2: 710208912
+      emperor_FIGHT_Medium_Attack_3: -621053344
+      emperor_FIGHT_Medium_Attack_4: -56253938
+      emperor_FIGHT_Medium_Attack_5: -846274612
+      emperor_FIGHT_Medium_Attack_6: 1556870337
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

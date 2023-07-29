@@ -6,8 +6,6 @@ public class Soldier : EnemyInfo {
     {
         base.Start();
 
-        
-
         AssignElement();
     }
 
@@ -16,8 +14,6 @@ public class Soldier : EnemyInfo {
         if (col != null) col.enabled = false;
 
         SetStats(l);
-        
-        base.PrepareCombat();
     }
 
     public void SetStats(int level)
@@ -37,6 +33,8 @@ public class Soldier : EnemyInfo {
         {
             element = (SkillList.Element)Random.Range(1, System.Enum.GetValues(typeof(SkillList.Element)).Length);
         }
+
+        ea.AssignElement(element);
 
         switch (element)
         {
