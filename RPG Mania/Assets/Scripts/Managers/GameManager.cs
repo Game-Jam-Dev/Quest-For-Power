@@ -20,15 +20,37 @@ public class GameManager : MonoBehaviour {
         playerData.skillActionsUses = skillActionsUses;
     }
 
-    public void SetWorldStateWilds(int currentScene, List<bool> enemyIsAliveWilds)
+    public void SetCurrentScene(int currentScene)
     {
         worldState.currentScene = currentScene;
+    }
+
+    public bool CheckEnemyDeath(string scene, int id)
+    {
+        if (scene == "wilds") return worldState.enemyIsAliveWilds[id];
+
+        else if (scene == "outskirts") return worldState.enemyIsAliveOutskirts[id];
+
+        else return true;
+    }
+
+    public void SetEnemyDeath(string scene, int id)
+    {
+        if (scene == "wilds") worldState.enemyIsAliveWilds[id] = false;
+
+        else if (scene == "outskirts") worldState.enemyIsAliveOutskirts[id] = false;
+
+        Debug.Log(id + " " + worldState.enemyIsAliveWilds[id]);
+    }
+
+    public void SetWorldStateWilds(List<bool> enemyIsAliveWilds)
+    {
+        
         worldState.enemyIsAliveWilds = enemyIsAliveWilds;
     }
 
-    public void SetWorldStateOutskirts(int currentScene, List<bool> enemyIsAliveOutskirts)
+    public void SetWorldStateOutskirts(List<bool> enemyIsAliveOutskirts)
     {
-        worldState.currentScene = currentScene;
         worldState.enemyIsAliveOutskirts = enemyIsAliveOutskirts;
     }
 

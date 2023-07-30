@@ -109,9 +109,13 @@ MonoBehaviour:
   accuracy: 40
   evasion: 40
   combo: 2
+  hit: 0
   attackClip: {fileID: 8300000, guid: a3f952095cec84440a88eb462db52486, type: 3}
   level: 1
   detectRange: 0.5
+  isAlive: 1
+  id: 0
+  scene: 
   ea: {fileID: 2966693440811833630}
 --- !u!114 &2966693440811833630
 MonoBehaviour:

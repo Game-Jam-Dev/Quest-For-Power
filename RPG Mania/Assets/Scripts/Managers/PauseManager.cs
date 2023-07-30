@@ -19,6 +19,7 @@ public class PauseManager : MonoBehaviour {
         actions.Gameplay.Pause.performed += TogglePause;
 
         resumeButton.onClick.AddListener(Resume);
+        saveButton.onClick.AddListener(SaveGame);
         quitButton.onClick.AddListener(Quit);
     }
 

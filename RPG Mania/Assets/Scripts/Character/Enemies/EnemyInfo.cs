@@ -3,6 +3,9 @@ using UnityEngine;
 public class EnemyInfo : CharacterInfo {
     public int level = 1;
     public float detectRange = .5f;
+    public bool isAlive = true;
+    public int id = 0;
+    public string scene = "";
     protected WildsManager wildsController;
     protected GameObject player;
     protected bool isAttacking;
@@ -15,6 +18,19 @@ public class EnemyInfo : CharacterInfo {
 
         player = GameObject.FindGameObjectWithTag("Player");
         wildsController = GameObject.FindGameObjectWithTag("Canvas").GetComponent<WildsManager>();
+    }
+
+    public void InitializeEnemy(int id)
+    {
+        this.id = id;
+        isAlive = GameManager.instance.CheckEnemyDeath(scene, id);
+    }
+
+    public override void Kill()
+    {
+        isAlive = false;
+        GameManager.instance.SetEnemyDeath(scene, id);
+        Destroy(gameObject);
     }
 
     public override ComboAction PickEnemyCombo(int currentComboLength)

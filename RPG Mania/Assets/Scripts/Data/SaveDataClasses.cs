@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 [System.Serializable]
 public class PlayerData
@@ -11,8 +12,8 @@ public class PlayerData
 public class WorldState
 {
     public int currentScene = 1;
-    public List<bool> enemyIsAliveWilds = new List<bool>();
-    public List<bool> enemyIsAliveOutskirts = new List<bool>();
+    public List<bool> enemyIsAliveWilds = new List<bool>(System.Linq.Enumerable.Repeat(true, 14));
+    public List<bool> enemyIsAliveOutskirts = new List<bool>(System.Linq.Enumerable.Repeat(true, 5));
 }
 
 [System.Serializable]
