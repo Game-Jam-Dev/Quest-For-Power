@@ -7,9 +7,11 @@ using System.Linq;
 using System.Collections;
 
 public class BattleWildsManager : MonoBehaviour {
+    [SerializeField] private WorldManager worldManager;
     [SerializeField] private TextMeshProUGUI pHealth, pSkill, pElement, pCombo, eHealth, actionText;
     [SerializeField] private GameObject eHealthContainer, comboContainer, skillContainer, targetContainer, pickAction;
     [SerializeField] private Button comboButton, skillButton, targetButton, attackButton, absorbButton, pickSkillButton, escapeButton, backButton;
+    [SerializeField] private WildsManager wildsManager;
     private List<Button> targetButtons = new List<Button>();
     private List<Button> comboButtons = new List<Button>();
     private List<Button> skillButtons = new List<Button>();
@@ -31,7 +33,6 @@ public class BattleWildsManager : MonoBehaviour {
 
     private void Awake() {
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
-        gameObject.SetActive(false);
     }
 
     private void OnEnable() {
@@ -386,6 +387,7 @@ public class BattleWildsManager : MonoBehaviour {
             player.gameObject.GetComponent<PlayerMovement>().enabled = true;
             player.element = SkillList.Element.None;
         }
+        wildsManager.EndBattle();
     }
 
     private void ClearUI()
