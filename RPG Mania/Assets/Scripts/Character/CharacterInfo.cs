@@ -89,4 +89,6 @@ public class CharacterInfo : MonoBehaviour {
     public virtual void Recover(){}
 
     public virtual ComboAction PickEnemyCombo(int currentComboLength){ return GetCombo(0); }
+
+    public virtual void AddReinforcement(EnemyInfo e){}
 }

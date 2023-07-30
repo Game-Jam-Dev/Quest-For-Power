@@ -32,6 +32,7 @@ public class BattleThroneManager : MonoBehaviour {
     private void OnEnable() {
         player = gameManager.player;
         player.gameObject.GetComponent<PlayerMovement>().enabled = false;
+        enemies.Reverse();
         var characters = new List<CharacterInfo> { player }.Concat(enemies);
         turnOrder = new Queue<CharacterInfo>(characters);
         
@@ -112,7 +113,7 @@ public class BattleThroneManager : MonoBehaviour {
                         }
                         i++;
                     }
-
+                    player.element = SkillList.Element.None;
                 } else {
                     while (comboLength < activeCharacter.combo)
                     {

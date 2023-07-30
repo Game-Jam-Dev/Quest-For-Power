@@ -3,7 +3,7 @@ using UnityEngine;
 public class EnemyInfo : CharacterInfo {
     public int level = 1;
     public float detectRange = .5f;
-    private WildsManager wildsController;
+    protected WildsManager wildsController;
     protected GameObject player;
     protected bool isAttacking;
 
@@ -50,7 +50,7 @@ public class EnemyInfo : CharacterInfo {
         return ea.GetAnimator();
     }
 
-    private void OnTriggerEnter(Collider other) {
+    protected virtual void OnTriggerEnter(Collider other) {
         if (other.gameObject.CompareTag("Player"))
         {
             wildsController.EncounterEnemy(gameObject);

@@ -37,6 +37,7 @@ public class BattleWildsManager : MonoBehaviour {
     private void OnEnable() {
         player = gameManager.player;
         enemies = wildsManager.GetEnemies();
+        enemies.Reverse();
         player.gameObject.GetComponent<PlayerMovement>().enabled = false;
         var characters = new List<CharacterInfo> { player }.Concat(enemies);
         turnOrder = new Queue<CharacterInfo>(characters);
@@ -133,6 +134,7 @@ public class BattleWildsManager : MonoBehaviour {
                             i++;
                         }
                     }
+                    player.element = SkillList.Element.None;
                 } else {
                     while (comboLength < activeCharacter.combo)
                     {
@@ -179,7 +181,6 @@ public class BattleWildsManager : MonoBehaviour {
     {
         UpdateSkills();
         actionText.text = "";
-        player.element = SkillList.Element.None;
         pElement.text = player.characterName + "'s Active Element: " + player.element;
         awaitCommand = true;
         pickAction.SetActive(true);

@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 81363362cb2c6d74e89a1da984e01196, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d76702866b61fab48ac454f41a210233, type: 3}
   m_Color: {r: 1, g: 0.8133183, b: 0.6563342, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -116,17 +116,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterName: Xix
-  maxHealth: 0
+  maxHealth: 500
   health: 0
-  element: 0
-  attack: 0
-  defense: 0
-  accuracy: 0
-  evasion: 0
-  combo: 0
+  element: 4
+  attack: 10
+  defense: 10
+  accuracy: 6
+  evasion: 6
+  combo: 3
   hit: 0
   attackClip: {fileID: 8300000, guid: a3f952095cec84440a88eb462db52486, type: 3}
-  level: 1
+  level: 6
   detectRange: 0.5
   ea: {fileID: 4628875186622591709}
 --- !u!114 &4628875186622591709
@@ -150,9 +150,9 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4387847782472095184}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e9f3617b9fd6e17429584c25d315480c, type: 2}
+  m_Controller: {fileID: 9100000, guid: a779b622997e16442ba4bb6a9739aa48, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
