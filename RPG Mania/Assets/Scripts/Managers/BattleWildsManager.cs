@@ -7,10 +7,9 @@ using System.Linq;
 using System.Collections;
 
 public class BattleWildsManager : MonoBehaviour {
-    [SerializeField] private WorldManager worldManager;
     [SerializeField] private TextMeshProUGUI pHealth, pSkill, pElement, pCombo, eHealth, actionText;
     [SerializeField] private GameObject eHealthContainer, comboContainer, skillContainer, targetContainer, pickAction;
-    [SerializeField] private Button comboButton, skillButton, targetButton, attackButton, absorbButton, pickSkillButton, escapeButton, backButton;
+    [SerializeField] private Button comboButton, skillButton, targetButton, attackButton, absorbButton, pickSkillButton, backButton;
     [SerializeField] private WildsManager wildsManager;
     private List<Button> targetButtons = new List<Button>();
     private List<Button> comboButtons = new List<Button>();
@@ -37,6 +36,7 @@ public class BattleWildsManager : MonoBehaviour {
 
     private void OnEnable() {
         player = gameManager.player;
+        enemies = wildsManager.GetEnemies();
         player.gameObject.GetComponent<PlayerMovement>().enabled = false;
         var characters = new List<CharacterInfo> { player }.Concat(enemies);
         turnOrder = new Queue<CharacterInfo>(characters);
@@ -44,7 +44,6 @@ public class BattleWildsManager : MonoBehaviour {
         attackButton.onClick.AddListener(SelectAttack);
         absorbButton.onClick.AddListener(SelectAbsorb);
         pickSkillButton.onClick.AddListener(SelectSkill);
-        escapeButton.onClick.AddListener(SelectEscape);
         absorbButton.interactable = true;
 
         SetEnemies();
@@ -98,7 +97,6 @@ public class BattleWildsManager : MonoBehaviour {
 
                             while (activeCharacter.GetIsAttacking())
                             {
-                                
                                 yield return null;
                             }
 
@@ -153,8 +151,6 @@ public class BattleWildsManager : MonoBehaviour {
                             yield return null;
                         }
 
-                        target.Recover();
-
                         if (!hit)
                         {
                             actionText.text = $"{activeCharacter.characterName} missed";
@@ -174,6 +170,8 @@ public class BattleWildsManager : MonoBehaviour {
 
                 NextTurn(activeCharacter);
             }
+
+            yield return null;
         }
     }
 
@@ -206,11 +204,6 @@ public class BattleWildsManager : MonoBehaviour {
         canCombo = true;
         pickAction.SetActive(false);
         skillContainer.SetActive(true);
-    }
-
-    private void SelectEscape()
-    {
-        EndBattle();
     }
 
     private void BackFromSkill()
@@ -379,6 +372,7 @@ public class BattleWildsManager : MonoBehaviour {
 
         xpGain = 0;
         absorbCounter = 0;
+        killCount = 0;
 
         ClearUI();
 
@@ -428,7 +422,6 @@ public class BattleWildsManager : MonoBehaviour {
 
     public void LoseBattle()
     {
-        EndBattle();
         SceneManager.LoadScene("Title Screen");
     }
 }

@@ -20,8 +20,6 @@ public class ThroneManager : MonoBehaviour {
         gameController = GameObject.FindGameObjectWithTag("GameController");
         gameManager = gameController.GetComponent<GameManager>();
 
-        // audioSource = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioSource>();
-
         player = GameObject.FindGameObjectWithTag("Player");
         gameManager.SetPlayer(player);
         playerInfo = player.GetComponent<PlayerInfo>();

@@ -80,7 +80,7 @@ public class ComboList
         int r = Random.Range(0,100);
         float a  = self.accuracy - target.evasion + (moveAccuracy - 3 * comboDepth);
         self.hit = r < a;
-        return self.hit;
+        return r < a;
     }
 
     private void Attack(CharacterInfo self, CharacterInfo target, float d)

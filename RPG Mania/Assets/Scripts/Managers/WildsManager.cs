@@ -59,8 +59,6 @@ public class WildsManager : MonoBehaviour {
 
     private void StartBattle() {
         playerInfo.PrepareCombat();
-        if (battleManager != null)
-            battleManager.enemies = battleEnemies;
         
         audioSource.clip = battleTheme;
         audioSource.time = 2.7f;
@@ -78,8 +76,15 @@ public class WildsManager : MonoBehaviour {
             }
         }
 
+        battleEnemies.Clear();
+
         audioSource.clip = wildsTheme;
         audioSource.time = 0;
         audioSource.Play();
+    }
+
+    public List<EnemyInfo> GetEnemies()
+    {
+        return battleEnemies;
     }
 }
