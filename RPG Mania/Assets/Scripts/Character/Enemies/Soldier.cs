@@ -6,25 +6,23 @@ public class Soldier : EnemyInfo {
     {
         base.Start();
 
+        SetStats();
         AssignElement();
     }
 
-    public override void PrepareCombat(int l = 1)
+    public override void PrepareCombat()
     {
         if (col != null) col.enabled = false;
 
-        SetStats(l);
+        SetStats();
     }
 
-    public void SetStats(int level)
+    public void SetStats()
     {
-        this.level = level;
-        
         maxHealth = level * 8;
         health = maxHealth;
         attack = level * 1.6f;
         defense = accuracy = evasion = level * .8f;
-
     }
 
     private void AssignElement()

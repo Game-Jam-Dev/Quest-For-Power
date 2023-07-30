@@ -9,17 +9,17 @@ EditorBuildSettings:
     path: Assets/Scenes/Title Screen.unity
     guid: bd4ef0d83fa52cb448551c06220e7ccd
   - enabled: 1
-    path: Assets/Scenes/Pick Scene.unity
-    guid: 47a8d52a4ada4bf46a6029e548df9a6a
-  - enabled: 1
     path: Assets/Scenes/Throne Room.unity
     guid: 9e712eca0d89a4b46bd7bbc315501996
-  - enabled: 0
-    path: Assets/Scenes/Outskirts.unity
-    guid: a6997b959de0ff54b9e2eacd9b4887d6
   - enabled: 1
     path: Assets/Scenes/Wilds.unity
     guid: 0ce912e1b4d6e8e4880f24bdbd0ce4cc
+  - enabled: 1
+    path: Assets/Scenes/Outskirts.unity
+    guid: a6997b959de0ff54b9e2eacd9b4887d6
+  - enabled: 1
+    path: Assets/Scenes/Pick Scene.unity
+    guid: 47a8d52a4ada4bf46a6029e548df9a6a
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 57a94fb8227721a48a1a93a2385a33a8,
       type: 2}

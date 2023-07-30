@@ -32,6 +32,7 @@ public class BattleThroneManager : MonoBehaviour {
     private void OnEnable() {
         player = gameManager.player;
         player.gameObject.GetComponent<PlayerMovement>().enabled = false;
+        enemies.Reverse();
         var characters = new List<CharacterInfo> { player }.Concat(enemies);
         turnOrder = new Queue<CharacterInfo>(characters);
         
@@ -75,7 +76,7 @@ public class BattleThroneManager : MonoBehaviour {
                     foreach (ComboAction a in comboActions)
                     {
                         actionText.text = $"{activeCharacter.characterName} used {a.Name} at {target.characterName}";
-                        bool hit = activeCharacter.DoAction(a, target, i);
+                        bool hit = activeCharacter.DoAction(a, player, i);
                             
 
                         while (activeCharacter.GetIsAttacking())
@@ -84,11 +85,7 @@ public class BattleThroneManager : MonoBehaviour {
                             yield return null;
                         }
 
-                        if (hit)
-                        {
-                            target.Recover();
-                        }
-                        else
+                        if (!hit)
                         {
                             actionText.text = $"{activeCharacter.characterName} missed";
                             break;
@@ -116,7 +113,7 @@ public class BattleThroneManager : MonoBehaviour {
                         }
                         i++;
                     }
-
+                    player.element = SkillList.Element.None;
                 } else {
                     while (comboLength < activeCharacter.combo)
                     {
@@ -135,8 +132,6 @@ public class BattleThroneManager : MonoBehaviour {
                             
                             yield return null;
                         }
-
-                        target.Recover();
 
                         if (!hit)
                         {
@@ -349,6 +344,8 @@ public class BattleThroneManager : MonoBehaviour {
         StopAllCoroutines();
 
         enemies.Clear();
+
+        killCount = 0;
 
         ClearUI();
 

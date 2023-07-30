@@ -1,0 +1,18 @@
+using UnityEngine;
+
+public class HideEnemies : MonoBehaviour {
+    [SerializeField] private GameObject enemy1, enemy2;
+    public Vector3 enemy1Location, enemy2Location;
+    private void OnTriggerEnter(Collider other) {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            enemy1.transform.position = enemy1Location;
+            enemy2.transform.position = enemy2Location;
+
+            enemy1.gameObject.SetActive(false);
+            enemy2.gameObject.SetActive(false);
+
+            Destroy(gameObject);
+        }
+    }
+}

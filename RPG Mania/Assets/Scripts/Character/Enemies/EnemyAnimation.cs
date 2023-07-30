@@ -3,6 +3,7 @@ using UnityEngine;
 public class EnemyAnimation : MonoBehaviour {
     private Animator anim;
     private SpriteRenderer sr;
+    private SkillList.Element element;
 
     public bool isAttacking = false;
 
@@ -15,11 +16,20 @@ public class EnemyAnimation : MonoBehaviour {
     public void AssignElement(SkillList.Element e)
     {
         if (anim != null) anim.SetInteger("Element", (int)e);
+
+        element = e;
+    }
+
+    private void OnEnable() {
+        AssignElement(element);
     }
 
     public void Attacked(bool attacked)
     {
-        if (anim != null) anim.SetBool("Attacked", attacked);
+        if (anim != null)
+        {
+            anim.SetBool("Attacked", attacked);
+        }
     }
 
     public void SetUpTrigger(string triggerName)
@@ -38,8 +48,8 @@ public class EnemyAnimation : MonoBehaviour {
     {
         if (anim != null)
         {
-            anim.ResetTrigger("Attack");
             isAttacking = false;
+            anim.ResetTrigger("Attack");
         }
     }
 

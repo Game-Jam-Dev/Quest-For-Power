@@ -6,6 +6,7 @@ public class WildsManager : MonoBehaviour {
     private PlayerInfo playerInfo;
     private List<EnemyInfo> enemies = new List<EnemyInfo>();
     private List<EnemyInfo> battleEnemies = new List<EnemyInfo>();
+    private List<EnemyInfo> reinforcements = new List<EnemyInfo>();
     private GameManager gameManager;
     [SerializeField] private GameObject battleUI;
     private BattleWildsManager battleManager;
@@ -35,6 +36,16 @@ public class WildsManager : MonoBehaviour {
         }
     }
 
+    public void BossFight(GameObject boss)
+    {
+        playerInfo.SetStats(6);
+        playerInfo.ResetHealth();
+        foreach (EnemyInfo e in reinforcements)
+            boss.GetComponent<XixInfo>().AddReinforcement(e);
+
+        EncounterEnemy(boss);
+    }
+
     public void EncounterEnemy(GameObject enemy)
     {
         foreach (EnemyInfo e in enemies)
@@ -42,6 +53,7 @@ public class WildsManager : MonoBehaviour {
             if (Vector3.Distance(enemy.transform.position, e.gameObject.transform.position) <= e.detectRange)
             {
                 battleEnemies.Add(e);
+                if (!e.gameObject.activeSelf) e.gameObject.SetActive(true);
                 e.PrepareCombat();
             } else 
             {
@@ -59,8 +71,6 @@ public class WildsManager : MonoBehaviour {
 
     private void StartBattle() {
         playerInfo.PrepareCombat();
-        if (battleManager != null)
-            battleManager.enemies = battleEnemies;
         
         audioSource.clip = battleTheme;
         audioSource.time = 2.7f;
@@ -68,7 +78,7 @@ public class WildsManager : MonoBehaviour {
         battleUI.SetActive(true);
     }
 
-    public void EndBattle()
+    public void WinBattle()
     {
         if (enemies.Count > 0)
         {
@@ -78,8 +88,25 @@ public class WildsManager : MonoBehaviour {
             }
         }
 
+        battleEnemies.Clear();
+
         audioSource.clip = wildsTheme;
         audioSource.time = 0;
         audioSource.Play();
+    }
+
+    public void LoseBattle()
+    {
+        
+    }
+
+    public List<EnemyInfo> GetEnemies()
+    {
+        return battleEnemies;
+    }
+
+    public void HideEnemies()
+    {
+
     }
 }

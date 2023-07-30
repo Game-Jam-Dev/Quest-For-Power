@@ -36,7 +36,7 @@ public class CharacterInfo : MonoBehaviour {
         audioSource = GetComponent<AudioSource>();
     }
 
-    public virtual void PrepareCombat(int l = 1){}
+    public virtual void PrepareCombat(){}
 
     public ComboAction GetCombo(int i)
     {
@@ -89,4 +89,6 @@ public class CharacterInfo : MonoBehaviour {
     public virtual void Recover(){}
 
     public virtual ComboAction PickEnemyCombo(int currentComboLength){ return GetCombo(0); }
+
+    public virtual void AddReinforcement(EnemyInfo e){}
 }

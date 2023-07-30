@@ -110,8 +110,9 @@ MonoBehaviour:
   accuracy: 0
   evasion: 0
   combo: 2
+  hit: 0
   attackClip: {fileID: 8300000, guid: a3f952095cec84440a88eb462db52486, type: 3}
-  level: 0
+  level: 1
   detectRange: 3
   ea: {fileID: 6267649557001182488}
 --- !u!136 &4930510028531210733

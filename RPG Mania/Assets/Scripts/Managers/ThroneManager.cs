@@ -13,14 +13,12 @@ public class ThroneManager : MonoBehaviour {
     private BattleThroneManager battleManager;
     private AudioSource audioSource;
     [SerializeField] private AudioClip throneTheme;
-    private int nextScene = 3;
+    private int wildsScene = 2;
     private bool bossFight = false;
 
     private void Start() {
         gameController = GameObject.FindGameObjectWithTag("GameController");
         gameManager = gameController.GetComponent<GameManager>();
-
-        // audioSource = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioSource>();
 
         player = GameObject.FindGameObjectWithTag("Player");
         gameManager.SetPlayer(player);
@@ -72,7 +70,7 @@ public class ThroneManager : MonoBehaviour {
 
     public void EndBossFight()
     {
-        SceneManager.LoadScene(nextScene);
+        SceneManager.LoadScene(wildsScene);
     }
 
     public void EndBattle()

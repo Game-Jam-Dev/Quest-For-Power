@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class TitleManager : MonoBehaviour {
     [SerializeField] private Button newButton, loadButton, settingsButton, creditsButton, quitButton;
-    private int nextScene = 1;
+    private int nextScene = 4;
 
     private void Awake() {
         newButton.onClick.AddListener(StartGame);
