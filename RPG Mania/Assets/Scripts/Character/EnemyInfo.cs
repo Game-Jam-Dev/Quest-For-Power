@@ -3,7 +3,7 @@ using UnityEngine;
 public class EnemyInfo : CharacterInfo {
     public int level = 1;
     public float detectRange = .5f;
-    private WorldManager worldController;
+    private WildsManager wildsController;
     protected GameObject player;
     protected bool isAttacking;
 
@@ -14,7 +14,7 @@ public class EnemyInfo : CharacterInfo {
         base.Start();
 
         player = GameObject.FindGameObjectWithTag("Player");
-        worldController = GameObject.FindGameObjectWithTag("Canvas").GetComponent<WorldManager>();
+        wildsController = GameObject.FindGameObjectWithTag("Canvas").GetComponent<WildsManager>();
     }
 
     public override ComboAction PickEnemyCombo(int currentComboLength)
@@ -53,7 +53,7 @@ public class EnemyInfo : CharacterInfo {
     private void OnTriggerEnter(Collider other) {
         if (other.gameObject.CompareTag("Player"))
         {
-            worldController.EncounterEnemy(gameObject);
+            wildsController.EncounterEnemy(gameObject);
         }
     }
 

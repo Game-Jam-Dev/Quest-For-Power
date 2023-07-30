@@ -1,10 +1,7 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 using System.Collections.Generic;
 
 public class WildsManager : MonoBehaviour {
-    [SerializeField] private Button battleButton, bossButton, allButton;
     private GameObject gameController, player;
     private PlayerInfo playerInfo;
     private List<EnemyInfo> enemies = new List<EnemyInfo>();
@@ -12,9 +9,8 @@ public class WildsManager : MonoBehaviour {
     private GameManager gameManager;
     [SerializeField] private GameObject battleUI;
     private BattleWildsManager battleManager;
-    private BattleThroneManager throneBattleManager;
     private AudioSource audioSource;
-    [SerializeField] private AudioClip throneTheme, wildsTheme, battleTheme;
+    [SerializeField] private AudioClip wildsTheme, battleTheme;
 
     private void Start() {
         gameController = GameObject.FindGameObjectWithTag("GameController");
@@ -27,16 +23,8 @@ public class WildsManager : MonoBehaviour {
         playerInfo = player.GetComponent<PlayerInfo>();
 
         battleManager = battleUI.GetComponent<BattleWildsManager>();
-        throneBattleManager = battleUI.GetComponentInChildren<BattleThroneManager>();
 
         SpawnEnemies();
-
-        if (battleButton != null)
-        {
-            battleButton.onClick.AddListener(StartBattle);
-            bossButton.onClick.AddListener(BossFight);
-            allButton.onClick.AddListener(FightAll);
-        }   
     }
 
     private void SpawnEnemies()
@@ -69,59 +57,18 @@ public class WildsManager : MonoBehaviour {
         StartBattle();
     }
 
-    private void BossFight()
-    {
-        playerInfo.PrepareCombat();
-
-        throneBattleManager.enemies = new List<EnemyInfo>{GameObject.FindGameObjectWithTag("Boss").GetComponent<EnemyInfo>()};
-        playerInfo.SetStats(50);
-        playerInfo.ResetHealth();
-
-        battleUI.SetActive(true);
-        battleButton.gameObject.SetActive(false);
-        bossButton.gameObject.SetActive(false);
-        allButton.gameObject.SetActive(false);    }
-
-    private void FightAll()
-    {
-        enemies.Add(GameObject.FindGameObjectWithTag("Boss").GetComponent<EnemyInfo>());
-        StartBattle();
-    }
-
     private void StartBattle() {
         playerInfo.PrepareCombat();
         if (battleManager != null)
             battleManager.enemies = battleEnemies;
-        else 
-        {
-            throneBattleManager.enemies = enemies;
-            playerInfo.SetStats(50);
-            playerInfo.ResetHealth();
-            foreach(EnemyInfo e in throneBattleManager.enemies) 
-            {
-                e.PrepareCombat(50);
-            }
-            battleButton.gameObject.SetActive(false);
-            bossButton.gameObject.SetActive(false);
-            allButton.gameObject.SetActive(false);
-        }
         
         audioSource.clip = battleTheme;
+        audioSource.time = 2.7f;
         audioSource.Play();
         battleUI.SetActive(true);
     }
 
-    public void EndThroneBattle()
-    {
-        if (battleButton != null)
-        {
-            battleButton.gameObject.SetActive(true);
-            bossButton.gameObject.SetActive(true);
-            allButton.gameObject.SetActive(true);
-        }
-    }
-
-    public void EndWildBattle()
+    public void EndBattle()
     {
         if (enemies.Count > 0)
         {
@@ -132,6 +79,7 @@ public class WildsManager : MonoBehaviour {
         }
 
         audioSource.clip = wildsTheme;
+        audioSource.time = 0;
         audioSource.Play();
     }
 }

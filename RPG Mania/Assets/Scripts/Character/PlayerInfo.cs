@@ -1,10 +1,14 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class PlayerInfo : CharacterInfo {
     private int experience = 0;
     public int level {get; private set;}
 
     [SerializeField] private PlayerAnimation pa;
+
+    [SerializeField] private AudioClip waterClip, fireClip, windClip, earthClip, drainClip;
+    private List<(AudioClip, float)> elementClips;
     protected override void Start() {
         base.Start();
 
@@ -19,6 +23,8 @@ public class PlayerInfo : CharacterInfo {
         skillActions.Add((SkillList.GetInstance().GetAction(skillKeys[2]), 0));
         skillActions.Add((SkillList.GetInstance().GetAction(skillKeys[3]), 0));
         skillActions.Add((SkillList.GetInstance().GetAction(skillKeys[4]), 0));
+
+        elementClips = new List<(AudioClip, float)>(){(drainClip, 2.45f), (waterClip, 1.03f), (fireClip, .7f), (windClip, 2.2f), (earthClip, .93f)};
     }
 
     public override void PrepareCombat(int l = 1)
@@ -85,7 +91,13 @@ public class PlayerInfo : CharacterInfo {
         } else if (activeSkill == SkillList.GetInstance().GetAction("earth"))
         {
             element = SkillList.Element.Earth;
+        } else {
+            element = SkillList.Element.None;
         }
+
+        audioSource.clip = elementClips[(int) element].Item1;
+        audioSource.time = elementClips[(int) element].Item2;
+        audioSource?.Play();
     }
 
     public bool CanUseSkill(SkillAction skill)
@@ -121,6 +133,10 @@ public class PlayerInfo : CharacterInfo {
             skillActions[3] = (skillActions[3].Item1, skillActions[3].Item2 + n);
             break;
         }
+
+        audioSource.clip = elementClips[0].Item1;
+        audioSource.time = elementClips[0].Item2;
+        audioSource?.Play();
     }
 
     public void LoseSkill(int n = 1)

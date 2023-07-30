@@ -148,7 +148,7 @@ GameObject:
   - component: {fileID: 6815562144913613366}
   - component: {fileID: 6815562144913613367}
   - component: {fileID: 6815562144913613371}
-  - component: {fileID: 6815562144913613370}
+  - component: {fileID: 3876464311629475554}
   m_Layer: 5
   m_Name: Canvas Wild
   m_TagString: Canvas
@@ -256,7 +256,7 @@ MonoBehaviour:
   resumeButton: {fileID: 6815562146226767789}
   quitButton: {fileID: 6815562145639972685}
   battleButton: {fileID: 0}
---- !u!114 &6815562144913613370
+--- !u!114 &3876464311629475554
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -265,13 +265,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6815562144913613364}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a560fe6a7a7f6248a0205484cb905a4, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f527d8314e6de843b6854bd854a2dab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  battleButton: {fileID: 0}
-  bossButton: {fileID: 0}
-  allButton: {fileID: 0}
   battleUI: {fileID: 2585248692451097170}
+  wildsTheme: {fileID: 8300000, guid: ab3377f648fc99c43968f21043ab7c9e, type: 3}
+  battleTheme: {fileID: 8300000, guid: 3324ab6b015b7f24991aa574ddaeb5ee, type: 3}
 --- !u!1 &6815562145639972683
 GameObject:
   m_ObjectHideFlags: 0
@@ -696,10 +695,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6815562144913613368}
     m_Modifications:
+    - target: {fileID: 6520596087603087559, guid: 43c7054ca2322f44b9771e1254fe0227,
+        type: 3}
+      propertyPath: wildsManager
+      value: 
+      objectReference: {fileID: 3876464311629475554}
+    - target: {fileID: 7489129160757680203, guid: 43c7054ca2322f44b9771e1254fe0227,
+        type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7489129160757680206, guid: 43c7054ca2322f44b9771e1254fe0227,
         type: 3}
       propertyPath: m_Name
       value: Battle UI (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7489129160757680206, guid: 43c7054ca2322f44b9771e1254fe0227,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7489129160757680213, guid: 43c7054ca2322f44b9771e1254fe0227,
         type: 3}

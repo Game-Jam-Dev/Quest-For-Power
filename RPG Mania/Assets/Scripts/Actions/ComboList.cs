@@ -79,7 +79,8 @@ public class ComboList
     {
         int r = Random.Range(0,100);
         float a  = self.accuracy - target.evasion + (moveAccuracy - 3 * comboDepth);
-        return r < a;
+        self.hit = r < a;
+        return self.hit;
     }
 
     private void Attack(CharacterInfo self, CharacterInfo target, float d)
@@ -97,7 +98,7 @@ public class ComboList
     public bool LightAttack(CharacterInfo self, CharacterInfo target, int comboDepth)
     {
         DoAnimation(self, "Light Attack");
-
+        
         if (!HitCheck(self, target, 100, comboDepth)) return false;
 
         else {

@@ -12,11 +12,15 @@ public class PlayerMovement : MonoBehaviour {
     private Vector2 moveInput;
     private bool isSprinting;
 
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip walkSound;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
 
         actions = new InputActions();
     }
@@ -76,5 +80,12 @@ public class PlayerMovement : MonoBehaviour {
         float speedToUse = isSprinting ? speed * sprint : speed;
 
         rb.velocity = moveDirection * speedToUse;
+    }
+
+    public void PlayMoveSound()
+    {
+        audioSource.clip = walkSound;
+        audioSource.time = 1.88f;
+        audioSource.Play();
     }
 }
