@@ -6,14 +6,16 @@ public class Soldier : EnemyInfo {
     {
         base.Start();
 
-        SetStats();
         AssignElement();
     }
 
     public override void PrepareCombat()
     {
-        if (col != null) col.enabled = false;
-
+        if (col != null) 
+        {
+            col.enabled = false;
+        }
+        
         SetStats();
     }
 
