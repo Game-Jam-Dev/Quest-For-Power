@@ -1616,7 +1616,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &7489129160757680200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1666,9 +1666,9 @@ MonoBehaviour:
   attackButton: {fileID: 7489129159829788650}
   absorbButton: {fileID: 6520596089002917895}
   pickSkillButton: {fileID: 7489129160730555161}
-  escapeButton: {fileID: 7489129159013851646}
   backButton: {fileID: 1104211911853846905, guid: e5533a998ad82d7478e68b172a7c98a6,
     type: 3}
+  wildsManager: {fileID: 0}
   killCount: 0
   enemies: []
 --- !u!1 &7489129160898792678
