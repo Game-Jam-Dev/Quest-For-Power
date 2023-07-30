@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2501267450143586671}
   - component: {fileID: 8720936053241364502}
   - component: {fileID: 7049266819238382266}
+  - component: {fileID: 287754882433469311}
   m_Layer: 0
   m_Name: Lord Varian
   m_TagString: Boss
@@ -76,8 +77,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 81363362cb2c6d74e89a1da984e01196, type: 3}
-  m_Color: {r: 1, g: 0.627451, b: 0.64272, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 85d12d09cf8e0e948a2a6a2e51faa73a, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -108,6 +109,7 @@ MonoBehaviour:
   accuracy: 50
   evasion: 50
   combo: 4
+  hit: 0
   attackClip: {fileID: 8300000, guid: a3f952095cec84440a88eb462db52486, type: 3}
   level: 50
   detectRange: 0.5
@@ -221,3 +223,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!95 &287754882433469311
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7774199283527923811}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 976c14c1f55bca24eb2dce53fe9c9f8f, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
