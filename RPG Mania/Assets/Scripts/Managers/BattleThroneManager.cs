@@ -10,6 +10,7 @@ public class BattleThroneManager : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI pHealth, pSkill, pElement, pCombo, eHealth, actionText;
     [SerializeField] private GameObject eHealthContainer, comboContainer, skillContainer, targetContainer, pickAction;
     [SerializeField] private Button comboButton, skillButton, targetButton, attackButton, pickSkillButton, backButton;
+    [SerializeField] private ThroneManager throneManager;
     private List<Button> targetButtons = new List<Button>();
     private List<Button> comboButtons = new List<Button>();
     private List<Button> skillButtons = new List<Button>();
@@ -27,7 +28,6 @@ public class BattleThroneManager : MonoBehaviour {
 
     private void Awake() {
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
-        gameObject.SetActive(false);
     }
     private void OnEnable() {
         player = gameManager.player;
@@ -75,13 +75,8 @@ public class BattleThroneManager : MonoBehaviour {
                     foreach (ComboAction a in comboActions)
                     {
                         actionText.text = $"{activeCharacter.characterName} used {a.Name} at {target.characterName}";
-                        bool hit = activeCharacter.DoAction(a, player, i);
+                        bool hit = activeCharacter.DoAction(a, target, i);
                             
-                        while (activeCharacter.GetIsAttacking())
-                        {
-                            
-                            yield return null;
-                        }
 
                         while (activeCharacter.GetIsAttacking())
                         {
@@ -292,6 +287,7 @@ public class BattleThroneManager : MonoBehaviour {
         {
             Destroy(skillContainer.transform.GetChild(i).gameObject);
         }
+        player.LoseSkill();
 
         pSkill.text = "";
 
@@ -361,6 +357,8 @@ public class BattleThroneManager : MonoBehaviour {
             player.gameObject.GetComponent<PlayerMovement>().enabled = true;
             player.element = SkillList.Element.None;
         }
+
+        throneManager.EndBattle();
     }
 
     private void ClearUI()
@@ -389,7 +387,6 @@ public class BattleThroneManager : MonoBehaviour {
 
     private void LoseBattle()
     {
-        EndBattle();
         SceneManager.LoadScene("Title Screen");
     }
 

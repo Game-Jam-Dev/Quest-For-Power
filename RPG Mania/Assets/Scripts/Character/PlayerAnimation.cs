@@ -9,7 +9,7 @@ public class PlayerAnimation : MonoBehaviour {
     public string currentTrigger = "";
     public bool isAttacking = false;
 
-    protected void Start() {
+    protected virtual void Start() {
         mainCamera = Camera.main;
 
         TryGetComponent<Animator>(out anim);

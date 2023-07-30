@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections.Generic;
 
-public class WorldManager : MonoBehaviour {
+public class WildsManager : MonoBehaviour {
     [SerializeField] private Button battleButton, bossButton, allButton;
     private GameObject gameController, player;
     private PlayerInfo playerInfo;

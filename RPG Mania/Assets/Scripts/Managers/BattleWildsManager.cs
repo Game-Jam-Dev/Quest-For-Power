@@ -7,6 +7,7 @@ using System.Linq;
 using System.Collections;
 
 public class BattleWildsManager : MonoBehaviour {
+    [SerializeField] private WorldManager worldManager;
     [SerializeField] private TextMeshProUGUI pHealth, pSkill, pElement, pCombo, eHealth, actionText;
     [SerializeField] private GameObject eHealthContainer, comboContainer, skillContainer, targetContainer, pickAction;
     [SerializeField] private Button comboButton, skillButton, targetButton, attackButton, absorbButton, pickSkillButton, escapeButton, backButton;

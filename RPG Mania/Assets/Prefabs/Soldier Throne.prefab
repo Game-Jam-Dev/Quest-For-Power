@@ -100,15 +100,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterName: Soldier
-  maxHealth: 800
+  maxHealth: 400
   health: 0
   element: 0
-  attack: 160
-  defense: 80
-  accuracy: 80
-  evasion: 80
+  attack: 60
+  defense: 30
+  accuracy: 40
+  evasion: 40
   combo: 2
-  level: 50
+  level: 1
   detectRange: 0.5
   ea: {fileID: 2966693440811833630}
 --- !u!114 &2966693440811833630
