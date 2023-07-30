@@ -66,7 +66,7 @@ public class WildsManager : MonoBehaviour {
         battleUI.SetActive(true);
     }
 
-    public void EndBattle()
+    public void WinBattle()
     {
         if (enemies.Count > 0)
         {
@@ -81,6 +81,11 @@ public class WildsManager : MonoBehaviour {
         audioSource.clip = wildsTheme;
         audioSource.time = 0;
         audioSource.Play();
+    }
+
+    public void LoseBattle()
+    {
+        
     }
 
     public List<EnemyInfo> GetEnemies()

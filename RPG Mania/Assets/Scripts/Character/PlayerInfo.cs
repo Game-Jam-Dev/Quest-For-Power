@@ -27,7 +27,7 @@ public class PlayerInfo : CharacterInfo {
         elementClips = new List<(AudioClip, float)>(){(drainClip, 2.45f), (waterClip, 1.03f), (fireClip, .7f), (windClip, 2.2f), (earthClip, .93f)};
     }
 
-    public override void PrepareCombat(int l = 1)
+    public override void PrepareCombat()
     {
         pa.SwitchToCombat();
     }

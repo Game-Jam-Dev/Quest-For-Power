@@ -381,7 +381,7 @@ public class BattleWildsManager : MonoBehaviour {
             player.gameObject.GetComponent<PlayerMovement>().enabled = true;
             player.element = SkillList.Element.None;
         }
-        wildsManager.EndBattle();
+        wildsManager.WinBattle();
     }
 
     private void ClearUI()
