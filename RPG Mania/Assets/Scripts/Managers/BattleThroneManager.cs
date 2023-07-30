@@ -76,7 +76,7 @@ public class BattleThroneManager : MonoBehaviour {
                     foreach (ComboAction a in comboActions)
                     {
                         actionText.text = $"{activeCharacter.characterName} used {a.Name} at {target.characterName}";
-                        bool hit = activeCharacter.DoAction(a, player, i);
+                        bool hit = activeCharacter.DoAction(a, target, i);
                             
 
                         while (activeCharacter.GetIsAttacking())
