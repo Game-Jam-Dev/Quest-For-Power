@@ -57,7 +57,7 @@ public class ThroneManager : MonoBehaviour {
         playerInfo.PrepareCombat();
         
         battleManager.enemies = enemies;
-        playerInfo.SetStats(50);
+        playerInfo.SetData(50);
         playerInfo.ResetHealth();
         battleUI.SetActive(true);
     }

@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PauseManager : MonoBehaviour {
     [SerializeField] private GameObject pauseUI, battleUI;
-    [SerializeField] private Button resumeButton, quitButton, battleButton;
+    [SerializeField] private Button resumeButton, saveButton, quitButton;
 
     private InputActions actions;
     
@@ -40,13 +40,16 @@ public class PauseManager : MonoBehaviour {
     private void Resume() {
         Time.timeScale = 1; 
         pauseUI.SetActive(false);
-        if (battleButton != null) battleButton.enabled = true;
     }
 
     private void Pause() {
         Time.timeScale = 0; 
         pauseUI.SetActive(true);
-        if (battleButton != null) battleButton.enabled = false;
+    }
+
+    private void SaveGame()
+    {
+        SaveSystem.SaveGameData(GameManager.instance.GetGameData());
     }
 
     private void Quit() {

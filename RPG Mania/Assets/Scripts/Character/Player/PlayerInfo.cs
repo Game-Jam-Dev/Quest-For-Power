@@ -43,7 +43,7 @@ public class PlayerInfo : CharacterInfo {
 
     private void LevelUp()
     {
-        SetStats(level + 1);
+        SetData(level + 1);
 
         Debug.Log("Now level " + level);
     }
@@ -58,7 +58,7 @@ public class PlayerInfo : CharacterInfo {
         pa.SetUpTrigger(triggerName);
     }
 
-    public void SetStats(int level)
+    public void SetData(int level)
     {
         this.level = level;
         experience = level * 10 - 10;

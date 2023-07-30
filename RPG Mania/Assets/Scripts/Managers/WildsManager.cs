@@ -38,7 +38,7 @@ public class WildsManager : MonoBehaviour {
 
     public void BossFight(GameObject boss)
     {
-        playerInfo.SetStats(6);
+        playerInfo.SetData(6);
         playerInfo.ResetHealth();
         foreach (EnemyInfo e in reinforcements)
             boss.GetComponent<XixInfo>().AddReinforcement(e);

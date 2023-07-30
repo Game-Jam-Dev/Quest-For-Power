@@ -14,7 +14,7 @@ public class TitleManager : MonoBehaviour {
         creditsButton.onClick.AddListener(Credits);
         quitButton.onClick.AddListener(QuitGame);
 
-        loadButton.interactable = false;
+        loadButton.interactable = SaveSystem.SaveFileExists();
         settingsButton.interactable = false;
     }
 
@@ -24,7 +24,13 @@ public class TitleManager : MonoBehaviour {
 
     private void LoadGame()
     {
-        SceneManager.LoadScene(nextScene);
+        GameData gameData = SaveSystem.LoadGameData(); // Load saved game data
+        if(gameData != null)
+        {
+            GameManager.instance.SetGameData(gameData);
+
+            SceneManager.LoadScene(gameData.worldState.currentScene);
+        }
     }
 
     private void Settings(){}
