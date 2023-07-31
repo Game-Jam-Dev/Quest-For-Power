@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b510c82cce5de494ea2d3b9016059745, type: 3}
+  m_Name: ThroneRoomPostBattle01
+  m_EditorClassIdentifier: 
+  dialogLines:
+  - speakerName: Arkanos
+    dialog: How... how could you...?
+  - speakerName: Varian
+    dialog: You brought this upon yourself, Arkanos. Your tyranny ends here.
+  - speakerName: Varian
+    dialog: This kingdom deserves a leader who will serve its people, not oppress
+      them. Today, I shall take that mantle.

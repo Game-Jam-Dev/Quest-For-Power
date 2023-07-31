@@ -7,6 +7,7 @@ public class DialogManager : MonoBehaviour
 {
     [SerializeField] private GameObject dialogBox;
     [SerializeField] private TMP_Text dialogText;
+    [SerializeField] private TMP_Text dialogName;
     [SerializeField] private float textSpeed;
     public DialogObject currentDialog;
 
@@ -17,10 +18,10 @@ public class DialogManager : MonoBehaviour
 
     private IEnumerator MoveThroughDialog(DialogObject dialogObject)
     {
-        
         for(int i = 0; i < dialogObject.dialogLines.Length; i++)
         {
             dialogText.text = "";
+            dialogName.text = dialogObject.dialogLines[i].speakerName;
             foreach (char c in dialogObject.dialogLines[i].dialog)
             {
                 //if (dialogText.text == dialogObject.dialogLines[i].dialog) { break; }
