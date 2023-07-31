@@ -16,6 +16,7 @@ public class WildsManager : MonoBehaviour {
     private AudioSource audioSource;
     [SerializeField] private AudioClip wildsTheme, battleTheme;
     private int currentScene;
+    private bool final = false;
 
     private void Start() {
         gameController = GameObject.FindGameObjectWithTag("GameController");
@@ -63,6 +64,8 @@ public class WildsManager : MonoBehaviour {
         foreach (EnemyInfo e in reinforcements)
             boss.GetComponent<XixInfo>().AddReinforcement(e);
 
+        final = true;
+
         EncounterEnemy(boss);
     }
 
@@ -100,6 +103,8 @@ public class WildsManager : MonoBehaviour {
 
     public void WinBattle()
     {
+        if (final) SceneManager.LoadScene("Credits");
+
         if (enemies.Count > 0)
         {
             foreach (EnemyInfo e in liveEnemies)

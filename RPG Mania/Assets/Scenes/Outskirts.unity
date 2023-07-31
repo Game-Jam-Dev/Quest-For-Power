@@ -998,7 +998,8 @@ PrefabInstance:
       propertyPath: battleUI
       value: 
       objectReference: {fileID: 1625175422}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7825545954615205506, guid: 4c63db1762ae4a943b5f1f9fc35d49ad, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 4c63db1762ae4a943b5f1f9fc35d49ad, type: 3}
 --- !u!1 &1272252351 stripped
 GameObject:

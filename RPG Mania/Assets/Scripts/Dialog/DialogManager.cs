@@ -10,10 +10,12 @@ public class DialogManager : MonoBehaviour
     [SerializeField] private TMP_Text dialogName;
     [SerializeField] private float textSpeed;
     public DialogObject currentDialog;
+    private bool showingDialog = true;
+    public bool clicked = false;
 
     public void Start()
     {
-        DisplayDialog(currentDialog);
+        
     }
 
     private IEnumerator MoveThroughDialog(DialogObject dialogObject)
@@ -22,23 +24,54 @@ public class DialogManager : MonoBehaviour
         {
             dialogText.text = "";
             dialogName.text = dialogObject.dialogLines[i].speakerName;
+
             foreach (char c in dialogObject.dialogLines[i].dialog)
             {
-                //if (dialogText.text == dialogObject.dialogLines[i].dialog) { break; }
                 dialogText.text += c;
                 yield return new WaitForSeconds(textSpeed);
+
+                // Check if the user has clicked during the text printing
+                if (clicked)
+                {
+                    clicked = false;  // Reset the clicked state
+                    dialogText.text = dialogObject.dialogLines[i].dialog; // Show full line
+                    break;  // This will break the 'foreach' loop
+                }
             }
 
             //The following line of code makes it so that the for loop is paused until the user clicks the left mouse button.
-            yield return new WaitUntil (()=>Input.GetMouseButtonDown(0));
+            yield return new WaitUntil(() => clicked);  // Wait until the Clicked is true
+            clicked = false; // Reset the clicked state
             //The following line of code makes the coroutine wait for a frame so as the next WaitUntil is not skipped
             yield return null;
         }
-        dialogBox.SetActive(false);
+        showingDialog = false;
+    }
+
+    public bool ShowingDialog()
+    {
+        return showingDialog;
     }
 
     public void DisplayDialog(DialogObject dialogObject)
     {
+        showingDialog = true;
         StartCoroutine(MoveThroughDialog(dialogObject));
+    }
+
+    private void OnEnable() {
+        dialogBox.SetActive(true);
+    }
+
+    private void OnDisable() {
+        dialogBox.SetActive(false);
+    }
+
+
+    private void Update() {
+        if(Input.GetMouseButtonDown(0))
+        {
+            clicked = true;
+        }
     }
 }

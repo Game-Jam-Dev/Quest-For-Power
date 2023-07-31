@@ -380,8 +380,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogBox: {fileID: 1627318887244746676}
   dialogText: {fileID: 8523279246317377008}
-  dialogName: {fileID: 0}
-  textSpeed: 0.1
+  dialogName: {fileID: 3788862165231372789}
+  textSpeed: 0.035
   currentDialog: {fileID: 11400000, guid: e0f1d46cb8131164ea3dcab0c5ebd739, type: 2}
 --- !u!1 &4676544588874010738
 GameObject:
@@ -1230,6 +1230,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 6219556176217980057}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3788862165231372789 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7117080988102407532, guid: 0d656edda9fefca43a2c23de9f04b7c4,
+    type: 3}
+  m_PrefabInstance: {fileID: 6219556176217980057}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &8523279246317377008 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2312748162189355369, guid: 0d656edda9fefca43a2c23de9f04b7c4,

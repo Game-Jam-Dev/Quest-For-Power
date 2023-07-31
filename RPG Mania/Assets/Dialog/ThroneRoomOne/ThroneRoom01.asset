@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ThroneRoom01
   m_EditorClassIdentifier: 
   dialogLines:
-  - speakerName: ???
+  - speakerName: Arkanos
     dialog: Varian, what is the meaning of this? Why are you sitting on my throne?
   - speakerName: Varian
     dialog: Oh, Arkanos, you've finally arrived to witness the beginning of your
