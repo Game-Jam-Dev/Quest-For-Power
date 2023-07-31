@@ -68,16 +68,16 @@ public class PlayerInfo : CharacterInfo {
         pa.SetUpTrigger(triggerName);
     }
 
-    public void SetData(int experience, List<int> skillUses)
+    public void SetData(int experience)
     {
         this.experience = experience;
         
         LevelUp();
+    }
 
-        for (int i = 0; i < skillActions.Count; i++)
-        {
-            skillActions[i] = (skillActions[i].Item1, skillUses[i]);
-        }
+    public void SetSkillUses()
+    {
+        GameManager.instance.GetPlayerSkills();
     }
 
     
@@ -116,7 +116,7 @@ public class PlayerInfo : CharacterInfo {
     {
         int index = skillActions.FindIndex(item => item.Item1 == skill);
 
-        if (index != -1) return skillActions[index].Item2 > 0;
+        if (index != -1) return GameManager.instance.GetPlayerSkills()[index] > 0;
 
         else return false;
     }

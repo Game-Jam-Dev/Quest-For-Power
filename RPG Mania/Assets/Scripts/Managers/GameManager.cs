@@ -29,6 +29,13 @@ public class GameManager : MonoBehaviour {
         playerData.skillActionUses[i] = count;
     }
 
+    public List<int> GetPlayerSkills(){
+        foreach (int i in playerData.skillActionUses) Debug.Log(i);
+
+        return playerData.skillActionUses;
+    }
+        
+
     public void SetCurrentScene(int currentScene)
     {
         worldState.currentScene = currentScene;
@@ -77,7 +84,7 @@ public class GameManager : MonoBehaviour {
     public void SetPlayer(GameObject player)
     {
         this.player = player.GetComponent<PlayerInfo>();
-        this.player.SetData(playerData.experience, playerData.skillActionUses);
+        this.player.SetData(playerData.experience);
         this.player.ResetHealth();
     }
 
