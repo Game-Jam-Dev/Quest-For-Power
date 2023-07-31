@@ -36,6 +36,8 @@ public class CharacterInfo : MonoBehaviour {
         audioSource = GetComponent<AudioSource>();
     }
 
+    public virtual void Kill(){}
+
     public virtual void PrepareCombat(){}
 
     public ComboAction GetCombo(int i)

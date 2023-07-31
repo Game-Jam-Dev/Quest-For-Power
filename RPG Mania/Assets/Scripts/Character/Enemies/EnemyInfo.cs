@@ -3,7 +3,10 @@ using UnityEngine;
 public class EnemyInfo : CharacterInfo {
     public int level = 1;
     public float detectRange = .5f;
-    protected WildsManager wildsController;
+    public bool isAlive = true;
+    public int id = 0;
+    public string scene = "";
+    protected WildsManager wildsManager;
     protected GameObject player;
     protected bool isAttacking;
 
@@ -14,7 +17,20 @@ public class EnemyInfo : CharacterInfo {
         base.Start();
 
         player = GameObject.FindGameObjectWithTag("Player");
-        wildsController = GameObject.FindGameObjectWithTag("Canvas").GetComponent<WildsManager>();
+        wildsManager = GameObject.FindGameObjectWithTag("Canvas").GetComponent<WildsManager>();
+    }
+
+    public void InitializeEnemy(int id)
+    {
+        this.id = id;
+        isAlive = GameManager.instance.CheckEnemyDeath(scene, id);
+    }
+
+    public override void Kill()
+    {
+        isAlive = false;
+        GameManager.instance.SetEnemyDeath(scene, id);
+        Destroy(gameObject);
     }
 
     public override ComboAction PickEnemyCombo(int currentComboLength)
@@ -53,7 +69,7 @@ public class EnemyInfo : CharacterInfo {
     protected virtual void OnTriggerEnter(Collider other) {
         if (other.gameObject.CompareTag("Player"))
         {
-            wildsController.EncounterEnemy(gameObject);
+            wildsManager.EncounterEnemy(gameObject);
         }
     }
 

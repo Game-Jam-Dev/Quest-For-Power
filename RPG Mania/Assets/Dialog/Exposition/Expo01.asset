@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b510c82cce5de494ea2d3b9016059745, type: 3}
+  m_Name: Expo01
+  m_EditorClassIdentifier: 
+  dialogLines:
+  - speakerName: 
+    dialog: "In the annals of history, there stood a figure shrouded in mystery and
+      enigma\u2014the Eternal Emperor, a being rumored to be older than time itself."
+  - speakerName: 
+    dialog: 'His origins remained a subject of speculation, and many believed he
+      had witnessed the birth and fall of civilizations long forgotten.
+
+'
+  - speakerName: 
+    dialog: His name, whispered in hushed tones, sent chills down the spines of those
+      who dared to speak of him.
+  - speakerName: 
+    dialog: ' Legends spoke of a pact he made with ancient deities, bestowing upon
+      him immortality and unmatched dominion over the forces of darkness.
+
+'

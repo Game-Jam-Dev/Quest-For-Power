@@ -85,6 +85,8 @@ public class BattleThroneManager : MonoBehaviour {
                             yield return null;
                         }
 
+                        target.Recover();
+
                         if (!hit)
                         {
                             actionText.text = $"{activeCharacter.characterName} missed";

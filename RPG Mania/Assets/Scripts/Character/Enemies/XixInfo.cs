@@ -12,7 +12,7 @@ public class XixInfo : EnemyInfo {
     protected override void OnTriggerEnter(Collider other) {
         if (other.gameObject.CompareTag("Player"))
         {
-            wildsController.BossFight(gameObject);
+            wildsManager.BossFight(gameObject);
         }
     }
 

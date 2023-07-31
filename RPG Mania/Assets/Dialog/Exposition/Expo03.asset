@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b510c82cce5de494ea2d3b9016059745, type: 3}
+  m_Name: Expo03
+  m_EditorClassIdentifier: 
+  dialogLines:
+  - speakerName: 
+    dialog: The seeds of dissent grew stronger as generations passed. Many believed
+      that the Eternal Emperor's power had waned, and they saw an opportunity to
+      seize control of their destiny.
+  - speakerName: 
+    dialog: Tales of prophecies foretelling his downfall circulated among the common
+      folk, igniting a spark of hope that had been suppressed for centuries.

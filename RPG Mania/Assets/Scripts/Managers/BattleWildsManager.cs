@@ -125,7 +125,7 @@ public class BattleWildsManager : MonoBehaviour {
                                 var newTurnOrder = new Queue<CharacterInfo>(turnOrder.Where(x => x != target));
                                 turnOrder = newTurnOrder;
 
-                                Destroy(target.gameObject);
+                                target.Kill();
 
                                 if (killCount >= enemies.Count) WinBattle();
 
