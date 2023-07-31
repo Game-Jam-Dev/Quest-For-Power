@@ -1596,17 +1596,22 @@ PrefabInstance:
     - target: {fileID: 4145101037742809439, guid: b24b71648e251074da2258070d5dca7f,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4145101037967595906, guid: b24b71648e251074da2258070d5dca7f,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4145101039070744598, guid: b24b71648e251074da2258070d5dca7f,
         type: 3}
       propertyPath: m_Name
       value: SettingsMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 4145101039070744598, guid: b24b71648e251074da2258070d5dca7f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4145101039070744599, guid: b24b71648e251074da2258070d5dca7f,
         type: 3}
