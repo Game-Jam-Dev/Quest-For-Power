@@ -11,8 +11,6 @@ public class ThroneManager : MonoBehaviour {
     private GameManager gameManager;
     [SerializeField] private GameObject battleUI;
     private BattleThroneManager battleManager;
-    private AudioSource audioSource;
-    [SerializeField] private AudioClip throneTheme;
     private int wildsScene = 2;
     private bool bossFight = false;
 
