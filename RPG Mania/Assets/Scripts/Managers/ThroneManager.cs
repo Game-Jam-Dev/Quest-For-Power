@@ -20,6 +20,8 @@ public class ThroneManager : MonoBehaviour {
         gameController = GameObject.FindGameObjectWithTag("GameController");
         gameManager = gameController.GetComponent<GameManager>();
 
+        gameManager.SetPlayerExperience(490);
+
         player = GameObject.FindGameObjectWithTag("Player");
         gameManager.SetPlayer(player);
         playerInfo = player.GetComponent<PlayerInfo>();
@@ -71,7 +73,7 @@ public class ThroneManager : MonoBehaviour {
     {
         GameManager.instance.SetPlayerExperience(0);
         GameManager.instance.SetPlayerSkills(new List<int>{0,0,0,0,0});
-        
+
         SceneManager.LoadScene(wildsScene);
     }
 

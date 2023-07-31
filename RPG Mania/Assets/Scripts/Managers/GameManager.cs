@@ -70,11 +70,6 @@ public class GameManager : MonoBehaviour {
         worldState.enemyIsAliveOutskirts = enemyIsAliveOutskirts;
     }
 
-    public void TriggerOutskirtEvent()
-    {
-        worldState.outskirtEvent = false;
-    }
-
     public GameData GetGameData()
     {
         gameData = new GameData{playerData = this.playerData, worldState = this.worldState};
