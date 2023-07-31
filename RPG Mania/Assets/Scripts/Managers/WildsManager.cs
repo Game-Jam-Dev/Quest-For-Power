@@ -1,17 +1,21 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class WildsManager : MonoBehaviour {
     private GameObject gameController, player;
     private PlayerInfo playerInfo;
     private List<EnemyInfo> enemies = new List<EnemyInfo>();
     private List<EnemyInfo> battleEnemies = new List<EnemyInfo>();
+    private List<EnemyInfo> liveEnemies = new List<EnemyInfo>();
     private List<EnemyInfo> reinforcements = new List<EnemyInfo>();
+    private List<bool> livingEnemies;
     private GameManager gameManager;
     [SerializeField] private GameObject battleUI;
     private BattleWildsManager battleManager;
     private AudioSource audioSource;
     [SerializeField] private AudioClip wildsTheme, battleTheme;
+    private int currentScene;
 
     private void Start() {
         gameController = GameObject.FindGameObjectWithTag("GameController");
@@ -25,7 +29,14 @@ public class WildsManager : MonoBehaviour {
 
         battleManager = battleUI.GetComponent<BattleWildsManager>();
 
+
+
+        currentScene = SceneManager.GetActiveScene().buildIndex;
+        gameManager.SetCurrentScene(currentScene);
+
         SpawnEnemies();
+
+
     }
 
     private void SpawnEnemies()
@@ -34,12 +45,21 @@ public class WildsManager : MonoBehaviour {
         {
             enemies.Add(e.GetComponent<EnemyInfo>());
         }
+
+        int i = 0;
+        foreach (EnemyInfo e in enemies)
+        {
+            e.InitializeEnemy(i);
+            i++;
+
+            if (e.isAlive) liveEnemies.Add(e);
+
+            else Destroy(e.gameObject);
+        }
     }
 
     public void BossFight(GameObject boss)
     {
-        playerInfo.SetStats(6);
-        playerInfo.ResetHealth();
         foreach (EnemyInfo e in reinforcements)
             boss.GetComponent<XixInfo>().AddReinforcement(e);
 
@@ -48,7 +68,7 @@ public class WildsManager : MonoBehaviour {
 
     public void EncounterEnemy(GameObject enemy)
     {
-        foreach (EnemyInfo e in enemies)
+        foreach (EnemyInfo e in liveEnemies)
         {
             if (Vector3.Distance(enemy.transform.position, e.gameObject.transform.position) <= e.detectRange)
             {
@@ -63,7 +83,7 @@ public class WildsManager : MonoBehaviour {
 
         foreach(EnemyInfo e in battleEnemies)
         {
-            enemies.Remove(e);
+            liveEnemies.Remove(e);
         }
 
         StartBattle();
@@ -82,7 +102,7 @@ public class WildsManager : MonoBehaviour {
     {
         if (enemies.Count > 0)
         {
-            foreach (EnemyInfo e in enemies)
+            foreach (EnemyInfo e in liveEnemies)
             {
                 e.gameObject.SetActive(true);
             }
@@ -103,10 +123,5 @@ public class WildsManager : MonoBehaviour {
     public List<EnemyInfo> GetEnemies()
     {
         return battleEnemies;
-    }
-
-    public void HideEnemies()
-    {
-
     }
 }

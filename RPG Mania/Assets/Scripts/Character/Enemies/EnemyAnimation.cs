@@ -11,6 +11,8 @@ public class EnemyAnimation : MonoBehaviour {
     {
         TryGetComponent<Animator>(out anim);
         TryGetComponent<SpriteRenderer>(out sr);
+
+        AssignElement(element);
     }
 
     public void AssignElement(SkillList.Element e)

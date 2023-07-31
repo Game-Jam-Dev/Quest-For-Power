@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class TitleManager : MonoBehaviour {
     [SerializeField] private Button newButton, loadButton, settingsButton, creditsButton, quitButton;
     private int nextScene = 4;
+    private int creditsScene = 5;
 
     private void Awake() {
         newButton.onClick.AddListener(StartGame);
@@ -13,9 +14,8 @@ public class TitleManager : MonoBehaviour {
         creditsButton.onClick.AddListener(Credits);
         quitButton.onClick.AddListener(QuitGame);
 
-        loadButton.interactable = false;
+        loadButton.interactable = SaveSystem.SaveFileExists();
         settingsButton.interactable = false;
-        creditsButton.interactable = false;
     }
 
     private void StartGame(){
@@ -24,12 +24,21 @@ public class TitleManager : MonoBehaviour {
 
     private void LoadGame()
     {
-        SceneManager.LoadScene(nextScene);
+        GameData gameData = SaveSystem.LoadGameData(); // Load saved game data
+        if(gameData != null)
+        {
+            GameManager.instance.SetGameData(gameData);
+
+            SceneManager.LoadScene(gameData.worldState.currentScene);
+        }
     }
 
     private void Settings(){}
 
-    private void Credits(){}
+    private void Credits()
+    {
+        SceneManager.LoadScene(creditsScene);
+    }
 
     private void QuitGame(){
         #if UNITY_EDITOR
