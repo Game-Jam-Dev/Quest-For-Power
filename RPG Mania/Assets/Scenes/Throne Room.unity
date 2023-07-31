@@ -553,6 +553,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.17999999, y: 0.17999998, z: 0}
   m_Center: {x: 0, y: 0.07999998, z: 0}
+--- !u!114 &1227245725 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4676544588567442430, guid: 4c63db1762ae4a943b5f1f9fc35d49ad,
+    type: 3}
+  m_PrefabInstance: {fileID: 2143006777}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2143006778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d5930f59c8a1c64f9df5d8a19e7e647, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1385643271
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1311,6 +1323,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b8cf5446c3edc5840bdd08a343f0ba48, type: 2}
   dialogObjectsPost:
   - {fileID: 11400000, guid: ca2a2dd17d6e415419e5377b00b29f21, type: 2}
+  pauseManager: {fileID: 1227245725}
 --- !u!1001 &7729118475600730603
 PrefabInstance:
   m_ObjectHideFlags: 0

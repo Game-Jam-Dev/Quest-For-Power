@@ -2576,6 +2576,11 @@ PrefabInstance:
       propertyPath: battleUI
       value: 
       objectReference: {fileID: 496980447}
+    - target: {fileID: 7825545954615205506, guid: 4c63db1762ae4a943b5f1f9fc35d49ad,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c63db1762ae4a943b5f1f9fc35d49ad, type: 3}
 --- !u!1 &1275094186 stripped

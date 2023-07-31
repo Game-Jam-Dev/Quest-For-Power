@@ -17,6 +17,8 @@ public class ThroneManager : MonoBehaviour {
     [SerializeField] private DialogManager dialogManager;
     [SerializeField] private List<DialogObject> dialogObjectsExpo, dialogObjectsPre, dialogObjectsPreBoss, dialogObjectsPost;
 
+    [SerializeField] public PauseManager pauseManager;
+
     private void Start() {
         gameController = GameObject.FindGameObjectWithTag("GameController");
         gameManager = gameController.GetComponent<GameManager>();
@@ -27,7 +29,11 @@ public class ThroneManager : MonoBehaviour {
         gameManager.SetPlayer(player);
         playerInfo = player.GetComponent<PlayerInfo>();
 
+        pauseManager.throne = true;
+
         battleManager = battleUI.GetComponentInChildren<BattleThroneManager>();
+
+
 
         SpawnEnemies();
 

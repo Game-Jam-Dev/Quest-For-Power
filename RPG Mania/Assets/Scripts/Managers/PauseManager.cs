@@ -11,6 +11,8 @@ public class PauseManager : MonoBehaviour {
     
     private int mainMenuSceneIndex = 0;
 
+    public bool throne = false;
+
     private void Awake() {
         actions = new InputActions();
 
@@ -32,6 +34,7 @@ public class PauseManager : MonoBehaviour {
     }
 
     private void TogglePause(InputAction.CallbackContext context) {
+        if (throne) return;
         if (pauseUI.activeSelf)
             Resume();
         else
