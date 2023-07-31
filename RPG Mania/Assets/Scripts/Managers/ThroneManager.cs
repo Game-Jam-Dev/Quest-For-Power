@@ -20,6 +20,8 @@ public class ThroneManager : MonoBehaviour {
         gameController = GameObject.FindGameObjectWithTag("GameController");
         gameManager = gameController.GetComponent<GameManager>();
 
+        gameManager.SetPlayerExperience(490);
+
         player = GameObject.FindGameObjectWithTag("Player");
         gameManager.SetPlayer(player);
         playerInfo = player.GetComponent<PlayerInfo>();
@@ -57,7 +59,6 @@ public class ThroneManager : MonoBehaviour {
         playerInfo.PrepareCombat();
         
         battleManager.enemies = enemies;
-        playerInfo.SetStats(50);
         playerInfo.ResetHealth();
         battleUI.SetActive(true);
     }
@@ -70,6 +71,9 @@ public class ThroneManager : MonoBehaviour {
 
     public void EndBossFight()
     {
+        GameManager.instance.SetPlayerExperience(0);
+        GameManager.instance.SetPlayerSkills(new List<int>{0,0,0,0,0});
+
         SceneManager.LoadScene(wildsScene);
     }
 

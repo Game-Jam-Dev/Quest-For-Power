@@ -114,6 +114,9 @@ MonoBehaviour:
   attackClip: {fileID: 8300000, guid: a3f952095cec84440a88eb462db52486, type: 3}
   level: 3
   detectRange: 3
+  isAlive: 1
+  id: 0
+  scene: wilds
   ea: {fileID: 266092305544161798}
 --- !u!136 &6652476710282752811
 CapsuleCollider:
