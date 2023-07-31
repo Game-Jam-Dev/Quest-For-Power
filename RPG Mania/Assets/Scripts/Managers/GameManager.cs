@@ -14,10 +14,19 @@ public class GameManager : MonoBehaviour {
         worldState = gameData.worldState;
     }
 
-    public void SetPlayerData(int level, List<int> skillActionsUses)
+    public void SetPlayerExperience(int experience)
     {
-        playerData.level = level;
-        playerData.skillActionsUses = skillActionsUses;
+        playerData.experience = experience;
+    }
+
+    public void SetPlayerSkills(List<int> skillActionUses)
+    {
+        playerData.skillActionUses = skillActionUses;
+    }
+
+    public void SetPlayerSkill(int i, int count)
+    {
+        playerData.skillActionUses[i] = count;
     }
 
     public void SetCurrentScene(int currentScene)
@@ -54,6 +63,11 @@ public class GameManager : MonoBehaviour {
         worldState.enemyIsAliveOutskirts = enemyIsAliveOutskirts;
     }
 
+    public void TriggerOutskirtEvent()
+    {
+        worldState.outskirtEvent = false;
+    }
+
     public GameData GetGameData()
     {
         gameData = new GameData{playerData = this.playerData, worldState = this.worldState};
@@ -63,7 +77,7 @@ public class GameManager : MonoBehaviour {
     public void SetPlayer(GameObject player)
     {
         this.player = player.GetComponent<PlayerInfo>();
-        this.player.SetData(1);
+        this.player.SetData(playerData.experience, playerData.skillActionUses);
         this.player.ResetHealth();
     }
 

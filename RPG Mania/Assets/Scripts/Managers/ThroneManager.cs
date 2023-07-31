@@ -57,7 +57,6 @@ public class ThroneManager : MonoBehaviour {
         playerInfo.PrepareCombat();
         
         battleManager.enemies = enemies;
-        playerInfo.SetData(50);
         playerInfo.ResetHealth();
         battleUI.SetActive(true);
     }
@@ -70,6 +69,9 @@ public class ThroneManager : MonoBehaviour {
 
     public void EndBossFight()
     {
+        GameManager.instance.SetPlayerExperience(0);
+        GameManager.instance.SetPlayerSkills(new List<int>{0,0,0,0,0});
+        
         SceneManager.LoadScene(wildsScene);
     }
 

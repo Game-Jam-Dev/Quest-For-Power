@@ -12,12 +12,12 @@ public class PlayerInfo : CharacterInfo {
     protected override void Start() {
         base.Start();
 
+        skillKeys.Add("health drain");
         skillKeys.Add("water");
         skillKeys.Add("fire");
         skillKeys.Add("wind");
         skillKeys.Add("earth");
-        skillKeys.Add("health drain");
-
+    
         skillActions.Add((SkillList.GetInstance().GetAction(skillKeys[0]), 0));
         skillActions.Add((SkillList.GetInstance().GetAction(skillKeys[1]), 0));
         skillActions.Add((SkillList.GetInstance().GetAction(skillKeys[2]), 0));
@@ -25,6 +25,8 @@ public class PlayerInfo : CharacterInfo {
         skillActions.Add((SkillList.GetInstance().GetAction(skillKeys[4]), 0));
 
         elementClips = new List<(AudioClip, float)>(){(drainClip, 2.45f), (waterClip, 1.03f), (fireClip, .7f), (windClip, 2.2f), (earthClip, .93f)};
+
+
     }
 
     public override void PrepareCombat()
@@ -39,11 +41,19 @@ public class PlayerInfo : CharacterInfo {
 
         health += (maxHealth/3) * kills;
         if (health > maxHealth) health = maxHealth;
+
+        GameManager.instance.SetPlayerExperience(experience);
     }
 
     private void LevelUp()
     {
-        SetData(level + 1);
+        level = experience / 10 + 1;
+
+        maxHealth = level * 20;
+        attack = level * 2;
+        defense = accuracy = evasion = level;
+
+        combo = (level / 50) + 4;        
 
         Debug.Log("Now level " + level);
     }
@@ -58,17 +68,19 @@ public class PlayerInfo : CharacterInfo {
         pa.SetUpTrigger(triggerName);
     }
 
-    public void SetData(int level)
+    public void SetData(int experience, List<int> skillUses)
     {
-        this.level = level;
-        experience = level * 10 - 10;
+        this.experience = experience;
+        
+        LevelUp();
 
-        maxHealth = level * 20;
-        attack = level * 2;
-        defense = accuracy = evasion = level;
-
-        combo = (level / 50) + 4;
+        for (int i = 0; i < skillActions.Count; i++)
+        {
+            skillActions[i] = (skillActions[i].Item1, skillUses[i]);
+        }
     }
+
+    
 
     public void ResetHealth()
     {
@@ -118,25 +130,15 @@ public class PlayerInfo : CharacterInfo {
 
     public void AbsorbSkill(SkillList.Element e, int n = 1)
     {
-        switch (e)
-        {
-            case SkillList.Element.Water:
-            skillActions[0] = (skillActions[0].Item1, skillActions[0].Item2 + n);
-            break;
-            case SkillList.Element.Fire:
-            skillActions[1] = (skillActions[1].Item1, skillActions[1].Item2 + n);
-            break;
-            case SkillList.Element.Wind:
-            skillActions[2] = (skillActions[2].Item1, skillActions[2].Item2 + n);
-            break;
-            case SkillList.Element.Earth:
-            skillActions[3] = (skillActions[3].Item1, skillActions[3].Item2 + n);
-            break;
-        }
+        int i = (int)e;
+
+        skillActions[i] = (skillActions[i].Item1, skillActions[i].Item2 + n);
 
         audioSource.clip = elementClips[0].Item1;
         audioSource.time = elementClips[0].Item2;
         audioSource?.Play();
+
+        GameManager.instance.SetPlayerSkill(i, skillActions[i].Item2);
     }
 
     public void LoseSkill(int n = 1)
@@ -150,18 +152,14 @@ public class PlayerInfo : CharacterInfo {
             int newCount = skillActions[index].Item2 - n;
             if (newCount < 0) newCount = 0;
             skillActions[index] = (skillActions[index].Item1, newCount);
+
+            GameManager.instance.SetPlayerSkill(index, skillActions[index].Item2);
         }
 
         element = SkillList.Element.None;
         activeSkill = null;
-    }
 
-    public void SetAllSkillAmounts(int n)
-    {
-        for (int i = 0; i < skillActions.Count; i++)
-        {
-            skillActions[i] = (skillActions[i].Item1, n);
-        }
+        
     }
 
     public override Animator GetAnimator() {return pa.GetAnimator();}

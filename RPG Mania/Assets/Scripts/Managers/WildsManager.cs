@@ -60,8 +60,6 @@ public class WildsManager : MonoBehaviour {
 
     public void BossFight(GameObject boss)
     {
-        playerInfo.SetData(6);
-        playerInfo.ResetHealth();
         foreach (EnemyInfo e in reinforcements)
             boss.GetComponent<XixInfo>().AddReinforcement(e);
 
@@ -83,10 +81,10 @@ public class WildsManager : MonoBehaviour {
             }
         }
 
-        // foreach(EnemyInfo e in battleEnemies)
-        // {
-        //     enemies.Remove(e);
-        // }
+        foreach(EnemyInfo e in battleEnemies)
+        {
+            liveEnemies.Remove(e);
+        }
 
         StartBattle();
     }
@@ -104,7 +102,7 @@ public class WildsManager : MonoBehaviour {
     {
         if (enemies.Count > 0)
         {
-            foreach (EnemyInfo e in enemies)
+            foreach (EnemyInfo e in liveEnemies)
             {
                 e.gameObject.SetActive(true);
             }
