@@ -4,7 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class TitleManager : MonoBehaviour {
     [SerializeField] private Button newButton, loadButton, creditsButton, quitButton;
-    private int nextScene = 1;
+    private int throneScene = 1;
+    private int pickScene = 4;
     private int creditsScene = 5;
 
     private void Awake() {
@@ -18,7 +19,7 @@ public class TitleManager : MonoBehaviour {
     }
 
     private void StartGame(){
-        SceneManager.LoadScene(nextScene);
+        SceneManager.LoadScene(pickScene);
     }
 
     private void LoadGame()

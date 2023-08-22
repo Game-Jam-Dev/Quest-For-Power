@@ -21,10 +21,15 @@ public class Soldier : EnemyInfo {
 
     public void SetStats()
     {
-        maxHealth = level * 8;
+        maxHealth = 10 + (int)(level * 2.5f);
+        attack = 6 + (int)(level * .8f);
+        defense = 1 + (int)(level * .35f);
+        accuracy = .65f + (int)(level / 20f);
+        evasion = .02f + (int)(level / 15f);
+
+        combo = 2 + (int)Mathf.Pow(level, .2f);
+
         health = maxHealth;
-        attack = level * 1.6f;
-        defense = accuracy = evasion = level * .8f;
     }
 
     private void AssignElement()

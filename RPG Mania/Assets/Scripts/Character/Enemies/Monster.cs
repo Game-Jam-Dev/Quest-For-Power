@@ -19,10 +19,15 @@ public class Monster : EnemyInfo {
 
     public void SetStats()
     {
-        maxHealth = level * 8;
+        maxHealth = 18 + (int)(level * 2.85f);
+        attack = 8 + (int)(level * .65f);
+        defense = 3 + (int)(level * .25f);
+        accuracy = .5f + (int)(level / 35f);
+        evasion = .005f + (int)(level / 10f);
+
+        combo = 3 + (int)Mathf.Pow(level, .25f);
+
         health = maxHealth;
-        attack = level * 1.6f;
-        defense = accuracy = evasion = level * .8f;
     }
 
     private void AssignElement()

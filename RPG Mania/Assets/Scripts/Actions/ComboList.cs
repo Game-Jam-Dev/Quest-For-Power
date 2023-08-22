@@ -54,32 +54,35 @@ public class ComboList
         return damage;
     }
 
-    private void LifeCheck(CharacterInfo target, int damage)
+    private void DamageCheck(CharacterInfo target, int damage)
     {
 
-        if (Random.Range(0, 100) < 3) damage *= 2;
-
-        Debug.Log(damage);
+        damage = CritMultiply(2, 2, damage);
 
         target.health -= damage;
         if (target.health < 0) target.health = 0;
     }
 
-    private void DoAnimation(CharacterInfo self, string triggerName)
+    private int CritMultiply(int criticalChance, float damageBoost, int damage)
     {
-        Animator anim = self.GetAnimator();
-        
-        if (anim != null) 
-        {   
-            self.SetUpTrigger(triggerName);
-        }
+
+
+        if (Random.Range(0, 100) < criticalChance) return (int)(damageBoost * damage);
+
+        else return 1;
     }
 
-    private bool HitCheck(CharacterInfo self, CharacterInfo target, int moveAccuracy, int comboDepth)
+    private bool HitCheck(CharacterInfo self, CharacterInfo target, float moveAccuracy, int comboDepth)
     {
         int r = Random.Range(0,100);
-        float a  = self.accuracy - target.evasion + (moveAccuracy - 3 * comboDepth);
+        float a  = (moveAccuracy * self.accuracy) - target.evasion + (comboDepth * .05f);
+        a *= 10;
         self.hit = r < a;
+
+        Debug.Log(self.accuracy + " " + target.evasion);
+
+        Debug.Log("random: " + r + ". acc calc: " + a);
+
         return r < a;
     }
 
@@ -92,42 +95,51 @@ public class ComboList
 
         damage = SkillCheck(self, target, damage);
 
-        LifeCheck(target, damage);
+        DamageCheck(target, damage);
     }
 
     public bool LightAttack(CharacterInfo self, CharacterInfo target, int comboDepth)
     {
         DoAnimation(self, "Light Attack");
-        
-        if (!HitCheck(self, target, 100, comboDepth)) return false;
 
-        else {
-            Attack(self, target, 1);
-            return true;
-        }
+        float accuracy = 1f;
+        float damageMultiplier = 1;
+        
+        return DoAttack(self, target, comboDepth, accuracy, damageMultiplier);
     }
 
     public bool MediumAttack(CharacterInfo self, CharacterInfo target, int comboDepth)
     {
         DoAnimation(self, "Medium Attack");
 
-        if (!HitCheck(self, target, 80, comboDepth)) return false;
+        float accuracy = .9f;
+        float damageMultiplier = 2.5f;
 
-        else {
-            Attack(self, target, 2.5f);
-            return true;
-        }
+        return DoAttack(self, target, comboDepth, accuracy, damageMultiplier);
     }
 
     public bool HeavyAttack(CharacterInfo self, CharacterInfo target, int comboDepth)
     {
         DoAnimation(self, "Heavy Attack");
 
-        if (!HitCheck(self, target, 60, comboDepth)) return false;
+        float accuracy = .8f;
+        float damageMultiplier = 4.5f;
+
+        return DoAttack(self, target, comboDepth, accuracy, damageMultiplier);
+    }
+
+    private bool DoAttack(CharacterInfo self, CharacterInfo target, int comboDepth, float accuracy, float damageMultiplier)
+    {
+        if (!HitCheck(self, target, accuracy, comboDepth)) return false;
 
         else {
-            Attack(self, target, 4);
+            Attack(self, target, damageMultiplier);
             return true;
         }
+    }
+
+    private void DoAnimation(CharacterInfo self, string triggerName)
+    {
+        self.SetUpTrigger(triggerName);
     }
 }

@@ -23,7 +23,7 @@ public class ThroneManager : MonoBehaviour {
         gameController = GameObject.FindGameObjectWithTag("GameController");
         gameManager = gameController.GetComponent<GameManager>();
 
-        gameManager.SetPlayerExperience(490);
+        gameManager.SetPlayerLevel(99);
 
         player = GameObject.FindGameObjectWithTag("Player");
         gameManager.SetPlayer(player);
@@ -37,7 +37,10 @@ public class ThroneManager : MonoBehaviour {
 
         SpawnEnemies();
 
-        StartCoroutine(DoDialogExposition(dialogObjectsExpo));
+        dialogManager.enabled = false;
+        StartBattle();
+
+        // StartCoroutine(DoDialogExposition(dialogObjectsExpo));
     }
 
     
@@ -68,6 +71,8 @@ public class ThroneManager : MonoBehaviour {
     {
         playerInfo.PrepareCombat();
         
+        foreach (EnemyInfo e in enemies) e.PrepareCombat();
+
         battleManager.enemies = enemies;
         playerInfo.ResetHealth();
         battleUI.SetActive(true);
@@ -76,17 +81,20 @@ public class ThroneManager : MonoBehaviour {
     public void EndSoldierBattle()
     {
         bossFight = true;
-        StartCoroutine(DoDialogBoss(dialogObjectsPreBoss));
+        BossFight();
+        // StartCoroutine(DoDialogBoss(dialogObjectsPreBoss));
     }
 
     public void EndBossFight()
     {
         bossFight = false;
-        StartCoroutine(DoDialogPost(dialogObjectsPost));
+        NextScene();
+        // StartCoroutine(DoDialogPost(dialogObjectsPost));
     }
 
     private void NextScene()
     {
+        GameManager.instance.SetPlayerLevel(1);
         GameManager.instance.SetPlayerExperience(0);
         GameManager.instance.SetPlayerSkills(new List<int>{0,0,0,0,0});
 

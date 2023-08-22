@@ -19,6 +19,23 @@ public class VarianInfo : EnemyInfo {
         skillActions.Add((SkillList.GetInstance().GetAction(skillKeys[2]), 0));
         skillActions.Add((SkillList.GetInstance().GetAction(skillKeys[3]), 0));
     }
+    public override void PrepareCombat()
+    {   
+        SetStats();
+    }
+
+    public void SetStats()
+    {
+        maxHealth = 10 + (int)(level * 2.5f);
+        attack = 6 + (int)(level * .8f);
+        defense = 1 + (int)(level * .35f);
+        accuracy = .65f + (int)(level / 20f);
+        evasion = .02f + (int)(level / 15f);
+
+        combo = 2 + (int)Mathf.Pow(level, .2f);
+
+        health = maxHealth;
+    }
 
     public override void UseSkill(SkillAction skill)
     {

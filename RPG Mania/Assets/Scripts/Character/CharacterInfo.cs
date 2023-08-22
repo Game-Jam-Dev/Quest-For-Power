@@ -6,8 +6,8 @@ public class CharacterInfo : MonoBehaviour {
     public int maxHealth;
     public int health;
     public SkillList.Element element;
-    public float attack;
-    public float defense;
+    public int attack;
+    public int defense;
     public float accuracy;
     public float evasion;
     public int combo;

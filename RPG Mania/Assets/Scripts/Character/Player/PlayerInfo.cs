@@ -36,8 +36,11 @@ public class PlayerInfo : CharacterInfo {
 
     public void WinBattle(int xp, int kills)
     {
+        int xpForLevel = 10 + (int)Mathf.Pow(level + 1, 2.5f);
+
         experience += xp;
-        if (experience >= level * 10) LevelUp();
+
+        if (experience >= xpForLevel) LevelUp(xpForLevel);
 
         health += (maxHealth/3) * kills;
         if (health > maxHealth) health = maxHealth;
@@ -45,17 +48,25 @@ public class PlayerInfo : CharacterInfo {
         GameManager.instance.SetPlayerExperience(experience);
     }
 
-    private void LevelUp()
+    private void LevelUp(int xpForLevel)
     {
-        level = experience / 10 + 1;
+        experience -= xpForLevel;
+        level++;
 
-        maxHealth = level * 20;
-        attack = level * 2;
-        defense = accuracy = evasion = level;
+        SetStats(level);
 
-        combo = (level / 50) + 4;        
+        GameManager.instance.SetPlayerLevel(level);
+    }
 
-        Debug.Log("Now level " + level);
+    private void SetStats(int level)
+    {
+        maxHealth = 20 + level * 5;
+        attack = 10 + (int)(level * 1.5);
+        defense = 3 + (int)(level * .8);
+        accuracy = .85f + (int)(level / 20f);
+        evasion = .05f + (int)(level / 10f);
+
+        combo = 3 + (int)Mathf.Pow(level,.399f);
     }
 
     public void EndCombat()
@@ -68,11 +79,12 @@ public class PlayerInfo : CharacterInfo {
         pa.SetUpTrigger(triggerName);
     }
 
-    public void SetData(int experience)
+    public void SetData(int level, int experience)
     {
+        this.level = level;
         this.experience = experience;
         
-        LevelUp();
+        SetStats(level);
     }
 
     public void SetSkillUses()
