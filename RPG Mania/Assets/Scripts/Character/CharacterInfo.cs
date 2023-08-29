@@ -11,7 +11,7 @@ public class CharacterInfo : MonoBehaviour {
     public float accuracy;
     public float evasion;
     public int combo;
-    public bool hit = false;
+    public bool hitTarget = false;
     public SkillAction activeSkill;
     protected AudioSource audioSource;
     [SerializeField] protected AudioClip attackClip;
@@ -74,7 +74,7 @@ public class CharacterInfo : MonoBehaviour {
 
     public void PlayAttackSound()
     {
-        if (hit)
+        if (hitTarget)
         {
             audioSource.clip = attackClip;
             audioSource.time = 2f;
@@ -82,7 +82,7 @@ public class CharacterInfo : MonoBehaviour {
         }
     }
 
-    public virtual void SetUpTrigger(string triggerName) {}
+    public virtual void SetAnimationTrigger(string triggerName) {}
 
     public virtual Animator GetAnimator() {return null;}
 

@@ -26,6 +26,15 @@ public class EnemyInfo : CharacterInfo {
         isAlive = GameManager.instance.CheckEnemyDeath(scene, id);
     }
 
+    public override void PrepareCombat()
+    {
+        level = GameManager.instance.GetPlayerLevel();
+        
+        SetStats();
+    }
+
+    protected virtual void SetStats(){}
+
     public override void Kill()
     {
         isAlive = false;
@@ -46,7 +55,7 @@ public class EnemyInfo : CharacterInfo {
         }
     }
 
-    public override void SetUpTrigger(string triggerName)
+    public override void SetAnimationTrigger(string triggerName)
     {
         ea.SetUpTrigger(triggerName);
     }

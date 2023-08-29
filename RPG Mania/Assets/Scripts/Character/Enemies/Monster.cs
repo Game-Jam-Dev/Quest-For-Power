@@ -1,29 +1,20 @@
 using UnityEngine;
 
 public class Monster : EnemyInfo {
-    private Collider col;
     protected override void Start()
     {
         base.Start();
 
-        SetStats();
         AssignElement();
     }
 
-    public override void PrepareCombat()
-    {
-        if (col != null) col.enabled = false;
-
-        SetStats();
-    }
-
-    public void SetStats()
+    protected override void SetStats()
     {
         maxHealth = 18 + (int)(level * 2.85f);
-        attack = 8 + (int)(level * .65f);
-        defense = 3 + (int)(level * .25f);
-        accuracy = .5f + (int)(level / 35f);
-        evasion = .005f + (int)(level / 10f);
+        attack = 10 + (int)(level * .75f);
+        defense = 9 + (int)(level * .6f);
+        accuracy = .5f + level / 3500f;
+        evasion = .005f + level / 10000f;
 
         combo = 3 + (int)Mathf.Pow(level, .25f);
 

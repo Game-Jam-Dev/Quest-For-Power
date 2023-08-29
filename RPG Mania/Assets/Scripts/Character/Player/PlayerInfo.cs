@@ -42,8 +42,7 @@ public class PlayerInfo : CharacterInfo {
 
         if (experience >= xpForLevel) LevelUp(xpForLevel);
 
-        health += (maxHealth/3) * kills;
-        if (health > maxHealth) health = maxHealth;
+        health = maxHealth;
 
         GameManager.instance.SetPlayerExperience(experience);
     }
@@ -61,12 +60,12 @@ public class PlayerInfo : CharacterInfo {
     private void SetStats(int level)
     {
         maxHealth = 20 + level * 5;
-        attack = 10 + (int)(level * 1.5);
-        defense = 3 + (int)(level * .8);
-        accuracy = .85f + (int)(level / 20f);
-        evasion = .05f + (int)(level / 10f);
+        attack = 9 + (int)(level * 1.5f);
+        defense = 5 + (int)(level * 1.1f);
+        accuracy = .85f + level / 2000f;
+        evasion = .05f + level / 1000f;
 
-        combo = 3 + (int)Mathf.Pow(level,.399f);
+        combo = 3 + (int)Mathf.Pow(level, .3f);
     }
 
     public void EndCombat()
@@ -74,7 +73,7 @@ public class PlayerInfo : CharacterInfo {
         pa.SwitchFromCombat();
     }
 
-    public override void SetUpTrigger(string triggerName)
+    public override void SetAnimationTrigger(string triggerName)
     {
         pa.SetUpTrigger(triggerName);
     }

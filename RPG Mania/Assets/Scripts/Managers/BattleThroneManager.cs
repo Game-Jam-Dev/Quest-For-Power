@@ -340,26 +340,6 @@ public class BattleThroneManager : MonoBehaviour {
         if (enemies.Count <= 0) EndBattle();
     }
 
-    private void OnDisable() {
-        Debug.Log("End Battle");
-
-        StopAllCoroutines();
-
-        enemies.Clear();
-
-        killCount = 0;
-
-        ClearUI();
-
-        if (player != null)
-        {
-            player.gameObject.GetComponent<PlayerMovement>().enabled = true;
-            player.element = SkillList.Element.None;
-        }
-
-        throneManager.EndBattle();
-    }
-
     private void ClearUI()
     {
         foreach (TextMeshProUGUI t in eHealthContainer.GetComponentsInChildren<TextMeshProUGUI>()){
@@ -392,6 +372,25 @@ public class BattleThroneManager : MonoBehaviour {
     public void EndBattle()
     {
         player.EndCombat();
+
+        Debug.Log("End Battle");
+
+        StopAllCoroutines();
+
+        enemies.Clear();
+
+        killCount = 0;
+
+        ClearUI();
+
+        if (player != null)
+        {
+            player.gameObject.GetComponent<PlayerMovement>().enabled = true;
+            player.element = SkillList.Element.None;
+        }
+
+        throneManager.EndBattle();
+
         gameObject.SetActive(false);
     }
 }

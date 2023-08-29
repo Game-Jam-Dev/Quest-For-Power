@@ -24,6 +24,11 @@ public class GameManager : MonoBehaviour {
         playerData.level = level;
     }
 
+    public int GetPlayerLevel()
+    {
+        return playerData.level;
+    }
+
     public void SetPlayerSkills(List<int> skillActionUses)
     {
         playerData.skillActionUses = skillActionUses;

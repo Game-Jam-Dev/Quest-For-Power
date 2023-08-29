@@ -58,13 +58,9 @@ public class ThroneManager : MonoBehaviour {
         player.transform.position += Vector3.forward * 5;
         Camera.main.transform.position += Vector3.forward * 4;
 
-        playerInfo.PrepareCombat();
+        enemies = new List<EnemyInfo>{GameObject.FindGameObjectWithTag("Boss").GetComponent<EnemyInfo>()};
 
-        battleManager.enemies = new List<EnemyInfo>{GameObject.FindGameObjectWithTag("Boss").GetComponent<EnemyInfo>()};
-
-        playerInfo.ResetHealth();
-
-        battleUI.SetActive(true);
+        StartBattle();
     }
 
     private void StartBattle() 
@@ -81,7 +77,7 @@ public class ThroneManager : MonoBehaviour {
     public void EndSoldierBattle()
     {
         bossFight = true;
-        BossFight();
+        StartCoroutine(BossFightNoDialog());
         // StartCoroutine(DoDialogBoss(dialogObjectsPreBoss));
     }
 
@@ -156,8 +152,6 @@ public class ThroneManager : MonoBehaviour {
         }
 
         BossFight();
-
-        dialogManager.enabled = false;
     }
 
     private IEnumerator DoDialogPost(List<DialogObject> dialogObjects)
@@ -176,5 +170,12 @@ public class ThroneManager : MonoBehaviour {
         dialogManager.enabled = false;
 
         NextScene();
+    }
+
+    private IEnumerator BossFightNoDialog()
+    {
+        yield return new WaitForEndOfFrame();
+
+        BossFight();
     }
 }
