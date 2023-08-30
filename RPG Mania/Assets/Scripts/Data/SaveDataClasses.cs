@@ -20,6 +20,6 @@ public class WorldState
 [System.Serializable]
 public class GameData
 {
-    public PlayerData playerData;
-    public WorldState worldState;
+    public PlayerData playerData = new();
+    public WorldState worldState = new();
 }

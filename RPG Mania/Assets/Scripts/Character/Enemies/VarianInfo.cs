@@ -22,7 +22,7 @@ public class VarianInfo : EnemyInfo {
 
     protected override void SetStats()
     {
-        maxHealth = 12 + (int)(level * 4f);
+        maxHealth = 12 + level * 4;
         attack = 8 + (int)(level * 1.3f);
         defense = 6 + (int)(level * 1.2f);
         accuracy = .85f + level / 2000f;

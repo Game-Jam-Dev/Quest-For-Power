@@ -59,8 +59,6 @@ public class ComboList
 
         damage = CritMultiply(2, 2, damage);
 
-        Debug.Log(damage);
-
         target.health -= damage;
         if (target.health < 0) target.health = 0;
     }
@@ -107,7 +105,7 @@ public class ComboList
     {
         string attackName = "Medium Attack";
         float accuracy = .9f;
-        float damageMultiplier = 2f;
+        float damageMultiplier = 1.5f;
 
         return DoAttack(self, target, comboDepth, accuracy, damageMultiplier, attackName);
     }
@@ -116,7 +114,7 @@ public class ComboList
     {
         string attackName = "Heavy Attack";
         float accuracy = .8f;
-        float damageMultiplier = 3f;
+        float damageMultiplier = 2f;
 
         return DoAttack(self, target, comboDepth, accuracy, damageMultiplier, attackName);
     }

@@ -38,7 +38,7 @@ public class ThroneManager : MonoBehaviour {
         SpawnEnemies();
 
         dialogManager.enabled = false;
-        StartBattle();
+        StartCoroutine(SoldierFightNoDialog());
 
         // StartCoroutine(DoDialogExposition(dialogObjectsExpo));
     }
@@ -170,6 +170,13 @@ public class ThroneManager : MonoBehaviour {
         dialogManager.enabled = false;
 
         NextScene();
+    }
+
+    private IEnumerator SoldierFightNoDialog()
+    {
+        yield return new WaitForEndOfFrame();
+
+        StartBattle();
     }
 
     private IEnumerator BossFightNoDialog()

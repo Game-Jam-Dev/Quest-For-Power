@@ -18,19 +18,24 @@ public class TitleManager : MonoBehaviour {
         
     }
 
-    private void StartGame(){
-        SceneManager.LoadScene(pickScene);
+    public void StartGame(){
+        EnterGame(new GameData(), pickScene);
     }
 
-    private void LoadGame()
+    public void LoadGame()
     {
         GameData gameData = SaveSystem.LoadGameData(); // Load saved game data
         if(gameData != null)
         {
-            GameManager.instance.SetGameData(gameData);
-
-            SceneManager.LoadScene(gameData.worldState.currentScene);
+            EnterGame(gameData, gameData.worldState.currentScene);
         }
+    }
+
+    private void EnterGame(GameData gameData, int scene)
+    {
+        GameManager.instance.SetGameData(gameData);
+
+        SceneManager.LoadScene(scene);
     }
 
     private void Settings(){}

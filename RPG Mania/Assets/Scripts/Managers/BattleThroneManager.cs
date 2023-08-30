@@ -164,7 +164,6 @@ public class BattleThroneManager : MonoBehaviour {
     {
         UpdateSkills();
         actionText.text = "";
-        player.element = SkillList.Element.None;
         pElement.text = player.characterName + "'s Active Element: " + player.element;
         awaitCommand = true;
         pickAction.SetActive(true);

@@ -16,7 +16,7 @@ public class XixInfo : EnemyInfo {
         attack = 8 + (int)(level * .8f);
         defense = 10 + (int)(level * 1.2f);
         accuracy = .65f + level / 3500f;
-        evasion = .02f + level / 1000f;
+        evasion = .01f + level / 1000f;
 
         combo = 3 + (int)Mathf.Pow(level, .25f);
 
