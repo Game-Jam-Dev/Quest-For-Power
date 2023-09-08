@@ -7,8 +7,6 @@ using UnityEngine.UI;
 
 public class SettingsMenuManager : MonoBehaviour
 {
-    [SerializeField] private Button returnButton;
-
     [Header("Volume Settings")]
     [SerializeField] private TMP_Text volumeTextValue = null;
     [SerializeField] private Slider volumeSlider = null;
