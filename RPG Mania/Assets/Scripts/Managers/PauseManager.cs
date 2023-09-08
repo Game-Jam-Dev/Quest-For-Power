@@ -4,14 +4,12 @@ using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 
 public class PauseManager : MonoBehaviour {
-    [SerializeField] private GameObject pauseUI, battleUI;
+    [SerializeField] private GameObject pauseUI;
     [SerializeField] private Button resumeButton, saveButton, quitButton;
 
     private InputActions actions;
     
     private int mainMenuSceneIndex = 0;
-
-    public bool throne = false;
 
     private void Awake() {
         actions = new InputActions();
@@ -31,10 +29,11 @@ public class PauseManager : MonoBehaviour {
 
     private void OnDisable() {
         actions.Gameplay.Pause.performed -= TogglePause;
+
+        actions.Gameplay.Disable();
     }
 
     private void TogglePause(InputAction.CallbackContext context) {
-        if (throne) return;
         if (pauseUI.activeSelf)
             Resume();
         else
@@ -62,5 +61,10 @@ public class PauseManager : MonoBehaviour {
         Time.timeScale = 1;
         actions.Gameplay.Disable();
         SceneManager.LoadScene(mainMenuSceneIndex);
+    }
+
+    public void DisablePausing()
+    {
+        actions.Gameplay.Pause.performed -= TogglePause;
     }
 }

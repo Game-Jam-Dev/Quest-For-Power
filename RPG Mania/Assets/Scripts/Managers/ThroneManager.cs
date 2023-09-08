@@ -3,14 +3,16 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Collections;
+using System.Linq;
 
-public class ThroneManager : MonoBehaviour {
+public class ThroneManager : WorldManager {
     private GameObject gameController, player;
     private PlayerInfo playerInfo;
     private List<EnemyInfo> enemies = new List<EnemyInfo>();
+    [SerializeField] private VarianInfo boss;
     private GameManager gameManager;
     [SerializeField] private GameObject battleUI;
-    private BattleThroneManager battleManager;
+    private BattleManager battleManager;
     private int wildsScene = 2;
     private bool bossFight = false;
     private bool exposition, pre, preBoss, post = true;
@@ -24,16 +26,15 @@ public class ThroneManager : MonoBehaviour {
         gameManager = gameController.GetComponent<GameManager>();
 
         gameManager.SetPlayerLevel(99);
+        gameManager.SetPlayerSkills(new List<int>(Enumerable.Repeat(99, 5)));
 
         player = GameObject.FindGameObjectWithTag("Player");
         gameManager.SetPlayer(player);
         playerInfo = player.GetComponent<PlayerInfo>();
 
-        pauseManager.throne = true;
+        pauseManager.DisablePausing();
 
-        battleManager = battleUI.GetComponentInChildren<BattleThroneManager>();
-
-
+        battleManager = battleUI.GetComponentInChildren<BattleManager>();
 
         SpawnEnemies();
 
@@ -69,7 +70,6 @@ public class ThroneManager : MonoBehaviour {
         
         foreach (EnemyInfo e in enemies) e.PrepareCombat();
 
-        battleManager.enemies = enemies;
         playerInfo.ResetHealth();
         battleUI.SetActive(true);
     }
@@ -97,7 +97,7 @@ public class ThroneManager : MonoBehaviour {
         SceneManager.LoadScene(wildsScene);
     }
 
-    public void EndBattle()
+    public override void WinBattle()
     {
         if (!bossFight) EndSoldierBattle();
 
@@ -184,5 +184,10 @@ public class ThroneManager : MonoBehaviour {
         yield return new WaitForEndOfFrame();
 
         BossFight();
+    }
+
+    public override List<EnemyInfo> GetEnemies()
+    {
+        return enemies;
     }
 }

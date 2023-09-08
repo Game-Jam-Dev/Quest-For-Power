@@ -5,8 +5,8 @@ public class GameManager : MonoBehaviour {
     public static GameManager instance;
     public PlayerInfo player;
     private GameData gameData;
-    private PlayerData playerData = new PlayerData();
-    private WorldState worldState = new WorldState();
+    private PlayerData playerData = new();
+    private WorldState worldState = new();
 
     public void SetGameData(GameData gameData)
     {
@@ -80,14 +80,14 @@ public class GameManager : MonoBehaviour {
 
     public GameData GetGameData()
     {
-        gameData = new GameData{playerData = this.playerData, worldState = this.worldState};
+        gameData = new GameData{playerData = playerData, worldState = worldState};
         return gameData;
     }
 
     public void SetPlayer(GameObject player)
     {
         this.player = player.GetComponent<PlayerInfo>();
-        this.player.SetData(playerData.level, playerData.experience);
+        this.player.SetData(playerData.level, playerData.experience, playerData.skillActionUses);
         this.player.ResetHealth();
     }
 

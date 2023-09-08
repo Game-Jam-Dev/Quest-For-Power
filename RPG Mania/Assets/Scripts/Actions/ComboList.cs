@@ -71,7 +71,7 @@ public class ComboList
         else return damage;
     }
 
-    private bool HitCheck(CharacterInfo self, CharacterInfo target, float moveAccuracy, int comboDepth)
+    private bool AttackCheck(CharacterInfo self, CharacterInfo target, float moveAccuracy, int comboDepth)
     {
         float r = Random.Range(0,1f);
         float a  = (moveAccuracy * self.accuracy) - target.evasion + (comboDepth * .05f);
@@ -80,7 +80,7 @@ public class ComboList
         return self.hitTarget;
     }
 
-    private void Attack(CharacterInfo self, CharacterInfo target, float d)
+    private void HitEnemy(CharacterInfo self, CharacterInfo target, float d)
     {
         target.SetAnimationTrigger("Attacked");
 
@@ -98,7 +98,7 @@ public class ComboList
         float accuracy = 1f;
         float damageMultiplier = 1;
         
-        return DoAttack(self, target, comboDepth, accuracy, damageMultiplier, attackName);
+        return DoAttack(self, target, comboDepth, attackName, accuracy, damageMultiplier);
     }
 
     public bool MediumAttack(CharacterInfo self, CharacterInfo target, int comboDepth)
@@ -107,7 +107,7 @@ public class ComboList
         float accuracy = .9f;
         float damageMultiplier = 1.5f;
 
-        return DoAttack(self, target, comboDepth, accuracy, damageMultiplier, attackName);
+        return DoAttack(self, target, comboDepth, attackName, accuracy, damageMultiplier);
     }
 
     public bool HeavyAttack(CharacterInfo self, CharacterInfo target, int comboDepth)
@@ -116,18 +116,17 @@ public class ComboList
         float accuracy = .8f;
         float damageMultiplier = 2f;
 
-        return DoAttack(self, target, comboDepth, accuracy, damageMultiplier, attackName);
+        return DoAttack(self, target, comboDepth, attackName, accuracy, damageMultiplier);
     }
 
-    private bool DoAttack(CharacterInfo self, CharacterInfo target, int comboDepth, float accuracy, float damageMultiplier, string attackName)
+    private bool DoAttack(CharacterInfo self, CharacterInfo target, int comboDepth, string attackName, float accuracy, float damageMultiplier)
     {
         self.SetAnimationTrigger(attackName);
 
-        if (!HitCheck(self, target, accuracy, comboDepth)) return false;
+        bool hitAttack = AttackCheck(self, target, accuracy, comboDepth);
 
-        else {
-            Attack(self, target, damageMultiplier);
-            return true;
-        }
+        if (hitAttack) HitEnemy(self, target, damageMultiplier);
+
+        return hitAttack;
     }
 }

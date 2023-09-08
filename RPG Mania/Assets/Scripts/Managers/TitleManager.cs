@@ -15,7 +15,6 @@ public class TitleManager : MonoBehaviour {
         quitButton.onClick.AddListener(QuitGame);
 
         loadButton.interactable = SaveSystem.SaveFileExists();
-        
     }
 
     public void StartGame(){

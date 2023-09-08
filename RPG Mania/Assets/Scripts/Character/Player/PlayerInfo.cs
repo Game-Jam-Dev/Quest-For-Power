@@ -78,20 +78,18 @@ public class PlayerInfo : CharacterInfo {
         pa.SetUpTrigger(triggerName);
     }
 
-    public void SetData(int level, int experience)
+    public void SetData(int level, int experience, List<int> skillUses)
     {
         this.level = level;
         this.experience = experience;
         
         SetStats(level);
-    }
 
-    public void SetSkillUses()
-    {
-        GameManager.instance.GetPlayerSkills();
+        for (int i = 0; i < skillActions.Count; i++)
+        {
+            skillActions[i] = (skillActions[i].Item1, skillUses[i]);
+        }
     }
-
-    
 
     public void ResetHealth()
     {
