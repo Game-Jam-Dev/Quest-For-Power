@@ -47,6 +47,8 @@ public class SettingsMenuManager : MonoBehaviour
         resolutionDropdown.AddOptions(options);
         resolutionDropdown.value = currentResolutionIndex;
         resolutionDropdown.RefreshShownValue();
+
+        gameObject.SetActive(false);
     }
 
     // Audio
@@ -95,7 +97,7 @@ public class SettingsMenuManager : MonoBehaviour
 
     public void ReturnToMain()
     {
-        enabled = false;
+        gameObject.SetActive(false);
     }
 
     public void ResetToDefault()

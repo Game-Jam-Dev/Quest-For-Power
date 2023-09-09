@@ -941,7 +941,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 6945518654216813109}
         m_TargetAssemblyTypeName: SettingsMenuManager, Assembly-CSharp
         m_MethodName: ApplySettings
         m_Mode: 1
@@ -3788,13 +3788,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45422b24deadf07418de144167745485, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  returnButton: {fileID: 0}
-  volumeTextValue: {fileID: 0}
-  volumeSlider: {fileID: 0}
+  volumeTextValue: {fileID: 4145101038864797718}
+  volumeSlider: {fileID: 4145101038545571606}
   defaultVolume: 1
-  qualityDropdown: {fileID: 0}
-  fullScreenToggle: {fileID: 0}
-  resolutionDropdown: {fileID: 0}
+  qualityDropdown: {fileID: 4145101037977767602}
+  fullScreenToggle: {fileID: 4145101037866565833}
+  resolutionDropdown: {fileID: 4145101039071362688}
 --- !u!1 &4145101039071362694
 GameObject:
   m_ObjectHideFlags: 0
@@ -4358,7 +4357,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 6945518654216813109}
         m_TargetAssemblyTypeName: SettingsMenuManager, Assembly-CSharp
         m_MethodName: ResetToDefault
         m_Mode: 1
@@ -4627,7 +4626,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 6945518654216813109}
         m_TargetAssemblyTypeName: SettingsMenuManager, Assembly-CSharp
         m_MethodName: ReturnToMain
         m_Mode: 1
