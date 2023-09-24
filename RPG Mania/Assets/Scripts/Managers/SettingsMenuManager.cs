@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class SettingsMenuManager : MonoBehaviour
 {
+    [SerializeField] private TitleManager titleManager;
+
     [Header("Volume Settings")]
     [SerializeField] private TMP_Text volumeTextValue = null;
     [SerializeField] private Slider volumeSlider = null;
@@ -20,6 +22,7 @@ public class SettingsMenuManager : MonoBehaviour
 
     private int qualityLevel;
     private bool isFullscreen;
+    private SettingsData settingsData;
 
     private void Start()
     {
@@ -60,7 +63,7 @@ public class SettingsMenuManager : MonoBehaviour
 
     public void VolumeApply()
     {
-        // save volume valume to save data
+        settingsData.volume = AudioListener.volume;
     }
 
     // Graphics

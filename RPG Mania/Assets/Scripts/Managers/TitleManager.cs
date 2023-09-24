@@ -5,21 +5,35 @@ using UnityEngine.SceneManagement;
 public class TitleManager : MonoBehaviour {
     [SerializeField] private Button loadButton;
     [SerializeField] private GameObject settingsMenu;
+    private GameData gameData;
     private int throneScene = 1;
     private int pickScene = 4;
     private int creditsScene = 5;
 
-    private void Awake() {
+    private void Awake() 
+    {
+
         loadButton.interactable = SaveSystem.SaveFileExists();
+    
+        if (loadButton.interactable)
+        {
+            gameData = SaveSystem.LoadGameData(); // Load saved game data
+        } 
+        else 
+        {
+            gameData = new GameData();
+        }
+
+        // settingsMenu.GetComponent<SettingsMenuManager>().Initialize(gameData.settingsData);
     }
 
-    public void StartGame(){
-        EnterGame(new GameData(), pickScene);
+    public void StartGame()
+    {
+        EnterGame(gameData.NewGame(), pickScene);
     }
 
     public void LoadGame()
     {
-        GameData gameData = SaveSystem.LoadGameData(); // Load saved game data
         if(gameData != null)
         {
             EnterGame(gameData, gameData.worldState.currentScene);
@@ -49,5 +63,11 @@ public class TitleManager : MonoBehaviour {
         #else
             Application.Quit();
         #endif
+    }
+
+    public void UpdateSettings(SettingsData settingsData)
+    {
+        gameData.settingsData = settingsData;
+        SaveSystem.SaveGameData(gameData);
     }
 }
