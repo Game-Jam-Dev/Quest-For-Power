@@ -1,24 +1,43 @@
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 [System.Serializable]
 public class PlayerData
 {
+    public int level = 1;
     public int experience = 0;
-    public List<int> skillActionUses = new List<int>{0,0,0,0,0};
+    public List<int> skillActionUses = new(Enumerable.Repeat(0,5));
 }
 
 [System.Serializable]
 public class WorldState
 {
     public int currentScene = 1;
-    public List<bool> enemyIsAliveWilds = new List<bool>(System.Linq.Enumerable.Repeat(true, 14));
-    public List<bool> enemyIsAliveOutskirts = new List<bool>(System.Linq.Enumerable.Repeat(true, 5));
+    public List<bool> enemyIsAliveWilds = new(Enumerable.Repeat(true, 14));
+    public List<bool> enemyIsAliveOutskirts = new(Enumerable.Repeat(true, 5));
+}
+
+[System.Serializable]
+public class SettingsData
+{
+    public float volume = 1;
+    public int qualityLevel = 1;
+    public bool fullScreen = false;
 }
 
 [System.Serializable]
 public class GameData
 {
-    public PlayerData playerData;
-    public WorldState worldState;
+    public PlayerData playerData = new();
+    public WorldState worldState = new();
+    public SettingsData settingsData = new();
+
+    public GameData NewGame()
+    {
+        playerData = new();
+        worldState = new();
+
+        return this;
+    }
 }

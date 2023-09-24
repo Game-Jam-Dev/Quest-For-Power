@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
-public class WildsManager : MonoBehaviour {
+public class WildsManager : WorldManager {
     private GameObject gameController, player;
     private PlayerInfo playerInfo;
     private List<EnemyInfo> enemies = new List<EnemyInfo>();
@@ -12,7 +12,7 @@ public class WildsManager : MonoBehaviour {
     private List<bool> livingEnemies;
     private GameManager gameManager;
     [SerializeField] private GameObject battleUI;
-    private BattleWildsManager battleManager;
+    private BattleManager battleManager;
     private AudioSource audioSource;
     [SerializeField] private AudioClip wildsTheme, battleTheme;
     private int currentScene;
@@ -28,7 +28,7 @@ public class WildsManager : MonoBehaviour {
         gameManager.SetPlayer(player);
         playerInfo = player.GetComponent<PlayerInfo>();
 
-        battleManager = battleUI.GetComponent<BattleWildsManager>();
+        battleManager = battleUI.GetComponent<BattleManager>();
 
 
 
@@ -101,7 +101,7 @@ public class WildsManager : MonoBehaviour {
         battleUI.SetActive(true);
     }
 
-    public void WinBattle()
+    public override void WinBattle()
     {
         if (final) SceneManager.LoadScene("Credits");
 
@@ -125,7 +125,7 @@ public class WildsManager : MonoBehaviour {
         
     }
 
-    public List<EnemyInfo> GetEnemies()
+    public override List<EnemyInfo> GetEnemies()
     {
         return battleEnemies;
     }

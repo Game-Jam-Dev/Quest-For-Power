@@ -9,8 +9,8 @@ public class HideEnemies : MonoBehaviour {
             enemy1.transform.position = enemy1Location;
             enemy2.transform.position = enemy2Location;
 
-            enemy1.gameObject.SetActive(false);
-            enemy2.gameObject.SetActive(false);
+            enemy1.SetActive(false);
+            enemy2.SetActive(false);
 
             Destroy(gameObject);
         }

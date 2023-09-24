@@ -20,6 +20,19 @@ public class VarianInfo : EnemyInfo {
         skillActions.Add((SkillList.GetInstance().GetAction(skillKeys[3]), 0));
     }
 
+    protected override void SetStats()
+    {
+        maxHealth = 12 + level * 4;
+        attack = 8 + (int)(level * 1.3f);
+        defense = 6 + (int)(level * 1.2f);
+        accuracy = .85f + level / 2000f;
+        evasion = .02f + level / 1500f;
+
+        combo = 2 + (int)Mathf.Pow(level, .2f);
+
+        health = maxHealth;
+    }
+
     public override void UseSkill(SkillAction skill)
     {
         activeSkill = skill;
@@ -41,24 +54,24 @@ public class VarianInfo : EnemyInfo {
 
     public override ComboAction PickEnemyCombo(int currentComboLength)
     {
-        if (currentComboLength == 0 && playerInfo.element != SkillList.Element.None)
-        {
-            switch (playerInfo.element)
-            {
-                case SkillList.Element.Water:
-                UseSkill(skillActions[3].Item1);
-                break;
-                case SkillList.Element.Fire:
-                UseSkill(skillActions[0].Item1);
-                break;
-                case SkillList.Element.Wind:
-                UseSkill(skillActions[1].Item1);
-                break;
-                case SkillList.Element.Earth:
-                UseSkill(skillActions[2].Item1);
-                break;
-            }
-        } 
+        // if (currentComboLength == 0 && playerInfo.element != SkillList.Element.None)
+        // {
+        //     switch (playerInfo.element)
+        //     {
+        //         case SkillList.Element.Water:
+        //         UseSkill(skillActions[3].Item1);
+        //         break;
+        //         case SkillList.Element.Fire:
+        //         UseSkill(skillActions[0].Item1);
+        //         break;
+        //         case SkillList.Element.Wind:
+        //         UseSkill(skillActions[1].Item1);
+        //         break;
+        //         case SkillList.Element.Earth:
+        //         UseSkill(skillActions[2].Item1);
+        //         break;
+        //     }
+        // }
 
         switch (combo - currentComboLength)
         {

@@ -3,14 +3,16 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Collections;
+using System.Linq;
 
-public class ThroneManager : MonoBehaviour {
+public class ThroneManager : WorldManager {
     private GameObject gameController, player;
     private PlayerInfo playerInfo;
     private List<EnemyInfo> enemies = new List<EnemyInfo>();
+    [SerializeField] private VarianInfo boss;
     private GameManager gameManager;
     [SerializeField] private GameObject battleUI;
-    private BattleThroneManager battleManager;
+    private BattleManager battleManager;
     private int wildsScene = 2;
     private bool bossFight = false;
     private bool exposition, pre, preBoss, post = true;
@@ -23,21 +25,23 @@ public class ThroneManager : MonoBehaviour {
         gameController = GameObject.FindGameObjectWithTag("GameController");
         gameManager = gameController.GetComponent<GameManager>();
 
-        gameManager.SetPlayerExperience(490);
+        gameManager.SetPlayerLevel(99);
+        gameManager.SetPlayerSkills(new List<int>(Enumerable.Repeat(99, 5)));
 
         player = GameObject.FindGameObjectWithTag("Player");
         gameManager.SetPlayer(player);
         playerInfo = player.GetComponent<PlayerInfo>();
 
-        pauseManager.throne = true;
+        pauseManager.DisablePausing();
 
-        battleManager = battleUI.GetComponentInChildren<BattleThroneManager>();
-
-
+        battleManager = battleUI.GetComponentInChildren<BattleManager>();
 
         SpawnEnemies();
 
-        StartCoroutine(DoDialogExposition(dialogObjectsExpo));
+        dialogManager.enabled = false;
+        StartCoroutine(SoldierFightNoDialog());
+
+        // StartCoroutine(DoDialogExposition(dialogObjectsExpo));
     }
 
     
@@ -55,20 +59,17 @@ public class ThroneManager : MonoBehaviour {
         player.transform.position += Vector3.forward * 5;
         Camera.main.transform.position += Vector3.forward * 4;
 
-        playerInfo.PrepareCombat();
+        enemies = new List<EnemyInfo>{GameObject.FindGameObjectWithTag("Boss").GetComponent<EnemyInfo>()};
 
-        battleManager.enemies = new List<EnemyInfo>{GameObject.FindGameObjectWithTag("Boss").GetComponent<EnemyInfo>()};
-
-        playerInfo.ResetHealth();
-
-        battleUI.SetActive(true);
+        StartBattle();
     }
 
     private void StartBattle() 
     {
         playerInfo.PrepareCombat();
         
-        battleManager.enemies = enemies;
+        foreach (EnemyInfo e in enemies) e.PrepareCombat();
+
         playerInfo.ResetHealth();
         battleUI.SetActive(true);
     }
@@ -76,24 +77,27 @@ public class ThroneManager : MonoBehaviour {
     public void EndSoldierBattle()
     {
         bossFight = true;
-        StartCoroutine(DoDialogBoss(dialogObjectsPreBoss));
+        StartCoroutine(BossFightNoDialog());
+        // StartCoroutine(DoDialogBoss(dialogObjectsPreBoss));
     }
 
     public void EndBossFight()
     {
         bossFight = false;
-        StartCoroutine(DoDialogPost(dialogObjectsPost));
+        NextScene();
+        // StartCoroutine(DoDialogPost(dialogObjectsPost));
     }
 
     private void NextScene()
     {
+        GameManager.instance.SetPlayerLevel(1);
         GameManager.instance.SetPlayerExperience(0);
         GameManager.instance.SetPlayerSkills(new List<int>{0,0,0,0,0});
 
         SceneManager.LoadScene(wildsScene);
     }
 
-    public void EndBattle()
+    public override void WinBattle()
     {
         if (!bossFight) EndSoldierBattle();
 
@@ -148,8 +152,6 @@ public class ThroneManager : MonoBehaviour {
         }
 
         BossFight();
-
-        dialogManager.enabled = false;
     }
 
     private IEnumerator DoDialogPost(List<DialogObject> dialogObjects)
@@ -168,5 +170,24 @@ public class ThroneManager : MonoBehaviour {
         dialogManager.enabled = false;
 
         NextScene();
+    }
+
+    private IEnumerator SoldierFightNoDialog()
+    {
+        yield return new WaitForEndOfFrame();
+
+        StartBattle();
+    }
+
+    private IEnumerator BossFightNoDialog()
+    {
+        yield return new WaitForEndOfFrame();
+
+        BossFight();
+    }
+
+    public override List<EnemyInfo> GetEnemies()
+    {
+        return enemies;
     }
 }

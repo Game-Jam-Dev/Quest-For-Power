@@ -110,10 +110,10 @@ MonoBehaviour:
   accuracy: 0
   evasion: 0
   combo: 2
-  hit: 0
+  hitTarget: 0
   attackClip: {fileID: 8300000, guid: a3f952095cec84440a88eb462db52486, type: 3}
   level: 1
-  detectRange: 3
+  detectRange: 4
   isAlive: 1
   id: 0
   scene: wilds

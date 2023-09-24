@@ -36,26 +36,36 @@ public class PlayerInfo : CharacterInfo {
 
     public void WinBattle(int xp, int kills)
     {
-        experience += xp;
-        if (experience >= level * 10) LevelUp();
+        int xpForLevel = 10 + (int)Mathf.Pow(level + 1, 2.5f);
 
-        health += (maxHealth/3) * kills;
-        if (health > maxHealth) health = maxHealth;
+        experience += xp;
+
+        if (experience >= xpForLevel) LevelUp(xpForLevel);
+
+        health = maxHealth;
 
         GameManager.instance.SetPlayerExperience(experience);
     }
 
-    private void LevelUp()
+    private void LevelUp(int xpForLevel)
     {
-        level = experience / 10 + 1;
+        experience -= xpForLevel;
+        level++;
 
-        maxHealth = level * 20;
-        attack = level * 2;
-        defense = accuracy = evasion = level;
+        SetStats(level);
 
-        combo = (level / 50) + 4;        
+        GameManager.instance.SetPlayerLevel(level);
+    }
 
-        Debug.Log("Now level " + level);
+    private void SetStats(int level)
+    {
+        maxHealth = 20 + level * 5;
+        attack = 9 + (int)(level * 1.5f);
+        defense = 5 + (int)(level * 1.1f);
+        accuracy = .85f + level / 2000f;
+        evasion = .05f + level / 1000f;
+
+        combo = 3 + (int)Mathf.Pow(level, .3f);
     }
 
     public void EndCombat()
@@ -63,24 +73,23 @@ public class PlayerInfo : CharacterInfo {
         pa.SwitchFromCombat();
     }
 
-    public override void SetUpTrigger(string triggerName)
+    public override void SetAnimationTrigger(string triggerName)
     {
         pa.SetUpTrigger(triggerName);
     }
 
-    public void SetData(int experience)
+    public void SetData(int level, int experience, List<int> skillUses)
     {
+        this.level = level;
         this.experience = experience;
         
-        LevelUp();
-    }
+        SetStats(level);
 
-    public void SetSkillUses()
-    {
-        GameManager.instance.GetPlayerSkills();
+        for (int i = 0; i < skillActions.Count; i++)
+        {
+            skillActions[i] = (skillActions[i].Item1, skillUses[i]);
+        }
     }
-
-    
 
     public void ResetHealth()
     {

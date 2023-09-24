@@ -1,7 +1,6 @@
 using UnityEngine;
 
 public class Soldier : EnemyInfo {
-    private Collider col;
     protected override void Start()
     {
         base.Start();
@@ -9,22 +8,17 @@ public class Soldier : EnemyInfo {
         AssignElement();
     }
 
-    public override void PrepareCombat()
+    protected override void SetStats()
     {
-        if (col != null) 
-        {
-            col.enabled = false;
-        }
-        
-        SetStats();
-    }
+        maxHealth = 12 + (int)(level * 2.5f);
+        attack = 8 + (int)(level * .9f);
+        defense = 6 + (int)(level * .8f);
+        accuracy = .65f + level / 2000f;
+        evasion = .02f + level / 1500f;
 
-    public void SetStats()
-    {
-        maxHealth = level * 8;
+        combo = 2 + (int)Mathf.Pow(level, .2f);
+
         health = maxHealth;
-        attack = level * 1.6f;
-        defense = accuracy = evasion = level * .8f;
     }
 
     private void AssignElement()

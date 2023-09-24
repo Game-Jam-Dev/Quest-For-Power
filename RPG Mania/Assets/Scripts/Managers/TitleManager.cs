@@ -3,47 +3,71 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class TitleManager : MonoBehaviour {
-    [SerializeField] private Button newButton, loadButton, creditsButton, quitButton;
-    private int nextScene = 1;
+    [SerializeField] private Button loadButton;
+    [SerializeField] private GameObject settingsMenu;
+    private GameData gameData;
+    private int throneScene = 1;
+    private int pickScene = 4;
     private int creditsScene = 5;
 
-    private void Awake() {
-        newButton.onClick.AddListener(StartGame);
-        loadButton.onClick.AddListener(LoadGame);
-        creditsButton.onClick.AddListener(Credits);
-        quitButton.onClick.AddListener(QuitGame);
+    private void Awake() 
+    {
 
         loadButton.interactable = SaveSystem.SaveFileExists();
-        
+    
+        if (loadButton.interactable)
+        {
+            gameData = SaveSystem.LoadGameData(); // Load saved game data
+        } 
+        else 
+        {
+            gameData = new GameData();
+        }
+
+        // settingsMenu.GetComponent<SettingsMenuManager>().Initialize(gameData.settingsData);
     }
 
-    private void StartGame(){
-        SceneManager.LoadScene(nextScene);
-    }
-
-    private void LoadGame()
+    public void StartGame()
     {
-        GameData gameData = SaveSystem.LoadGameData(); // Load saved game data
+        EnterGame(gameData.NewGame(), pickScene);
+    }
+
+    public void LoadGame()
+    {
         if(gameData != null)
         {
-            GameManager.instance.SetGameData(gameData);
-
-            SceneManager.LoadScene(gameData.worldState.currentScene);
+            EnterGame(gameData, gameData.worldState.currentScene);
         }
     }
 
-    private void Settings(){}
+    private void EnterGame(GameData gameData, int scene)
+    {
+        GameManager.instance.SetGameData(gameData);
 
-    private void Credits()
+        SceneManager.LoadScene(scene);
+    }
+
+    public void Settings()
+    {
+        settingsMenu.SetActive(true);
+    }
+
+    public void Credits()
     {
         SceneManager.LoadScene(creditsScene);
     }
 
-    private void QuitGame(){
+    public void QuitGame(){
         #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
         #else
             Application.Quit();
         #endif
+    }
+
+    public void UpdateSettings(SettingsData settingsData)
+    {
+        gameData.settingsData = settingsData;
+        SaveSystem.SaveGameData(gameData);
     }
 }
