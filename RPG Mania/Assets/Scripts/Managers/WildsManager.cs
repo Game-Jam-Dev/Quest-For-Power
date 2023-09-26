@@ -9,28 +9,27 @@ public class WildsManager : WorldManager {
     private List<EnemyInfo> battleEnemies = new List<EnemyInfo>();
     private List<EnemyInfo> liveEnemies = new List<EnemyInfo>();
     private List<EnemyInfo> reinforcements = new List<EnemyInfo>();
-    private List<bool> livingEnemies;
     private GameManager gameManager;
     [SerializeField] private GameObject battleUI;
-    private BattleManager battleManager;
+    [SerializeField] private GameObject mainCamera, battleCamera;
+    private BattleCamera battleCameraScript;
     private AudioSource audioSource;
     [SerializeField] private AudioClip wildsTheme, battleTheme;
     private int currentScene;
     private bool final = false;
+    private bool encountered = false;
 
     private void Start() {
         gameController = GameObject.FindGameObjectWithTag("GameController");
         gameManager = gameController.GetComponent<GameManager>();
+
+        battleCameraScript = battleCamera.GetComponent<BattleCamera>();
 
         audioSource = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioSource>();
 
         player = GameObject.FindGameObjectWithTag("Player");
         gameManager.SetPlayer(player);
         playerInfo = player.GetComponent<PlayerInfo>();
-
-        battleManager = battleUI.GetComponent<BattleManager>();
-
-
 
         currentScene = SceneManager.GetActiveScene().buildIndex;
         gameManager.SetCurrentScene(currentScene);
@@ -69,7 +68,7 @@ public class WildsManager : WorldManager {
         EncounterEnemy(boss);
     }
 
-    public void EncounterEnemy(GameObject enemy)
+    public void EncounterEnemy(GameObject enemy, float rotationZ = 0)
     {
         foreach (EnemyInfo e in liveEnemies)
         {
@@ -84,21 +83,38 @@ public class WildsManager : WorldManager {
             }
         }
 
-        foreach(EnemyInfo e in battleEnemies)
-        {
-            liveEnemies.Remove(e);
-        }
+        SwitchToBattleCamera();
+        battleCameraScript.SetDirection(rotationZ);
 
         StartBattle();
     }
 
-    private void StartBattle() {
+    private void StartBattle() 
+    {
         playerInfo.PrepareCombat();
+
+        foreach(EnemyInfo e in battleEnemies)
+        {
+            liveEnemies.Remove(e);
+            e.SetRotationForBattleCamera();
+        }
         
         audioSource.clip = battleTheme;
         audioSource.time = 2.7f;
         audioSource.Play();
         battleUI.SetActive(true);
+    }
+
+    private void SwitchToBattleCamera()
+    {
+        battleCamera.SetActive(true);
+        mainCamera.SetActive(false);
+    }
+
+    private void SwitchToMainCamera()
+    {
+        mainCamera.SetActive(true);
+        battleCamera.SetActive(false);
     }
 
     public override void WinBattle()
@@ -114,6 +130,8 @@ public class WildsManager : WorldManager {
         }
 
         battleEnemies.Clear();
+
+        SwitchToMainCamera();
 
         audioSource.clip = wildsTheme;
         audioSource.time = 0;

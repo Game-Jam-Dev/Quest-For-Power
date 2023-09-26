@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class IndoorCamera : MonoBehaviour
+public class FollowCamera : MonoBehaviour
 {
     [SerializeField] private Transform target;
     [SerializeField] private Vector3 offset;
@@ -10,7 +8,18 @@ public class IndoorCamera : MonoBehaviour
     public float smoothFactor;
     [SerializeField] private Vector3 minValues, maxValues;
 
-    private void Start() {
+    private void OnEnable() 
+    {
+        SnapToPosition();
+        tag = "MainCamera";
+    }
+
+    private void OnDisable() {
+        tag = "Untagged";
+    }
+
+    private void SnapToPosition()
+    {
         transform.position = target.position + offset;
         transform.rotation = Quaternion.LookRotation(target.position - transform.position);
     }
@@ -20,7 +29,7 @@ public class IndoorCamera : MonoBehaviour
         Follow();
     }
 
-    void Follow()
+    private void Follow()
     {
         Vector3 targetPosition = target.position + offset;
         // Check if camera is out of bounds or not
