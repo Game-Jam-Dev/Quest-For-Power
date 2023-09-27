@@ -328,14 +328,27 @@ public class BattleManager : MonoBehaviour {
             if (player.CanUseSkill(currentSkill))
             { 
                 Button selectSkill = Instantiate(skillButtonPrefab, skillContainer.transform);
-                selectSkill.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = currentSkill.Name + " (" + player.GetSkillAmount(currentSkill) + " Uses)";
+
+                int skillAmount = player.GetSkillAmount(currentSkill);
+                string skillDisplay = currentSkill.Name + " (" + skillAmount + " ";
+                if (skillAmount == 1)
+                    skillDisplay += "Use)";
+                else 
+                    skillDisplay += "Uses)";
+
+                selectSkill.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = skillDisplay;
                 selectSkill.onClick.AddListener(() => PickSkill(currentSkill));
                 skillButtons.Add(selectSkill);
             }
         }
 
-        Button back = Instantiate(backButtonPrefab, skillContainer.transform);
-        back.onClick.AddListener(BackFromSkill);
+        pickSkillButton.interactable = skillContainer.transform.childCount > 0;
+
+        if (pickSkillButton.interactable)
+        {
+            Button back = Instantiate(backButtonPrefab, skillContainer.transform);
+            back.onClick.AddListener(BackFromSkill); 
+        }
     }
 
     private void UpdateHealth()
