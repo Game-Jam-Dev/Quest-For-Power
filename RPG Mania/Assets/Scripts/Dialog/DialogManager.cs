@@ -8,7 +8,7 @@ public class DialogManager : MonoBehaviour
     [SerializeField] private GameObject dialogBox;
     [SerializeField] private TMP_Text dialogText;
     [SerializeField] private TMP_Text dialogName;
-    [SerializeField] private float textSpeed;
+    [SerializeField] private float textSpeed = .035f;
     public DialogObject currentDialog;
     private bool showingDialog = true;
     public bool clicked = false;

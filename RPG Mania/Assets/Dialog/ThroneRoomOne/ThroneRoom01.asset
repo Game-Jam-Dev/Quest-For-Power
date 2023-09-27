@@ -23,3 +23,15 @@ MonoBehaviour:
   - speakerName: Varian
     dialog: Oh, I assure you, I have never been more in control of my mind. It is
       time for a new ruler, one who will bring prosperity and justice to these lands.
+  - speakerName: Arkanos
+    dialog: Prosperity and justice? Those are mere delusions of the weak. Power and
+      domination are the true keys to ruling this realm.
+  - speakerName: Varian
+    dialog: Your reign of tyranny has brought nothing but suffering to our people.
+      Your lust for power has blinded you to the cries of the innocent.
+  - speakerName: Arkanos
+    dialog: You have become a fool, Varian! I will not let your foolish ideals stand
+      in the way of my ambitions.
+  - speakerName: Varian
+    dialog: Then so be it. I stand here not as your general, but as the liberator
+      of this realm.

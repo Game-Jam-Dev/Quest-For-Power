@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneSwitcher : MonoBehaviour {
-    private int outskirtsScene = 3;
+    private string outskirtsScene = "Outskirts";
 
     private void OnCollisionEnter(Collision other) {
         if (other.gameObject.CompareTag("Player"))

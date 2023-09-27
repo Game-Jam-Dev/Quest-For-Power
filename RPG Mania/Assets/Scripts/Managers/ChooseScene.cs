@@ -4,9 +4,10 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ChooseScene : MonoBehaviour {
-    [SerializeField] Button throne, wilds, outskirts, title;
+    [SerializeField] Button intro, throne, wilds, outskirts, title;
 
     private void Awake() {
+        intro.onClick.AddListener(() => SceneManager.LoadScene("Intro Cutscene"));
         throne.onClick.AddListener(() => SceneManager.LoadScene("Throne Room"));
         wilds.onClick.AddListener(StartWilds);
         outskirts.onClick.AddListener(StartOutskirts);

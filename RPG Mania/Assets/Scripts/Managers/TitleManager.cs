@@ -6,8 +6,8 @@ public class TitleManager : MonoBehaviour {
     [SerializeField] private Button loadButton;
     [SerializeField] private GameObject settingsMenu;
     private GameData gameData;
-    private int throneScene = 1;
-    private int pickScene = 4;
+    private int introScene = 1;
+    private int pickScene = 6;
     private int creditsScene = 5;
 
     private void Awake() 
