@@ -24,31 +24,6 @@ public class BattleCamera : MonoBehaviour {
         tag = "Untagged";
     }
 
-    private void SnapToPosition()
-    {
-        transform.position = target.position + currentOffset;
-        transform.rotation = Quaternion.LookRotation(target.position - transform.position);
-    }
-
-    private void FixedUpdate()
-    {
-        Follow();
-    }
-
-    private void Follow()
-    {
-        Vector3 targetPosition = target.position + currentOffset;
-        // Check if camera is out of bounds or not
-        Vector3 boundPosition = new Vector3(
-            Mathf.Clamp(targetPosition.x, minValues.x, maxValues.x),
-            Mathf.Clamp(targetPosition.y, minValues.y, maxValues.y),
-            Mathf.Clamp(targetPosition.z, minValues.z, maxValues.z));
-        Vector3 smoothPosition = Vector3.Lerp(transform.position, boundPosition, smoothFactor * Time.fixedDeltaTime);
-        transform.position = smoothPosition;
-
-        transform.rotation = Quaternion.LookRotation(target.position - transform.position);
-    }
-
     public void SetDirection(float direction)
     {
         switch (direction)
@@ -58,6 +33,7 @@ public class BattleCamera : MonoBehaviour {
                 currentOffset.z = -offset.x;
                 break;
             case 180:
+                currentOffset.x = offset.x;
                 currentOffset.z = -offset.z;
                 break;
             case 270:
@@ -70,5 +46,11 @@ public class BattleCamera : MonoBehaviour {
         }
 
         SnapToPosition();
+    }
+
+    private void SnapToPosition()
+    {
+        transform.position = target.position + currentOffset;
+        transform.rotation = Quaternion.LookRotation(target.position - transform.position);
     }
 }

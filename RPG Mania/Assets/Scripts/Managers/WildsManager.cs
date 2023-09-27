@@ -17,7 +17,6 @@ public class WildsManager : WorldManager {
     [SerializeField] private AudioClip wildsTheme, battleTheme;
     private int currentScene;
     private bool final = false;
-    private bool encountered = false;
 
     private void Start() {
         gameController = GameObject.FindGameObjectWithTag("GameController");

@@ -8,7 +8,7 @@ public class EnemyAnimation : MonoBehaviour {
     public float combatPositionHeightAdjustment = 1;
     private float combatPositionHeight;
     public bool isAttacking = false;
-    private bool isFighting = false;
+    public bool isFighting = false;
 
     private void Start()
     {

@@ -23,9 +23,9 @@ public class ChooseScene : MonoBehaviour {
 
     private void StartOutskirts()
     {
-        GameManager.instance.SetPlayerLevel(10);
+        GameManager.instance.SetPlayerLevel(8);
         GameManager.instance.SetPlayerExperience(0);
-        GameManager.instance.SetPlayerSkills(new List<int>{0,0,0,0,0});
+        GameManager.instance.SetPlayerSkills(new List<int>{0,2,2,2,2});
         SceneManager.LoadScene("Outskirts");
     }
 }

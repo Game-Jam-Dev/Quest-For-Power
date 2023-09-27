@@ -86,6 +86,7 @@ public class BattleManager : MonoBehaviour {
                     {
                         player.AbsorbSkill(target.element);
                         absorbCounter += 1;
+                        actionText.text = $"{activeCharacter.characterName} absorbed the {target.element} element from {target.characterName}";
 
                         if (absorbCounter >= 3) pickAbsorbButton.interactable = false;
                     } 
@@ -171,10 +172,9 @@ public class BattleManager : MonoBehaviour {
 
                         i++;
                     }
-
-                    yield return new WaitForSeconds(.5f);
-                    
                 }
+
+                yield return new WaitForSeconds(.5f);
 
                 NextTurn(activeCharacter);
             }
@@ -328,11 +328,12 @@ public class BattleManager : MonoBehaviour {
             if (player.CanUseSkill(currentSkill))
             { 
                 Button selectSkill = Instantiate(skillButtonPrefab, skillContainer.transform);
-                selectSkill.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = currentSkill.Name;
+                selectSkill.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = currentSkill.Name + " (" + player.GetSkillAmount(currentSkill) + " Uses)";
                 selectSkill.onClick.AddListener(() => PickSkill(currentSkill));
                 skillButtons.Add(selectSkill);
             }
         }
+
         Button back = Instantiate(backButtonPrefab, skillContainer.transform);
         back.onClick.AddListener(BackFromSkill);
     }
@@ -403,8 +404,6 @@ public class BattleManager : MonoBehaviour {
     {
         player.EndCombat();
 
-        Debug.Log("End Battle");
-
         StopAllCoroutines();
 
         enemies.Clear();
@@ -412,6 +411,8 @@ public class BattleManager : MonoBehaviour {
         xpGain = 0;
         absorbCounter = 0;
         killCount = 0;
+        comboLength = 0;
+        comboActions.Clear();
 
         ClearUI();
 

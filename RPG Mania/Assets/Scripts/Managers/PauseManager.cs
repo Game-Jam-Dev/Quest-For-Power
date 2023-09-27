@@ -54,7 +54,7 @@ public class PauseManager : MonoBehaviour {
     {
         SaveSystem.SaveGameData(GameManager.instance.GetGameData());
         
-        GameManager.instance.GetPlayerSkills();
+        GameManager.instance.GetPlayerSkillUses();
     }
 
     private void Quit() {
