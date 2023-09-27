@@ -113,7 +113,7 @@ MonoBehaviour:
   hitTarget: 0
   attackClip: {fileID: 8300000, guid: a3f952095cec84440a88eb462db52486, type: 3}
   level: 1
-  detectRange: 4
+  detectRange: 5.2
   isAlive: 1
   id: 0
   scene: wilds
@@ -129,7 +129,7 @@ CapsuleCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 2
-  m_Height: 2.7
+  m_Height: 4
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6267649557001182488
@@ -144,6 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e10645ac2c0aa8b42b83e09055397b20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  combatPositionHeightAdjustment: 0.5
   isAttacking: 0
 --- !u!95 &3546035313566299711
 Animator:

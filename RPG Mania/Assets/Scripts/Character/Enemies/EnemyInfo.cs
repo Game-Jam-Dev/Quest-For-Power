@@ -31,6 +31,7 @@ public class EnemyInfo : CharacterInfo {
         level = GameManager.instance.GetPlayerLevel();
         
         SetStats();
+        ea.StartFighting();
     }
 
     protected virtual void SetStats(){}
@@ -75,11 +76,35 @@ public class EnemyInfo : CharacterInfo {
         return ea.GetAnimator();
     }
 
-    protected virtual void OnTriggerEnter(Collider other) {
+    protected virtual void OnTriggerEnter(Collider other) 
+    {
         if (other.gameObject.CompareTag("Player"))
         {
-            wildsManager.EncounterEnemy(gameObject);
+            // Find the rotation for the enemy to face the player
+
+            float rotationZ;
+            Vector3 distance = other.transform.position - transform.position;
+            
+            if (Mathf.Abs(distance.x) > Mathf.Abs(distance.z))
+            {
+                if (distance.x > 0) rotationZ = 90;
+
+                else rotationZ = 270;
+            } 
+            else 
+            {
+                if (distance.z > 0) rotationZ = 180;
+
+                else rotationZ = 0; 
+            }
+
+            wildsManager.EncounterEnemy(gameObject, rotationZ);
         }
+    }
+
+    public void SetRotationForBattleCamera()
+    {
+        ea.StartFighting();
     }
 
     public int XPFromKill(int playerLevel)

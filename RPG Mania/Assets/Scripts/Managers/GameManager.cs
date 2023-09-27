@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour {
         playerData.skillActionUses[i] = count;
     }
 
-    public List<int> GetPlayerSkills(){
+    public List<int> GetPlayerSkillUses(){
         return playerData.skillActionUses;
     }
         

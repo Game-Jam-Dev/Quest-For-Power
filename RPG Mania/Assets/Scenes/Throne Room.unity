@@ -151,6 +151,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2966693440811833630, guid: 40286b3be96a7ef44a43ee52d9f29bea,
+        type: 3}
+      propertyPath: isFighting
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2966693440811833630, guid: 40286b3be96a7ef44a43ee52d9f29bea,
+        type: 3}
+      propertyPath: combatPositionHeightAdjustment
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3036269658535557653, guid: 40286b3be96a7ef44a43ee52d9f29bea,
         type: 3}
       propertyPath: m_Name
@@ -451,6 +461,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2966693440811833630, guid: 40286b3be96a7ef44a43ee52d9f29bea,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2966693440811833630, guid: 40286b3be96a7ef44a43ee52d9f29bea,
+        type: 3}
+      propertyPath: isFighting
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2966693440811833630, guid: 40286b3be96a7ef44a43ee52d9f29bea,
+        type: 3}
+      propertyPath: combatPositionHeightAdjustment
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3036269658535557653, guid: 40286b3be96a7ef44a43ee52d9f29bea,
         type: 3}
       propertyPath: m_Name
@@ -560,6 +585,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2966693440811833630, guid: 40286b3be96a7ef44a43ee52d9f29bea,
+        type: 3}
+      propertyPath: isFighting
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2966693440811833630, guid: 40286b3be96a7ef44a43ee52d9f29bea,
+        type: 3}
+      propertyPath: combatPositionHeightAdjustment
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3036269658535557653, guid: 40286b3be96a7ef44a43ee52d9f29bea,
         type: 3}
       propertyPath: m_Name
@@ -970,6 +1005,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2966693440811833630, guid: 40286b3be96a7ef44a43ee52d9f29bea,
+        type: 3}
+      propertyPath: isFighting
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2966693440811833630, guid: 40286b3be96a7ef44a43ee52d9f29bea,
+        type: 3}
+      propertyPath: combatPositionHeightAdjustment
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3036269658535557653, guid: 40286b3be96a7ef44a43ee52d9f29bea,
         type: 3}
       propertyPath: m_Name
@@ -1340,6 +1385,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8720936053241364502, guid: d0bea8f35265c9143a384cfea304ba30,
+        type: 3}
+      propertyPath: isFighting
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8720936053241364502, guid: d0bea8f35265c9143a384cfea304ba30,
+        type: 3}
+      propertyPath: combatPositionHeightAdjustment
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4598856092647899261, guid: d0bea8f35265c9143a384cfea304ba30, type: 3}

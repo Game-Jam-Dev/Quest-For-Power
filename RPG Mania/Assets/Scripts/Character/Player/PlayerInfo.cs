@@ -17,12 +17,14 @@ public class PlayerInfo : CharacterInfo {
         skillKeys.Add("fire");
         skillKeys.Add("wind");
         skillKeys.Add("earth");
-    
-        skillActions.Add((SkillList.GetInstance().GetAction(skillKeys[0]), 0));
-        skillActions.Add((SkillList.GetInstance().GetAction(skillKeys[1]), 0));
-        skillActions.Add((SkillList.GetInstance().GetAction(skillKeys[2]), 0));
-        skillActions.Add((SkillList.GetInstance().GetAction(skillKeys[3]), 0));
-        skillActions.Add((SkillList.GetInstance().GetAction(skillKeys[4]), 0));
+
+        List<int> playerSkillUses = GameManager.instance.GetPlayerSkillUses();
+        SkillList skillList = SkillList.GetInstance();
+
+        for (int i = 0; i < skillKeys.Count; i++)
+        {
+            skillActions.Add((skillList.GetAction(skillKeys[i]), playerSkillUses[i]));
+        }
 
         elementClips = new List<(AudioClip, float)>(){(drainClip, 2.45f), (waterClip, 1.03f), (fireClip, .7f), (windClip, 2.2f), (earthClip, .93f)};
 
@@ -125,7 +127,7 @@ public class PlayerInfo : CharacterInfo {
     {
         int index = skillActions.FindIndex(item => item.Item1 == skill);
 
-        if (index != -1) return GameManager.instance.GetPlayerSkills()[index] > 0;
+        if (index != -1) return GameManager.instance.GetPlayerSkillUses()[index] > 0;
 
         else return false;
     }
