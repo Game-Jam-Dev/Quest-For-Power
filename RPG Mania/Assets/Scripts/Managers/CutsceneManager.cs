@@ -22,7 +22,8 @@ public class CutsceneManager : MonoBehaviour {
         Dialog,
     }
 
-    private void Awake() {
+    private void Start() 
+    {
         dialogManager.enabled = false;
 
         NextImage();
@@ -59,7 +60,11 @@ public class CutsceneManager : MonoBehaviour {
         currentImageIndex++;
 
         if (currentImageIndex >= imageLeadsTo.Count || currentImageIndex >= images.Count)
-            SceneManager.LoadScene(nextScene);
+        {
+            EndCutscene();
+            return;
+        }
+            
 
         imageBackground.sprite = images[currentImageIndex];
 
@@ -76,5 +81,10 @@ public class CutsceneManager : MonoBehaviour {
         {
             canSkip = true;
         }
+    }
+
+    public void EndCutscene()
+    {
+        SceneManager.LoadScene(nextScene);
     }
 }

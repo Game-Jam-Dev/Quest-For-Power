@@ -381,7 +381,6 @@ MonoBehaviour:
   dialogText: {fileID: 8523279246317377008}
   dialogName: {fileID: 3788862165231372789}
   textSpeed: 0.035
-  currentDialog: {fileID: 11400000, guid: e0f1d46cb8131164ea3dcab0c5ebd739, type: 2}
   clicked: 0
 --- !u!1 &4676544588874010738
 GameObject:
@@ -1190,6 +1189,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8745279740039523959, guid: 0d656edda9fefca43a2c23de9f04b7c4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7825545954615205506}
+    - target: {fileID: 8745279740039523959, guid: 0d656edda9fefca43a2c23de9f04b7c4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SkipDialog
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d656edda9fefca43a2c23de9f04b7c4, type: 3}

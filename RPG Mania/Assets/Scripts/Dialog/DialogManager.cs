@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -9,14 +8,8 @@ public class DialogManager : MonoBehaviour
     [SerializeField] private TMP_Text dialogText;
     [SerializeField] private TMP_Text dialogName;
     [SerializeField] private float textSpeed = .035f;
-    public DialogObject currentDialog;
-    private bool showingDialog = true;
+    private Coroutine currentDialog;
     public bool clicked = false;
-
-    public void Start()
-    {
-        
-    }
 
     private IEnumerator MoveThroughDialog(DialogObject dialogObject)
     {
@@ -45,18 +38,18 @@ public class DialogManager : MonoBehaviour
             //The following line of code makes the coroutine wait for a frame so as the next WaitUntil is not skipped
             yield return null;
         }
-        showingDialog = false;
+
+        currentDialog = null;
     }
 
     public bool ShowingDialog()
     {
-        return showingDialog;
+        return currentDialog != null;
     }
 
     public void DisplayDialog(DialogObject dialogObject)
     {
-        showingDialog = true;
-        StartCoroutine(MoveThroughDialog(dialogObject));
+        currentDialog = StartCoroutine(MoveThroughDialog(dialogObject));
     }
 
     private void OnEnable() {
@@ -67,11 +60,20 @@ public class DialogManager : MonoBehaviour
         dialogBox.SetActive(false);
     }
 
-
     private void Update() {
         if(Input.GetMouseButtonDown(0))
         {
             clicked = true;
         }
+    }
+
+    public void SkipDialog()
+    {
+        if (currentDialog != null)
+        {
+            StopCoroutine(currentDialog);
+            currentDialog = null;
+            dialogText.text = "";
+        } 
     }
 }
