@@ -49,6 +49,16 @@ public class GameManager : MonoBehaviour {
         worldState.currentScene = currentScene;
     }
 
+    public bool CheckVisitedWilds()
+    {
+        return worldState.visitedWilds;
+    }
+
+    public void SetVisitedWilds(bool b)
+    {
+        worldState.visitedWilds = b;
+    }
+
     public bool CheckEnemyDeath(string scene, int id)
     {
         if (scene == "wilds") return worldState.enemyIsAliveWilds[id];

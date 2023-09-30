@@ -53,8 +53,6 @@ public class PauseManager : MonoBehaviour {
     private void SaveGame()
     {
         SaveSystem.SaveGameData(GameManager.instance.GetGameData());
-        
-        GameManager.instance.GetPlayerSkills();
     }
 
     private void Quit() {

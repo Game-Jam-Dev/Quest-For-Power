@@ -27,6 +27,7 @@ public class ChooseScene : MonoBehaviour {
         GameManager.instance.SetPlayerLevel(10);
         GameManager.instance.SetPlayerExperience(0);
         GameManager.instance.SetPlayerSkills(new List<int>{0,0,0,0,0});
+        GameManager.instance.SetVisitedWilds(true);
         SceneManager.LoadScene("Outskirts");
     }
 }

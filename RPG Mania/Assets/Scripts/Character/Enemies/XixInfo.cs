@@ -14,7 +14,7 @@ public class XixInfo : EnemyInfo {
     {
         maxHealth = 50 + level * 5;
         attack = 8 + (int)(level * .8f);
-        defense = 10 + (int)(level * 1.2f);
+        defense = 7 + (int)(level * 1.2f);
         accuracy = .65f + level / 3500f;
         evasion = .01f + level / 1000f;
 

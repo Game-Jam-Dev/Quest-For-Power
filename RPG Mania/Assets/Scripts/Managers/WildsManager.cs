@@ -1,51 +1,34 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class WildsManager : WorldManager {
-    private GameObject gameController, player;
-    private PlayerInfo playerInfo;
-    private List<EnemyInfo> enemies = new List<EnemyInfo>();
+    
     private List<EnemyInfo> battleEnemies = new List<EnemyInfo>();
     private List<EnemyInfo> liveEnemies = new List<EnemyInfo>();
     private List<EnemyInfo> reinforcements = new List<EnemyInfo>();
-    private List<bool> livingEnemies;
-    private GameManager gameManager;
-    [SerializeField] private GameObject battleUI;
-    private BattleManager battleManager;
     private AudioSource audioSource;
     [SerializeField] private AudioClip wildsTheme, battleTheme;
-    private int currentScene;
+    [SerializeField] private DialogObject dialogObjectPre, dialogObjectPreboss, dialogObjectPost;
     private bool final = false;
 
-    private void Start() {
-        gameController = GameObject.FindGameObjectWithTag("GameController");
-        gameManager = gameController.GetComponent<GameManager>();
+    protected override void Start() {
+        base.Start();
 
         audioSource = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioSource>();
 
-        player = GameObject.FindGameObjectWithTag("Player");
-        gameManager.SetPlayer(player);
-        playerInfo = player.GetComponent<PlayerInfo>();
-
-        battleManager = battleUI.GetComponent<BattleManager>();
-
-
-
-        currentScene = SceneManager.GetActiveScene().buildIndex;
-        gameManager.SetCurrentScene(currentScene);
-
-        SpawnEnemies();
-
-
+        if (!GameManager.instance.CheckVisitedWilds())
+        {
+            GameManager.instance.SetVisitedWilds(true);
+            StartCoroutine(DoDialog(dialogObjectPre));
+        } else 
+            dialogManager.enabled = false;
     }
 
-    private void SpawnEnemies()
+    protected override void SpawnEnemies()
     {
-        foreach (GameObject e in GameObject.FindGameObjectsWithTag("Enemy"))
-        {
-            enemies.Add(e.GetComponent<EnemyInfo>());
-        }
+        base.SpawnEnemies();
 
         int i = 0;
         foreach (EnemyInfo e in enemies)
@@ -66,7 +49,8 @@ public class WildsManager : WorldManager {
 
         final = true;
 
-        EncounterEnemy(boss);
+        StartCoroutine(BossFightDialog(boss));
+        
     }
 
     public void EncounterEnemy(GameObject enemy)
@@ -103,7 +87,10 @@ public class WildsManager : WorldManager {
 
     public override void WinBattle()
     {
-        if (final) SceneManager.LoadScene("Credits");
+        if (final)
+        {
+            StartCoroutine(BossFightWinDialog());
+        }
 
         if (enemies.Count > 0)
         {
@@ -123,6 +110,28 @@ public class WildsManager : WorldManager {
     public void LoseBattle()
     {
         
+    }
+
+    private IEnumerator BossFightDialog(GameObject boss)
+    {
+        StartCoroutine(DoDialog(dialogObjectPreboss));
+
+        yield return new WaitForEndOfFrame();
+
+        yield return new WaitUntil(() => !dialogManager.enabled);
+
+        EncounterEnemy(boss);
+    }
+
+    private IEnumerator BossFightWinDialog()
+    {
+        StartCoroutine(DoDialog(dialogObjectPost));
+
+        yield return new WaitForEndOfFrame();
+
+        yield return new WaitUntil(() => !dialogManager.enabled);
+
+        SceneManager.LoadScene("Credits");
     }
 
     public override List<EnemyInfo> GetEnemies()

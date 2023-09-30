@@ -14,6 +14,8 @@ public class PlayerData
 public class WorldState
 {
     public int currentScene = 1;
+    public bool visitedWilds = false;
+    public bool visitedOutskirts = false;
     public List<bool> enemyIsAliveWilds = new(Enumerable.Repeat(true, 14));
     public List<bool> enemyIsAliveOutskirts = new(Enumerable.Repeat(true, 5));
 }
