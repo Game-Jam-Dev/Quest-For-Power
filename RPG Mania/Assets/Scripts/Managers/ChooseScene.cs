@@ -19,15 +19,17 @@ public class ChooseScene : MonoBehaviour {
         GameManager.instance.SetPlayerLevel(1);
         GameManager.instance.SetPlayerExperience(0);
         GameManager.instance.SetPlayerSkills(new List<int>{0,0,0,0,0});
+      
         SceneManager.LoadScene("Wilds");
     }
 
     private void StartOutskirts()
     {
-        GameManager.instance.SetPlayerLevel(10);
+        GameManager.instance.SetPlayerLevel(8);
         GameManager.instance.SetPlayerExperience(0);
-        GameManager.instance.SetPlayerSkills(new List<int>{0,0,0,0,0});
+        GameManager.instance.SetPlayerSkills(new List<int>{0,2,2,2,2});
         GameManager.instance.SetVisitedWilds(true);
+        
         SceneManager.LoadScene("Outskirts");
     }
 }

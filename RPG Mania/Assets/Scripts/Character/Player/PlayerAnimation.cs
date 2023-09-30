@@ -2,18 +2,16 @@ using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour {
 
-    protected Camera mainCamera;
     protected Animator anim;
     protected SpriteRenderer sr;
+    protected bool isFighting = false;
 
     public string currentTrigger = "";
     public bool isAttacking = false;
 
     protected virtual void Start() {
-        mainCamera = Camera.main;
-
-        TryGetComponent<Animator>(out anim);
-        TryGetComponent<SpriteRenderer>(out sr);
+        TryGetComponent(out anim);
+        TryGetComponent(out sr);
     }
 
     public void SwitchToCombat()
@@ -22,12 +20,17 @@ public class PlayerAnimation : MonoBehaviour {
         {
             sr.flipX = false;
             anim.SetBool("Combat", true);
+            isFighting = true;
         }
     }
 
     public void SwitchFromCombat()
     {
-        if (anim != null) anim.SetBool("Combat", false);
+        if (anim != null)
+        {
+            anim.SetBool("Combat", false);
+            isFighting = false;
+        } 
     }
 
     public void SetUpTrigger(string triggerName)

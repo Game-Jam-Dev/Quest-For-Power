@@ -5,14 +5,40 @@ public class EnemyAnimation : MonoBehaviour {
     private SpriteRenderer sr;
     private SkillList.Element element;
 
+    public float combatPositionHeightAdjustment = 1;
+    private float combatPositionHeight;
     public bool isAttacking = false;
+    public bool isFighting = false;
 
     private void Start()
     {
-        TryGetComponent<Animator>(out anim);
-        TryGetComponent<SpriteRenderer>(out sr);
+        TryGetComponent(out anim);
+        TryGetComponent(out sr);
 
         AssignElement(element);
+
+        combatPositionHeight = transform.position.y + combatPositionHeightAdjustment;
+    }
+
+    private void LateUpdate() {
+        Transform camera = Camera.main.transform;
+
+        Vector3 direction = camera.position - transform.position;
+
+        if (!isFighting)
+            direction.x = direction.z = 0;
+
+        if (direction != Vector3.zero) {
+            Quaternion lookRotation = Quaternion.LookRotation(-direction);
+            transform.rotation = lookRotation;
+        }
+    }
+
+    public void StartFighting()
+    {
+        isFighting = true;
+
+        transform.position = new(transform.position.x, combatPositionHeight, transform.position.z);
     }
 
     public void AssignElement(SkillList.Element e)

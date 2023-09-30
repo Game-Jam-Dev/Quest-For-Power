@@ -8,13 +8,20 @@ public class WildsManager : WorldManager {
     private List<EnemyInfo> battleEnemies = new List<EnemyInfo>();
     private List<EnemyInfo> liveEnemies = new List<EnemyInfo>();
     private List<EnemyInfo> reinforcements = new List<EnemyInfo>();
+  
+    [SerializeField] private GameObject mainCamera, battleCamera;
+    private BattleCamera battleCameraScript;
+  
     private AudioSource audioSource;
     [SerializeField] private AudioClip wildsTheme, battleTheme;
+  
     [SerializeField] private DialogObject dialogObjectPre, dialogObjectPreboss, dialogObjectPost;
     private bool final = false;
 
     protected override void Start() {
         base.Start();
+
+        battleCameraScript = battleCamera.GetComponent<BattleCamera>();
 
         audioSource = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioSource>();
 
@@ -23,7 +30,9 @@ public class WildsManager : WorldManager {
             GameManager.instance.SetVisitedWilds(true);
             StartCoroutine(DoDialog(dialogObjectPre));
         } else 
+        {
             dialogManager.enabled = false;
+        }
     }
 
     protected override void SpawnEnemies()
@@ -53,7 +62,7 @@ public class WildsManager : WorldManager {
         
     }
 
-    public void EncounterEnemy(GameObject enemy)
+    public void EncounterEnemy(GameObject enemy, float rotationZ = 0)
     {
         foreach (EnemyInfo e in liveEnemies)
         {
@@ -68,21 +77,38 @@ public class WildsManager : WorldManager {
             }
         }
 
-        foreach(EnemyInfo e in battleEnemies)
-        {
-            liveEnemies.Remove(e);
-        }
+        SwitchToBattleCamera();
+        battleCameraScript.SetDirection(rotationZ);
 
         StartBattle();
     }
 
-    private void StartBattle() {
+    private void StartBattle() 
+    {
         playerInfo.PrepareCombat();
+
+        foreach(EnemyInfo e in battleEnemies)
+        {
+            liveEnemies.Remove(e);
+            e.SetRotationForBattleCamera();
+        }
         
         audioSource.clip = battleTheme;
         audioSource.time = 2.7f;
         audioSource.Play();
         battleUI.SetActive(true);
+    }
+
+    private void SwitchToBattleCamera()
+    {
+        battleCamera.SetActive(true);
+        mainCamera.SetActive(false);
+    }
+
+    private void SwitchToMainCamera()
+    {
+        mainCamera.SetActive(true);
+        battleCamera.SetActive(false);
     }
 
     public override void WinBattle()
@@ -101,6 +127,8 @@ public class WildsManager : WorldManager {
         }
 
         battleEnemies.Clear();
+
+        SwitchToMainCamera();
 
         audioSource.clip = wildsTheme;
         audioSource.time = 0;
