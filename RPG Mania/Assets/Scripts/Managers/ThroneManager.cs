@@ -6,62 +6,40 @@ using System.Collections;
 using System.Linq;
 
 public class ThroneManager : WorldManager {
-    private GameObject gameController, player;
-    private PlayerInfo playerInfo;
-    private List<EnemyInfo> enemies = new List<EnemyInfo>();
     [SerializeField] private VarianInfo boss;
-    private GameManager gameManager;
-    [SerializeField] private GameObject battleUI;
-    private BattleManager battleManager;
-    private int wildsScene = 2;
-    private bool bossFight = false;
-    private bool exposition, pre, preBoss, post = true;
-    [SerializeField] private DialogManager dialogManager;
-    [SerializeField] private List<DialogObject> dialogObjectsExpo, dialogObjectsPre, dialogObjectsPreBoss, dialogObjectsPost;
+    private string nextScene = "Wilds";
+    private bool pre, preBoss = false;
+    [SerializeField] private DialogObject dialogObjectStart, dialogObjectPreBoss, dialogObjectPostBoss;
 
-    [SerializeField] public PauseManager pauseManager;
-
-    private void Start() {
-        gameController = GameObject.FindGameObjectWithTag("GameController");
-        gameManager = gameController.GetComponent<GameManager>();
+    protected override void Start() {
+        base.Start();
 
         gameManager.SetPlayerLevel(99);
         gameManager.SetPlayerSkills(new List<int>(Enumerable.Repeat(99, 5)));
 
-        player = GameObject.FindGameObjectWithTag("Player");
         gameManager.SetPlayer(player);
-        playerInfo = player.GetComponent<PlayerInfo>();
 
-        pauseManager.DisablePausing();
-
-        battleManager = battleUI.GetComponentInChildren<BattleManager>();
-
-        SpawnEnemies();
-
-        dialogManager.enabled = false;
-        StartCoroutine(SoldierFightNoDialog());
-
-        // StartCoroutine(DoDialogExposition(dialogObjectsExpo));
+        StartCoroutine(DoDialog(dialogObjectStart));
     }
 
-    
-
-    private void SpawnEnemies()
+    protected override IEnumerator DoDialog(DialogObject dialogObject)
     {
-        foreach (GameObject e in GameObject.FindGameObjectsWithTag("Enemy"))
-        {
-            enemies.Add(e.GetComponent<EnemyInfo>());
-        }
+        StartCoroutine(base.DoDialog(dialogObject));
+
+        yield return new WaitForEndOfFrame();
+
+        yield return new WaitUntil(() => !dialogManager.enabled);
+
+        NextBattle();
     }
 
-    private void BossFight()
+    private void NextBattle()
     {
-        player.transform.position += Vector3.forward * 5;
-        Camera.main.transform.position += Vector3.forward * 4;
+        if (!pre) StartBattle();
 
-        enemies = new List<EnemyInfo>{GameObject.FindGameObjectWithTag("Boss").GetComponent<EnemyInfo>()};
+        else if (!preBoss) BossFight();
 
-        StartBattle();
+        else NextScene();
     }
 
     private void StartBattle() 
@@ -74,18 +52,33 @@ public class ThroneManager : WorldManager {
         battleUI.SetActive(true);
     }
 
-    public void EndSoldierBattle()
+    private void BossFight()
     {
-        bossFight = true;
-        StartCoroutine(BossFightNoDialog());
-        // StartCoroutine(DoDialogBoss(dialogObjectsPreBoss));
+        player.transform.position += Vector3.forward * 5;
+        Camera.main.transform.position += Vector3.forward * 4;
+
+        enemies = new List<EnemyInfo>{GameObject.FindGameObjectWithTag("Boss").GetComponent<EnemyInfo>()};
+
+        StartBattle();
     }
 
-    public void EndBossFight()
+    public override void WinBattle()
     {
-        bossFight = false;
-        NextScene();
-        // StartCoroutine(DoDialogPost(dialogObjectsPost));
+        if (!pre) EndSoldierBattle();
+
+        else EndBossFight();
+    }
+
+    private void EndSoldierBattle()
+    {
+        pre = true;
+        StartCoroutine(DoDialog(dialogObjectPreBoss));
+    }
+
+    private void EndBossFight()
+    {
+        preBoss = true;
+        StartCoroutine(DoDialog(dialogObjectPostBoss));
     }
 
     private void NextScene()
@@ -94,82 +87,7 @@ public class ThroneManager : WorldManager {
         GameManager.instance.SetPlayerExperience(0);
         GameManager.instance.SetPlayerSkills(new List<int>{0,0,0,0,0});
 
-        SceneManager.LoadScene(wildsScene);
-    }
-
-    public override void WinBattle()
-    {
-        if (!bossFight) EndSoldierBattle();
-
-        else EndBossFight();
-    }
-
-    private IEnumerator DoDialogExposition(List<DialogObject> dialogObjects)
-    {
-        dialogManager.enabled = true;
-
-        foreach (DialogObject d in dialogObjects)
-        {
-            // Start the next dialog.
-            dialogManager.DisplayDialog(d);
-
-            // Wait for this dialog to finish before proceeding to the next one.
-            yield return new WaitUntil(() => !dialogManager.ShowingDialog());
-        }
-
-        StartCoroutine(DoDialogPre(dialogObjectsPre));
-    }
-
-    private IEnumerator DoDialogPre(List<DialogObject> dialogObjects)
-    {
-        dialogManager.enabled = true;
-
-        foreach (DialogObject d in dialogObjects)
-        {
-            // Start the next dialog.
-            dialogManager.DisplayDialog(d);
-
-            // Wait for this dialog to finish before proceeding to the next one.
-            yield return new WaitUntil(() => !dialogManager.ShowingDialog());
-        }
-
-        StartBattle();
-
-        dialogManager.enabled = false;
-    }
-
-    private IEnumerator DoDialogBoss(List<DialogObject> dialogObjects)
-    {
-        dialogManager.enabled = true;
-
-        foreach (DialogObject d in dialogObjects)
-        {
-            // Start the next dialog.
-            dialogManager.DisplayDialog(d);
-
-            // Wait for this dialog to finish before proceeding to the next one.
-            yield return new WaitUntil(() => !dialogManager.ShowingDialog());
-        }
-
-        BossFight();
-    }
-
-    private IEnumerator DoDialogPost(List<DialogObject> dialogObjects)
-    {
-        dialogManager.enabled = true;
-
-        foreach (DialogObject d in dialogObjects)
-        {
-            // Start the next dialog.
-            dialogManager.DisplayDialog(d);
-
-            // Wait for this dialog to finish before proceeding to the next one.
-            yield return new WaitUntil(() => !dialogManager.ShowingDialog());
-        }
-
-        dialogManager.enabled = false;
-
-        NextScene();
+        SceneManager.LoadScene(nextScene);
     }
 
     private IEnumerator SoldierFightNoDialog()

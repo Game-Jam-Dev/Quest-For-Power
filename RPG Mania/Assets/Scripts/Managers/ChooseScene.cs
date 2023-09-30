@@ -4,9 +4,10 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class ChooseScene : MonoBehaviour {
-    [SerializeField] Button throne, wilds, outskirts, title;
+    [SerializeField] Button intro, throne, wilds, outskirts, title;
 
     private void Awake() {
+        intro.onClick.AddListener(() => SceneManager.LoadScene("Intro Cutscene"));
         throne.onClick.AddListener(() => SceneManager.LoadScene("Throne Room"));
         wilds.onClick.AddListener(StartWilds);
         outskirts.onClick.AddListener(StartOutskirts);
@@ -18,6 +19,7 @@ public class ChooseScene : MonoBehaviour {
         GameManager.instance.SetPlayerLevel(1);
         GameManager.instance.SetPlayerExperience(0);
         GameManager.instance.SetPlayerSkills(new List<int>{0,0,0,0,0});
+      
         SceneManager.LoadScene("Wilds");
     }
 
@@ -26,6 +28,8 @@ public class ChooseScene : MonoBehaviour {
         GameManager.instance.SetPlayerLevel(8);
         GameManager.instance.SetPlayerExperience(0);
         GameManager.instance.SetPlayerSkills(new List<int>{0,2,2,2,2});
+        GameManager.instance.SetVisitedWilds(true);
+        
         SceneManager.LoadScene("Outskirts");
     }
 }

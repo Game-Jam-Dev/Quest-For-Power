@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 1627318887244746676, guid: 4c63db1762ae4a943b5f1f9fc35d49ad,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2954583793753382018, guid: 4c63db1762ae4a943b5f1f9fc35d49ad,
         type: 3}
@@ -140,10 +140,22 @@ PrefabInstance:
     - target: {fileID: 7825545954615205506, guid: 4c63db1762ae4a943b5f1f9fc35d49ad,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c63db1762ae4a943b5f1f9fc35d49ad, type: 3}
+--- !u!114 &1109073085222256411 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7825545954615205506, guid: 4c63db1762ae4a943b5f1f9fc35d49ad,
+    type: 3}
+  m_PrefabInstance: {fileID: 7205148684219834777}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2529817974779253352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d72bb86857e47e34791a16e661563781, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2529817974779253352 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4676544588567442417, guid: 4c63db1762ae4a943b5f1f9fc35d49ad,
@@ -163,10 +175,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   battleUI: {fileID: 5403508953617284382}
+  dialogManager: {fileID: 1109073085222256411}
   mainCamera: {fileID: 0}
   battleCamera: {fileID: 0}
   wildsTheme: {fileID: 8300000, guid: ab3377f648fc99c43968f21043ab7c9e, type: 3}
   battleTheme: {fileID: 8300000, guid: 3324ab6b015b7f24991aa574ddaeb5ee, type: 3}
+  dialogObjectPre: {fileID: 11400000, guid: 127ab6a6a28a87343933b59bd00d707f, type: 2}
+  dialogObjectPreboss: {fileID: 11400000, guid: 78a767884cfb68346ba054806d438e05,
+    type: 2}
+  dialogObjectPost: {fileID: 11400000, guid: 53fdd61ed4b51f44d8c0869e4e5c3213, type: 2}
 --- !u!1 &5403508953617284382 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2954583793753382023, guid: 4c63db1762ae4a943b5f1f9fc35d49ad,
