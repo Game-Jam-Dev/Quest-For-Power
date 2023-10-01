@@ -13,14 +13,11 @@ public class TitleManager : MonoBehaviour {
     private void Awake() 
     {
 
-        loadButton.interactable = SaveSystem.SaveFileExists();
-    
-        if (loadButton.interactable)
+        gameData = SaveSystem.LoadGameData();
+
+        if (gameData == null)
         {
-            gameData = SaveSystem.LoadGameData(); // Load saved game data
-        } 
-        else 
-        {
+            loadButton.interactable = false;
             gameData = new GameData();
         }
 

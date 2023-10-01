@@ -7,16 +7,20 @@ public class ButtonHighlight : MonoBehaviour, IPointerEnterHandler, IPointerExit
     [SerializeField] private Sprite neutral, press;
     private Image image;
 
-    private void Awake()
+    private void Start() 
     {
         image = GetComponent<Image>();
-        if(image == null)
+        
+        if(image != null)
         {
-            Debug.LogError("No Image component found on this GameObject.");
+            image.sprite = neutral;
+
+            if (!GetComponent<Button>().interactable)
+                enabled = false;
         }
         else
         {
-            image.sprite = neutral;
+            Debug.LogError("No Image component found on this GameObject.");
         }
     }
 
