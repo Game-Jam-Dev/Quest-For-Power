@@ -30,6 +30,8 @@ public class BattleManager : MonoBehaviour {
     private CharacterInfo target;
     private PlayerInfo player;
 
+    private Coroutine battleLoop;
+
     private void Awake() {
         gameManager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
         gameObject.SetActive(false);
@@ -63,7 +65,7 @@ public class BattleManager : MonoBehaviour {
 
         if (enemies.Count <= 0) EndBattle();
 
-        StartCoroutine(BattleSequence());
+        battleLoop = StartCoroutine(BattleSequence());
     }
 
     private IEnumerator BattleSequence()
@@ -130,7 +132,8 @@ public class BattleManager : MonoBehaviour {
 
                                 target.Kill();
 
-                                if (killCount >= enemies.Count) WinBattle();
+                                if (killCount >= enemies.Count) 
+                                    StartCoroutine(WinBattle());
 
                                 break;
                             }
@@ -168,8 +171,8 @@ public class BattleManager : MonoBehaviour {
 
                         UpdateHealth();
 
-                        if (player.health <= 0) LoseBattle();
-
+                        if (player.health <= 0)
+                            StartCoroutine(LoseBattle());
                         i++;
                     }
                 }
@@ -440,14 +443,35 @@ public class BattleManager : MonoBehaviour {
         worldManager.WinBattle();
     }
 
-    public void WinBattle()
+    private IEnumerator WinBattle()
     {
+        StopCoroutine(battleLoop);
+
+        actionText.text = "You won!";
+
+        yield return new WaitForSeconds(1f);
+
+        int currentLevel = player.level;
+
         player.WinBattle(xpGain, killCount);
+
+        if (player.level > currentLevel)
+        {
+            actionText.text = "You are now level " + player.level;
+            yield return new WaitForSeconds(.1f);
+        }
+
         EndBattle();
     }
 
-    public void LoseBattle()
+    private IEnumerator LoseBattle()
     {
+        StopCoroutine(battleLoop);
+
+        actionText.text = "You were defeated!";
+
+        yield return new WaitForSeconds(1f);
+
         SceneManager.LoadScene("Title Screen");
     }
 }
