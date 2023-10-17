@@ -12,13 +12,13 @@ EditorBuildSettings:
     path: Assets/Scenes/Intro Cutscene.unity
     guid: 5fa0510c6d98e9047a67a6060c33caff
   - enabled: 1
-    path: Assets/Scenes/Throne Room.unity
+    path: Assets/Scenes/Playable/Throne Room.unity
     guid: 9e712eca0d89a4b46bd7bbc315501996
   - enabled: 1
-    path: Assets/Scenes/Wilds.unity
+    path: Assets/Scenes/Playable/Wilds.unity
     guid: 0ce912e1b4d6e8e4880f24bdbd0ce4cc
   - enabled: 1
-    path: Assets/Scenes/Outskirts.unity
+    path: Assets/Scenes/Playable/Outskirts.unity
     guid: a6997b959de0ff54b9e2eacd9b4887d6
   - enabled: 1
     path: Assets/Scenes/Credits.unity

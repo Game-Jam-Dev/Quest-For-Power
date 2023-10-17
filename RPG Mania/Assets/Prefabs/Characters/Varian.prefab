@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &1994173138829777053
+--- !u!1001 &9189691735162266032
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,38 +10,43 @@ PrefabInstance:
     - target: {fileID: 1769637154394782135, guid: f9c545364aad19f4bb9f85d04902751c,
         type: 3}
       propertyPath: m_Size.x
-      value: 5.12
+      value: 2.8888888
       objectReference: {fileID: 0}
     - target: {fileID: 1769637154394782135, guid: f9c545364aad19f4bb9f85d04902751c,
         type: 3}
       propertyPath: m_Size.y
-      value: 5.12
+      value: 2.8444445
       objectReference: {fileID: 0}
     - target: {fileID: 1769637154394782135, guid: f9c545364aad19f4bb9f85d04902751c,
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 937211cdd4900ff4eb4f2e2e3eca58fe,
+      objectReference: {fileID: 21300000, guid: 85d12d09cf8e0e948a2a6a2e51faa73a,
         type: 3}
     - target: {fileID: 1769637154394782135, guid: f9c545364aad19f4bb9f85d04902751c,
         type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1794985302480791014, guid: f9c545364aad19f4bb9f85d04902751c,
+    - target: {fileID: 2966693440811833630, guid: f9c545364aad19f4bb9f85d04902751c,
         type: 3}
-      propertyPath: m_Height
-      value: 2.7
+      propertyPath: isFighting
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1794985302480791014, guid: f9c545364aad19f4bb9f85d04902751c,
+    - target: {fileID: 2966693440811833630, guid: f9c545364aad19f4bb9f85d04902751c,
         type: 3}
-      propertyPath: m_Radius
-      value: 4
+      propertyPath: combatPositionHeightAdjustment
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3036269658535557653, guid: f9c545364aad19f4bb9f85d04902751c,
         type: 3}
       propertyPath: m_Name
-      value: Monst
+      value: Varian Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 3036269658535557653, guid: f9c545364aad19f4bb9f85d04902751c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Boss
       objectReference: {fileID: 0}
     - target: {fileID: 3446468312287349178, guid: f9c545364aad19f4bb9f85d04902751c,
         type: 3}
@@ -102,40 +107,29 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 5c1237cb24d90c74a9103c56002f3360, type: 2}
-    m_RemovedComponents: []
+      objectReference: {fileID: 9100000, guid: 976c14c1f55bca24eb2dce53fe9c9f8f, type: 2}
+    m_RemovedComponents:
+    - {fileID: 1794985302480791014, guid: f9c545364aad19f4bb9f85d04902751c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f9c545364aad19f4bb9f85d04902751c, type: 3}
---- !u!114 &1880120070783393725 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 124762517530691360, guid: f9c545364aad19f4bb9f85d04902751c,
-    type: 3}
-  m_PrefabInstance: {fileID: 1994173138829777053}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &3570869403515740808 stripped
+--- !u!1 &6172931899074173861 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3036269658535557653, guid: f9c545364aad19f4bb9f85d04902751c,
     type: 3}
-  m_PrefabInstance: {fileID: 1994173138829777053}
+  m_PrefabInstance: {fileID: 9189691735162266032}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &286914051976275691
+--- !u!114 &4600024616435205422
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3570869403515740808}
+  m_GameObject: {fileID: 6172931899074173861}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43adab7222cc3f647b4f8e89bee7f1eb, type: 3}
+  m_Script: {fileID: 11500000, guid: b6b9220f5c104da488c2e7b88e97f69b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterName: Monster
+  characterName: Lord Varian
   maxHealth: 0
   health: 0
   element: 0
@@ -147,18 +141,30 @@ MonoBehaviour:
   hitTarget: 0
   attackClip: {fileID: 8300000, guid: a3f952095cec84440a88eb462db52486, type: 3}
   level: 1
-  detectRange: 7
-  ea: {fileID: 3641008635405992323}
-  damageDisplay: {fileID: 1880120070783393725}
---- !u!114 &3641008635405992323 stripped
+  detectRange: 0.5
+  ea: {fileID: 6243000664107169966}
+  damageDisplay: {fileID: 9093727697120781968}
+--- !u!114 &6243000664107169966 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2966693440811833630, guid: f9c545364aad19f4bb9f85d04902751c,
     type: 3}
-  m_PrefabInstance: {fileID: 1994173138829777053}
+  m_PrefabInstance: {fileID: 9189691735162266032}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3570869403515740808}
+  m_GameObject: {fileID: 6172931899074173861}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e10645ac2c0aa8b42b83e09055397b20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &9093727697120781968 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 124762517530691360, guid: f9c545364aad19f4bb9f85d04902751c,
+    type: 3}
+  m_PrefabInstance: {fileID: 9189691735162266032}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

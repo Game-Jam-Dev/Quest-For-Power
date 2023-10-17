@@ -45,7 +45,7 @@ public class WildsManager : WorldManager {
             e.InitializeEnemy(i);
             i++;
 
-            if (e.isAlive) liveEnemies.Add(e);
+            if (e.GetIsAlive()) liveEnemies.Add(e);
 
             else Destroy(e.gameObject);
         }
@@ -53,8 +53,12 @@ public class WildsManager : WorldManager {
 
     public void BossFight(GameObject boss)
     {
+        XixInfo xix = boss.GetComponent<XixInfo>();
+
         foreach (EnemyInfo e in reinforcements)
-            boss.GetComponent<XixInfo>().AddReinforcement(e);
+            xix.AddReinforcement(e);
+        
+        liveEnemies.Add(xix);
 
         final = true;
 

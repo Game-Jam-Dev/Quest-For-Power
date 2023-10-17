@@ -1,16 +1,19 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EnemyInfo : CharacterInfo {
     public int level = 1;
     public float detectRange = .5f;
-    public bool isAlive = true;
-    public int id = 0;
-    public string scene = "";
+    private bool isAlive = true;
+    private int id = 0;
+    private int scene = 0;
     protected WildsManager wildsManager;
     protected GameObject player;
     protected bool isAttacking;
 
     [SerializeField] protected EnemyAnimation ea;
+    [SerializeField] private TextMeshPro damageDisplay;
 
     protected override void Start()
     {
@@ -23,6 +26,7 @@ public class EnemyInfo : CharacterInfo {
     public void InitializeEnemy(int id)
     {
         this.id = id;
+        scene = SceneManager.GetActiveScene().buildIndex;
         isAlive = GameManager.instance.CheckEnemyDeath(scene, id);
     }
 
@@ -31,6 +35,8 @@ public class EnemyInfo : CharacterInfo {
         level = GameManager.instance.GetPlayerLevel();
         
         SetStats();
+        damageDisplay.text = maxHealth.ToString();
+        damageDisplay.enabled = true;
         ea.StartFighting();
     }
 
@@ -41,6 +47,13 @@ public class EnemyInfo : CharacterInfo {
         isAlive = false;
         GameManager.instance.SetEnemyDeath(scene, id);
         Destroy(gameObject);
+    }
+
+    public override void Attacked(int damage)
+    {
+        base.Attacked(damage);
+
+        damageDisplay.text = health.ToString();
     }
 
     public override ComboAction PickEnemyCombo(int currentComboLength)
@@ -74,6 +87,11 @@ public class EnemyInfo : CharacterInfo {
     public override Animator GetAnimator()
     {
         return ea.GetAnimator();
+    }
+
+    public bool GetIsAlive()
+    {
+        return isAlive;
     }
 
     protected virtual void OnTriggerEnter(Collider other) 

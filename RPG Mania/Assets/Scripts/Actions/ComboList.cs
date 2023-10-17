@@ -59,8 +59,7 @@ public class ComboList
 
         damage = CritMultiply(2, 2, damage);
 
-        target.health -= damage;
-        if (target.health < 0) target.health = 0;
+        target.Attacked(damage);
     }
 
     private int CritMultiply(int criticalChance, float damageBoost, int damage)

@@ -82,6 +82,12 @@ public class CharacterInfo : MonoBehaviour {
         }
     }
 
+    public virtual void Attacked(int damage)
+    {
+        health -= damage;
+        if (health < 0) health = 0;
+    }
+
     public virtual void SetAnimationTrigger(string triggerName) {}
 
     public virtual Animator GetAnimator() {return null;}

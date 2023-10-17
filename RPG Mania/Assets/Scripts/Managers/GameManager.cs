@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour {
     private PlayerData playerData = new();
     private WorldState worldState = new();
 
+    private readonly int wildsScene = 3;
+    private readonly int outskirtsScene = 4;
+
     public void SetGameData(GameData gameData)
     {
         playerData = gameData.playerData;
@@ -59,20 +62,24 @@ public class GameManager : MonoBehaviour {
         worldState.visitedWilds = b;
     }
 
-    public bool CheckEnemyDeath(string scene, int id)
+    public bool CheckEnemyDeath(int scene, int id)
     {
-        if (scene == "wilds") return worldState.enemyIsAliveWilds[id];
+        Debug.Log(scene + " " + wildsScene + " " + id + " " + worldState.enemyIsAliveWilds[id]);
 
-        else if (scene == "outskirts") return worldState.enemyIsAliveOutskirts[id];
+        if (scene == wildsScene) return worldState.enemyIsAliveWilds[id];
+
+        else if (scene == outskirtsScene) return worldState.enemyIsAliveOutskirts[id];
 
         else return true;
     }
 
-    public void SetEnemyDeath(string scene, int id)
+    public void SetEnemyDeath(int scene, int id)
     {
-        if (scene == "wilds") worldState.enemyIsAliveWilds[id] = false;
+        Debug.Log(scene + " " + wildsScene + " " + id + " " + worldState.enemyIsAliveWilds[id]);
 
-        else if (scene == "outskirts") worldState.enemyIsAliveOutskirts[id] = false;
+        if (scene == wildsScene) worldState.enemyIsAliveWilds[id] = false;
+
+        else if (scene == outskirtsScene) worldState.enemyIsAliveOutskirts[id] = false;
 
         Debug.Log(id + " " + worldState.enemyIsAliveWilds[id]);
     }
