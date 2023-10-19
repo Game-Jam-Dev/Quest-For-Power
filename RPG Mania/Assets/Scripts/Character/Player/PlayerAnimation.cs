@@ -63,6 +63,17 @@ public class PlayerAnimation : MonoBehaviour {
         }
         return false;
     }
+
+    public void EscapeFromEnemy()
+    {
+        float escapeDistanceMultiplier = .2f;
+
+        Transform camera = Camera.main.transform;
+
+        Vector3 direction = camera.position - transform.position;
+
+        transform.position += new Vector3(direction.x, 0, direction.z) * escapeDistanceMultiplier;
+    }
     
     public Animator GetAnimator() {return anim;}
 }

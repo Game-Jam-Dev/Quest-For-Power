@@ -38,6 +38,8 @@ public class CharacterInfo : MonoBehaviour {
 
     public virtual void Kill(){}
 
+    public virtual void Defeated(){}
+
     public virtual void PrepareCombat(){}
 
     public ComboAction GetCombo(int i)

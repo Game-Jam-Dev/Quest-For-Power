@@ -7,7 +7,7 @@ using System.Linq;
 
 public class ThroneManager : WorldManager {
     [SerializeField] private VarianInfo boss;
-    private string nextScene = "Wilds";
+    private readonly string nextScene = "Wilds";
     private bool pre, preBoss = false;
     [SerializeField] private DialogObject dialogObjectStart, dialogObjectPreBoss, dialogObjectPostBoss;
 

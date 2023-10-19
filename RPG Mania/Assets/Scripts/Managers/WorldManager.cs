@@ -31,6 +31,13 @@ public abstract class WorldManager : MonoBehaviour {
 
     public virtual void WinBattle(){}
 
+    public virtual void LoseBattle()
+    {
+        SceneManager.LoadScene("Title Screen");
+    }
+
+    public virtual void EscapeBattle(){}
+
     protected virtual void SpawnEnemies()
     {
         foreach (GameObject e in GameObject.FindGameObjectsWithTag("Enemy"))

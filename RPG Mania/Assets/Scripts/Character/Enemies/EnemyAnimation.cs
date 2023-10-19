@@ -6,7 +6,7 @@ public class EnemyAnimation : MonoBehaviour {
     private SkillList.Element element;
 
     public float combatPositionHeightAdjustment = 1;
-    private float combatPositionHeight;
+    private float combatPositionHeight, originalPositionHeight;
     public bool isAttacking = false;
     public bool isFighting = false;
 
@@ -17,7 +17,8 @@ public class EnemyAnimation : MonoBehaviour {
 
         AssignElement(element);
 
-        combatPositionHeight = transform.position.y + combatPositionHeightAdjustment;
+        originalPositionHeight = transform.position.y;
+        combatPositionHeight = originalPositionHeight + combatPositionHeightAdjustment;
     }
 
     private void LateUpdate() {
@@ -39,6 +40,14 @@ public class EnemyAnimation : MonoBehaviour {
         isFighting = true;
 
         transform.position = new(transform.position.x, combatPositionHeight, transform.position.z);
+    }
+
+    public void StopFighting()
+    {
+        isFighting = false;
+
+        transform.position = new(transform.position.x, originalPositionHeight, transform.position.z);
+        // transform.rotation = Quaternion.LookRotation(Vector3.zero);
     }
 
     public void AssignElement(SkillList.Element e)

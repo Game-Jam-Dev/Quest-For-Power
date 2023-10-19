@@ -44,7 +44,7 @@ public class PlayerInfo : CharacterInfo {
 
         if (experience >= xpForLevel) LevelUp(xpForLevel);
 
-        health = maxHealth;
+        ResetHealth();
 
         GameManager.instance.SetPlayerExperience(experience);
     }
@@ -174,6 +174,8 @@ public class PlayerInfo : CharacterInfo {
     }
 
     public override Animator GetAnimator() {return pa.GetAnimator();}
+
+    public PlayerAnimation GetPlayerAnimation() { return pa; }
 
     public override bool GetIsAttacking() {return pa.isAttacking;}
 }

@@ -17,6 +17,7 @@ public class BattleManager : MonoBehaviour {
     private GameManager gameManager;
     public int killCount = 0;
     private int xpGain = 0;
+    private float dialogueDisplayTime = 1.5f;
 
     private Queue<CharacterInfo> turnOrder = new Queue<CharacterInfo>();
     public List<EnemyInfo> enemies = new List<EnemyInfo>();
@@ -130,7 +131,7 @@ public class BattleManager : MonoBehaviour {
                                 var newTurnOrder = new Queue<CharacterInfo>(turnOrder.Where(x => x != target));
                                 turnOrder = newTurnOrder;
 
-                                target.Kill();
+                                target.Defeated();
 
                                 if (killCount >= enemies.Count) 
                                     StartCoroutine(WinBattle());
@@ -195,25 +196,32 @@ public class BattleManager : MonoBehaviour {
         pickAction.SetActive(true);
     }
 
-    private void SelectAttack()
+    public void SelectAttack()
     {
         canCombo = true;
         pickAction.SetActive(false);
         targetContainer.SetActive(true);
     }
 
-    private void SelectAbsorb()
+    public void SelectAbsorb()
     {
         canCombo = false;
         pickAction.SetActive(false);
         targetContainer.SetActive(true);
     }
 
-    private void SelectSkill()
+    public void SelectSkill()
     {
         canCombo = true;
         pickAction.SetActive(false);
         skillContainer.SetActive(true);
+    }
+
+    public void SelectEscape()
+    {
+        StopCoroutine(battleLoop);
+        worldManager.EscapeBattle();
+        EndBattle();
     }
 
     private void BackFromSkill()
@@ -416,7 +424,7 @@ public class BattleManager : MonoBehaviour {
         comboButtons.Clear();
     }
 
-    public void EndBattle()
+    private void EndBattle()
     {
         player.EndCombat();
 
@@ -439,8 +447,6 @@ public class BattleManager : MonoBehaviour {
         }
 
         gameObject.SetActive(false);
-
-        worldManager.WinBattle();
     }
 
     private IEnumerator WinBattle()
@@ -449,17 +455,24 @@ public class BattleManager : MonoBehaviour {
 
         actionText.text = "You won!";
 
-        yield return new WaitForSeconds(1f);
-
         int currentLevel = player.level;
 
         player.WinBattle(xpGain, killCount);
 
+        yield return new WaitForSeconds(dialogueDisplayTime);
+
         if (player.level > currentLevel)
         {
-            actionText.text = "You are now level " + player.level;
-            yield return new WaitForSeconds(.1f);
+            actionText.text = "Level up! You are now level " + player.level;
+            yield return new WaitForSeconds(dialogueDisplayTime);
         }
+
+        foreach (EnemyInfo e in enemies)
+        {
+            e.Kill();
+        }
+
+        worldManager.WinBattle();
 
         EndBattle();
     }
@@ -470,8 +483,8 @@ public class BattleManager : MonoBehaviour {
 
         actionText.text = "You were defeated!";
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(dialogueDisplayTime);
 
-        SceneManager.LoadScene("Title Screen");
+        worldManager.LoseBattle();
     }
 }

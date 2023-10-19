@@ -22,6 +22,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2954583792082920758, guid: 4c63db1762ae4a943b5f1f9fc35d49ad,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4676544588567442417, guid: 4c63db1762ae4a943b5f1f9fc35d49ad,
         type: 3}
       propertyPath: m_Name
@@ -162,9 +167,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a7468952ff6966408f8dcf1b01b89ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boss: {fileID: 0}
   battleUI: {fileID: 8668608954351140431}
   dialogManager: {fileID: 4455242219326078026}
+  boss: {fileID: 0}
   dialogObjectStart: {fileID: 11400000, guid: 24750a0b3d6716d428a98d9e4370e106, type: 2}
   dialogObjectPreBoss: {fileID: 11400000, guid: b8cf5446c3edc5840bdd08a343f0ba48,
     type: 2}

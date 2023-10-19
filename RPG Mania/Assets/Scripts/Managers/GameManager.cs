@@ -64,8 +64,6 @@ public class GameManager : MonoBehaviour {
 
     public bool CheckEnemyDeath(int scene, int id)
     {
-        Debug.Log(scene + " " + wildsScene + " " + id + " " + worldState.enemyIsAliveWilds[id]);
-
         if (scene == wildsScene) return worldState.enemyIsAliveWilds[id];
 
         else if (scene == outskirtsScene) return worldState.enemyIsAliveOutskirts[id];
@@ -75,13 +73,9 @@ public class GameManager : MonoBehaviour {
 
     public void SetEnemyDeath(int scene, int id)
     {
-        Debug.Log(scene + " " + wildsScene + " " + id + " " + worldState.enemyIsAliveWilds[id]);
-
         if (scene == wildsScene) worldState.enemyIsAliveWilds[id] = false;
 
         else if (scene == outskirtsScene) worldState.enemyIsAliveOutskirts[id] = false;
-
-        Debug.Log(id + " " + worldState.enemyIsAliveWilds[id]);
     }
 
     public void SetWorldStateWilds(List<bool> enemyIsAliveWilds)

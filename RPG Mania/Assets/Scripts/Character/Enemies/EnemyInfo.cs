@@ -40,6 +40,13 @@ public class EnemyInfo : CharacterInfo {
         ea.StartFighting();
     }
 
+    public void ResetFromFight()
+    {
+        gameObject.SetActive(true);
+        damageDisplay.enabled = false;
+        ea.StopFighting();
+    }
+
     protected virtual void SetStats(){}
 
     public override void Kill()
@@ -49,11 +56,14 @@ public class EnemyInfo : CharacterInfo {
         Destroy(gameObject);
     }
 
+    public override void Defeated()
+    {
+        gameObject.SetActive(false);
+    }
+
     public override void Attacked(int damage)
     {
         base.Attacked(damage);
-
-        damageDisplay.text = health.ToString();
     }
 
     public override ComboAction PickEnemyCombo(int currentComboLength)
@@ -77,6 +87,8 @@ public class EnemyInfo : CharacterInfo {
     public override void Recover()
     {
         ea.Attacked(false);
+
+        damageDisplay.text = health.ToString();
     }
 
     public override bool GetIsAttacking()
@@ -118,11 +130,6 @@ public class EnemyInfo : CharacterInfo {
 
             wildsManager.EncounterEnemy(gameObject, rotationZ);
         }
-    }
-
-    public void SetRotationForBattleCamera()
-    {
-        ea.StartFighting();
     }
 
     public int XPFromKill(int playerLevel)
