@@ -73,6 +73,8 @@ public class PlayerInfo : CharacterInfo {
     public void EndCombat()
     {
         pa.SwitchFromCombat();
+
+        DeactivateSkill();
     }
 
     public override void SetAnimationTrigger(string triggerName)
@@ -139,17 +141,22 @@ public class PlayerInfo : CharacterInfo {
         return skillActions[index].Item2;
     }
 
-    public void AbsorbSkill(SkillList.Element e, int n = 1)
+    public void AbsorbSkill(SkillList.Element e)
     {
         int i = (int)e;
+
+        int n = Random.Range(1,4);
 
         skillActions[i] = (skillActions[i].Item1, skillActions[i].Item2 + n);
 
         audioSource.clip = elementClips[0].Item1;
         audioSource.time = elementClips[0].Item2;
-        audioSource?.Play();
+        audioSource.Play();
 
         GameManager.instance.SetPlayerSkill(i, skillActions[i].Item2);
+
+        health += maxHealth/2;
+        if (health > maxHealth) health = maxHealth;
     }
 
     public void LoseSkill(int n = 1)
@@ -166,11 +173,12 @@ public class PlayerInfo : CharacterInfo {
 
             GameManager.instance.SetPlayerSkill(index, skillActions[index].Item2);
         }
+    }
 
+    public void DeactivateSkill()
+    {
         element = SkillList.Element.None;
         activeSkill = null;
-
-        
     }
 
     public override Animator GetAnimator() {return pa.GetAnimator();}

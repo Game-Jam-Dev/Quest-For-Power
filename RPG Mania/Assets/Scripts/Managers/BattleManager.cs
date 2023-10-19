@@ -26,6 +26,7 @@ public class BattleManager : MonoBehaviour {
     private int comboLength = 0;
     private bool canCombo = true;
     private int absorbCounter = 0;
+    private int activeSkillCounter = 0;
 
     private List<ComboAction> comboActions = new();
     private CharacterInfo target;
@@ -47,9 +48,6 @@ public class BattleManager : MonoBehaviour {
         var characters = new List<CharacterInfo> { player }.Concat(enemies);
         turnOrder = new Queue<CharacterInfo>(characters);
         
-        pickAttackButton.onClick.AddListener(SelectAttack);
-        pickAbsorbButton.onClick.AddListener(SelectAbsorb);
-        pickSkillButton.onClick.AddListener(SelectSkill);
         pickAbsorbButton.interactable = true;
 
         SetEnemies();
@@ -92,6 +90,8 @@ public class BattleManager : MonoBehaviour {
                         actionText.text = $"{activeCharacter.characterName} absorbed the {target.element} element from {target.characterName}";
 
                         if (absorbCounter >= 3) pickAbsorbButton.interactable = false;
+
+                        UpdateHealth();
                     } 
                     else
                     {
@@ -141,9 +141,6 @@ public class BattleManager : MonoBehaviour {
                             i++;
                         }
                     }
-                    
-                    player.element = SkillList.Element.None;
-
                 } else {
                     while (comboLength < activeCharacter.combo)
                     {
@@ -236,6 +233,7 @@ public class BattleManager : MonoBehaviour {
         player.element = SkillList.Element.None;
         pSkill.text = "";
         pElement.text = player.characterName + "'s Active Element: " + player.element;
+        
         targetContainer.SetActive(false);
         pickAction.SetActive(true);
     }
@@ -329,10 +327,24 @@ public class BattleManager : MonoBehaviour {
         {
             Destroy(skillContainer.transform.GetChild(i).gameObject);
         }
-        player.LoseSkill();
 
-        pSkill.text = "";
+        if (player.activeSkill != null)
+        {
+            if (activeSkillCounter == 0)
+                player.LoseSkill();
 
+            if (activeSkillCounter < 3)
+                activeSkillCounter++;
+            else 
+            {
+                player.DeactivateSkill();
+                pSkill.text = "";
+                activeSkillCounter = 0;
+            }
+        } else {
+            pSkill.text = "";
+        }
+        
         for (int i = 0; i < player.CountSkills(); i++)
         {
             SkillAction currentSkill = player.GetSkill(i);
