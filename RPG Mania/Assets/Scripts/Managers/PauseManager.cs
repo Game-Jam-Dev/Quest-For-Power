@@ -2,10 +2,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
+using System;
 
 public class PauseManager : MonoBehaviour {
     [SerializeField] private GameObject pauseUI;
     [SerializeField] private Button resumeButton, saveButton, quitButton;
+
+    public static event Action<bool> pauseEvent;
 
     private InputActions actions;
     
@@ -17,10 +20,6 @@ public class PauseManager : MonoBehaviour {
         actions.Gameplay.Enable();
 
         actions.Gameplay.Pause.performed += TogglePause;
-
-        resumeButton.onClick.AddListener(Resume);
-        saveButton.onClick.AddListener(SaveGame);
-        quitButton.onClick.AddListener(Quit);
     }
 
     private void OnEnable() {
@@ -40,22 +39,25 @@ public class PauseManager : MonoBehaviour {
             Pause();
     }
 
-    private void Resume() {
+    public void Resume() {
         Time.timeScale = 1; 
         pauseUI.SetActive(false);
+        pauseEvent(false);
     }
 
     private void Pause() {
         Time.timeScale = 0; 
         pauseUI.SetActive(true);
+        pauseEvent(true);
+        Utility.SetActiveButton(resumeButton);
     }
 
-    private void SaveGame()
+    public void SaveGame()
     {
         SaveSystem.SaveGameData(GameManager.instance.GetGameData());
     }
 
-    private void Quit() {
+    public void Quit() {
         Time.timeScale = 1;
         actions.Gameplay.Disable();
         SceneManager.LoadScene(mainMenuSceneIndex);

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour {
     public float speed = 5f;
@@ -33,6 +34,8 @@ public class PlayerMovement : MonoBehaviour {
         actions.Gameplay.Move.canceled += StopCharacter;
         actions.Gameplay.Sprint.performed += context => isSprinting = true;
         actions.Gameplay.Sprint.canceled += context => isSprinting = false;
+
+        PauseManager.pauseEvent += TogglePause;
     }
 
     private void OnDisable() {
@@ -40,6 +43,8 @@ public class PlayerMovement : MonoBehaviour {
         actions.Gameplay.Move.canceled -= StopCharacter;
         actions.Gameplay.Sprint.performed -= context => isSprinting = true;
         actions.Gameplay.Sprint.canceled -= context => isSprinting = false;
+
+        PauseManager.pauseEvent -= TogglePause;
 
         actions.Gameplay.Disable();
 
@@ -87,5 +92,13 @@ public class PlayerMovement : MonoBehaviour {
         audioSource.clip = walkSound;
         audioSource.time = 1.88f;
         audioSource.Play();
+    }
+
+    private void TogglePause(bool pause)
+    {
+        if (pause)
+            actions.Gameplay.Disable();
+        else 
+            actions.Gameplay.Enable();
     }
 }

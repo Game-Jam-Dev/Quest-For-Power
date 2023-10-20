@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class SettingsMenuManager : MonoBehaviour
 {
-    [SerializeField] private TitleManager titleManager;
+    [SerializeField] private GameObject previousMenu;
 
     [Header("Volume Settings")]
     [SerializeField] private TMP_Text volumeTextValue = null;
@@ -101,6 +101,7 @@ public class SettingsMenuManager : MonoBehaviour
     public void ReturnToMain()
     {
         gameObject.SetActive(false);
+        previousMenu.SetActive(true);
     }
 
     public void ResetToDefault()

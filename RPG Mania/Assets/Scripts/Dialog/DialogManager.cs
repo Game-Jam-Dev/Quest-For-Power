@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DialogManager : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class DialogManager : MonoBehaviour
     [SerializeField] private TMP_Text dialogText;
     [SerializeField] private TMP_Text dialogName;
     [SerializeField] private float textSpeed = .035f;
+    [SerializeField] private Button skipButton;
     private Coroutine currentDialog;
     public bool clicked = false;
 
@@ -54,6 +56,7 @@ public class DialogManager : MonoBehaviour
 
     private void OnEnable() {
         dialogBox.SetActive(true);
+        Utility.SetActiveButton(skipButton);
     }
 
     private void OnDisable() {

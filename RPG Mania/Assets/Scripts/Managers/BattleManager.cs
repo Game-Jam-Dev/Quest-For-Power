@@ -5,6 +5,7 @@ using TMPro;
 using System.Collections.Generic;
 using System.Linq;
 using System.Collections;
+using UnityEngine.EventSystems;
 
 public class BattleManager : MonoBehaviour {
     [SerializeField] private TextMeshProUGUI pHealth, pSkill, pElement, pCombo, actionText, eHealth;
@@ -48,8 +49,6 @@ public class BattleManager : MonoBehaviour {
         var characters = new List<CharacterInfo> { player }.Concat(enemies);
         turnOrder = new Queue<CharacterInfo>(characters);
         
-        pickAbsorbButton.interactable = true;
-
         SetEnemies();
         SetCombos();
 
@@ -124,8 +123,11 @@ public class BattleManager : MonoBehaviour {
                                 xpGain += (target as EnemyInfo).XPFromKill(player.level);
 
                                 int targetIndex = enemies.IndexOf(target as EnemyInfo);
+
+                                Button targetButton = targetContainer.transform.GetChild(targetIndex).GetComponent<Button>();
                                 
-                                targetContainer.transform.GetChild(targetIndex).GetComponent<Button>().interactable = false;
+                                targetButtons.Remove(targetButton);
+                                targetButton.interactable = false;
                                 eHealthContainer.transform.GetChild(targetIndex).GetComponent<TextMeshProUGUI>().text = target.characterName + " is defeated";
 
                                 var newTurnOrder = new Queue<CharacterInfo>(turnOrder.Where(x => x != target));
@@ -191,6 +193,7 @@ public class BattleManager : MonoBehaviour {
         pElement.text = player.characterName + "'s Active Element: " + player.element;
         awaitCommand = true;
         pickAction.SetActive(true);
+        Utility.SetActiveButton(pickAttackButton);
     }
 
     public void SelectAttack()
@@ -198,6 +201,7 @@ public class BattleManager : MonoBehaviour {
         canCombo = true;
         pickAction.SetActive(false);
         targetContainer.SetActive(true);
+        Utility.SetActiveButton(targetButtons[0]);
     }
 
     public void SelectAbsorb()
@@ -205,6 +209,7 @@ public class BattleManager : MonoBehaviour {
         canCombo = false;
         pickAction.SetActive(false);
         targetContainer.SetActive(true);
+        Utility.SetActiveButton(targetButtons[0]);
     }
 
     public void SelectSkill()
@@ -212,6 +217,8 @@ public class BattleManager : MonoBehaviour {
         canCombo = true;
         pickAction.SetActive(false);
         skillContainer.SetActive(true);
+        Utility.SetActiveButton(skillButtons[0]);
+        Debug.Log(skillButtons[0] + " " + skillButtons.Count);
     }
 
     public void SelectEscape()
@@ -225,6 +232,7 @@ public class BattleManager : MonoBehaviour {
     {
         skillContainer.SetActive(false);
         pickAction.SetActive(true);
+        Utility.SetActiveButton(pickAttackButton);
     }
 
     private void BackFromTarget()
@@ -236,6 +244,7 @@ public class BattleManager : MonoBehaviour {
         
         targetContainer.SetActive(false);
         pickAction.SetActive(true);
+        Utility.SetActiveButton(pickAttackButton);
     }
 
     private void BackFromCombo()
@@ -245,6 +254,7 @@ public class BattleManager : MonoBehaviour {
         comboLength = 0;
         UpdateCombo();
         targetContainer.SetActive(true);
+        Utility.SetActiveButton(targetButtons[0]);
     }
 
     private void PickTarget(CharacterInfo target)
@@ -252,7 +262,11 @@ public class BattleManager : MonoBehaviour {
         this.target = target;
         targetContainer.SetActive(false);
 
-        if (canCombo) comboContainer.SetActive(true);
+        if (canCombo)
+        {
+            comboContainer.SetActive(true);
+            Utility.SetActiveButton(comboButtons[0]);
+        } 
 
         else awaitCommand = false;
     }
@@ -265,8 +279,13 @@ public class BattleManager : MonoBehaviour {
             comboLength += action.Cost;
         }
 
-        if (comboLength < player.combo) UpdateCombo();
-
+        if (comboLength < player.combo) 
+        {
+            if (action.Cost > player.combo - comboLength)
+                Utility.SetActiveButton(comboButtons[0]);
+                
+            UpdateCombo();
+        }
         else
         {
             pCombo.text = player.characterName + "'s Combo Length: " + (player.combo - comboLength);
@@ -281,6 +300,8 @@ public class BattleManager : MonoBehaviour {
 
         skillContainer.SetActive(false);
         targetContainer.SetActive(true);
+        Utility.SetActiveButton(targetButtons[0]);
+
         pSkill.text = player.characterName + "'s Active Skill: " + player.activeSkill.Name;
         pElement.text = player.characterName + "'s Active Element: " + player.element;
     }
@@ -327,6 +348,8 @@ public class BattleManager : MonoBehaviour {
         {
             Destroy(skillContainer.transform.GetChild(i).gameObject);
         }
+
+        skillButtons.Clear();
 
         if (player.activeSkill != null)
         {
@@ -414,6 +437,10 @@ public class BattleManager : MonoBehaviour {
 
     private void ClearUI()
     {
+        targetButtons.Clear();
+        comboButtons.Clear();
+        skillButtons.Clear();
+
         foreach (TextMeshProUGUI t in eHealthContainer.GetComponentsInChildren<TextMeshProUGUI>()){
             Destroy(t.gameObject);
         }
@@ -433,7 +460,7 @@ public class BattleManager : MonoBehaviour {
             Destroy(comboContainer.transform.GetChild(i).gameObject);
         }
 
-        comboButtons.Clear();
+        pickAbsorbButton.interactable = true;
     }
 
     private void EndBattle()

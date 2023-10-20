@@ -14,6 +14,7 @@ public class CutsceneManager : MonoBehaviour {
     private int currentImageIndex = -1;
     private int currentDialogIndex = 0;
     [SerializeField] private string nextScene;
+    [SerializeField] private Button skipButton;
     private bool canSkip = true;
 
     private enum NextElement
@@ -40,6 +41,8 @@ public class CutsceneManager : MonoBehaviour {
         yield return new WaitUntil(() => !dialogManager.ShowingDialog());
         
         dialogManager.enabled = false;
+
+        Utility.SetActiveButton(skipButton);
 
         currentDialogIndex++;
 
