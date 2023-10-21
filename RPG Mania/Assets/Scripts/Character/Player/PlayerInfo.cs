@@ -59,7 +59,7 @@ public class PlayerInfo : CharacterInfo {
         GameManager.instance.SetPlayerLevel(level);
     }
 
-    private void SetStats(int level)
+    public void SetStats(int level)
     {
         maxHealth = 20 + level * 5;
         attack = 9 + (int)(level * 1.5f);
@@ -68,6 +68,8 @@ public class PlayerInfo : CharacterInfo {
         evasion = .05f + level / 1000f;
 
         combo = 3 + (int)Mathf.Pow(level, .3f);
+
+        ResetHealth();
     }
 
     public void EndCombat()
