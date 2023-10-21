@@ -285,11 +285,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1078228898759043340, guid: ee22fa963f27753488037834e6096ada,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 1078228898759043341, guid: ee22fa963f27753488037834e6096ada,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -319,11 +314,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1078228899028297308, guid: ee22fa963f27753488037834e6096ada,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1078228899028297309, guid: ee22fa963f27753488037834e6096ada,
         type: 3}
@@ -385,16 +375,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1078228899707433123, guid: ee22fa963f27753488037834e6096ada,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1078228900159456494, guid: ee22fa963f27753488037834e6096ada,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 1078228900159456495, guid: ee22fa963f27753488037834e6096ada,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -424,11 +404,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5702919162455458982, guid: ee22fa963f27753488037834e6096ada,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5702919162455458983, guid: ee22fa963f27753488037834e6096ada,
         type: 3}
