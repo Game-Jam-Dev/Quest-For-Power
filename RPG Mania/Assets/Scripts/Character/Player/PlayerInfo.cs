@@ -122,6 +122,8 @@ public class PlayerInfo : CharacterInfo {
             element = SkillList.Element.None;
         }
 
+        pa.SetElement(element);
+
         audioSource.clip = elementClips[(int) element].Item1;
         audioSource.time = elementClips[(int) element].Item2;
         audioSource?.Play();
@@ -181,6 +183,7 @@ public class PlayerInfo : CharacterInfo {
     {
         element = SkillList.Element.None;
         activeSkill = null;
+        pa.SetElement(element);
     }
 
     public override Animator GetAnimator() {return pa.GetAnimator();}
