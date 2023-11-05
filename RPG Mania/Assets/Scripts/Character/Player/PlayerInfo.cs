@@ -34,6 +34,7 @@ public class PlayerInfo : CharacterInfo {
     public override void PrepareCombat()
     {
         pa.SwitchToCombat();
+        GetComponent<PlayerMovement>().enabled = false;
     }
 
     public void WinBattle(int xp, int kills)
@@ -77,6 +78,8 @@ public class PlayerInfo : CharacterInfo {
         pa.SwitchFromCombat();
 
         DeactivateSkill();
+
+        GetComponent<PlayerMovement>().enabled = true;
     }
 
     public override void SetAnimationTrigger(string triggerName)
@@ -102,7 +105,7 @@ public class PlayerInfo : CharacterInfo {
         health = maxHealth;
     }
 
-    public override void UseSkill(SkillAction skill)
+    public override void SelectSkill(SkillAction skill)
     {
         activeSkill = skill;
         
@@ -163,10 +166,8 @@ public class PlayerInfo : CharacterInfo {
         if (health > maxHealth) health = maxHealth;
     }
 
-    public void LoseSkill(int n = 1)
+    public void LoseSkillUse(int n = 1)
     {
-        if (activeSkill == null) return;
-
         int index = skillActions.FindIndex(item => item.Item1 == activeSkill);
 
         if (index != -1)

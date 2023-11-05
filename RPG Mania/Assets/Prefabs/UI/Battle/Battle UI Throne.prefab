@@ -971,24 +971,21 @@ MonoBehaviour:
   pSkill: {fileID: 7154225629493095037}
   pElement: {fileID: 8191742645628366787}
   pCombo: {fileID: 4532333333418016008}
-  eHealth: {fileID: 6488212552660973955, guid: 12ee78be68ed87742930fa06845bd6d5, type: 3}
   actionText: {fileID: 2541482093114163381}
+  eHealth: {fileID: 6488212552660973955, guid: 12ee78be68ed87742930fa06845bd6d5, type: 3}
   eHealthContainer: {fileID: 4437018506638830645}
   comboContainer: {fileID: 4437018507471472281}
   skillContainer: {fileID: 4437018507383861896}
   targetContainer: {fileID: 4437018505397472564}
   pickAction: {fileID: 4437018507030381583}
-  comboButton: {fileID: 8435136807521846455, guid: f65e6af6fca6f794c9a41a403ba041b0,
-    type: 3}
-  skillButton: {fileID: 1104211911853846905, guid: 4e9d0c08d92f09945a295f5ec36ea26e,
-    type: 3}
-  targetButton: {fileID: 1104211911853846905, guid: fdd98018acee60c48aad000fc3ed353d,
-    type: 3}
-  attackButton: {fileID: 4437018505577133881}
-  absorbButton: {fileID: 0}
+  pickAttackButton: {fileID: 0}
+  pickAbsorbButton: {fileID: 0}
   pickSkillButton: {fileID: 4437018506809299914}
-  backButton: {fileID: 1104211911853846905, guid: e5533a998ad82d7478e68b172a7c98a6,
-    type: 3}
+  pickEscapeButton: {fileID: 0}
+  comboButtonPrefab: {fileID: 0}
+  skillButtonPrefab: {fileID: 0}
+  targetButtonPrefab: {fileID: 0}
+  backButtonPrefab: {fileID: 0}
   worldManager: {fileID: 0}
   killCount: 0
   enemies: []

@@ -61,10 +61,11 @@ public class EnemyInfo : CharacterInfo {
         gameObject.SetActive(false);
     }
 
-    public override void Attacked(int damage)
-    {
-        base.Attacked(damage);
-    }
+    // uncomment if enemy takes damage incorrectly
+    // public override void Attacked(int damage)
+    // {
+    //     base.Attacked(damage);
+    // }
 
     public override ComboAction PickEnemyCombo(int currentComboLength)
     {

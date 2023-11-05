@@ -27,7 +27,16 @@ public abstract class WorldManager : MonoBehaviour {
         SpawnEnemies();
     }
 
-    public virtual List<EnemyInfo> GetEnemies() { return enemies; }
+    public virtual List<EnemyInfo> GetBattleEnemies() 
+    {
+        return enemies; 
+    }
+
+    public virtual void PrepareCharactersForCombat(IEnumerable<CharacterInfo> characters)
+    {
+        foreach (CharacterInfo c in characters)
+            c.PrepareCombat();
+    }
 
     public virtual void WinBattle(){}
 
@@ -62,4 +71,6 @@ public abstract class WorldManager : MonoBehaviour {
 
         playerMovement.enabled = true;
     }
+
+    public PlayerInfo GetPlayer() { return playerInfo; }
 }

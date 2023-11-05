@@ -103,9 +103,4 @@ public class ThroneManager : WorldManager {
 
         BossFight();
     }
-
-    public override List<EnemyInfo> GetEnemies()
-    {
-        return enemies;
-    }
 }

@@ -69,7 +69,7 @@ public class CharacterInfo : MonoBehaviour {
         return action.Action(this, target, comboDepth);
     }
 
-    public virtual void UseSkill(SkillAction skill)
+    public virtual void SelectSkill(SkillAction skill)
     {
         activeSkill = skill;
     }

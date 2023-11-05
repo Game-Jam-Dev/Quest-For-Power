@@ -392,8 +392,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1609328121110642409}
-        m_TargetAssemblyTypeName: BattleManager, Assembly-CSharp
+      - m_Target: {fileID: 8660360920264718509}
+        m_TargetAssemblyTypeName: BattleUIManager, Assembly-CSharp
         m_MethodName: SelectAbsorb
         m_Mode: 1
         m_Arguments:
@@ -526,8 +526,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1609328121110642409}
-        m_TargetAssemblyTypeName: BattleManager, Assembly-CSharp
+      - m_Target: {fileID: 8660360920264718509}
+        m_TargetAssemblyTypeName: BattleUIManager, Assembly-CSharp
         m_MethodName: SelectEscape
         m_Mode: 1
         m_Arguments:
@@ -795,8 +795,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1609328121110642409}
-        m_TargetAssemblyTypeName: BattleManager, Assembly-CSharp
+      - m_Target: {fileID: 8660360920264718509}
+        m_TargetAssemblyTypeName: BattleUIManager, Assembly-CSharp
         m_MethodName: SelectAttack
         m_Mode: 1
         m_Arguments:
@@ -1566,8 +1566,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1609328121110642409}
-        m_TargetAssemblyTypeName: BattleManager, Assembly-CSharp
+      - m_Target: {fileID: 8660360920264718509}
+        m_TargetAssemblyTypeName: BattleUIManager, Assembly-CSharp
         m_MethodName: SelectSkill
         m_Mode: 1
         m_Arguments:
@@ -1591,6 +1591,7 @@ GameObject:
   - component: {fileID: 7489129160757680203}
   - component: {fileID: 7489129160757680200}
   - component: {fileID: 1609328121110642409}
+  - component: {fileID: 8660360920264718509}
   m_Layer: 5
   m_Name: Battle UI
   m_TagString: BattleController
@@ -1664,7 +1665,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &7489129160757680200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1694,12 +1695,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e99851d7b86a3534ba801962fac917ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  worldManager: {fileID: 0}
+  killCount: 0
+  enemies: []
+  awaitCommand: 0
+  comboLength: 0
+  absorb: 0
+  activeSkillCounter: 0
+  battleUIManager: {fileID: 8660360920264718509}
+  target: {fileID: 0}
+  dialogueDisplayTime: 1.5
+--- !u!114 &8660360920264718509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7489129160757680206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b59d73983e37f90419de6b64fa47dbf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   pHealth: {fileID: 7489129159911647187}
   pSkill: {fileID: 4122242635358309038}
   pElement: {fileID: 3157908518300159760}
   pCombo: {fileID: 7249628541076381147}
   actionText: {fileID: 8734986459518918758}
-  eHealth: {fileID: 6488212552660973955, guid: 12ee78be68ed87742930fa06845bd6d5, type: 3}
+  eHealthPrefab: {fileID: 6488212552660973955, guid: 12ee78be68ed87742930fa06845bd6d5,
+    type: 3}
   eHealthContainer: {fileID: 7489129160898792678}
   comboContainer: {fileID: 7489129160116610634}
   skillContainer: {fileID: 7489129160155861595}
@@ -1717,9 +1741,7 @@ MonoBehaviour:
     type: 3}
   backButtonPrefab: {fileID: 1104211911853846905, guid: e5533a998ad82d7478e68b172a7c98a6,
     type: 3}
-  worldManager: {fileID: 0}
-  killCount: 0
-  enemies: []
+  battleManager: {fileID: 1609328121110642409}
 --- !u!1 &7489129160898792678
 GameObject:
   m_ObjectHideFlags: 0

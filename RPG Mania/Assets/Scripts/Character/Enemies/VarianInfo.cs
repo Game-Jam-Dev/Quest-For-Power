@@ -33,7 +33,7 @@ public class VarianInfo : EnemyInfo {
         health = maxHealth;
     }
 
-    public override void UseSkill(SkillAction skill)
+    public override void SelectSkill(SkillAction skill)
     {
         activeSkill = skill;
         

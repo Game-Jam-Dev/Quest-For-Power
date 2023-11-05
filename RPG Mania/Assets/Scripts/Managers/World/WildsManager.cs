@@ -74,7 +74,6 @@ public class WildsManager : WorldManager {
             {
                 battleEnemies.Add(e);
                 if (!e.gameObject.activeSelf) e.gameObject.SetActive(true);
-                e.PrepareCombat();
             } else 
             {
                 e.gameObject.SetActive(false);
@@ -94,8 +93,11 @@ public class WildsManager : WorldManager {
         foreach(EnemyInfo e in battleEnemies)
         {
             liveEnemies.Remove(e);
+            e.PrepareCombat();
         }
         
+        battleEnemies.Reverse();
+
         audioSource.clip = battleTheme;
         audioSource.time = 2.7f;
         audioSource.Play();
@@ -180,7 +182,7 @@ public class WildsManager : WorldManager {
         SceneManager.LoadScene("Credits");
     }
 
-    public override List<EnemyInfo> GetEnemies()
+    public override List<EnemyInfo> GetBattleEnemies()
     {
         return battleEnemies;
     }
