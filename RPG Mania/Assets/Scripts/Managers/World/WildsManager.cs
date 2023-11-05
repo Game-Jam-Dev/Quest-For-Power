@@ -5,9 +5,9 @@ using System.Collections;
 
 public class WildsManager : WorldManager {
     
-    private List<EnemyInfo> battleEnemies = new List<EnemyInfo>();
-    private List<EnemyInfo> liveEnemies = new List<EnemyInfo>();
-    private List<EnemyInfo> reinforcements = new List<EnemyInfo>();
+    private List<EnemyBattle> battleEnemies = new List<EnemyBattle>();
+    private List<EnemyBattle> liveEnemies = new List<EnemyBattle>();
+    private List<EnemyBattle> reinforcements = new List<EnemyBattle>();
   
     [SerializeField] private GameObject mainCamera, battleCamera;
     private BattleCamera battleCameraScript;
@@ -40,7 +40,7 @@ public class WildsManager : WorldManager {
         base.SpawnEnemies();
 
         int i = 0;
-        foreach (EnemyInfo e in enemies)
+        foreach (EnemyBattle e in enemies)
         {
             e.InitializeEnemy(i);
             i++;
@@ -53,9 +53,9 @@ public class WildsManager : WorldManager {
 
     public void BossFight(GameObject boss)
     {
-        XixInfo xix = boss.GetComponent<XixInfo>();
+        Xix xix = boss.GetComponent<Xix>();
 
-        foreach (EnemyInfo e in reinforcements)
+        foreach (EnemyBattle e in reinforcements)
             xix.AddReinforcement(e);
         
         liveEnemies.Add(xix);
@@ -68,7 +68,7 @@ public class WildsManager : WorldManager {
 
     public void EncounterEnemy(GameObject enemy, float rotationZ = 0)
     {
-        foreach (EnemyInfo e in liveEnemies)
+        foreach (EnemyBattle e in liveEnemies)
         {
             if (Vector3.Distance(enemy.transform.position, e.gameObject.transform.position) <= e.detectRange)
             {
@@ -88,9 +88,9 @@ public class WildsManager : WorldManager {
 
     private void StartBattle() 
     {
-        playerInfo.PrepareCombat();
+        playerBattle.PrepareCombat();
 
-        foreach(EnemyInfo e in battleEnemies)
+        foreach(EnemyBattle e in battleEnemies)
         {
             liveEnemies.Remove(e);
             e.PrepareCombat();
@@ -120,13 +120,13 @@ public class WildsManager : WorldManager {
     {
         if (enemies.Count > 0)
         {
-            foreach (EnemyInfo e in liveEnemies)
+            foreach (EnemyBattle e in liveEnemies)
             {
                 e.gameObject.SetActive(true);
             }
         }
 
-        playerInfo.GetPlayerAnimation().EscapeFromEnemy();
+        playerBattle.GetPlayerAnimation().EscapeFromEnemy();
 
         SwitchToMainCamera();
 
@@ -151,9 +151,9 @@ public class WildsManager : WorldManager {
     {
         EndBattle();
 
-        playerInfo.ResetHealth();
+        playerBattle.ResetHealth();
 
-        foreach (EnemyInfo e in battleEnemies)
+        foreach (EnemyBattle e in battleEnemies)
         {
             e.ResetFromFight();
             liveEnemies.Add(e);
@@ -182,7 +182,7 @@ public class WildsManager : WorldManager {
         SceneManager.LoadScene("Credits");
     }
 
-    public override List<EnemyInfo> GetBattleEnemies()
+    public override List<EnemyBattle> GetBattleEnemies()
     {
         return battleEnemies;
     }

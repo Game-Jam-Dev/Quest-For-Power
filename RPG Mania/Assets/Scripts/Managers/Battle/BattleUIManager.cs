@@ -5,25 +5,42 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class BattleUIManager : MonoBehaviour {
-    [SerializeField] private TextMeshProUGUI pHealth, pSkill, pElement, pCombo, actionText, eHealthPrefab;
-    [SerializeField] private GameObject eHealthContainer, comboContainer, skillContainer, targetContainer, pickAction;
-    [SerializeField] private Button pickAttackButton, pickAbsorbButton, pickSkillButton, comboButtonPrefab, skillButtonPrefab, targetButtonPrefab, backButtonPrefab;
+    [SerializeField] private BattleManager battleManager;
 
+    [Header("Text Display")]
+    [SerializeField] private TextMeshProUGUI pHealth;
+    [SerializeField] private TextMeshProUGUI pSkill, pElement, pCombo, actionText, eHealthPrefab;
+
+    [Header("Containers")]
+    [SerializeField] private GameObject eHealthContainer;
+    [SerializeField] private GameObject comboContainer, skillContainer, targetContainer, pickAction;
+
+    [Header("Initial Buttons")]
+    [SerializeField] private Button pickAttackButton;
+    [SerializeField] private Button pickAbsorbButton, pickSkillButton;
+
+    [Header("Button Prefabs")]
+    [SerializeField] private Button comboButtonPrefab;
+    [SerializeField] private Button skillButtonPrefab, targetButtonPrefab, backButtonPrefab;
+
+    // Lists to fill with instantiated button prefabs
     private List<Button> targetButtons = new();
     private List<Button> comboButtons = new();
     private List<Button> skillButtons = new();
+
+    // store character information
+    private PlayerBattle player;
+    private List<EnemyBattle> enemies = new();
     private List<ComboAction> playerCombo = new();
+    private CharacterBattle characterToAttack;
+
+    // Tracker variables
     private int playerComboLength = 0;
     private int absorbCounter = 0;
-
-    [SerializeField] private BattleManager battleManager;
-    private List<EnemyInfo> enemies = new();
-    private PlayerInfo player;
-
     private bool canCombo = true;
-    private CharacterInfo target;
+    
 
-    public void SetForBattle(PlayerInfo player, List<EnemyInfo> enemies)
+    public void SetForBattle(PlayerBattle player, List<EnemyBattle> enemies)
     {
         // ensure everything is reset
         ClearUI();
@@ -50,11 +67,14 @@ public class BattleUIManager : MonoBehaviour {
         SetText("");
 
         // reset used variables
-        target = null;
+        characterToAttack = null;
         playerComboLength = 0;
         playerCombo.Clear();
         UpdateCombo();
         UpdateSkills();
+
+        // wait for updates to be complete
+        StartCoroutine(Utility.WaitAFrame());
         
         pickAction.SetActive(true);
         Utility.SetActiveButton(pickAttackButton);
@@ -66,7 +86,7 @@ public class BattleUIManager : MonoBehaviour {
         for (int i = 0; i < enemies.Count; i++)
         {
             // set health display
-            EnemyInfo enemy = enemies[i];
+            EnemyBattle enemy = enemies[i];
             TextMeshProUGUI enemyHealthText = Instantiate(eHealthPrefab, eHealthContainer.transform);
             enemyHealthText.rectTransform.anchoredPosition = new Vector3(0, -i * 100);
 
@@ -156,6 +176,7 @@ public class BattleUIManager : MonoBehaviour {
         // clear previously displayed skills
         for (int i = 0; i < skillContainer.transform.childCount; i++)
         {
+            // destroy old buttons
             Destroy(skillContainer.transform.GetChild(i).gameObject);
         }
 
@@ -176,7 +197,7 @@ public class BattleUIManager : MonoBehaviour {
         // set all enemys' health ui elements
         for (int i = 0; i < enemies.Count; i++)
         {
-            EnemyInfo enemy = enemies[i];
+            EnemyBattle enemy = enemies[i];
 
             // set health display for enemy
             string elementText = "";
@@ -253,9 +274,9 @@ public class BattleUIManager : MonoBehaviour {
         Utility.SetActiveButton(targetButtons[0]);
     }
 
-    private void PickTarget(CharacterInfo target)
+    private void PickTarget(CharacterBattle target)
     {
-        this.target = target;
+        this.characterToAttack = target;
 
         targetContainer.SetActive(false);
 
@@ -312,12 +333,12 @@ public class BattleUIManager : MonoBehaviour {
 
     private void SendComboAction()
     {
-        battleManager.SetComboAction(target, playerCombo);
+        battleManager.SetComboAction(characterToAttack, playerCombo);
     }
     
     private void SendAbsorbAction()
     {
-        battleManager.SetAbsorbAction(target);
+        battleManager.SetAbsorbAction(characterToAttack);
         
         // manage absorb counter
         absorbCounter++;
@@ -337,7 +358,7 @@ public class BattleUIManager : MonoBehaviour {
         actionText.text = s;
     }
 
-    public void DefeatedEnemy(EnemyInfo enemy)
+    public void DefeatedEnemy(EnemyBattle enemy)
     {
         // get the enemy's index in enemy list
         int enemyIndex = enemies.IndexOf(enemy);
@@ -349,6 +370,9 @@ public class BattleUIManager : MonoBehaviour {
 
         // set enemy's health ui to defeated text
         eHealthContainer.transform.GetChild(enemyIndex).GetComponent<TextMeshProUGUI>().text = enemy.characterName + " is defeated";
+
+        // remove from list
+        enemies.Remove(enemy);
     }
 
     public void ClearActiveSkill()
@@ -389,7 +413,7 @@ public class BattleUIManager : MonoBehaviour {
         absorbCounter = 0;
 
         // reset used variables
-        target = null;
+        characterToAttack = null;
         playerComboLength = 0;
         playerCombo.Clear();
 

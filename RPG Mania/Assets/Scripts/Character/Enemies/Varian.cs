@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public class VarianInfo : EnemyInfo {
-    private PlayerInfo playerInfo;
+public class Varian : EnemyBattle {
+    private PlayerBattle playerInfo;
 
     protected override void Start()
     {
         base.Start();
 
-        playerInfo = player.GetComponent<PlayerInfo>();
+        playerInfo = player.GetComponent<PlayerBattle>();
 
         skillKeys.Add("water");
         skillKeys.Add("fire");

@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class EnemyInfo : CharacterInfo {
+public class EnemyBattle : CharacterBattle {
     public int level = 1;
     public float detectRange = .5f;
     private bool isAlive = true;

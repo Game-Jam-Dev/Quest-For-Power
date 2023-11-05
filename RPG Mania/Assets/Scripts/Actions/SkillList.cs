@@ -49,14 +49,14 @@ public class SkillList
         };
     }
 
-    public int EmptyAction(CharacterInfo self, CharacterInfo target, int damage)
+    public int EmptyAction(CharacterBattle self, CharacterBattle target, int damage)
     {
         Debug.Log("This action is null");
 
         return damage;
     }
 
-    public int InfuseWater(CharacterInfo self, CharacterInfo target, int damage)
+    public int InfuseWater(CharacterBattle self, CharacterBattle target, int damage)
     {
         if (target.element == Element.Fire) damage += damage/2;
 
@@ -65,7 +65,7 @@ public class SkillList
         return damage;
     }
 
-    public int InfuseWind(CharacterInfo self, CharacterInfo target, int damage)
+    public int InfuseWind(CharacterBattle self, CharacterBattle target, int damage)
     {
         if (target.element == Element.Earth) damage += damage/2;
 
@@ -74,7 +74,7 @@ public class SkillList
         return damage;
     }
 
-    public int InfuseEarth(CharacterInfo self, CharacterInfo target, int damage)
+    public int InfuseEarth(CharacterBattle self, CharacterBattle target, int damage)
     {
         if (target.element == Element.Water) damage += damage/2;
 
@@ -83,7 +83,7 @@ public class SkillList
         return damage;
     }
 
-    public int InfuseFire(CharacterInfo self, CharacterInfo target, int damage)
+    public int InfuseFire(CharacterBattle self, CharacterBattle target, int damage)
     {
         if (target.element == Element.Wind) damage += damage/2;
 
@@ -92,11 +92,9 @@ public class SkillList
         return damage;
     }
 
-    public int HealthDrain(CharacterInfo self, CharacterInfo target, int damage)
+    public int HealthDrain(CharacterBattle self, CharacterBattle target, int damage)
     {
-        self.health += damage/3;
-
-        if (self.health > self.maxHealth) self.health = self.maxHealth;
+        self.Heal(damage/3);
 
         return damage;
     }

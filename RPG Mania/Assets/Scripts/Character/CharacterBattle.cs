@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class CharacterInfo : MonoBehaviour {
+public class CharacterBattle : MonoBehaviour {
     public string characterName = "";
     public int maxHealth;
     public int health;
@@ -64,7 +64,7 @@ public class CharacterInfo : MonoBehaviour {
         return skillActions.Count;
     }
 
-    public bool DoAction(ComboAction action, CharacterInfo target, int comboDepth)
+    public bool DoAction(ComboAction action, CharacterBattle target, int comboDepth)
     {
         return action.Action(this, target, comboDepth);
     }
@@ -80,7 +80,7 @@ public class CharacterInfo : MonoBehaviour {
         {
             audioSource.clip = attackClip;
             audioSource.time = 2f;
-            audioSource?.Play();
+            audioSource.Play();
         }
     }
 
@@ -88,6 +88,12 @@ public class CharacterInfo : MonoBehaviour {
     {
         health -= damage;
         if (health < 0) health = 0;
+    }
+
+    public virtual void Heal(int heal)
+    {
+        health += heal;
+        if (health > maxHealth) health = maxHealth;
     }
 
     public virtual void SetAnimationTrigger(string triggerName) {}
@@ -100,5 +106,5 @@ public class CharacterInfo : MonoBehaviour {
 
     public virtual ComboAction PickEnemyCombo(int currentComboLength){ return GetCombo(0); }
 
-    public virtual void AddReinforcement(EnemyInfo e){}
+    public virtual void AddReinforcement(EnemyBattle e){}
 }

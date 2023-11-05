@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class PlayerInfo : CharacterInfo {
+public class PlayerBattle : CharacterBattle {
     private int experience = 0;
     public int level {get; private set;}
 
@@ -27,8 +27,6 @@ public class PlayerInfo : CharacterInfo {
         }
 
         elementClips = new List<(AudioClip, float)>(){(drainClip, 2.45f), (waterClip, 1.03f), (fireClip, .7f), (windClip, 2.2f), (earthClip, .93f)};
-
-
     }
 
     public override void PrepareCombat()
@@ -150,20 +148,18 @@ public class PlayerInfo : CharacterInfo {
 
     public void AbsorbSkill(SkillList.Element e)
     {
-        int i = (int)e;
+        int index = (int)e;
+        int spellsTaken = Random.Range(1,4);
 
-        int n = Random.Range(1,4);
-
-        skillActions[i] = (skillActions[i].Item1, skillActions[i].Item2 + n);
+        skillActions[index] = (skillActions[index].Item1, skillActions[index].Item2 + spellsTaken);
 
         audioSource.clip = elementClips[0].Item1;
         audioSource.time = elementClips[0].Item2;
         audioSource.Play();
 
-        GameManager.instance.SetPlayerSkill(i, skillActions[i].Item2);
+        GameManager.instance.SetPlayerSkill(index, skillActions[index].Item2);
 
-        health += maxHealth/2;
-        if (health > maxHealth) health = maxHealth;
+        Heal(maxHealth/2);
     }
 
     public void LoseSkillUse(int n = 1)

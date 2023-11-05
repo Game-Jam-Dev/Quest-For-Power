@@ -8,9 +8,9 @@ public abstract class WorldManager : MonoBehaviour {
     [SerializeField] protected DialogManager dialogManager;
     protected GameManager gameManager;
     protected GameObject player;
-    protected PlayerInfo playerInfo;
+    protected PlayerBattle playerBattle;
     protected PlayerMovement playerMovement;
-    protected List<EnemyInfo> enemies = new();
+    protected List<EnemyBattle> enemies = new();
 
     protected virtual void Start() {
         GameObject gameController = GameObject.FindGameObjectWithTag("GameController");
@@ -21,20 +21,20 @@ public abstract class WorldManager : MonoBehaviour {
 
         player = GameObject.FindGameObjectWithTag("Player");
         gameManager.SetPlayer(player);
-        playerInfo = player.GetComponent<PlayerInfo>();
+        playerBattle = player.GetComponent<PlayerBattle>();
         playerMovement = player.GetComponent<PlayerMovement>();
 
         SpawnEnemies();
     }
 
-    public virtual List<EnemyInfo> GetBattleEnemies() 
+    public virtual List<EnemyBattle> GetBattleEnemies() 
     {
         return enemies; 
     }
 
-    public virtual void PrepareCharactersForCombat(IEnumerable<CharacterInfo> characters)
+    public virtual void PrepareCharactersForCombat(IEnumerable<CharacterBattle> characters)
     {
-        foreach (CharacterInfo c in characters)
+        foreach (CharacterBattle c in characters)
             c.PrepareCombat();
     }
 
@@ -51,7 +51,7 @@ public abstract class WorldManager : MonoBehaviour {
     {
         foreach (GameObject e in GameObject.FindGameObjectsWithTag("Enemy"))
         {
-            enemies.Add(e.GetComponent<EnemyInfo>());
+            enemies.Add(e.GetComponent<EnemyBattle>());
         }
     }
 
@@ -72,5 +72,5 @@ public abstract class WorldManager : MonoBehaviour {
         playerMovement.enabled = true;
     }
 
-    public PlayerInfo GetPlayer() { return playerInfo; }
+    public PlayerBattle GetPlayer() { return playerBattle; }
 }

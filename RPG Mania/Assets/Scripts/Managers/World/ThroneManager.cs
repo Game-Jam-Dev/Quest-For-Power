@@ -6,7 +6,7 @@ using System.Collections;
 using System.Linq;
 
 public class ThroneManager : WorldManager {
-    [SerializeField] private VarianInfo boss;
+    [SerializeField] private Varian boss;
     private readonly string nextScene = "Wilds";
     private bool pre, preBoss = false;
     [SerializeField] private DialogObject dialogObjectStart, dialogObjectPreBoss, dialogObjectPostBoss;
@@ -44,11 +44,11 @@ public class ThroneManager : WorldManager {
 
     private void StartBattle() 
     {
-        playerInfo.PrepareCombat();
+        playerBattle.PrepareCombat();
         
-        foreach (EnemyInfo e in enemies) e.PrepareCombat();
+        foreach (EnemyBattle e in enemies) e.PrepareCombat();
 
-        playerInfo.ResetHealth();
+        playerBattle.ResetHealth();
         battleUI.SetActive(true);
     }
 
@@ -57,7 +57,7 @@ public class ThroneManager : WorldManager {
         player.transform.position += Vector3.forward * 5;
         Camera.main.transform.position += Vector3.forward * 4;
 
-        enemies = new List<EnemyInfo>{GameObject.FindGameObjectWithTag("Boss").GetComponent<EnemyInfo>()};
+        enemies = new List<EnemyBattle>{GameObject.FindGameObjectWithTag("Boss").GetComponent<EnemyBattle>()};
 
         StartBattle();
     }

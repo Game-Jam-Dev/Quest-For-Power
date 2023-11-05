@@ -1,8 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class XixInfo : EnemyInfo {
-    private List<EnemyInfo> reinforcements = new List<EnemyInfo>();
+public class Xix : EnemyBattle {
+    private List<EnemyBattle> reinforcements = new List<EnemyBattle>();
 
     protected override void Start() {
         base.Start();
@@ -30,7 +30,7 @@ public class XixInfo : EnemyInfo {
         }
     }
 
-    public override void AddReinforcement(EnemyInfo e)
+    public override void AddReinforcement(EnemyBattle e)
     {
         reinforcements.Add(e);
     }

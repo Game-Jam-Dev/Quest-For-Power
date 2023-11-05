@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ComboList
 {
-    public static ComboList Instance { get; private set; }
+    private static ComboList instance;
     private IDictionary<string, ComboAction> actionList;
 
     private ComboList()
@@ -13,12 +13,9 @@ public class ComboList
 
     public static ComboList GetInstance()
     {
-        if (Instance == null)
-        {
-            Instance = new ComboList();
-        }
+        instance ??= new ComboList();
 
-        return Instance;
+        return instance;
     }
 
     public ComboAction GetAction(string key)
@@ -36,96 +33,39 @@ public class ComboList
             {"light", new ComboAction("Light Attack", 1, LightAttack)},
             {"medium", new ComboAction("Medium Attack", 2, MediumAttack)},
             {"heavy", new ComboAction("Heavy Attack", 3, HeavyAttack)},
-            
         };
     }
 
-    public bool EmptyAction(CharacterInfo self, CharacterInfo target, int comboDepth)
+    public bool EmptyAction(CharacterBattle self, CharacterBattle target, int comboDepth)
     {
         Debug.Log("This action is null");
         return false;
     }
 
-    private int SkillCheck(CharacterInfo self, CharacterInfo target, int damage)
-    {
-        if (self.activeSkill != null)
-            damage = self.activeSkill.Action(self, target, damage);
-
-        return damage;
-    }
-
-    private void DamageCheck(CharacterInfo target, int damage)
-    {
-
-        damage = CritMultiply(2, 2, damage);
-
-        target.Attacked(damage);
-    }
-
-    private int CritMultiply(int criticalChance, float damageBoost, int damage)
-    {
-
-        if (Random.Range(0, 100) < criticalChance) return (int)(damageBoost * damage);
-
-        else return damage;
-    }
-
-    private bool AttackCheck(CharacterInfo self, CharacterInfo target, float moveAccuracy, int comboDepth)
-    {
-        float r = Random.Range(0,1f);
-        float a  = (moveAccuracy * self.accuracy) - target.evasion + (comboDepth * .05f);
-        self.hitTarget = r < a;
-
-        return self.hitTarget;
-    }
-
-    private void HitEnemy(CharacterInfo self, CharacterInfo target, float d)
-    {
-        target.SetAnimationTrigger("Attacked");
-
-        int damage = (int)(self.attack * d - target.defense);
-        if (damage < 0) damage = 0;
-
-        damage = SkillCheck(self, target, damage);
-
-        DamageCheck(target, damage);
-    }
-
-    public bool LightAttack(CharacterInfo self, CharacterInfo target, int comboDepth)
+    public bool LightAttack(CharacterBattle self, CharacterBattle target, int comboDepth)
     {
         string attackName = "Light Attack";
         float accuracy = 1f;
         float damageMultiplier = 1;
         
-        return DoAttack(self, target, comboDepth, attackName, accuracy, damageMultiplier);
+        return ComboAction.DoAttack(self, target, comboDepth, attackName, accuracy, damageMultiplier);
     }
 
-    public bool MediumAttack(CharacterInfo self, CharacterInfo target, int comboDepth)
+    public bool MediumAttack(CharacterBattle self, CharacterBattle target, int comboDepth)
     {
         string attackName = "Medium Attack";
         float accuracy = .9f;
         float damageMultiplier = 1.5f;
 
-        return DoAttack(self, target, comboDepth, attackName, accuracy, damageMultiplier);
+        return ComboAction.DoAttack(self, target, comboDepth, attackName, accuracy, damageMultiplier);
     }
 
-    public bool HeavyAttack(CharacterInfo self, CharacterInfo target, int comboDepth)
+    public bool HeavyAttack(CharacterBattle self, CharacterBattle target, int comboDepth)
     {
         string attackName = "Heavy Attack";
         float accuracy = .8f;
         float damageMultiplier = 2f;
 
-        return DoAttack(self, target, comboDepth, attackName, accuracy, damageMultiplier);
-    }
-
-    private bool DoAttack(CharacterInfo self, CharacterInfo target, int comboDepth, string attackName, float accuracy, float damageMultiplier)
-    {
-        self.SetAnimationTrigger(attackName);
-
-        bool hitAttack = AttackCheck(self, target, accuracy, comboDepth);
-
-        if (hitAttack) HitEnemy(self, target, damageMultiplier);
-
-        return hitAttack;
+        return ComboAction.DoAttack(self, target, comboDepth, attackName, accuracy, damageMultiplier);
     }
 }
