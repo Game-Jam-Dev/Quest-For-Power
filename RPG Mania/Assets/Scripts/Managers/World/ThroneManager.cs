@@ -6,10 +6,9 @@ using System.Collections;
 using System.Linq;
 
 public class ThroneManager : WorldManager {
-    [SerializeField] private Varian boss;
-    private readonly string nextScene = "Wilds";
-    private bool pre, preBoss = false;
-    [SerializeField] private DialogObject dialogObjectStart, dialogObjectPreBoss, dialogObjectPostBoss;
+    private readonly string nextScene = "Throne Cutscene";
+    private bool preBattle = false;
+    [SerializeField] private DialogObject dialogObjectStart, dialogObjectPreBoss;
 
     protected override void Start() {
         base.Start();
@@ -35,11 +34,9 @@ public class ThroneManager : WorldManager {
 
     private void NextBattle()
     {
-        if (!pre) StartBattle();
+        if (!preBattle) StartBattle();
 
-        else if (!preBoss) BossFight();
-
-        else NextScene();
+        else BossFight();
     }
 
     private void StartBattle() 
@@ -64,21 +61,15 @@ public class ThroneManager : WorldManager {
 
     public override void WinBattle()
     {
-        if (!pre) EndSoldierBattle();
+        if (!preBattle) EndSoldierBattle();
 
-        else EndBossFight();
+        else NextScene();
     }
 
     private void EndSoldierBattle()
     {
-        pre = true;
+        preBattle = true;
         StartCoroutine(DoDialog(dialogObjectPreBoss));
-    }
-
-    private void EndBossFight()
-    {
-        preBoss = true;
-        StartCoroutine(DoDialog(dialogObjectPostBoss));
     }
 
     private void NextScene()
