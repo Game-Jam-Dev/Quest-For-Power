@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class PlayerBattle : CharacterBattle {
     private int experience = 0;
-    public int level {get; private set;}
+    public int level = 0;
 
     [SerializeField] private PlayerAnimation pa;
 

@@ -133,7 +133,7 @@ public class EnemyBattle : CharacterBattle {
         }
     }
 
-    public int XPFromKill(int playerLevel)
+    public virtual int XPFromKill(int playerLevel)
     {
         int xp = 5;
 

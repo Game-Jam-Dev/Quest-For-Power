@@ -33,6 +33,13 @@ public class Varian : EnemyBattle {
         health = maxHealth;
     }
 
+    public override int XPFromKill(int playerLevel)
+    {
+        int xp = 5;
+
+        return xp;
+    }
+
     public override void SelectSkill(SkillAction skill)
     {
         activeSkill = skill;

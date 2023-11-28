@@ -21,6 +21,13 @@ public class Monster : EnemyBattle {
         health = maxHealth;
     }
 
+    public override int XPFromKill(int playerLevel)
+    {
+        int xp = 5;
+
+        return xp;
+    }
+
     private void AssignElement()
     {
         if (element == SkillList.Element.None)
