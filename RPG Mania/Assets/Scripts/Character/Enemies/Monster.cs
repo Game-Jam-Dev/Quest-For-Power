@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Monster : EnemyInfo {
+public class Monster : EnemyBattle {
     protected override void Start()
     {
         base.Start();

@@ -17,6 +17,8 @@ public class CutsceneManager : MonoBehaviour {
     [SerializeField] private Button skipButton;
     private bool canSkip = true;
 
+    public float autoSkipTime = 3f;
+
     private enum NextElement
     {
         Image,
@@ -37,8 +39,16 @@ public class CutsceneManager : MonoBehaviour {
         // Start the next dialog.
         dialogManager.DisplayDialog(dialogObject);
 
-        // Wait for this dialog to finish before proceeding to the next one.
-        yield return new WaitUntil(() => !dialogManager.ShowingDialog());
+        yield return new WaitUntil(() => dialogManager.fullLine);
+
+        float c = 0;
+
+        while (dialogManager.ShowingDialog() || autoSkipTime > c)
+        {
+            c += Time.deltaTime;
+
+            yield return null;
+        }
         
         dialogManager.enabled = false;
 
@@ -51,7 +61,14 @@ public class CutsceneManager : MonoBehaviour {
 
     private IEnumerator WaitAtImage()
     {
-        yield return new WaitUntil(() => Input.GetMouseButtonDown(0) && canSkip);
+        float c = 0;
+
+        while (Input.GetMouseButtonDown(0) && canSkip || autoSkipTime > c)
+        {
+            c += Time.deltaTime;
+
+            yield return null;
+        }
 
         canSkip = false;
 

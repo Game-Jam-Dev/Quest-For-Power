@@ -33,13 +33,22 @@ public class PlayerAnimation : MonoBehaviour {
         } 
     }
 
+    public void SetElement(SkillList.Element element)
+    {
+        anim.SetInteger("Element", (int)element);
+    }
+
     public void SetUpTrigger(string triggerName)
     {
         if (anim != null && TriggerExists(triggerName, anim))
         {
             currentTrigger = triggerName;
-            isAttacking = true;
-            anim.SetTrigger(currentTrigger);
+            if (triggerName == "Light Attack" || triggerName == "Medium Attack" || triggerName == "Heavy Attack")
+            {
+                anim.SetTrigger("Attack");
+                isAttacking = true;
+            } 
+                anim.SetTrigger(currentTrigger);
         }
     }
 

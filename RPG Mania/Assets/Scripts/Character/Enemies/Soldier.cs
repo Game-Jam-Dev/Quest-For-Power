@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Soldier : EnemyInfo {
+public class Soldier : EnemyBattle {
     protected override void Start()
     {
         base.Start();

@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Title Screen.unity
     guid: bd4ef0d83fa52cb448551c06220e7ccd
   - enabled: 1
-    path: Assets/Scenes/Intro Cutscene.unity
+    path: Assets/Scenes/Cutscene/Intro Cutscene.unity
     guid: 5fa0510c6d98e9047a67a6060c33caff
   - enabled: 1
     path: Assets/Scenes/Playable/Throne Room.unity

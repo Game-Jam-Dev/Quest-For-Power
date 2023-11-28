@@ -12,6 +12,7 @@ public class DialogManager : MonoBehaviour
     [SerializeField] private Button skipButton;
     private Coroutine currentDialog;
     public bool clicked = false;
+    public bool fullLine = false;
 
     private IEnumerator MoveThroughDialog(DialogObject dialogObject)
     {
@@ -19,6 +20,8 @@ public class DialogManager : MonoBehaviour
         {
             dialogText.text = "";
             dialogName.text = dialogObject.dialogLines[i].speakerName;
+
+            fullLine = false;
 
             foreach (char c in dialogObject.dialogLines[i].dialog)
             {
@@ -33,6 +36,8 @@ public class DialogManager : MonoBehaviour
                     break;  // This will break the 'foreach' loop
                 }
             }
+
+            fullLine = true;
 
             //The following line of code makes it so that the for loop is paused until the user clicks the left mouse button.
             yield return new WaitUntil(() => clicked);  // Wait until the Clicked is true

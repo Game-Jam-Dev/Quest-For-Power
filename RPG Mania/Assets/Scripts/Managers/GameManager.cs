@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour {
     public static GameManager instance;
-    public PlayerInfo player;
+    public PlayerBattle player;
     private GameData gameData;
     private PlayerData playerData = new();
     private WorldState worldState = new();
@@ -97,7 +97,7 @@ public class GameManager : MonoBehaviour {
 
     public void SetPlayer(GameObject player)
     {
-        this.player = player.GetComponent<PlayerInfo>();
+        this.player = player.GetComponent<PlayerBattle>();
         this.player.SetData(playerData.level, playerData.experience, playerData.skillActionUses);
         this.player.ResetHealth();
     }
