@@ -62,7 +62,7 @@ public class PlayerBattle : CharacterBattle {
     {
         maxHealth = 20 + level * 5;
         attack = 9 + (int)(level * 1.5f);
-        defense = 5 + (int)(level * 1.1f);
+        defense = 9 + (int)(level * 1.1f);
         accuracy = .85f + level / 2000f;
         evasion = .05f + level / 1000f;
 
