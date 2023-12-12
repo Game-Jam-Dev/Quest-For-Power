@@ -57,8 +57,7 @@ public class ComboAction
 
     private static void DamageCheck(CharacterBattle target, int damage)
     {
-
-        damage = CritMultiply(2, 2, damage);
+        damage = CritMultiply(5, 1.5f, damage);
 
         target.Attacked(damage);
     }
