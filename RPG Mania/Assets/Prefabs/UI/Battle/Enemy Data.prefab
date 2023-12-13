@@ -85,6 +85,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2802031050381703753}
+  - component: {fileID: 5583677499081063333}
   m_Layer: 5
   m_Name: Enemy Data
   m_TagString: Untagged
@@ -114,6 +115,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5583677499081063333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3981022341754873434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f1fa1a80084239418f167921293ff1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  element: {fileID: 6840969834849389815}
 --- !u!1001 &8053457528478112405
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -239,3 +253,15 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 8053457528478112405}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6840969834849389815 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3545354499675543138, guid: abfbfd3b1bcd50b439b555e292710414,
+    type: 3}
+  m_PrefabInstance: {fileID: 8053457528478112405}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 808ef9418e91aef4d9d0681b22f51923, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

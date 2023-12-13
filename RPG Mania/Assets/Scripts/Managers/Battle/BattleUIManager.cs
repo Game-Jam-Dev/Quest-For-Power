@@ -40,7 +40,7 @@ public class BattleUIManager : MonoBehaviour {
     private bool canCombo = true;
     
 
-    public void SetForBattle(PlayerBattle player, List<EnemyBattle> enemies)
+    public void Initialize(PlayerBattle player, List<EnemyBattle> enemies)
     {
         // ensure everything is reset
         ClearUI();
@@ -61,7 +61,7 @@ public class BattleUIManager : MonoBehaviour {
         pickAction.SetActive(false);
     }
 
-    public void ActivateForPlayerTurn()
+    public void StartPlayerTurn()
     {
         // Update UI
         SetText("");
@@ -97,7 +97,7 @@ public class BattleUIManager : MonoBehaviour {
 
             // set button text
             string leadingText = "";
-            if (enemy.element != SkillList.Element.None) leadingText = enemy.element + " ";
+            if (enemy.element != ElementManager.Element.None) leadingText = enemy.element + " ";
             selectEnemy.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = leadingText + enemy.characterName;
         }
 
@@ -201,7 +201,7 @@ public class BattleUIManager : MonoBehaviour {
 
             // set health display for enemy
             string elementText = "";
-            if (enemy.element != SkillList.Element.None) elementText = enemy.element + " ";
+            if (enemy.element != ElementManager.Element.None) elementText = enemy.element + " ";
             eHealthContainer.transform.GetChild(i).GetComponent<TextMeshProUGUI>().text = elementText + enemy.characterName + "'s Health: " + enemy.health;
         }
     }

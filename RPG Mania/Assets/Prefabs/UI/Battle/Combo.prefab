@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3883333341272854975}
   - component: {fileID: 8548048377928064796}
+  - component: {fileID: 6668625034758565386}
   m_Layer: 5
   m_Name: Combo
   m_TagString: Untagged
@@ -68,6 +69,23 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &6668625034758565386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3006582350810800969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4e033efee3fb624aa28b4b2137a8dc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  comboObject: {fileID: 2178621366353951945, guid: 8449ec6be81729a4fa53d37a35ba098c,
+    type: 3}
+  active: {fileID: 21300000, guid: 906fef01077b6ad49ade67dd9e050463, type: 3}
+  highlighted: {fileID: 0}
+  inactive: {fileID: 21300000, guid: 23d697b7bd8b6c5499dcdf02edbf1e99, type: 3}
 --- !u!1001 &1291187844659434116
 PrefabInstance:
   m_ObjectHideFlags: 0

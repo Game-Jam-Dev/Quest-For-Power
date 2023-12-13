@@ -5,7 +5,7 @@ public class CharacterBattle : MonoBehaviour {
     public string characterName = "";
     public int maxHealth;
     public int health;
-    public SkillList.Element element;
+    public ElementManager.Element element;
     public int attack;
     public int defense;
     public float accuracy;

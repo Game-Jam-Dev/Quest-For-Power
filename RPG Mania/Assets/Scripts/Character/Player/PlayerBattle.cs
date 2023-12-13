@@ -109,18 +109,18 @@ public class PlayerBattle : CharacterBattle {
         
         if (activeSkill == SkillList.GetInstance().GetAction("water"))
         {
-            element = SkillList.Element.Water;
+            element = ElementManager.Element.Water;
         } else if (activeSkill == SkillList.GetInstance().GetAction("fire"))
         {
-            element = SkillList.Element.Fire;
+            element = ElementManager.Element.Fire;
         } else if (activeSkill == SkillList.GetInstance().GetAction("wind"))
         {
-            element = SkillList.Element.Wind;
+            element = ElementManager.Element.Wind;
         } else if (activeSkill == SkillList.GetInstance().GetAction("earth"))
         {
-            element = SkillList.Element.Earth;
+            element = ElementManager.Element.Earth;
         } else {
-            element = SkillList.Element.None;
+            element = ElementManager.Element.None;
         }
 
         pa.SetElement(element);
@@ -146,7 +146,7 @@ public class PlayerBattle : CharacterBattle {
         return skillActions[index].Item2;
     }
 
-    public void AbsorbSkill(SkillList.Element e)
+    public void AbsorbSkill(ElementManager.Element e)
     {
         int index = (int)e;
         int spellsTaken = Random.Range(1,4);
@@ -178,7 +178,7 @@ public class PlayerBattle : CharacterBattle {
 
     public void DeactivateSkill()
     {
-        element = SkillList.Element.None;
+        element = ElementManager.Element.None;
         activeSkill = null;
         pa.SetElement(element);
     }

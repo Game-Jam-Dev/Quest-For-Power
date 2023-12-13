@@ -3,7 +3,7 @@ using UnityEngine;
 public class EnemyAnimation : MonoBehaviour {
     private Animator anim;
     private SpriteRenderer sr;
-    private SkillList.Element element;
+    private ElementManager.Element element;
 
     public float combatPositionHeightAdjustment = 1;
     private float combatPositionHeight, originalPositionHeight;
@@ -50,7 +50,7 @@ public class EnemyAnimation : MonoBehaviour {
         // transform.rotation = Quaternion.LookRotation(Vector3.zero);
     }
 
-    public void AssignElement(SkillList.Element e)
+    public void AssignElement(ElementManager.Element e)
     {
         if (anim != null) anim.SetInteger("Element", (int)e);
 

@@ -39,16 +39,16 @@ public class Varian : EnemyBattle {
         
         if (activeSkill == SkillList.GetInstance().GetAction("water"))
         {
-            element = SkillList.Element.Water;
+            element = ElementManager.Element.Water;
         } else if (activeSkill == SkillList.GetInstance().GetAction("fire"))
         {
-            element = SkillList.Element.Fire;
+            element = ElementManager.Element.Fire;
         } else if (activeSkill == SkillList.GetInstance().GetAction("wind"))
         {
-            element = SkillList.Element.Wind;
+            element = ElementManager.Element.Wind;
         } else if (activeSkill == SkillList.GetInstance().GetAction("earth"))
         {
-            element = SkillList.Element.Earth;
+            element = ElementManager.Element.Earth;
         }
     }
 

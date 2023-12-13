@@ -33,7 +33,7 @@ public class PlayerAnimation : MonoBehaviour {
         } 
     }
 
-    public void SetElement(SkillList.Element element)
+    public void SetElement(ElementManager.Element element)
     {
         anim.SetInteger("Element", (int)element);
     }

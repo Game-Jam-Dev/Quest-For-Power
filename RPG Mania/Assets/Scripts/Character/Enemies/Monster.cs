@@ -23,25 +23,25 @@ public class Monster : EnemyBattle {
 
     private void AssignElement()
     {
-        if (element == SkillList.Element.None)
+        if (element == ElementManager.Element.None)
         {
-            element = (SkillList.Element)Random.Range(1, System.Enum.GetValues(typeof(SkillList.Element)).Length);
+            element = (ElementManager.Element)Random.Range(1, System.Enum.GetValues(typeof(ElementManager.Element)).Length);
         }
 
         ea.AssignElement(element);
 
         switch (element)
         {
-            case SkillList.Element.Water:
+            case ElementManager.Element.Water:
             activeSkill = SkillList.GetInstance().GetAction("water");
             break;
-            case SkillList.Element.Fire:
+            case ElementManager.Element.Fire:
             activeSkill = SkillList.GetInstance().GetAction("fire");
             break;
-            case SkillList.Element.Wind:
+            case ElementManager.Element.Wind:
             activeSkill = SkillList.GetInstance().GetAction("wind");
             break;
-            case SkillList.Element.Earth:
+            case ElementManager.Element.Earth:
             activeSkill = SkillList.GetInstance().GetAction("earth");
             break;
         }

@@ -60,7 +60,7 @@ public class BattleManager : MonoBehaviour {
 
     private void SetUpUI()
     {
-        battleUIManager.SetForBattle(player, enemies);
+        battleUIManager.Initialize(player, enemies);
     }
 
     private IEnumerator BattleLoop()
@@ -75,7 +75,7 @@ public class BattleManager : MonoBehaviour {
                 InitializePlayer();
 
                 // activate ui
-                battleUIManager.ActivateForPlayerTurn();
+                battleUIManager.StartPlayerTurn();
                 
                 // make the loop stay here until the player selects their commands in the ui
                 while (awaitCommand)
