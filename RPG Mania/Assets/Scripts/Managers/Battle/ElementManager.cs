@@ -30,7 +30,41 @@ public class ElementManager : MonoBehaviour {
         {
             image.color = Color.clear;
         }
+    }
 
-        
+    public static int CalculateEffectiveDamage(Element attack, Element defend, int damage)
+    {
+        if (attack == Element.None || defend == Element.None) return damage;
+
+        if (attack == defend) return damage/2;
+
+        switch (attack)
+        {
+            case Element.Water:
+            if (defend == ElementManager.Element.Fire) damage += damage/2;
+
+            else if (defend == ElementManager.Element.Earth) damage -= damage/2;
+            break;
+
+            case Element.Fire:
+            if (defend == ElementManager.Element.Wind) damage += damage/2;
+
+            else if (defend == ElementManager.Element.Water) damage -= damage/2;
+            break;
+
+            case Element.Wind:
+            if (defend == ElementManager.Element.Earth) damage += damage/2;
+
+            else if (defend == ElementManager.Element.Fire) damage -= damage/2;
+            break;
+
+            case Element.Earth:
+            if (defend == ElementManager.Element.Water) damage += damage/2;
+
+            else if (defend == ElementManager.Element.Wind) damage -= damage/2;
+            break;
+        }
+
+        return damage;
     }
 }

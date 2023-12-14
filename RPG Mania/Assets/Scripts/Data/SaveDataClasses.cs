@@ -7,6 +7,7 @@ public class PlayerData
     public int level = 1;
     public int experience = 0;
     public List<int> skillActionUses = new(Enumerable.Repeat(0,5));
+    public List<Item> items = new();
 }
 
 [System.Serializable]

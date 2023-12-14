@@ -10,27 +10,99 @@ public class UIManager : MonoBehaviour {
     [Header("Containers")]
     [SerializeField] private PlayerContainerManager playerContainerManager;
     [SerializeField] private EnemyContainerManager enemyContainerManager;
+    [SerializeField] private SkillContainerManager skillContainerManager;
+    [SerializeField] private ItemContainerManager itemContainerManager;
+    [SerializeField] private GameObject initialContainer, comboContainer, skillContainer, itemContainer, targetContainer;
 
     private PlayerBattle player;
     private List<EnemyBattle> enemies;
 
     public void Initialize(PlayerBattle player, List<EnemyBattle> enemies)
     {
+        ResetUI();
+
         // Initialize characters in the fight
         this.player = player;
         this.enemies = enemies;
 
         playerContainerManager.SetPlayer(player);
         enemyContainerManager.SetEnemies(enemies);
+        skillContainerManager.SetSkills(player);
+        itemContainerManager.SetItems();
+    }
+
+    private void ResetUI()
+    {
+        initialContainer.SetActive(false);
+        comboContainer.SetActive(false);
+        skillContainer.SetActive(false);
+        itemContainer.SetActive(false);
+        targetContainer.SetActive(false);
     }
 
     public void StartPlayerTurn()
     {
+        initialContainer.SetActive(true);
+    }
+
+    public void SelectAttack()
+    {
+        Utility.SwitchActiveObjects(initialContainer, comboContainer);
+
+
+    }
+
+    public void SelectSkill()
+    {
+        Utility.SwitchActiveObjects(initialContainer, skillContainer);
+
+
+    }
+
+    public void SelectItem()
+    {
+        Utility.SwitchActiveObjects(initialContainer, skillContainer);
+
+
+    }
+
+    public void SelectEscape()
+    {
         
     }
 
-    private void SetEnemies()
+    public void PickCombo(ComboAction combo)
+    {
+        playerContainerManager.UseCombo(combo.Cost);
+
+    }
+
+    public void PickSkill(SkillAction skill)
+    {
+        Utility.SwitchActiveObjects(skillContainer, initialContainer);
+
+
+    }
+
+    public void PickTarget(EnemyBattle enemy)
     {
 
+    }
+
+    public void PickItem()
+    {
+
+    }
+
+
+
+    public void UpdatePlayerHealth()
+    {
+        
+    }
+
+    public void UpdateEnemyHealth(EnemyBattle enemy)
+    {
+        enemyContainerManager.UpdateDamage(enemy);
     }
 }

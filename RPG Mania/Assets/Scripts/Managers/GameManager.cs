@@ -89,6 +89,28 @@ public class GameManager : MonoBehaviour {
         worldState.enemyIsAliveOutskirts = enemyIsAliveOutskirts;
     }
 
+    public void AddItem(Item item)
+    {
+        playerData.items.Add(item);
+    }
+
+    public void RemoveItem(Item item)
+    {
+        playerData.items.Remove(item);
+    }
+
+    public Item GetItem(int i)
+    {
+        if (i < playerData.items.Count) return playerData.items[i];
+
+        else return null;
+    }
+
+    public List<Item> GetItems()
+    {
+        return playerData.items;
+    }
+
     public GameData GetGameData()
     {
         gameData = new GameData{playerData = playerData, worldState = worldState};
