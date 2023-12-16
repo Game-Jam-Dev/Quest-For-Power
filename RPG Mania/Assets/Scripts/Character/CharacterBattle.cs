@@ -96,6 +96,81 @@ public class CharacterBattle : MonoBehaviour {
         if (health > maxHealth) health = maxHealth;
     }
 
+    public virtual void AlterStat(StatChanger.Stat stat, float value, bool isPercent)
+    {
+        switch (stat)
+        {
+            case StatChanger.Stat.HP:
+                if (isPercent)
+                {
+                    maxHealth += Mathf.RoundToInt(maxHealth * value);
+                }
+                else
+                {
+                    maxHealth += Mathf.RoundToInt(value);
+                }
+                break;
+            case StatChanger.Stat.Atk:
+                if (isPercent)
+                {
+                    attack += Mathf.RoundToInt(attack * value);
+                }
+                else
+                {
+                    attack += Mathf.RoundToInt(value);
+                }
+                break;
+            case StatChanger.Stat.Def:
+                if (isPercent)
+                {
+                    defense += Mathf.RoundToInt(defense * value);
+                }
+                else
+                {
+                    defense += Mathf.RoundToInt(value);
+                }
+                break;
+            case StatChanger.Stat.Acc:
+                if (isPercent)
+                {
+                    accuracy += accuracy * value;
+                }
+                else
+                {
+                    accuracy += value;
+                }
+                break;
+            case StatChanger.Stat.Eva:
+                if (isPercent)
+                {
+                    evasion += evasion * value;
+                }
+                else
+                {
+                    evasion += value;
+                }
+                break;
+            case StatChanger.Stat.All:
+                if (isPercent)
+                {
+                    maxHealth += Mathf.RoundToInt(maxHealth * value);
+                    attack += Mathf.RoundToInt(attack * value);
+                    defense += Mathf.RoundToInt(defense * value);
+                    accuracy += accuracy * value;
+                    evasion += evasion * value;
+                }
+                else
+                {
+                    maxHealth += Mathf.RoundToInt(value);
+                    attack += Mathf.RoundToInt(value);
+                    defense += Mathf.RoundToInt(value);
+                    accuracy += value;
+                    evasion += value;
+                }
+                break;
+        }
+    }
+
     public virtual void SetAnimationTrigger(string triggerName) {}
 
     public virtual Animator GetAnimator() {return null;}

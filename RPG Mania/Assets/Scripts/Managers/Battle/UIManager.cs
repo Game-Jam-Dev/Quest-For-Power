@@ -14,8 +14,10 @@ public class UIManager : MonoBehaviour {
     [SerializeField] private ItemContainerManager itemContainerManager;
     [SerializeField] private GameObject initialContainer, comboContainer, skillContainer, itemContainer, targetContainer;
 
-    private PlayerBattle player;
-    private List<EnemyBattle> enemies;
+    public PlayerBattle player;
+    public List<EnemyBattle> enemies;
+
+    public EnemyBattle target;
 
     public void Initialize(PlayerBattle player, List<EnemyBattle> enemies)
     {

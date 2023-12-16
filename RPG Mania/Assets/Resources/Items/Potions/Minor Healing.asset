@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f36b03e1008df3d4c84ea698f442ca19, type: 3}
-  m_Name: Potion
+  m_Name: Minor Healing
   m_EditorClassIdentifier: 
-  itemName: 
-  value: 0
-  description: 
+  itemName: Minor Healing Potion
+  value: 50
+  description: 'Minor healing '

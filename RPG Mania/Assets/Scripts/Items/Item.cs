@@ -4,22 +4,7 @@ public abstract class Item : ScriptableObject {
     public int value;
     public string description;
 
-    public virtual void Use(CharacterBattle characterBattle){}
+    public virtual void Use(CharacterBattle character){}
 
-    protected enum Stat
-    {
-        HP,
-        Atk,
-        Def,
-        Acc,
-        Eva,
-        All,
-    }
-
-    protected enum Target
-    {
-        Self,
-        Enemy,
-        All,
-    }
+    public virtual void Use(CharacterBattle[] characters){}
 }

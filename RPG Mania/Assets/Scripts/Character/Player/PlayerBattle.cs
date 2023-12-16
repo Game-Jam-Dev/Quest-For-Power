@@ -67,8 +67,6 @@ public class PlayerBattle : CharacterBattle {
         evasion = .05f + level / 1000f;
 
         combo = 3 + (int)Mathf.Pow(level, .3f);
-
-        ResetHealth();
     }
 
     public void EndCombat()
@@ -78,6 +76,10 @@ public class PlayerBattle : CharacterBattle {
         DeactivateSkill();
 
         GetComponent<PlayerMovement>().enabled = true;
+
+        SetStats(level);
+
+        ResetHealth();
     }
 
     public override void SetAnimationTrigger(string triggerName)
