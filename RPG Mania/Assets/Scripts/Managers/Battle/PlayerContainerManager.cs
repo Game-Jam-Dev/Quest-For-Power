@@ -14,9 +14,21 @@ public class PlayerContainerManager : MonoBehaviour {
         comboManager.SetComboLength(player.combo);
     }
 
-    public void UseCombo(int count)
+    public void UpdateElement(SkillAction skill)
+    {
+        element.SetElement(skill);
+    }
+
+    public void UpdateElement(ElementManager.Element element)
+    {
+        this.element.SetElement(element);
+    }
+
+    public bool UseCombo(int count)
     {
         comboManager.SelectCombo(count);
+
+        return comboManager.MaxCombo();
     }
 
     public void HighlightCombo(int count)

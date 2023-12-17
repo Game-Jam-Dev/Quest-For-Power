@@ -6,14 +6,15 @@ using System.Collections;
 public class BattleManager : MonoBehaviour {
     [Header("Managers")]
     [SerializeField] private WorldManager worldManager;
-    [SerializeField] private BattleUIManager battleUIManager;
+    [SerializeField] private UIManager battleUIManager;
 
     [Header("Other Variables")]
     public float dialogueDisplayTime = 1.5f;
 
     [Header("Extras, no need to change")]
     public List<EnemyBattle> enemies = new();
-    private PlayerBattle player;
+    public PlayerBattle player;
+    private Item item;
     private Queue<CharacterBattle> turnOrder = new();
     public CharacterBattle characterToAttack;
     public List<ComboAction> activeCharacterCombo = new();
@@ -88,7 +89,30 @@ public class BattleManager : MonoBehaviour {
                 if (absorb)
                 {
                     Absorb(activeCharacter);
-                } 
+                } else if (item != null)
+                {
+                    ItemManager.UseItem(item, this);
+
+                    // update health ui
+                    battleUIManager.UpdateEnemyHealth((EnemyBattle)characterToAttack);
+                    battleUIManager.UpdatePlayerHealth();
+
+                    if (characterToAttack.health <= 0)
+                    {
+                        StartCoroutine(LoseBattle());
+
+                        break;
+                    }
+
+                    // handle enemy's death
+                    else if (characterToAttack.health <= 0)
+                    {
+                        DefeatedEnemy();
+
+                        // break out of combo when enemy dies
+                        break;
+                    }
+                }
                 // standard action
                 else
                 {
@@ -117,7 +141,7 @@ public class BattleManager : MonoBehaviour {
                         }
 
                         // update enemy's health ui
-                        battleUIManager.UpdateEnemyHealth();
+                        battleUIManager.UpdateEnemyHealth((EnemyBattle)characterToAttack);
 
                         // handle enemy's death
                         if (characterToAttack.health <= 0)
@@ -187,6 +211,7 @@ public class BattleManager : MonoBehaviour {
     {
         // Prepares player for turn
         awaitCommand = true;
+        item = null;
     }
 
     private void NextTurn(CharacterBattle activeCharacter)
@@ -274,6 +299,13 @@ public class BattleManager : MonoBehaviour {
         awaitCommand = false;
     }
 
+    public void SetItemAction(Item item, CharacterBattle characterToAttack)
+    {
+        this.item = item;
+        this.characterToAttack = characterToAttack;
+        awaitCommand = false;
+    }
+
     public void UpdateSkillCounter()
     {
         // tracks how long the player has been using the same skill
@@ -293,20 +325,20 @@ public class BattleManager : MonoBehaviour {
             {
                 player.DeactivateSkill();
                 activeSkillCounter = 0;
-                battleUIManager.ClearActiveSkill();
+                battleUIManager.DisableActiveSkill();
             }
         }
     }
 
-    public void UnselectSkill()
-    {
-        if (activeSkillCounter == 0)
-        {
-            player.DeactivateSkill();
+    // public void UnselectSkill()
+    // {
+    //     if (activeSkillCounter == 0)
+    //     {
+    //         player.DeactivateSkill();
 
-            battleUIManager.ClearActiveSkill();
-        }
-    }
+    //         battleUIManager.ClearActiveSkill();
+    //     }
+    // }
 
     private void EndBattle()
     {
@@ -322,7 +354,7 @@ public class BattleManager : MonoBehaviour {
         activeCharacterCombo.Clear();
         absorb = false;
 
-        battleUIManager.ClearUI();
+        battleUIManager.EndBattle();
 
         gameObject.SetActive(false);
     }

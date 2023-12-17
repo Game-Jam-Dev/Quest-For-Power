@@ -6,20 +6,20 @@ public class EnemyContainerManager : MonoBehaviour {
 
     private List<(EnemyBattle, EnemyBattleManager)> enemyDatas = new();
     
-    public void SetEnemies(List<EnemyBattle> enemies)
+    public void SetEnemies(List<EnemyBattle> enemies, UIManager uiManager)
     {
         ResetEnemies();
 
         foreach (EnemyBattle e in enemies)
         {
-            CreateEnemy(e);
+            CreateEnemy(e, uiManager);
         }
     }
 
-    private void CreateEnemy(EnemyBattle enemy)
+    private void CreateEnemy(EnemyBattle enemy, UIManager uiManager)
     {
         EnemyBattleManager enemyData = Instantiate(enemyDataPrefab, transform).GetComponent<EnemyBattleManager>();
-        enemyData.Initialize(this, enemy);
+        enemyData.Initialize(this, enemy, uiManager);
 
         enemyDatas.Add((enemy, enemyData));
     }
@@ -40,7 +40,7 @@ public class EnemyContainerManager : MonoBehaviour {
 
     public void DefeatedEnemy(EnemyBattleManager e)
     {
-        e.gameObject.SetActive(false);
+        enemyDatas.Remove(enemyDatas.Find(x => x.Item2 == e));
     }
 
     private (EnemyBattle, EnemyBattleManager) FindEnemy(EnemyBattle enemy)
@@ -54,5 +54,24 @@ public class EnemyContainerManager : MonoBehaviour {
         }
 
         return enemyDatas[0];
+    }
+
+    public void TargetEnemies() {
+        if (enemyDatas.Count > 0)
+        {
+            foreach ((EnemyBattle, EnemyBattleManager) e in enemyDatas)
+            {
+                e.Item2.LockCursor(false);
+            }
+
+            enemyDatas[0].Item2.SelectEnemy();
+        }
+    }
+
+    public void UntargetEnemies() {
+        foreach ((EnemyBattle, EnemyBattleManager) e in enemyDatas)
+        {
+            e.Item2.LockCursor(true);
+        }
     }
 }

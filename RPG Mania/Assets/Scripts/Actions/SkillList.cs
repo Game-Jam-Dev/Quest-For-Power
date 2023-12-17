@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class SkillList
@@ -13,10 +14,7 @@ public class SkillList
 
     public static SkillList GetInstance()
     {
-        if (Instance == null)
-        {
-            Instance = new SkillList();
-        }
+        Instance ??= new SkillList();
 
         return Instance;
     }
@@ -26,6 +24,13 @@ public class SkillList
         if (skillList.ContainsKey(key)) return skillList[key];
 
         else return new SkillAction("Null", EmptyAction);
+    }
+
+    public SkillAction[] GetActions()
+    {
+        SkillAction[] actions = skillList.Values.ToArray();
+
+        return actions;
     }
 
 

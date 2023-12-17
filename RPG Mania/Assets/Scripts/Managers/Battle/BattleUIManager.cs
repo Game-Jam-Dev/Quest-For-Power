@@ -256,7 +256,7 @@ public class BattleUIManager : MonoBehaviour {
     {   
         targetContainer.SetActive(false);
         pickAction.SetActive(true);
-        battleManager.UnselectSkill();
+        // battleManager.UnselectSkill();
         canCombo = true;
         Utility.SetActiveButton(pickAttackButton);
     }

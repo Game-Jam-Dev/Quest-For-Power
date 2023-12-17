@@ -2,13 +2,9 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "StatChanger", menuName = "Items/StatChanger", order = 0)]
 public class StatChanger : Item {
-
     public Stat stat;
-    public Target target;
     public bool isPositive = true;
     public bool isPercent = false;
-
-    public enum Target { self, enemy }
     
     public enum Stat
     {

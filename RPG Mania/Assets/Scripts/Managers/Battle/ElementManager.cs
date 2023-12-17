@@ -32,6 +32,25 @@ public class ElementManager : MonoBehaviour {
         }
     }
 
+    public void SetElement(SkillAction skill)
+    {
+        Element element = GetElement(skill);
+
+        SetElement(element);
+    }
+
+    public static Element GetElement(SkillAction skill)
+    {
+        return skill.Name switch
+        {
+            "Water" => Element.Water,
+            "Fire" => Element.Fire,
+            "Wind" => Element.Wind,
+            "Earth" => Element.Earth,
+            _ => Element.None,
+        };
+    }
+
     public static int CalculateEffectiveDamage(Element attack, Element defend, int damage)
     {
         if (attack == Element.None || defend == Element.None) return damage;

@@ -35,25 +35,27 @@ public class ItemManager {
 
     public Item[] GetItems() { return items; }
 
-    public static void UseItem(Item item, UIManager UIManager)
+    public static void UseItem(Item item, BattleManager battleManager)
     {
         switch (item)
         {
             case Potion potion:
-                potion.Use(UIManager.player);
+                potion.Use(battleManager.player);
                 break;
             case Essence essence:
-                if (essence.range == Essence.Range.single)
-                    essence.Use(UIManager.target);
+                if (essence.target == Item.Target.Single)
+                    essence.Use(battleManager.characterToAttack);
                 else
-                    essence.Use(new CharacterBattle[] { UIManager.player }.Concat(UIManager.enemies).ToArray());
+                    essence.Use(new CharacterBattle[] { battleManager.player }.Concat(battleManager.enemies).ToArray());
                 break;
             case StatChanger statChanger:
-                if (statChanger.target == StatChanger.Target.self)
-                    statChanger.Use(UIManager.player);
+                if (statChanger.target == Item.Target.Self)
+                    statChanger.Use(battleManager.player);
                 else
-                    statChanger.Use(UIManager.target);
+                    statChanger.Use(battleManager.characterToAttack);
                 break;
         }
+
+        GameManager.instance.RemoveItem(item);
     }
 }

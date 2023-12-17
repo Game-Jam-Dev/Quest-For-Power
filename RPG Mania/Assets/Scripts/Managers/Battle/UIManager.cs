@@ -12,12 +12,14 @@ public class UIManager : MonoBehaviour {
     [SerializeField] private EnemyContainerManager enemyContainerManager;
     [SerializeField] private SkillContainerManager skillContainerManager;
     [SerializeField] private ItemContainerManager itemContainerManager;
-    [SerializeField] private GameObject initialContainer, comboContainer, skillContainer, itemContainer, targetContainer;
+    [SerializeField] private GameObject initialContainer, comboContainer, skillContainer, itemContainer;
 
     public PlayerBattle player;
     public List<EnemyBattle> enemies;
 
     public EnemyBattle target;
+    public Item selectedItem;
+    public List<ComboAction> playerCombo = new();
 
     public void Initialize(PlayerBattle player, List<EnemyBattle> enemies)
     {
@@ -28,9 +30,9 @@ public class UIManager : MonoBehaviour {
         this.enemies = enemies;
 
         playerContainerManager.SetPlayer(player);
-        enemyContainerManager.SetEnemies(enemies);
-        skillContainerManager.SetSkills(player);
-        itemContainerManager.SetItems();
+        enemyContainerManager.SetEnemies(enemies, this);
+        skillContainerManager.UpdateSkills(player);
+        itemContainerManager.UpdateItems();
     }
 
     private void ResetUI()
@@ -39,7 +41,10 @@ public class UIManager : MonoBehaviour {
         comboContainer.SetActive(false);
         skillContainer.SetActive(false);
         itemContainer.SetActive(false);
-        targetContainer.SetActive(false);
+
+        target = null;
+        selectedItem = null;
+        playerCombo.Clear();
     }
 
     public void StartPlayerTurn()
@@ -49,54 +54,140 @@ public class UIManager : MonoBehaviour {
 
     public void SelectAttack()
     {
-        Utility.SwitchActiveObjects(initialContainer, comboContainer);
-
-
+        initialContainer.SetActive(false);
+        enemyContainerManager.TargetEnemies();
     }
 
     public void SelectSkill()
     {
         Utility.SwitchActiveObjects(initialContainer, skillContainer);
-
-
     }
 
     public void SelectItem()
     {
         Utility.SwitchActiveObjects(initialContainer, skillContainer);
-
-
     }
 
     public void SelectEscape()
     {
-        
+        battleManager.Escape();
     }
 
-    public void PickCombo(ComboAction combo)
+    public void PickCombo(string combo)
     {
-        playerContainerManager.UseCombo(combo.Cost);
+        ComboAction action = ComboList.GetInstance().GetAction(combo);
 
+        bool max = playerContainerManager.UseCombo(action.Cost);
+        playerCombo.Add(action);
+
+        if (max)
+        {
+            comboContainer.SetActive(false);
+            SendComboAction();
+        }
     }
 
     public void PickSkill(SkillAction skill)
     {
         Utility.SwitchActiveObjects(skillContainer, initialContainer);
 
+        battleManager.activeSkillCounter = 0;
 
+        player.SelectSkill(skill);
+        skillContainerManager.UpdateSkills(player);
+        playerContainerManager.UpdateElement(skill);
     }
 
     public void PickTarget(EnemyBattle enemy)
     {
+        target = enemy;
 
+        if (selectedItem != null)
+        {
+            SendItemAction(enemy);
+        }
+        else
+        {
+            comboContainer.SetActive(true);
+        }
     }
 
-    public void PickItem()
+    public void PickItem(Item item)
     {
-
+        selectedItem = item;
+        itemContainer.SetActive(false);
+        if (item.target == Item.Target.Single)
+        {
+            enemyContainerManager.TargetEnemies();
+        }
+        else
+        {
+            SendItemAction();
+        }
     }
 
+    public void BackFromSkill()
+    {
+        Utility.SwitchActiveObjects(skillContainer, initialContainer);
+    }
 
+    public void BackFromItem()
+    {
+        Utility.SwitchActiveObjects(itemContainer, initialContainer);
+    }
+
+    public void BackFromTarget()
+    {
+        enemyContainerManager.UntargetEnemies();
+        if (selectedItem != null)
+        {
+            selectedItem = null;
+            itemContainer.SetActive(true);
+        }
+        else
+        {
+            initialContainer.SetActive(true);
+        }
+    }
+
+    public void BackFromCombo()
+    {
+        enemyContainerManager.TargetEnemies();
+        comboContainer.SetActive(false);
+
+        playerContainerManager.ResetCombo();
+        playerCombo.Clear();
+    }
+
+    private void SendComboAction()
+    {
+        battleManager.SetComboAction(target, playerCombo);
+    }
+
+    private void SendItemAction(EnemyBattle target = null)
+    {
+        battleManager.SetItemAction(selectedItem, target);
+    }
+
+    private void EndTurn()
+    {
+        enemyContainerManager.UntargetEnemies();
+    }
+
+    public void EndBattle()
+    {
+        ResetUI();
+    }
+
+    public void DefeatedEnemy(EnemyBattle enemy)
+    {
+        enemies.Remove(enemy);
+    }
+
+    public void DisableActiveSkill()
+    {
+        playerContainerManager.UpdateElement(ElementManager.Element.None);
+    }
 
     public void UpdatePlayerHealth()
     {
@@ -106,5 +197,15 @@ public class UIManager : MonoBehaviour {
     public void UpdateEnemyHealth(EnemyBattle enemy)
     {
         enemyContainerManager.UpdateDamage(enemy);
+    }
+
+    public void UpdateSkills()
+    {
+        skillContainerManager.UpdateSkills(player);
+    }
+
+    public void SetText(string text)
+    {
+
     }
 }

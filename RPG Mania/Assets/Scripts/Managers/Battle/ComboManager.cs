@@ -88,6 +88,8 @@ public class ComboManager : MonoBehaviour {
             Image image = activeCombos[i];
             image.sprite = active;
         }
+
+        activeCombo = max;
     }
 
     public void ResetCombo()
@@ -98,6 +100,7 @@ public class ComboManager : MonoBehaviour {
         }
 
         activeCombo = 0;
+        highlightCombos.Clear();
     }
 
     public int ComboLength() { return activeCombo; }
