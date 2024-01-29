@@ -13,13 +13,18 @@ public class SkillContainerManager : MonoBehaviour {
         SkillAction[] skills = SkillList.GetInstance().GetActions();
 
         foreach (SkillAction skill in skills) {
-            GameObject skillObject = Instantiate(skillObjectPrefab, transform);
+            GameObject skillObj = Instantiate(skillObjectPrefab, transform);
 
-            skillObject.GetComponent<Button>().onClick.AddListener(() => UseSkill(skill));
-            skillObject.GetComponentInChildren<TextMeshProUGUI>().text = skill.Name;
-            skillObjects.Add((skillObject, skill));
-            skillObject.SetActive(false);
+            skillObj.GetComponent<Button>().onClick.AddListener(() => UseSkill(skill));
+            skillObj.GetComponentInChildren<TextMeshProUGUI>().text = skill.Name;
+            skillObjects.Add((skillObj, skill));
+            skillObj.SetActive(false);
         }
+
+        GameObject skillObject = Instantiate(skillObjectPrefab, transform);
+
+        skillObject.GetComponent<Button>().onClick.AddListener(Back);
+        skillObject.GetComponentInChildren<TextMeshProUGUI>().text = "Back";
     }
     public void UpdateSkills(PlayerBattle player)
     {
@@ -42,5 +47,10 @@ public class SkillContainerManager : MonoBehaviour {
     private void UseSkill(SkillAction skill)
     {
         uiManager.PickSkill(skill);
+    }
+
+    private void Back()
+    {
+        uiManager.BackFromSkill();
     }
 }

@@ -77,6 +77,8 @@ public class UIManager : MonoBehaviour {
     {
         ComboAction action = ComboList.GetInstance().GetAction(combo);
 
+        if (!playerContainerManager.CanUseCombo(action.Cost)) return;
+
         bool max = playerContainerManager.UseCombo(action.Cost);
         playerCombo.Add(action);
 
@@ -147,6 +149,7 @@ public class UIManager : MonoBehaviour {
         else
         {
             initialContainer.SetActive(true);
+            playerContainerManager.ResetCombo();
         }
     }
 
@@ -155,6 +158,8 @@ public class UIManager : MonoBehaviour {
         enemyContainerManager.TargetEnemies();
         comboContainer.SetActive(false);
 
+        initialContainer.SetActive(true);
+
         playerContainerManager.ResetCombo();
         playerCombo.Clear();
     }
@@ -162,16 +167,19 @@ public class UIManager : MonoBehaviour {
     private void SendComboAction()
     {
         battleManager.SetComboAction(target, playerCombo);
+        EndTurn();
     }
 
     private void SendItemAction(EnemyBattle target = null)
     {
         battleManager.SetItemAction(selectedItem, target);
+        EndTurn();
     }
 
     private void EndTurn()
     {
         enemyContainerManager.UntargetEnemies();
+        playerContainerManager.ResetCombo();
     }
 
     public void EndBattle()

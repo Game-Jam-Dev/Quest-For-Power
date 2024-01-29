@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,7 +16,12 @@ public class EnemyBattleManager : MonoBehaviour {
         this.container = container;
         this.enemy = enemy;
 
-        cursorButton.transform.position = enemy.transform.position;
+        Canvas canvas = container.GetComponentInParent<Canvas>();
+
+        Vector3 enemyScreenPosition = Camera.main.WorldToScreenPoint(enemy.transform.position);
+        RectTransformUtility.ScreenPointToWorldPointInRectangle(canvas.transform as RectTransform, enemyScreenPosition, canvas.worldCamera, out Vector3 enemyCanvasPosition);
+
+        cursorButton.transform.position = enemyCanvasPosition;
 
         cursorButton.onClick.AddListener(() => uiManager.PickTarget(this.enemy));
 

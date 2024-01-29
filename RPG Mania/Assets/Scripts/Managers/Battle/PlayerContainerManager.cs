@@ -10,8 +10,8 @@ public class PlayerContainerManager : MonoBehaviour {
     {
         this.player = player;
 
-        element.SetElement(player.element);
-        comboManager.SetComboLength(player.combo);
+        element.SetElement(this.player.element);
+        comboManager.SetComboLength(this.player.combo);
     }
 
     public void UpdateElement(SkillAction skill)
@@ -22,6 +22,11 @@ public class PlayerContainerManager : MonoBehaviour {
     public void UpdateElement(ElementManager.Element element)
     {
         this.element.SetElement(element);
+    }
+
+    public bool CanUseCombo(int count)
+    {
+        return comboManager.CanUseCombo(count);
     }
 
     public bool UseCombo(int count)

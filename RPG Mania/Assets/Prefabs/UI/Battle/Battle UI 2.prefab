@@ -241,7 +241,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 353.8}
+  m_AnchoredPosition: {x: 668.6, y: 243.79999}
   m_SizeDelta: {x: 448, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &9190250519394984028
@@ -918,7 +918,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62d8e076ce8a9214691e0678fd29e505, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillObjectPrefab: {fileID: 2178621366353951945, guid: 8449ec6be81729a4fa53d37a35ba098c,
+  skillObjectPrefab: {fileID: 2178621366353951945, guid: d0662560e961ce94890cbb36e7230092,
     type: 3}
   uiManager: {fileID: 1422133305692190771}
 --- !u!224 &3204100228097978830 stripped
@@ -1412,6 +1412,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7185554625198397433, guid: 36fddac2e01142b4bbd89f09590bafb0,
+        type: 3}
+      propertyPath: m_Interactable
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7358474756773285717, guid: 36fddac2e01142b4bbd89f09590bafb0,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -1432,7 +1437,12 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7185554625198397433, guid: 36fddac2e01142b4bbd89f09590bafb0, type: 3}
+    - {fileID: 4108093531914247049, guid: 36fddac2e01142b4bbd89f09590bafb0, type: 3}
+    - {fileID: 2556392756306871620, guid: 36fddac2e01142b4bbd89f09590bafb0, type: 3}
+    - {fileID: 6011272283849826795, guid: 36fddac2e01142b4bbd89f09590bafb0, type: 3}
+    - {fileID: 6174004728762595549, guid: 36fddac2e01142b4bbd89f09590bafb0, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 36fddac2e01142b4bbd89f09590bafb0, type: 3}
 --- !u!224 &193757453542124117 stripped
 RectTransform:
@@ -2611,7 +2621,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45d2ffc2a6ec3084798ec8d83f93b2cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemObjectPrefab: {fileID: 2178621366353951945, guid: 8449ec6be81729a4fa53d37a35ba098c,
+  itemObjectPrefab: {fileID: 2178621366353951945, guid: d0662560e961ce94890cbb36e7230092,
     type: 3}
   uiManager: {fileID: 1422133305692190771}
 --- !u!224 &8978954295470712891 stripped

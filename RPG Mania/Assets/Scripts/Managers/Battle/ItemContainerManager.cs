@@ -15,13 +15,18 @@ public class ItemContainerManager : MonoBehaviour {
 
         foreach (Item item in items)
         {
-            GameObject itemObject = Instantiate(itemObjectPrefab, transform);
+            GameObject itemObj = Instantiate(itemObjectPrefab, transform);
 
-            itemObject.GetComponent<Button>().onClick.AddListener(() => UseItem(item));
-            itemObject.GetComponentInChildren<TextMeshProUGUI>().text = item.itemName;
-            itemObjects.Add((itemObject, item));
-            itemObject.SetActive(false);
+            itemObj.GetComponent<Button>().onClick.AddListener(() => UseItem(item));
+            itemObj.GetComponentInChildren<TextMeshProUGUI>().text = item.itemName;
+            itemObjects.Add((itemObj, item));
+            itemObj.SetActive(false);
         }
+
+        GameObject itemObject = Instantiate(itemObjectPrefab, transform);
+
+        itemObject.GetComponent<Button>().onClick.AddListener(Back);
+        itemObject.GetComponentInChildren<TextMeshProUGUI>().text = "Back";
     }
     public void UpdateItems()
     {
@@ -44,5 +49,10 @@ public class ItemContainerManager : MonoBehaviour {
     private void UseItem(Item item)
     {
         uiManager.PickItem(item);
+    }
+
+    private void Back()
+    {
+        uiManager.BackFromItem();
     }
 }
