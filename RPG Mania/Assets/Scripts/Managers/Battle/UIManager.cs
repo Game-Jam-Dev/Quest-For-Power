@@ -12,7 +12,7 @@ public class UIManager : MonoBehaviour {
     [SerializeField] private EnemyContainerManager enemyContainerManager;
     [SerializeField] private SkillContainerManager skillContainerManager;
     [SerializeField] private ItemContainerManager itemContainerManager;
-    [SerializeField] private GameObject initialContainer, comboContainer, skillContainer, itemContainer;
+    [SerializeField] private GameObject initialContainer, targetContainer, comboContainer, skillContainer, itemContainer;
 
     public PlayerBattle player;
     public List<EnemyBattle> enemies;
@@ -38,6 +38,7 @@ public class UIManager : MonoBehaviour {
     private void ResetUI()
     {
         initialContainer.SetActive(false);
+        targetContainer.SetActive(false);
         comboContainer.SetActive(false);
         skillContainer.SetActive(false);
         itemContainer.SetActive(false);
@@ -54,7 +55,7 @@ public class UIManager : MonoBehaviour {
 
     public void SelectAttack()
     {
-        initialContainer.SetActive(false);
+        Utility.SwitchActiveObjects(initialContainer, targetContainer);
         enemyContainerManager.TargetEnemies();
     }
 
@@ -65,7 +66,7 @@ public class UIManager : MonoBehaviour {
 
     public void SelectItem()
     {
-        Utility.SwitchActiveObjects(initialContainer, skillContainer);
+        Utility.SwitchActiveObjects(initialContainer, itemContainer);
     }
 
     public void SelectEscape()
@@ -103,6 +104,8 @@ public class UIManager : MonoBehaviour {
     public void PickTarget(EnemyBattle enemy)
     {
         target = enemy;
+        enemyContainerManager.UntargetEnemies();
+        targetContainer.SetActive(false);
 
         if (selectedItem != null)
         {
@@ -121,6 +124,7 @@ public class UIManager : MonoBehaviour {
         if (item.target == Item.Target.Single)
         {
             enemyContainerManager.TargetEnemies();
+            targetContainer.SetActive(true);
         }
         else
         {
@@ -141,6 +145,7 @@ public class UIManager : MonoBehaviour {
     public void BackFromTarget()
     {
         enemyContainerManager.UntargetEnemies();
+        targetContainer.SetActive(false);
         if (selectedItem != null)
         {
             selectedItem = null;
@@ -155,11 +160,8 @@ public class UIManager : MonoBehaviour {
 
     public void BackFromCombo()
     {
-        enemyContainerManager.TargetEnemies();
-        comboContainer.SetActive(false);
-
-        initialContainer.SetActive(true);
-
+        Utility.SwitchActiveObjects(comboContainer, initialContainer);
+        
         playerContainerManager.ResetCombo();
         playerCombo.Clear();
     }

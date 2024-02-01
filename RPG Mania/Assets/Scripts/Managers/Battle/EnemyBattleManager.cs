@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 public class EnemyBattleManager : MonoBehaviour {
     [SerializeField] private ElementManager element;
-    [SerializeField] private Button cursorButton;
-    public float cursorYOffset = 1f;
+    private GameObject cursorObject;
+    private Button cursorButton;
 
     private EnemyBattle enemy;
     private EnemyContainerManager container;
@@ -16,24 +16,32 @@ public class EnemyBattleManager : MonoBehaviour {
         this.container = container;
         this.enemy = enemy;
 
-        Canvas canvas = container.GetComponentInParent<Canvas>();
+        cursorObject = enemy.GetCursorDisplay();
+        cursorObject.TryGetComponent(out cursorButton);
 
-        Vector3 enemyScreenPosition = Camera.main.WorldToScreenPoint(enemy.transform.position);
-        RectTransformUtility.ScreenPointToWorldPointInRectangle(canvas.transform as RectTransform, enemyScreenPosition, canvas.worldCamera, out Vector3 enemyCanvasPosition);
+        // Canvas canvas = container.GetComponentInParent<Canvas>();
 
-        cursorButton.transform.position = enemyCanvasPosition;
+        // Vector3 enemyScreenPosition = Camera.main.WorldToScreenPoint(enemy.transform.position);
+        // RectTransformUtility.ScreenPointToWorldPointInRectangle(canvas.transform as RectTransform, enemyScreenPosition, canvas.worldCamera, out Vector3 enemyCanvasPosition);
+
+        // cursorButton.transform.position = enemyCanvasPosition;
 
         cursorButton.onClick.AddListener(() => uiManager.PickTarget(this.enemy));
 
         element.SetElement(enemy.element);
     }
 
-    public void LockCursor(bool b)
+    public void DeselectEnemy()
     {
-        cursorButton.interactable = !b;
+        cursorObject.SetActive(false);
     }
 
     public void SelectEnemy()
+    {
+        cursorObject.SetActive(true);
+    }
+
+    public void SelectButton()
     {
         Utility.SetActiveButton(cursorButton);
     }
@@ -42,10 +50,11 @@ public class EnemyBattleManager : MonoBehaviour {
     {
         if (enemy.health <= 0)
         {
-            cursorButton.gameObject.SetActive(false);
-            
             container.DefeatedEnemy(this);
+
         }
+
+
     }
 
     public EnemyBattle GetEnemy()

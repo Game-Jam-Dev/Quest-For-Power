@@ -83,26 +83,26 @@ public class BattleUIManager : MonoBehaviour {
     private void SetEnemies()
     {
         // Make ui components for each enemy
-        for (int i = 0; i < enemies.Count; i++)
-        {
-            // set health display
-            EnemyBattle enemy = enemies[i];
-            TextMeshProUGUI enemyHealthText = Instantiate(eHealthPrefab, eHealthContainer.transform);
-            enemyHealthText.rectTransform.anchoredPosition = new Vector3(0, -i * 100);
+        // for (int i = 0; i < enemies.Count; i++)
+        // {
+        //     // set health display
+        //     EnemyBattle enemy = enemies[i];
+        //     TextMeshProUGUI enemyHealthText = Instantiate(eHealthPrefab, eHealthContainer.transform);
+        //     enemyHealthText.rectTransform.anchoredPosition = new Vector3(0, -i * 100);
 
-            // set button to select enemy
-            Button selectEnemy = Instantiate(targetButtonPrefab, targetContainer.transform);
-            selectEnemy.onClick.AddListener(() => PickTarget(enemy));
-            targetButtons.Add(selectEnemy);
+        //     // set button to select enemy
+        //     Button selectEnemy = Instantiate(targetButtonPrefab, targetContainer.transform);
+        //     selectEnemy.onClick.AddListener(() => PickTarget(enemy));
+        //     targetButtons.Add(selectEnemy);
 
-            // set button text
-            string leadingText = "";
-            if (enemy.element != ElementManager.Element.None) leadingText = enemy.element + " ";
-            selectEnemy.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = leadingText + enemy.characterName;
-        }
+        //     // set button text
+        //     string leadingText = "";
+        //     if (enemy.element != ElementManager.Element.None) leadingText = enemy.element + " ";
+        //     selectEnemy.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = leadingText + enemy.characterName;
+        // }
 
-        Button back = Instantiate(backButtonPrefab, targetContainer.transform);
-        back.onClick.AddListener(BackFromTarget);
+        // Button back = Instantiate(backButtonPrefab, targetContainer.transform);
+        // back.onClick.AddListener(BackFromTarget);
     }
 
     private void SetHealth()
