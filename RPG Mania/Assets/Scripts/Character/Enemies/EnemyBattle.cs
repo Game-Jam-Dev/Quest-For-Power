@@ -15,6 +15,8 @@ public class EnemyBattle : CharacterBattle {
     [SerializeField] protected EnemyAnimation ea;
     private GameObject cursorDisplay;
 
+    public Item itemDrop;
+
     protected override void Start()
     {
         base.Start();
@@ -23,6 +25,8 @@ public class EnemyBattle : CharacterBattle {
         wildsManager = GameObject.FindGameObjectWithTag("Canvas").GetComponent<WildsManager>();
         cursorDisplay = transform.GetChild(0).GetChild(0).gameObject;
         cursorDisplay.SetActive(false);
+
+        itemDrop = ItemManager.GetInstance().GetRandomItem();
     }
 
     public void InitializeEnemy(int id)
@@ -140,5 +144,10 @@ public class EnemyBattle : CharacterBattle {
         int xp = 5;
 
         return xp;
+    }
+
+    public Item ItemDrop()
+    {
+        return itemDrop;
     }
 }

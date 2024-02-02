@@ -9,7 +9,7 @@ public class ItemContainerManager : MonoBehaviour {
 
     private List<(GameObject, Item)> itemObjects = new();
 
-    private void Start()
+    public void Initialize()
     {
         Item[] items = ItemManager.GetInstance().GetItems();
 
@@ -30,6 +30,8 @@ public class ItemContainerManager : MonoBehaviour {
     }
     public void UpdateItems()
     {
+        if (itemObjects.Count == 0) Initialize();
+
         for (int i = 0; i < itemObjects.Count; i++)
         {
             GameObject skillObject = itemObjects[i].Item1;

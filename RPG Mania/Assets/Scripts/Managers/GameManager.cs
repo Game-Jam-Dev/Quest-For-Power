@@ -94,6 +94,11 @@ public class GameManager : MonoBehaviour {
         playerData.items.Add(item);
     }
 
+    public void AddItems(List<Item> items)
+    {
+        playerData.items.AddRange(items);
+    }
+
     public void RemoveItem(Item item)
     {
         playerData.items.Remove(item);

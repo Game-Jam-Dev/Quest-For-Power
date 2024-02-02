@@ -2,8 +2,8 @@ using System.Linq;
 using UnityEngine;
 
 public class ItemManager {
-    public static ItemManager Instance { get; private set; }
-    private readonly Item[] items;
+    private static ItemManager Instance;
+    private Item[] items;
 
     public ItemManager()
     {
@@ -31,6 +31,11 @@ public class ItemManager {
         if (index < items.Length) return items[index];
 
         else return null;
+    }
+
+    public Item GetRandomItem()
+    {
+        return items[Random.Range(0, items.Length)];
     }
 
     public Item[] GetItems() { return items; }

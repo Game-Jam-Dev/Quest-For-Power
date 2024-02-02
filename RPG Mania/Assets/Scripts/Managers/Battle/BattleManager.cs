@@ -23,6 +23,7 @@ public class BattleManager : MonoBehaviour {
     // tracker variables
     public int killCount = 0;
     private int xpGain = 0;
+    private List<Item> itemDrops = new();
     public bool awaitCommand = false;
     private int comboLength = 0;
     public bool absorb = false;
@@ -229,7 +230,7 @@ public class BattleManager : MonoBehaviour {
     public void Escape()
     {
         if (worldManager is ThroneManager) return;
-        
+
         StopCoroutine(battleLoop);
         worldManager.EscapeBattle();
         EndBattle();
@@ -264,6 +265,7 @@ public class BattleManager : MonoBehaviour {
         // gain stats from kill
         killCount++;
         xpGain += defeatedEnemy.XPFromKill(player.level);
+        itemDrops.Add(defeatedEnemy.itemDrop);
 
         // remove enemy from ui
         battleUIManager.DefeatedEnemy(defeatedEnemy);
@@ -351,6 +353,7 @@ public class BattleManager : MonoBehaviour {
         enemies.Clear();
 
         xpGain = 0;
+        itemDrops.Clear();
         killCount = 0;
         comboLength = 0;
         activeCharacterCombo.Clear();
@@ -369,7 +372,7 @@ public class BattleManager : MonoBehaviour {
 
         int currentLevel = player.level;
 
-        player.WinBattle(xpGain, killCount);
+        player.WinBattle(xpGain, killCount, itemDrops);
 
         yield return new WaitForSeconds(dialogueDisplayTime);
 
