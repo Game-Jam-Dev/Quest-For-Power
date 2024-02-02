@@ -21,6 +21,10 @@ public class UIManager : MonoBehaviour {
     public Item selectedItem;
     public List<ComboAction> playerCombo = new();
 
+    private bool absorb = false;
+    private int absorbCounter = 0;
+    private int absorbCounterMax = 3;
+
     public void Initialize(PlayerBattle player, List<EnemyBattle> enemies)
     {
         ResetUI();
@@ -101,6 +105,15 @@ public class UIManager : MonoBehaviour {
         playerContainerManager.UpdateElement(skill);
     }
 
+    public void PickAbsorb()
+    {
+        if (absorbCounter > absorbCounterMax) return;
+
+        absorb = true;
+        enemyContainerManager.TargetEnemies();
+        Utility.SwitchActiveObjects(skillContainer, targetContainer);
+    }
+
     public void PickTarget(EnemyBattle enemy)
     {
         target = enemy;
@@ -110,6 +123,10 @@ public class UIManager : MonoBehaviour {
         if (selectedItem != null)
         {
             SendItemAction(enemy);
+        }
+        else if (absorb)
+        {
+            SendAbsorbAction(enemy);
         }
         else
         {
@@ -149,13 +166,17 @@ public class UIManager : MonoBehaviour {
         if (selectedItem != null)
         {
             selectedItem = null;
-            itemContainer.SetActive(true);
+        }
+        else if (absorb)
+        {
+            absorb = false;
         }
         else
         {
-            initialContainer.SetActive(true);
             playerContainerManager.ResetCombo();
         }
+
+        initialContainer.SetActive(true);
     }
 
     public void BackFromCombo()
@@ -174,7 +195,16 @@ public class UIManager : MonoBehaviour {
 
     private void SendItemAction(EnemyBattle target = null)
     {
+        selectedItem = null;
         battleManager.SetItemAction(selectedItem, target);
+        EndTurn();
+    }
+
+    private void SendAbsorbAction(EnemyBattle target)
+    {
+        absorbCounter++;
+        absorb = false;
+        battleManager.SetAbsorbAction(target);
         EndTurn();
     }
 

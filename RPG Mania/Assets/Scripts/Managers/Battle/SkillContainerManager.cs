@@ -9,25 +9,30 @@ public class SkillContainerManager : MonoBehaviour {
 
     private List<(GameObject, SkillAction)> skillObjects = new();
 
-    private void Start() {
+    public void Initialize() {
         SkillAction[] skills = SkillList.GetInstance().GetActions();
 
-        foreach (SkillAction skill in skills) {
-            GameObject skillObj = Instantiate(skillObjectPrefab, transform);
+        GameObject skillObj = Instantiate(skillObjectPrefab, transform);
+        skillObj.GetComponent<Button>().onClick.AddListener(UseAbsorb);
+        skillObj.GetComponentInChildren<TextMeshProUGUI>().text = "Absorb";
 
+        foreach (SkillAction skill in skills) {
+            skillObj = Instantiate(skillObjectPrefab, transform);
             skillObj.GetComponent<Button>().onClick.AddListener(() => UseSkill(skill));
             skillObj.GetComponentInChildren<TextMeshProUGUI>().text = skill.Name;
+
             skillObjects.Add((skillObj, skill));
             skillObj.SetActive(false);
         }
 
-        GameObject skillObject = Instantiate(skillObjectPrefab, transform);
-
-        skillObject.GetComponent<Button>().onClick.AddListener(Back);
-        skillObject.GetComponentInChildren<TextMeshProUGUI>().text = "Back";
+        skillObj = Instantiate(skillObjectPrefab, transform);
+        skillObj.GetComponent<Button>().onClick.AddListener(Back);
+        skillObj.GetComponentInChildren<TextMeshProUGUI>().text = "Back";
     }
     public void UpdateSkills(PlayerBattle player)
     {
+        if (skillObjects.Count == 0) Initialize();
+
         for (int i = 0; i < skillObjects.Count; i++)
         {
             GameObject skillObject = skillObjects[i].Item1;
@@ -47,6 +52,11 @@ public class SkillContainerManager : MonoBehaviour {
     private void UseSkill(SkillAction skill)
     {
         uiManager.PickSkill(skill);
+    }
+
+    private void UseAbsorb()
+    {
+        uiManager.PickAbsorb();
     }
 
     private void Back()

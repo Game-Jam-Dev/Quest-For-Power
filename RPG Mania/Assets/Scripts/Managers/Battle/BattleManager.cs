@@ -228,6 +228,8 @@ public class BattleManager : MonoBehaviour {
 
     public void Escape()
     {
+        if (worldManager is ThroneManager) return;
+        
         StopCoroutine(battleLoop);
         worldManager.EscapeBattle();
         EndBattle();
