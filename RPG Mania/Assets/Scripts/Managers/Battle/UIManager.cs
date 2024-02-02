@@ -233,7 +233,7 @@ public class UIManager : MonoBehaviour {
 
     public void UpdatePlayerHealth()
     {
-        
+        playerContainerManager.UpdateHealth();
     }
 
     public void UpdateEnemyHealth(EnemyBattle enemy)

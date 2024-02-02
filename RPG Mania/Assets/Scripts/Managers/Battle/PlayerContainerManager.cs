@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerContainerManager : MonoBehaviour {
     [SerializeField] private ElementManager element;
     [SerializeField] private ComboManager comboManager;
+    [SerializeField] private PlayerHealthManager playerHealthManager;
 
     private PlayerBattle player;
 
@@ -12,6 +13,7 @@ public class PlayerContainerManager : MonoBehaviour {
 
         element.SetElement(this.player.element);
         comboManager.SetComboLength(this.player.combo);
+        playerHealthManager.SetHealth(this.player);
     }
 
     public void UpdateElement(SkillAction skill)
@@ -22,6 +24,11 @@ public class PlayerContainerManager : MonoBehaviour {
     public void UpdateElement(ElementManager.Element element)
     {
         this.element.SetElement(element);
+    }
+
+    public void UpdateHealth()
+    {
+        playerHealthManager.UpdateHealth(player.health);
     }
 
     public bool CanUseCombo(int count)

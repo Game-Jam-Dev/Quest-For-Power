@@ -11,17 +11,13 @@ public class ComboManager : MonoBehaviour {
     private List<Image> highlightCombos = new();
     private int activeCombo = 0;
     
-
     public void SetComboLength(int length)
     {
         if (length == activeCombos.Count) return;
 
-        Debug.Log(length + " " + activeCombos.Count);
-
         activeCombos.Clear();
 
-        int i = 0;
-
+        int i;
         for (i = 0; i < totalCombos.Count; i++)
         {
             GameObject combo = totalCombos[i];
@@ -48,8 +44,6 @@ public class ComboManager : MonoBehaviour {
 
             i++;
         }
-
-        Debug.Log(activeCombos.Count);
     }
 
     // public void HighlightCombo(int count)

@@ -15,6 +15,7 @@ MonoBehaviour:
   itemName: 'Skill potion '
   value: 10
   description: 'Increases accuracy '
+  target: 2
   stat: 3
   isPositive: 1
   isPercent: 1

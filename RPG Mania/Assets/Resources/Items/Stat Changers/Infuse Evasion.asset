@@ -15,6 +15,7 @@ MonoBehaviour:
   itemName: 'Swiftness potion '
   value: 10
   description: 'Increases evasion '
+  target: 2
   stat: 4
   isPositive: 1
   isPercent: 1

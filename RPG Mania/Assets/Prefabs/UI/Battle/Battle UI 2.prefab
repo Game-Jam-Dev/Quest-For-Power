@@ -420,6 +420,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   element: {fileID: 4408845276030621636}
   comboManager: {fileID: 7773130883791721952}
+  playerHealthManager: {fileID: 5065510539618388586}
 --- !u!1 &7171979277732554003
 GameObject:
   m_ObjectHideFlags: 0
@@ -509,6 +510,7 @@ GameObject:
   - component: {fileID: 3387562298566759484}
   - component: {fileID: 3401234576961513534}
   - component: {fileID: 6887939432791188566}
+  - component: {fileID: 5065510539618388586}
   m_Layer: 5
   m_Name: Health
   m_TagString: Untagged
@@ -574,6 +576,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5065510539618388586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8350424738213515886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 131c77abaaf367c4ebe9253a75b906a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 6887939432791188566}
 --- !u!1001 &1081775646356943
 PrefabInstance:
   m_ObjectHideFlags: 0
