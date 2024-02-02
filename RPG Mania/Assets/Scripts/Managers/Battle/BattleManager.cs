@@ -6,7 +6,7 @@ using System.Collections;
 public class BattleManager : MonoBehaviour {
     [Header("Managers")]
     [SerializeField] private WorldManager worldManager;
-    [SerializeField] private UIManager battleUIManager;
+    [SerializeField] private BattleUIManager battleUIManager;
 
     [Header("Other Variables")]
     public float dialogueDisplayTime = 1.5f;
@@ -94,24 +94,27 @@ public class BattleManager : MonoBehaviour {
                 {
                     ItemManager.UseItem(item, this);
 
-                    // update health ui
-                    battleUIManager.UpdateEnemyHealth((EnemyBattle)characterToAttack);
-                    battleUIManager.UpdatePlayerHealth();
+                    battleUIManager.SetText($"{player.characterName} used {item.itemName}");
 
-                    if (characterToAttack.health <= 0)
+                    battleUIManager.UpdatePlayerHealth();
+                    battleUIManager.UpdateItems();
+
+                    if (player.health <= 0)
                     {
                         StartCoroutine(LoseBattle());
 
                         break;
                     }
 
-                    // handle enemy's death
-                    else if (characterToAttack.health <= 0)
+                    if (characterToAttack != null)
                     {
-                        DefeatedEnemy();
+                        battleUIManager.UpdateEnemyHealth((EnemyBattle)characterToAttack);
 
-                        // break out of combo when enemy dies
-                        break;
+                        // handle enemy's death
+                        if (characterToAttack.health <= 0)
+                        {
+                            DefeatedEnemy();
+                        }
                     }
                 }
                 // standard action
@@ -265,7 +268,8 @@ public class BattleManager : MonoBehaviour {
         // gain stats from kill
         killCount++;
         xpGain += defeatedEnemy.XPFromKill(player.level);
-        itemDrops.Add(defeatedEnemy.itemDrop);
+        
+        if (defeatedEnemy.itemDrops) itemDrops.Add(defeatedEnemy.itemDrop);
 
         // remove enemy from ui
         battleUIManager.DefeatedEnemy(defeatedEnemy);

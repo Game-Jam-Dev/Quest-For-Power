@@ -34,8 +34,6 @@ public class EnemyHealthManager : MonoBehaviour {
         float divisor = maxHealth / (float)healthPieces.Count;
         float current = maxHealth - currentHealth;
 
-        Debug.Log(current + " " + divisor);
-
         for (int i = 0; i < healthPieces.Count; i++)
         {
             if (current <= (i+1) * divisor)

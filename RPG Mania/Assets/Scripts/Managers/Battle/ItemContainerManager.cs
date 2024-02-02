@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ItemContainerManager : MonoBehaviour {
     [SerializeField] private GameObject itemObjectPrefab;
-    [SerializeField] private UIManager uiManager;
+    [SerializeField] private BattleUIManager uiManager;
 
     private List<(GameObject, Item)> itemObjects = new();
 

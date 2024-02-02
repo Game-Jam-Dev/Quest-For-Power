@@ -43,8 +43,6 @@ public class PlayerBattle : CharacterBattle {
 
         if (experience >= xpForLevel) LevelUp(xpForLevel);
 
-        ResetHealth();
-
         GameManager.instance.SetPlayerExperience(experience);
 
         GameManager.instance.AddItems(itemDrops);
@@ -69,6 +67,8 @@ public class PlayerBattle : CharacterBattle {
         evasion = .05f + level / 1000f;
 
         combo = 3 + (int)Mathf.Pow(level, .3f);
+
+        ResetHealth();
     }
 
     public void EndCombat()

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class SkillContainerManager : MonoBehaviour {
     [SerializeField] private GameObject skillObjectPrefab;
-    [SerializeField] private UIManager uiManager;
+    [SerializeField] private BattleUIManager uiManager;
 
     private List<(GameObject, SkillAction)> skillObjects = new();
 

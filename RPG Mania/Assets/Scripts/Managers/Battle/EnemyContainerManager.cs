@@ -7,7 +7,7 @@ public class EnemyContainerManager : MonoBehaviour {
     private List<(EnemyBattle, EnemyBattleManager)> enemyDatas = new();
     private EnemyBattleManager selectedEnemy;
     
-    public void SetEnemies(List<EnemyBattle> enemies, UIManager uiManager)
+    public void SetEnemies(List<EnemyBattle> enemies, BattleUIManager uiManager)
     {
         ResetEnemies();
 
@@ -19,7 +19,7 @@ public class EnemyContainerManager : MonoBehaviour {
         ResetSelectedEnemy();
     }
 
-    private void CreateEnemy(EnemyBattle enemy, UIManager uiManager)
+    private void CreateEnemy(EnemyBattle enemy, BattleUIManager uiManager)
     {
         EnemyBattleManager enemyData = Instantiate(enemyDataPrefab, transform).GetComponent<EnemyBattleManager>();
         enemyData.Initialize(this, enemy, uiManager);

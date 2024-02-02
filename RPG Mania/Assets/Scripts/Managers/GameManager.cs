@@ -8,8 +8,8 @@ public class GameManager : MonoBehaviour {
     private PlayerData playerData = new();
     private WorldState worldState = new();
 
-    private readonly int wildsScene = 3;
-    private readonly int outskirtsScene = 4;
+    private readonly int wildsScene = 4;
+    private readonly int outskirtsScene = 5;
 
     public void SetGameData(GameData gameData)
     {

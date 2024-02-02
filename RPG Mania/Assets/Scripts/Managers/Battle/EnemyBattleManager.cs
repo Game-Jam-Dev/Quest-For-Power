@@ -11,7 +11,7 @@ public class EnemyBattleManager : MonoBehaviour {
     private EnemyBattle enemy;
     private EnemyContainerManager container;
     
-    public void Initialize(EnemyContainerManager container, EnemyBattle enemy, UIManager uiManager)
+    public void Initialize(EnemyContainerManager container, EnemyBattle enemy, BattleUIManager uiManager)
     {
         this.container = container;
         this.enemy = enemy;

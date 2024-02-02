@@ -14,6 +14,7 @@ public class PlayerHealthManager : MonoBehaviour {
     public void SetHealth(PlayerBattle player)
     {
         maxHealth = player.maxHealth;
+        UpdateHealth(player.health);
     }
 
     public void UpdateHealth(int health)

@@ -15,6 +15,7 @@ public class EnemyBattle : CharacterBattle {
     [SerializeField] protected EnemyAnimation ea;
     private GameObject cursorDisplay;
 
+    public bool itemDrops = true;
     public Item itemDrop;
 
     protected override void Start()
@@ -26,7 +27,7 @@ public class EnemyBattle : CharacterBattle {
         cursorDisplay = transform.GetChild(0).GetChild(0).gameObject;
         cursorDisplay.SetActive(false);
 
-        itemDrop = ItemManager.GetInstance().GetRandomItem();
+        if (itemDrops) itemDrop = ItemManager.GetInstance().GetRandomItem();
     }
 
     public void InitializeEnemy(int id)

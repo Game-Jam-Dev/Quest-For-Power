@@ -41,7 +41,7 @@ PrefabInstance:
     - target: {fileID: 3036269658535557653, guid: f9c545364aad19f4bb9f85d04902751c,
         type: 3}
       propertyPath: m_Name
-      value: Varian Variant
+      value: Varian
       objectReference: {fileID: 0}
     - target: {fileID: 3036269658535557653, guid: f9c545364aad19f4bb9f85d04902751c,
         type: 3}
@@ -143,7 +143,8 @@ MonoBehaviour:
   level: 1
   detectRange: 0.5
   ea: {fileID: 6243000664107169966}
-  damageDisplay: {fileID: 9093727697120781968}
+  itemDrops: 0
+  itemDrop: {fileID: 0}
 --- !u!114 &6243000664107169966 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2966693440811833630, guid: f9c545364aad19f4bb9f85d04902751c,
@@ -154,17 +155,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e10645ac2c0aa8b42b83e09055397b20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &9093727697120781968 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 124762517530691360, guid: f9c545364aad19f4bb9f85d04902751c,
-    type: 3}
-  m_PrefabInstance: {fileID: 9189691735162266032}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

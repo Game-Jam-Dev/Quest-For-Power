@@ -38,7 +38,6 @@ public class SkillList
     {
         skillList = new Dictionary<string, SkillAction>()
         {
-            {"health drain", new SkillAction("Health Drain", HealthDrain)},
             {"water", new SkillAction("Water", InfuseWater)},
             {"wind", new SkillAction("Wind", InfuseWind)},
             {"earth", new SkillAction("Earth", InfuseEarth)},

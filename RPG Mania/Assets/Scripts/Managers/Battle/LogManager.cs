@@ -21,4 +21,13 @@ public class LogManager : MonoBehaviour {
             logTexts.Dequeue();
         }
     }
+
+    public void ClearLog()
+    {
+        foreach (TextMeshProUGUI log in logTexts)
+        {
+            Destroy(log.gameObject);
+        }
+        logTexts.Clear();
+    }
 }
