@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour {
     [SerializeField] private EnemyContainerManager enemyContainerManager;
     [SerializeField] private SkillContainerManager skillContainerManager;
     [SerializeField] private ItemContainerManager itemContainerManager;
+    [SerializeField] private LogManager logManager;
     [SerializeField] private GameObject initialContainer, targetContainer, comboContainer, skillContainer, itemContainer;
 
     public PlayerBattle player;
@@ -163,6 +164,7 @@ public class UIManager : MonoBehaviour {
     {
         enemyContainerManager.UntargetEnemies();
         targetContainer.SetActive(false);
+
         if (selectedItem != null)
         {
             selectedItem = null;
@@ -246,6 +248,6 @@ public class UIManager : MonoBehaviour {
 
     public void SetText(string text)
     {
-
+        logManager.SetText(text);
     }
 }
