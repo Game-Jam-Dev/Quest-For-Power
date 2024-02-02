@@ -4,31 +4,24 @@ using UnityEngine.UI;
 
 public class EnemyBattleManager : MonoBehaviour {
     [SerializeField] private ElementManager element;
+    [SerializeField] private EnemyHealthManager healthManager;
     private GameObject cursorObject;
     private Button cursorButton;
 
     private EnemyBattle enemy;
     private EnemyContainerManager container;
     
-    
     public void Initialize(EnemyContainerManager container, EnemyBattle enemy, UIManager uiManager)
     {
         this.container = container;
         this.enemy = enemy;
 
+        healthManager.Initialize(enemy);
+        element.SetElement(enemy.element);
+
         cursorObject = enemy.GetCursorDisplay();
         cursorObject.TryGetComponent(out cursorButton);
-
-        // Canvas canvas = container.GetComponentInParent<Canvas>();
-
-        // Vector3 enemyScreenPosition = Camera.main.WorldToScreenPoint(enemy.transform.position);
-        // RectTransformUtility.ScreenPointToWorldPointInRectangle(canvas.transform as RectTransform, enemyScreenPosition, canvas.worldCamera, out Vector3 enemyCanvasPosition);
-
-        // cursorButton.transform.position = enemyCanvasPosition;
-
         cursorButton.onClick.AddListener(() => uiManager.PickTarget(this.enemy));
-
-        element.SetElement(enemy.element);
     }
 
     public void DeselectEnemy()
@@ -50,11 +43,12 @@ public class EnemyBattleManager : MonoBehaviour {
     {
         if (enemy.health <= 0)
         {
+            healthManager.Defeated();
             container.DefeatedEnemy(this);
-
+        } else
+        {
+            healthManager.UpdateHealth(enemy.health);
         }
-
-
     }
 
     public EnemyBattle GetEnemy()

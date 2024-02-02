@@ -1665,7 +1665,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &7489129160757680200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1696,15 +1696,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   worldManager: {fileID: 0}
-  killCount: 0
+  battleUIManager: {fileID: 0}
+  dialogueDisplayTime: 1.5
   enemies: []
+  player: {fileID: 0}
+  characterToAttack: {fileID: 0}
+  killCount: 0
   awaitCommand: 0
-  comboLength: 0
   absorb: 0
   activeSkillCounter: 0
-  battleUIManager: {fileID: 8660360920264718509}
-  target: {fileID: 0}
-  dialogueDisplayTime: 1.5
 --- !u!114 &8660360920264718509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1717,6 +1717,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b59d73983e37f90419de6b64fa47dbf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  battleManager: {fileID: 1609328121110642409}
   pHealth: {fileID: 7489129159911647187}
   pSkill: {fileID: 4122242635358309038}
   pElement: {fileID: 3157908518300159760}
@@ -1732,7 +1733,6 @@ MonoBehaviour:
   pickAttackButton: {fileID: 7489129159829788650}
   pickAbsorbButton: {fileID: 6520596089002917895}
   pickSkillButton: {fileID: 7489129160730555161}
-  pickEscapeButton: {fileID: 7489129159013851646}
   comboButtonPrefab: {fileID: 8435136807521846455, guid: f65e6af6fca6f794c9a41a403ba041b0,
     type: 3}
   skillButtonPrefab: {fileID: 1104211911853846905, guid: 4e9d0c08d92f09945a295f5ec36ea26e,
@@ -1741,7 +1741,6 @@ MonoBehaviour:
     type: 3}
   backButtonPrefab: {fileID: 1104211911853846905, guid: e5533a998ad82d7478e68b172a7c98a6,
     type: 3}
-  battleManager: {fileID: 1609328121110642409}
 --- !u!1 &7489129160898792678
 GameObject:
   m_ObjectHideFlags: 0
