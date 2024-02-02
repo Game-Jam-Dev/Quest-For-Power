@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class ItemContainerManager : MonoBehaviour {
     [SerializeField] private GameObject itemObjectPrefab;
+    [SerializeField] private MenuContainer menuContainer;
     [SerializeField] private BattleUIManager uiManager;
 
     private List<(GameObject, Item)> itemObjects = new();
@@ -32,6 +33,8 @@ public class ItemContainerManager : MonoBehaviour {
     {
         if (itemObjects.Count == 0) Initialize();
 
+        List<GameObject> activeItems = new();
+
         for (int i = 0; i < itemObjects.Count; i++)
         {
             GameObject skillObject = itemObjects[i].Item1;
@@ -40,12 +43,15 @@ public class ItemContainerManager : MonoBehaviour {
             if (GameManager.instance.GetItems().Contains(item))
             {
                 skillObject.SetActive(true);
+                activeItems.Add(skillObject);
             }
             else
             {
                 skillObject.SetActive(false);
             }
         }
+
+        menuContainer.SetButtons(activeItems);
     }
 
     private void UseItem(Item item)

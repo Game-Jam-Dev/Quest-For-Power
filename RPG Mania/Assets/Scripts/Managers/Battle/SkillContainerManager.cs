@@ -5,19 +5,21 @@ using UnityEngine.UI;
 
 public class SkillContainerManager : MonoBehaviour {
     [SerializeField] private GameObject skillObjectPrefab;
+    [SerializeField] private MenuContainer menuContainer;
     [SerializeField] private BattleUIManager uiManager;
 
     private List<(GameObject, SkillAction)> skillObjects = new();
+    private GameObject absorbObject;
 
     public void Initialize() {
         SkillAction[] skills = SkillList.GetInstance().GetActions();
 
-        GameObject skillObj = Instantiate(skillObjectPrefab, transform);
-        skillObj.GetComponent<Button>().onClick.AddListener(UseAbsorb);
-        skillObj.GetComponentInChildren<TextMeshProUGUI>().text = "Absorb";
+        absorbObject = Instantiate(skillObjectPrefab, transform);
+        absorbObject.GetComponent<Button>().onClick.AddListener(UseAbsorb);
+        absorbObject.GetComponentInChildren<TextMeshProUGUI>().text = "Absorb";
 
         foreach (SkillAction skill in skills) {
-            skillObj = Instantiate(skillObjectPrefab, transform);
+            GameObject skillObj = Instantiate(skillObjectPrefab, transform);
             skillObj.GetComponent<Button>().onClick.AddListener(() => UseSkill(skill));
             skillObj.GetComponentInChildren<TextMeshProUGUI>().text = skill.Name;
 
@@ -25,13 +27,15 @@ public class SkillContainerManager : MonoBehaviour {
             skillObj.SetActive(false);
         }
 
-        skillObj = Instantiate(skillObjectPrefab, transform);
-        skillObj.GetComponent<Button>().onClick.AddListener(Back);
-        skillObj.GetComponentInChildren<TextMeshProUGUI>().text = "Back";
+        GameObject skillObject = Instantiate(skillObjectPrefab, transform);
+        skillObject.GetComponent<Button>().onClick.AddListener(Back);
+        skillObject.GetComponentInChildren<TextMeshProUGUI>().text = "Back";
     }
     public void UpdateSkills(PlayerBattle player)
     {
         if (skillObjects.Count == 0) Initialize();
+
+        List<GameObject> activeSkills = new() { absorbObject };
 
         for (int i = 0; i < skillObjects.Count; i++)
         {
@@ -41,12 +45,15 @@ public class SkillContainerManager : MonoBehaviour {
             if (player.CanUseSkill(skill))
             {
                 skillObject.SetActive(true);
+                activeSkills.Add(skillObject);
             }
             else
             {
                 skillObject.SetActive(false);
             }
         }
+
+        menuContainer.SetButtons(activeSkills);
     }
 
     private void UseSkill(SkillAction skill)
