@@ -56,6 +56,10 @@ public class BattleUIManager : MonoBehaviour {
     public void StartPlayerTurn()
     {
         initialContainer.SetActive(true);
+        targetContainer.SetActive(false);
+        comboContainer.SetActive(false);
+        skillContainer.SetActive(false);
+        itemContainer.SetActive(false);
     }
 
     public void SelectAttack()
@@ -110,7 +114,11 @@ public class BattleUIManager : MonoBehaviour {
 
     public void PickAbsorb()
     {
-        if (absorbCounter > absorbCounterMax) return;
+        if (absorbCounter > absorbCounterMax) 
+        {
+            SetText("You can't absorb from these enemies anymore.");
+            return;
+        }
 
         absorb = true;
         enemyContainerManager.TargetEnemies();
