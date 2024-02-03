@@ -10,7 +10,12 @@ PrefabInstance:
     - target: {fileID: 7000107113405779141, guid: 9d7d7ac18fa203d40b1f5518b20b35bb,
         type: 3}
       propertyPath: m_Name
-      value: Soldier Water
+      value: Soldier Throne
+      objectReference: {fileID: 0}
+    - target: {fileID: 7007879344559388374, guid: 9d7d7ac18fa203d40b1f5518b20b35bb,
+        type: 3}
+      propertyPath: itemDrops
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7074117665683435470, guid: 9d7d7ac18fa203d40b1f5518b20b35bb,
         type: 3}

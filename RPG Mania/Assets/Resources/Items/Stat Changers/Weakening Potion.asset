@@ -15,7 +15,7 @@ MonoBehaviour:
   itemName: 'Weakening potion '
   value: 10
   description: 'Reduces all stats of the target '
+  target: 0
   stat: 5
-  target: 1
   isPositive: 0
   isPercent: 1

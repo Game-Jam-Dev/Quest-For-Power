@@ -15,6 +15,7 @@ MonoBehaviour:
   itemName: Minor Defense infusion
   value: 5
   description: 'Minor Defense increase '
+  target: 2
   stat: 2
   isPositive: 1
   isPercent: 0

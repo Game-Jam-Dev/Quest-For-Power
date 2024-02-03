@@ -35,7 +35,7 @@ public class PlayerBattle : CharacterBattle {
         GetComponent<PlayerMovement>().enabled = false;
     }
 
-    public void WinBattle(int xp, int kills)
+    public void WinBattle(int xp, int kills, List<Item> itemDrops)
     {
         int xpForLevel = 10 + (int)Mathf.Pow(level + 1, 2.5f);
 
@@ -43,9 +43,11 @@ public class PlayerBattle : CharacterBattle {
 
         if (experience >= xpForLevel) LevelUp(xpForLevel);
 
-        ResetHealth();
-
         GameManager.instance.SetPlayerExperience(experience);
+
+        GameManager.instance.AddItems(itemDrops);
+
+        SaveSystem.SaveGameData(GameManager.instance.GetGameData());
     }
 
     private void LevelUp(int xpForLevel)
@@ -56,6 +58,8 @@ public class PlayerBattle : CharacterBattle {
         SetStats(level);
 
         GameManager.instance.SetPlayerLevel(level);
+
+        ResetHealth();
     }
 
     public void SetStats(int level)
@@ -78,8 +82,6 @@ public class PlayerBattle : CharacterBattle {
         GetComponent<PlayerMovement>().enabled = true;
 
         SetStats(level);
-
-        ResetHealth();
     }
 
     public override void SetAnimationTrigger(string triggerName)

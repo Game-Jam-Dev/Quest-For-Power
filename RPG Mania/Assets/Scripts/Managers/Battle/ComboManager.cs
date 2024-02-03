@@ -11,15 +11,13 @@ public class ComboManager : MonoBehaviour {
     private List<Image> highlightCombos = new();
     private int activeCombo = 0;
     
-
     public void SetComboLength(int length)
     {
         if (length == activeCombos.Count) return;
 
         activeCombos.Clear();
 
-        int i = 0;
-
+        int i;
         for (i = 0; i < totalCombos.Count; i++)
         {
             GameObject combo = totalCombos[i];
@@ -35,7 +33,7 @@ public class ComboManager : MonoBehaviour {
                 combo.SetActive(false);
         }
 
-        while (i > length)
+        while (i < length)
         {
             GameObject combo = Instantiate(comboObject, transform);
             totalCombos.Add(combo);
@@ -81,11 +79,11 @@ public class ComboManager : MonoBehaviour {
 
     public void SelectCombo(int count)
     {
-        int max = Mathf.Max(count + activeCombo, activeCombos.Count);
+        int max = Mathf.Min(count + activeCombo, activeCombos.Count);
 
-        for (int i = activeCombo; activeCombo < max; i++)
+        for (int i = activeCombo; activeCombo < max; activeCombo++)
         {
-            Image image = activeCombos[i];
+            Image image = activeCombos[activeCombo];
             image.sprite = active;
         }
 
@@ -104,6 +102,8 @@ public class ComboManager : MonoBehaviour {
     }
 
     public int ComboLength() { return activeCombo; }
+
+    public bool CanUseCombo(int count) { return activeCombo + count <= activeCombos.Count; }
 
     public bool MaxCombo() { return activeCombo == activeCombos.Count; }
 }

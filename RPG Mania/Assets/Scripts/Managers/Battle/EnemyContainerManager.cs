@@ -5,8 +5,9 @@ public class EnemyContainerManager : MonoBehaviour {
     [SerializeField] private GameObject enemyDataPrefab; 
 
     private List<(EnemyBattle, EnemyBattleManager)> enemyDatas = new();
+    private EnemyBattleManager selectedEnemy;
     
-    public void SetEnemies(List<EnemyBattle> enemies, UIManager uiManager)
+    public void SetEnemies(List<EnemyBattle> enemies, BattleUIManager uiManager)
     {
         ResetEnemies();
 
@@ -14,9 +15,11 @@ public class EnemyContainerManager : MonoBehaviour {
         {
             CreateEnemy(e, uiManager);
         }
+
+        ResetSelectedEnemy();
     }
 
-    private void CreateEnemy(EnemyBattle enemy, UIManager uiManager)
+    private void CreateEnemy(EnemyBattle enemy, BattleUIManager uiManager)
     {
         EnemyBattleManager enemyData = Instantiate(enemyDataPrefab, transform).GetComponent<EnemyBattleManager>();
         enemyData.Initialize(this, enemy, uiManager);
@@ -33,14 +36,29 @@ public class EnemyContainerManager : MonoBehaviour {
         }
     }
 
+    private void ResetSelectedEnemy()
+    {
+        if (enemyDatas.Count > 0)
+        {
+            selectedEnemy = enemyDatas[0].Item2;
+        }
+        else
+        {
+            selectedEnemy = null;
+        }
+    }
+
     public void UpdateDamage(EnemyBattle enemy)
     {
-        FindEnemy(enemy).Item2.UpdateDamage();
+        EnemyBattleManager enemyManager = FindEnemy(enemy).Item2;
+        enemyManager.UpdateDamage();
+        selectedEnemy = enemyManager;
     }
 
     public void DefeatedEnemy(EnemyBattleManager e)
     {
         enemyDatas.Remove(enemyDatas.Find(x => x.Item2 == e));
+        ResetSelectedEnemy();
     }
 
     private (EnemyBattle, EnemyBattleManager) FindEnemy(EnemyBattle enemy)
@@ -56,22 +74,20 @@ public class EnemyContainerManager : MonoBehaviour {
         return enemyDatas[0];
     }
 
-    public void TargetEnemies() {
-        if (enemyDatas.Count > 0)
+    public void TargetEnemies()
+    {
+        foreach ((EnemyBattle, EnemyBattleManager) e in enemyDatas)
         {
-            foreach ((EnemyBattle, EnemyBattleManager) e in enemyDatas)
-            {
-                e.Item2.LockCursor(false);
-            }
-
-            enemyDatas[0].Item2.SelectEnemy();
+            e.Item2.SelectEnemy();
         }
+
+        selectedEnemy.SelectButton();
     }
 
     public void UntargetEnemies() {
         foreach ((EnemyBattle, EnemyBattleManager) e in enemyDatas)
         {
-            e.Item2.LockCursor(true);
+            e.Item2.DeselectEnemy();
         }
     }
 }

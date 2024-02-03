@@ -15,6 +15,7 @@ MonoBehaviour:
   itemName: Minor Strength infusion
   value: 10
   description: 'Minor strength increase '
+  target: 2
   stat: 1
   isPositive: 1
   isPercent: 0

@@ -8,8 +8,8 @@ public class GameManager : MonoBehaviour {
     private PlayerData playerData = new();
     private WorldState worldState = new();
 
-    private readonly int wildsScene = 3;
-    private readonly int outskirtsScene = 4;
+    private readonly int wildsScene = 4;
+    private readonly int outskirtsScene = 5;
 
     public void SetGameData(GameData gameData)
     {
@@ -92,6 +92,11 @@ public class GameManager : MonoBehaviour {
     public void AddItem(Item item)
     {
         playerData.items.Add(item);
+    }
+
+    public void AddItems(List<Item> items)
+    {
+        playerData.items.AddRange(items);
     }
 
     public void RemoveItem(Item item)

@@ -4,6 +4,7 @@ public class BattleCamera : MonoBehaviour {
     [SerializeField] private Transform target;
     [SerializeField] private Vector3 offset;
     private Vector3 currentOffset;
+    public float targetYOffset;
     [Range(1, 10)]
     public float smoothFactor;
     [SerializeField] private Vector3 minValues, maxValues;
@@ -51,6 +52,6 @@ public class BattleCamera : MonoBehaviour {
     private void SnapToPosition()
     {
         transform.position = target.position + currentOffset;
-        transform.rotation = Quaternion.LookRotation(target.position - transform.position);
+        transform.rotation = Quaternion.LookRotation(target.position + new Vector3(0, targetYOffset, 0) - transform.position);
     }
 }

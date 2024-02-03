@@ -149,16 +149,5 @@ MonoBehaviour:
   level: 1
   detectRange: 0.5
   ea: {fileID: 6181144340382996442}
-  damageDisplay: {fileID: 9031730636142971364}
---- !u!114 &9031730636142971364 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 124762517530691360, guid: f9c545364aad19f4bb9f85d04902751c,
-    type: 3}
-  m_PrefabInstance: {fileID: 9001598274072989380}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  itemDrops: 0
+  itemDrop: {fileID: 0}

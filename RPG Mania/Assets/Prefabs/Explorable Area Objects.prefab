@@ -131,7 +131,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 4562790639759249467}
-  offset: {x: 0, y: 3.7, z: -4.2}
+  offset: {x: 0, y: 5, z: -2}
+  targetYOffset: 2
   smoothFactor: 4.88
   minValues: {x: -100, y: -100, z: -100}
   maxValues: {x: 100, y: 100, z: 100}

@@ -1,6 +1,6 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class EnemyBattle : CharacterBattle {
     public int level = 1;
@@ -13,7 +13,10 @@ public class EnemyBattle : CharacterBattle {
     protected bool isAttacking;
 
     [SerializeField] protected EnemyAnimation ea;
-    [SerializeField] private TextMeshPro damageDisplay;
+    private GameObject cursorDisplay;
+
+    public bool itemDrops = true;
+    public Item itemDrop;
 
     protected override void Start()
     {
@@ -21,6 +24,10 @@ public class EnemyBattle : CharacterBattle {
 
         player = GameObject.FindGameObjectWithTag("Player");
         wildsManager = GameObject.FindGameObjectWithTag("Canvas").GetComponent<WildsManager>();
+        cursorDisplay = transform.GetChild(0).GetChild(0).gameObject;
+        cursorDisplay.SetActive(false);
+
+        if (itemDrops) itemDrop = ItemManager.GetInstance().GetRandomItem();
     }
 
     public void InitializeEnemy(int id)
@@ -35,15 +42,12 @@ public class EnemyBattle : CharacterBattle {
         level = GameManager.instance.GetPlayerLevel();
         
         SetStats();
-        damageDisplay.text = maxHealth.ToString();
-        damageDisplay.enabled = true;
         ea.StartFighting();
     }
 
     public void ResetFromFight()
     {
         gameObject.SetActive(true);
-        damageDisplay.enabled = false;
         ea.StopFighting();
     }
 
@@ -88,8 +92,6 @@ public class EnemyBattle : CharacterBattle {
     public override void Recover()
     {
         ea.Attacked(false);
-
-        damageDisplay.text = health.ToString();
     }
 
     public override bool GetIsAttacking()
@@ -105,6 +107,11 @@ public class EnemyBattle : CharacterBattle {
     public bool GetIsAlive()
     {
         return isAlive;
+    }
+
+    public GameObject GetCursorDisplay()
+    {
+        return cursorDisplay;
     }
 
     protected virtual void OnTriggerEnter(Collider other) 
@@ -138,5 +145,10 @@ public class EnemyBattle : CharacterBattle {
         int xp = 5;
 
         return xp;
+    }
+
+    public Item ItemDrop()
+    {
+        return itemDrop;
     }
 }

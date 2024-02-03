@@ -575,7 +575,7 @@ PrefabInstance:
     - target: {fileID: 4562790639759249467, guid: ebe76a19dc889d84b94b0d40aa7fcb1f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 36.58
+      value: 35.892406
       objectReference: {fileID: 0}
     - target: {fileID: 4898442293097768126, guid: ebe76a19dc889d84b94b0d40aa7fcb1f,
         type: 3}
@@ -968,8 +968,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy1: {fileID: 933836255}
   enemy2: {fileID: 176074404}
-  enemy1Location: {x: -2.79, y: 0.397, z: 46}
-  enemy2Location: {x: 3.34, y: 0.397, z: 46}
+  enemy1Location: {x: -1.51, y: 0.397, z: 46.6}
+  enemy2Location: {x: 2.49, y: 0.397, z: 46.6}
 --- !u!4 &864597867 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a6de5c9ab87dafb4c939b80d7f9ea09c,

@@ -13,7 +13,7 @@ public class Essence : Item {
     {
         foreach (CharacterBattle character in characters)
         {
-            character.Attacked(ElementManager.CalculateEffectiveDamage(element, character.element, value));
+            Use(character);
         }
     }
 }

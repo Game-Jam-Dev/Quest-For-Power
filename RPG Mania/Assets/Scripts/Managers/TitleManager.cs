@@ -7,8 +7,8 @@ public class TitleManager : MonoBehaviour {
     [SerializeField] private GameObject settingsMenu;
     private GameData gameData;
     private int introScene = 1;
-    private int pickScene = 6;
-    private int creditsScene = 5;
+    private int pickScene = 7;
+    private int creditsScene = 6;
 
     private void Awake() 
     {
