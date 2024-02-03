@@ -46,6 +46,8 @@ public class PlayerBattle : CharacterBattle {
         GameManager.instance.SetPlayerExperience(experience);
 
         GameManager.instance.AddItems(itemDrops);
+
+        SaveSystem.SaveGameData(GameManager.instance.GetGameData());
     }
 
     private void LevelUp(int xpForLevel)

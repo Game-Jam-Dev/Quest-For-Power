@@ -41,7 +41,7 @@ PrefabInstance:
     - target: {fileID: 3036269658535557653, guid: f9c545364aad19f4bb9f85d04902751c,
         type: 3}
       propertyPath: m_Name
-      value: Monst
+      value: Monster
       objectReference: {fileID: 0}
     - target: {fileID: 3446468312287349178, guid: f9c545364aad19f4bb9f85d04902751c,
         type: 3}
@@ -98,6 +98,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4513373369586295138, guid: f9c545364aad19f4bb9f85d04902751c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.9
+      objectReference: {fileID: 0}
     - target: {fileID: 6777435114762703956, guid: f9c545364aad19f4bb9f85d04902751c,
         type: 3}
       propertyPath: m_Controller
@@ -105,18 +110,6 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 5c1237cb24d90c74a9103c56002f3360, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9c545364aad19f4bb9f85d04902751c, type: 3}
---- !u!114 &1880120070783393725 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 124762517530691360, guid: f9c545364aad19f4bb9f85d04902751c,
-    type: 3}
-  m_PrefabInstance: {fileID: 1994173138829777053}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3570869403515740808 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3036269658535557653, guid: f9c545364aad19f4bb9f85d04902751c,
@@ -149,7 +142,8 @@ MonoBehaviour:
   level: 1
   detectRange: 7
   ea: {fileID: 3641008635405992323}
-  damageDisplay: {fileID: 1880120070783393725}
+  itemDrops: 1
+  itemDrop: {fileID: 0}
 --- !u!114 &3641008635405992323 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2966693440811833630, guid: f9c545364aad19f4bb9f85d04902751c,

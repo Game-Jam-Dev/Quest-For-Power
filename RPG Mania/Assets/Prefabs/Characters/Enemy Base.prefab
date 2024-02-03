@@ -425,7 +425,7 @@ GameObject:
   - component: {fileID: 834155022444123385}
   - component: {fileID: 7465197429376244271}
   m_Layer: 0
-  m_Name: Cursor
+  m_Name: Select
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

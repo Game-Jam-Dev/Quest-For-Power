@@ -268,12 +268,14 @@ public class BattleManager : MonoBehaviour {
         // gain stats from kill
         killCount++;
         xpGain += defeatedEnemy.XPFromKill(player.level);
-        
+
         if (defeatedEnemy.itemDrops) itemDrops.Add(defeatedEnemy.itemDrop);
 
         // remove enemy from ui
         battleUIManager.DefeatedEnemy(defeatedEnemy);
         defeatedEnemy.Defeated();
+
+        battleUIManager.SetText($"{defeatedEnemy.characterName} was defeated!");
 
         // end battle if it was the last enemy
         // switch if statements if battle ends incorrectly

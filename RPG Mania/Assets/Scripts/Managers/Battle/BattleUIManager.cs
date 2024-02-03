@@ -1,8 +1,5 @@
-using System;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class BattleUIManager : MonoBehaviour {
     [SerializeField] private BattleManager battleManager;
@@ -52,6 +49,8 @@ public class BattleUIManager : MonoBehaviour {
         selectedItem = null;
         playerCombo.Clear();
         logManager.ClearLog();
+
+        absorbCounter = 0;
     }
 
     public void StartPlayerTurn()
@@ -105,6 +104,8 @@ public class BattleUIManager : MonoBehaviour {
         player.SelectSkill(skill);
         skillContainerManager.UpdateSkills(player);
         playerContainerManager.UpdateElement(skill);
+
+        SetText("Activated " + skill.Name);
     }
 
     public void PickAbsorb()
