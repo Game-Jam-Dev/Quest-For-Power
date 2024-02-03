@@ -19,7 +19,8 @@ public class EnemyBattleManager : MonoBehaviour {
         healthManager.Initialize(enemy);
         element.SetElement(enemy.element);
 
-        cursorObject = enemy.GetCursorDisplay();
+        cursorObject = enemy.ConnectUI();
+        cursorObject.GetComponent<CursorHover>().ConnectUI(this);
         cursorObject.TryGetComponent(out cursorButton);
         cursorButton.onClick.AddListener(() => uiManager.PickTarget(this.enemy));
     }
@@ -36,7 +37,14 @@ public class EnemyBattleManager : MonoBehaviour {
 
     public void SelectButton()
     {
-        Utility.SetActiveButton(cursorButton);
+        element.Highlight();
+        healthManager.Highlight();
+    }
+
+    public void DeselectButton()
+    {
+        element.Unhighlight();
+        healthManager.Unhighlight();
     }
 
     public void UpdateDamage()

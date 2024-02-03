@@ -80,8 +80,6 @@ public class EnemyContainerManager : MonoBehaviour {
         {
             e.Item2.SelectEnemy();
         }
-
-        selectedEnemy.SelectButton();
     }
 
     public void UntargetEnemies() {

@@ -13,6 +13,7 @@ public class EnemyBattle : CharacterBattle {
     protected bool isAttacking;
 
     [SerializeField] protected EnemyAnimation ea;
+    private EnemyBattleManager enemyBattleManager;
     private GameObject cursorDisplay;
 
     public bool itemDrops = true;
@@ -109,7 +110,7 @@ public class EnemyBattle : CharacterBattle {
         return isAlive;
     }
 
-    public GameObject GetCursorDisplay()
+    public GameObject ConnectUI()
     {
         return cursorDisplay;
     }

@@ -56,7 +56,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   worldManager: {fileID: 0}
   battleUIManager: {fileID: 1422133305692190771}
-  dialogueDisplayTime: 1.5
+  dialogueDisplayTime: 2
   enemies: []
   player: {fileID: 0}
   characterToAttack: {fileID: 0}

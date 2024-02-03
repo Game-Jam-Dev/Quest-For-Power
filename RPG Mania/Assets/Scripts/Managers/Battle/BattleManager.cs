@@ -232,7 +232,11 @@ public class BattleManager : MonoBehaviour {
 
     public void Escape()
     {
-        if (worldManager is ThroneManager) return;
+        if (worldManager is ThroneManager)
+        {
+            battleUIManager.SetText("You can't run! The kingdom is at stake!");
+            return;
+        }
 
         StopCoroutine(battleLoop);
         worldManager.EscapeBattle();

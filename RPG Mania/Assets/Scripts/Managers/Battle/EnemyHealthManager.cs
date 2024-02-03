@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyHealthManager : MonoBehaviour {
     [SerializeField] private GameObject healthBar;
@@ -52,6 +53,22 @@ public class EnemyHealthManager : MonoBehaviour {
         foreach (GameObject piece in healthPieces)
         {
             piece.SetActive(true);
+        }
+    }
+
+    public void Highlight()
+    {
+        foreach (GameObject piece in healthPieces)
+        {
+            piece.GetComponent<Image>().color = Color.yellow;
+        }
+    }
+
+    public void Unhighlight()
+    {
+        foreach (GameObject piece in healthPieces)
+        {
+            piece.GetComponent<Image>().color = Color.white;
         }
     }
 
