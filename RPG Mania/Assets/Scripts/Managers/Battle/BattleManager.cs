@@ -6,7 +6,7 @@ using System.Collections;
 public class BattleManager : MonoBehaviour {
     [Header("Managers")]
     [SerializeField] private WorldManager worldManager;
-    [SerializeField] private UIManager battleUIManager;
+    [SerializeField] private BattleUIManager battleUIManager;
 
     [Header("Other Variables")]
     public float dialogueDisplayTime = 1.5f;
@@ -23,6 +23,7 @@ public class BattleManager : MonoBehaviour {
     // tracker variables
     public int killCount = 0;
     private int xpGain = 0;
+    private List<Item> itemDrops = new();
     public bool awaitCommand = false;
     private int comboLength = 0;
     public bool absorb = false;
@@ -93,24 +94,27 @@ public class BattleManager : MonoBehaviour {
                 {
                     ItemManager.UseItem(item, this);
 
-                    // update health ui
-                    battleUIManager.UpdateEnemyHealth((EnemyBattle)characterToAttack);
-                    battleUIManager.UpdatePlayerHealth();
+                    battleUIManager.SetText($"{player.characterName} used {item.itemName}");
 
-                    if (characterToAttack.health <= 0)
+                    battleUIManager.UpdatePlayerHealth();
+                    battleUIManager.UpdateItems();
+
+                    if (player.health <= 0)
                     {
                         StartCoroutine(LoseBattle());
 
                         break;
                     }
 
-                    // handle enemy's death
-                    else if (characterToAttack.health <= 0)
+                    if (characterToAttack != null)
                     {
-                        DefeatedEnemy();
+                        battleUIManager.UpdateEnemyHealth((EnemyBattle)characterToAttack);
 
-                        // break out of combo when enemy dies
-                        break;
+                        // handle enemy's death
+                        if (characterToAttack.health <= 0)
+                        {
+                            DefeatedEnemy();
+                        }
                     }
                 }
                 // standard action
@@ -228,6 +232,12 @@ public class BattleManager : MonoBehaviour {
 
     public void Escape()
     {
+        if (worldManager is ThroneManager)
+        {
+            battleUIManager.SetText("You can't run! The kingdom is at stake!");
+            return;
+        }
+
         StopCoroutine(battleLoop);
         worldManager.EscapeBattle();
         EndBattle();
@@ -263,9 +273,13 @@ public class BattleManager : MonoBehaviour {
         killCount++;
         xpGain += defeatedEnemy.XPFromKill(player.level);
 
+        if (defeatedEnemy.itemDrops) itemDrops.Add(defeatedEnemy.itemDrop);
+
         // remove enemy from ui
         battleUIManager.DefeatedEnemy(defeatedEnemy);
         defeatedEnemy.Defeated();
+
+        battleUIManager.SetText($"{defeatedEnemy.characterName} was defeated!");
 
         // end battle if it was the last enemy
         // switch if statements if battle ends incorrectly
@@ -349,6 +363,7 @@ public class BattleManager : MonoBehaviour {
         enemies.Clear();
 
         xpGain = 0;
+        itemDrops.Clear();
         killCount = 0;
         comboLength = 0;
         activeCharacterCombo.Clear();
@@ -367,7 +382,7 @@ public class BattleManager : MonoBehaviour {
 
         int currentLevel = player.level;
 
-        player.WinBattle(xpGain, killCount);
+        player.WinBattle(xpGain, killCount, itemDrops);
 
         yield return new WaitForSeconds(dialogueDisplayTime);
 

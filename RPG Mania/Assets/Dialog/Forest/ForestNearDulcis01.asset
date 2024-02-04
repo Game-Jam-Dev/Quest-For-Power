@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: ForestNearDulcis01
   m_EditorClassIdentifier: 
   dialogLines:
-  - speakerName: Capitan Xix
+  - speakerName: Captain Xix
     dialog: Emperor Arkanos, you should have stayed away.
-  - speakerName: Capitan Xix
+  - speakerName: Captain Xix
     dialog: Your reign of tyranny ends here!
   - speakerName: Arkanos
     dialog: You were one of my most trusted soldiers, and yet you turn against me?
-  - speakerName: Capitan Xix
+  - speakerName: Captain Xix
     dialog: "I once believed in you, but your lust for power blinded you. It is time
       for a new ruler\u2014one who will bring prosperity and justice to this land."
   - speakerName: Arkanos

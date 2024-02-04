@@ -39,6 +39,16 @@ public class ElementManager : MonoBehaviour {
         SetElement(element);
     }
 
+    public void Highlight()
+    {
+        image.color = Color.yellow;
+    }
+
+    public void Unhighlight()
+    {
+        image.color = Color.white;
+    }
+
     public static Element GetElement(SkillAction skill)
     {
         return skill.Name switch
@@ -60,27 +70,27 @@ public class ElementManager : MonoBehaviour {
         switch (attack)
         {
             case Element.Water:
-            if (defend == ElementManager.Element.Fire) damage += damage/2;
+            if (defend == Element.Fire) damage += damage/2;
 
-            else if (defend == ElementManager.Element.Earth) damage -= damage/2;
+            else if (defend == Element.Earth) damage -= damage/2;
             break;
 
             case Element.Fire:
-            if (defend == ElementManager.Element.Wind) damage += damage/2;
+            if (defend == Element.Wind) damage += damage/2;
 
-            else if (defend == ElementManager.Element.Water) damage -= damage/2;
+            else if (defend == Element.Water) damage -= damage/2;
             break;
 
             case Element.Wind:
-            if (defend == ElementManager.Element.Earth) damage += damage/2;
+            if (defend == Element.Earth) damage += damage/2;
 
-            else if (defend == ElementManager.Element.Fire) damage -= damage/2;
+            else if (defend == Element.Fire) damage -= damage/2;
             break;
 
             case Element.Earth:
-            if (defend == ElementManager.Element.Water) damage += damage/2;
+            if (defend == Element.Water) damage += damage/2;
 
-            else if (defend == ElementManager.Element.Wind) damage -= damage/2;
+            else if (defend == Element.Wind) damage -= damage/2;
             break;
         }
 
