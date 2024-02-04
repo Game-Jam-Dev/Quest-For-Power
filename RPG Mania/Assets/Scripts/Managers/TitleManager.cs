@@ -45,8 +45,7 @@ public class TitleManager : MonoBehaviour {
 
     public void Settings()
     {
-        settingsMenu.SetActive(true);
-        gameObject.SetActive(false);
+        SceneManager.LoadScene("Settings");
     }
 
     public void Credits()
