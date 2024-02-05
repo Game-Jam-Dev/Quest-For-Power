@@ -25,7 +25,7 @@ public class TitleManager : MonoBehaviour {
 
     public void StartGame()
     {
-        EnterGame(gameData.NewGame(), pickScene);
+        EnterGame(gameData.NewGame(), introScene);
     }
 
     public void LoadGame()

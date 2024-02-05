@@ -157,13 +157,18 @@ public class PlayerBattle : CharacterBattle {
 
         skillActions[index] = (skillActions[index].Item1, skillActions[index].Item2 + spellsTaken);
 
-        audioSource.clip = elementClips[0].Item1;
-        audioSource.time = elementClips[0].Item2;
-        audioSource.Play();
+        SetAnimationTrigger("Absorb");
 
         GameManager.instance.SetPlayerSkill(index, skillActions[index].Item2);
 
         Heal(maxHealth/2);
+    }
+
+    public void PlayAbsorbSound()
+    {
+        audioSource.clip = elementClips[0].Item1;
+        audioSource.time = elementClips[0].Item2;
+        audioSource.Play();
     }
 
     public void LoseSkillUse(int n = 1)
