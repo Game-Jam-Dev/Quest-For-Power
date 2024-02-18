@@ -40,10 +40,12 @@ public class PlayerAnimation : MonoBehaviour {
 
     public void SetUpTrigger(string triggerName)
     {
+        Debug.Log(triggerName);
         if (anim != null && TriggerExists(triggerName, anim))
         {
+            Debug.Log("worked");
             currentTrigger = triggerName;
-            if (triggerName == "Light Attack" || triggerName == "Medium Attack" || triggerName == "Heavy Attack")
+            if (triggerName == "Light Attack" || triggerName == "Medium Attack" || triggerName == "Heavy Attack" || triggerName == "Absorb")
             {
                 anim.SetTrigger("Attack");
                 isAttacking = true;

@@ -48,8 +48,6 @@ public class MenuContainer : MonoBehaviour {
                 r++;
                 c = 0;
             }
-
-            Debug.Log(c + " " + r);
         }
 
         if (c != 0)
