@@ -29,8 +29,11 @@ public class BattleManager : MonoBehaviour {
     public bool absorb = false;
     public int activeSkillCounter = 0;
 
+    GameObject combatResolutionUI;
+
     private void Awake() {
         gameObject.SetActive(false);
+        combatResolutionUI = GameObject.Find("CombatResolution");
     }
     
     private void OnEnable() 

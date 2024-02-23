@@ -2,8 +2,9 @@ using UnityEngine;
 using System.Collections.Generic;
 
 public class PlayerBattle : CharacterBattle {
-    private int experience = 0;
+    public int experience = 0;
     public int level {get; private set;}
+
 
     [SerializeField] private PlayerAnimation pa;
 
@@ -37,10 +38,10 @@ public class PlayerBattle : CharacterBattle {
 
     public void WinBattle(int xp, int kills, List<Item> itemDrops)
     {
-        int xpForLevel = 10 + (int)Mathf.Pow(level + 1, 2.5f);
+        int xpForLevel = XpForLevel();
 
         experience += xp;
-
+        
         if (experience >= xpForLevel) LevelUp(xpForLevel);
 
         GameManager.instance.SetPlayerExperience(experience);
@@ -48,6 +49,11 @@ public class PlayerBattle : CharacterBattle {
         GameManager.instance.AddItems(itemDrops);
 
         SaveSystem.SaveGameData(GameManager.instance.GetGameData());
+    }
+
+    public int XpForLevel()
+    {
+        return 10 + (int)Mathf.Pow(level + 1, 2.5f);
     }
 
     private void LevelUp(int xpForLevel)

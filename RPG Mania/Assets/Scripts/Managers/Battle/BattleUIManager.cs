@@ -10,7 +10,7 @@ public class BattleUIManager : MonoBehaviour {
     [SerializeField] private SkillContainerManager skillContainerManager;
     [SerializeField] private ItemContainerManager itemContainerManager;
     [SerializeField] private LogManager logManager;
-    [SerializeField] private GameObject initialContainer, targetContainer, comboContainer, skillContainer, itemContainer;
+    [SerializeField] private GameObject initialContainer, targetContainer, comboContainer, skillContainer, itemContainer, combatResolution;
 
     public PlayerBattle player;
     public List<EnemyBattle> enemies;
@@ -44,6 +44,7 @@ public class BattleUIManager : MonoBehaviour {
         comboContainer.SetActive(false);
         skillContainer.SetActive(false);
         itemContainer.SetActive(false);
+        combatResolution.SetActive(false);
 
         target = null;
         selectedItem = null;
@@ -56,6 +57,17 @@ public class BattleUIManager : MonoBehaviour {
     public void StartPlayerTurn()
     {
         initialContainer.SetActive(true);
+        targetContainer.SetActive(false);
+        comboContainer.SetActive(false);
+        skillContainer.SetActive(false);
+        itemContainer.SetActive(false);
+        combatResolution.SetActive(false);
+    }
+
+    public void StartCombatResolutionUI()
+    {
+        combatResolution.SetActive(true);
+        initialContainer.SetActive(false);
         targetContainer.SetActive(false);
         comboContainer.SetActive(false);
         skillContainer.SetActive(false);
