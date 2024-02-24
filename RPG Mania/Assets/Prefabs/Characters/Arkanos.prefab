@@ -142,13 +142,21 @@ MonoBehaviour:
   accuracy: 5
   evasion: 5
   combo: 5
+  hitTarget: 0
   attackClip: {fileID: 8300000, guid: a3f952095cec84440a88eb462db52486, type: 3}
+  experience: 0
   pa: {fileID: 0}
   waterClip: {fileID: 8300000, guid: 6f5a909fdf2f53f42acd639bbf5b3146, type: 3}
   fireClip: {fileID: 8300000, guid: 487b8978220de304795ced49f7886af1, type: 3}
   windClip: {fileID: 8300000, guid: 4ccee905f4ca8f14b86b35af5d4b649e, type: 3}
   earthClip: {fileID: 8300000, guid: 0880c3fb57d55cc4286faa64493f4726, type: 3}
   drainClip: {fileID: 8300000, guid: 721ba92d54895b049b145fc81dc9a1f4, type: 3}
+  baseAttack: 9
+  baseMaxHealth: 45
+  baseDefense: 5
+  baseComboPoints: 4
+  baseAccuracy: 0.985
+  baseEvasion: 0.15
 --- !u!95 &689032297376394089
 Animator:
   serializedVersion: 5

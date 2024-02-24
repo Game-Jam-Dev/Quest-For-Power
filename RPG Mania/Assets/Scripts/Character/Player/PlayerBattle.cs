@@ -7,8 +7,10 @@ public class PlayerBattle : CharacterBattle {
 
 
     [SerializeField] private PlayerAnimation pa;
-
     [SerializeField] private AudioClip waterClip, fireClip, windClip, earthClip, drainClip;
+    [SerializeField] public int baseAttack, baseMaxHealth, baseDefense, baseComboPoints;
+    [SerializeField] public float baseAccuracy, baseEvasion;
+
     private List<(AudioClip, float)> elementClips;
     protected override void Start() {
         base.Start();
@@ -70,13 +72,23 @@ public class PlayerBattle : CharacterBattle {
 
     public void SetStats(int level)
     {
-        maxHealth = 20 + level * 5;
-        attack = 9 + (int)(level * 1.5f);
-        defense = 5 + (int)(level * 1.1f);
-        accuracy = .85f + level / 2000f;
-        evasion = .05f + level / 1000f;
+        // Old stats:
+        //maxHealth = 20 + level * 5;
+        //attack = 9 + (int)(level * 1.5f);
+        //defense = 5 + (int)(level * 1.1f);
+        //accuracy = .85f + level / 2000f;
+        //evasion = .05f + level / 1000f;
+        //combo = 3 + (int)Mathf.Pow(level, .3f);
+        //baseAttack, baseMaxHealth, baseDefense, baseAccuracy, baseEvasion, baseComboPoints
 
-        combo = 3 + (int)Mathf.Pow(level, .3f);
+        maxHealth = baseMaxHealth + level * 5;
+        attack = baseAttack + (int)(level * 1.5f);
+        defense = baseDefense + (int)(level * 1.1f);
+        accuracy = baseAccuracy + level / 2000f;
+        evasion = baseEvasion + level / 1000f;
+
+        combo = baseComboPoints + (int)Mathf.Log(.475f*level) + 
+            (int).02f * level;
     }
 
     public void EndCombat()
