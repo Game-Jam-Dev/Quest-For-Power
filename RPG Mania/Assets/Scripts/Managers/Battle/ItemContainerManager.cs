@@ -8,7 +8,7 @@ public class ItemContainerManager : MonoBehaviour {
     [SerializeField] private MenuContainer menuContainer;
     [SerializeField] private BattleUIManager uiManager;
 
-    private List<(GameObject, Item)> itemObjects = new();
+    public List<(GameObject, Item)> itemObjects = new();
 
     public void Initialize()
     {

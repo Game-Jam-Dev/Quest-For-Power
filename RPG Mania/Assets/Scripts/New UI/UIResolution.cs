@@ -7,11 +7,11 @@ using UnityEditorInternal.VersionControl;
 public class UIResolution : MonoBehaviour
 {
     [SerializeField]
-    TextMeshProUGUI CharacterNameText;
+    TextMeshProUGUI characterNameText;
     [SerializeField]
-    TextMeshProUGUI XPStatsText;
+    TextMeshProUGUI xpStatsText;
     [SerializeField]
-    TextMeshProUGUI ItemListText;
+    TextMeshProUGUI itemListText;
     [SerializeField] 
     private WorldManager worldManager;
     [SerializeField]
@@ -20,10 +20,10 @@ public class UIResolution : MonoBehaviour
     private BattleManager battleManager;
 
 
-    const string LvlPrefix = "Lvl - ";
-    const string XPPrefix = "Current XP - ";
-    const string NextLvlPrefix = "XP for next lvl - ";
-    const string NewLine = "\n";
+    const string lvlPrefix = "Lvl - ";
+    const string xpPrefix = "Current XP - ";
+    const string nextLvlPrefix = "XP for next lvl - ";
+    const string newLine = "\n";
 
     public int lvl = 1;
     public int currentXP = 0;
@@ -37,18 +37,18 @@ public class UIResolution : MonoBehaviour
     void OnEnable()
     {
         player = worldManager.GetPlayer();
-        CharacterNameText.text = characterName;
+        characterNameText.text = characterName;
         lvl = player.level;
         currentXP = player.experience;
         nextLvl = playerBatle.XpForLevel();
-        XPStatsText.text = LvlPrefix + lvl.ToString() + NewLine + XPPrefix + currentXP.ToString() + NewLine + NextLvlPrefix + nextLvl.ToString();
+        xpStatsText.text = lvlPrefix + lvl.ToString() + newLine + xpPrefix + currentXP.ToString() + newLine + nextLvlPrefix + nextLvl.ToString();
         items = battleManager.itemDrops;
         foreach (Item item in items)
         {
                 itemsString += item.itemName + "\n";
         }
 
-        ItemListText.text = itemsString;
+        itemListText.text = itemsString;
     }
 
     private void OnDisable()
