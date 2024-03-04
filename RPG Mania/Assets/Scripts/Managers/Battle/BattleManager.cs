@@ -23,7 +23,7 @@ public class BattleManager : MonoBehaviour {
     // tracker variables
     public int killCount = 0;
     private int xpGain = 0;
-    private List<Item> itemDrops = new();
+    public List<Item> itemDrops = new();
     public bool awaitCommand = false;
     private int comboLength = 0;
     public bool absorb = false;
