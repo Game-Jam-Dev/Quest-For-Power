@@ -39,19 +39,24 @@ public class BattleUIManager : MonoBehaviour {
 
     private void ResetUI()
     {
-        initialContainer.SetActive(false);
-        targetContainer.SetActive(false);
-        comboContainer.SetActive(false);
-        skillContainer.SetActive(false);
-        itemContainer.SetActive(false);
-        combatResolution.SetActive(false);
-
+        CloseMenus();
+        
         target = null;
         selectedItem = null;
         playerCombo.Clear();
         logManager.ClearLog();
 
         absorbCounter = 0;
+    }
+
+    private void CloseMenus()
+    {
+        initialContainer.SetActive(false);
+        targetContainer.SetActive(false);
+        comboContainer.SetActive(false);
+        skillContainer.SetActive(false);
+        itemContainer.SetActive(false);
+        combatResolution.SetActive(false);
     }
 
     public void StartPlayerTurn()
@@ -61,17 +66,21 @@ public class BattleUIManager : MonoBehaviour {
         comboContainer.SetActive(false);
         skillContainer.SetActive(false);
         itemContainer.SetActive(false);
-        combatResolution.SetActive(false);
     }
 
     public void StartCombatResolutionUI()
     {
-        combatResolution.SetActive(true);
-        initialContainer.SetActive(false);
-        targetContainer.SetActive(false);
-        comboContainer.SetActive(false);
-        skillContainer.SetActive(false);
-        itemContainer.SetActive(false);
+        CloseMenus();
+
+        if (battleManager.worldManager is not ThroneManager)
+        {
+            combatResolution.SetActive(true);
+            combatResolution.GetComponent<UIResolution>().Initialize(this, battleManager, player);
+        }
+        else 
+        {
+            CloseUI();
+        }
     }
 
     public void SelectAttack()
@@ -240,7 +249,16 @@ public class BattleUIManager : MonoBehaviour {
 
     public void EndBattle()
     {
+        StartCombatResolutionUI();
+    }
+
+    public void CloseUI()
+    {
         ResetUI();
+
+        battleManager.EndBattle();
+
+        gameObject.SetActive(false);
     }
 
     public void DefeatedEnemy(EnemyBattle enemy)

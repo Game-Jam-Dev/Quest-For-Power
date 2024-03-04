@@ -11,13 +11,10 @@ public class UIResolution : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI xpStatsText;
     [SerializeField]
-    TextMeshProUGUI itemListText;
-    [SerializeField] 
-    private WorldManager worldManager;
-    [SerializeField]
-    private PlayerBattle playerBatle;
-    [SerializeField]
+    TextMeshProUGUI itemListText; 
+    
     private BattleManager battleManager;
+    private BattleUIManager battleUIManager;
 
 
     const string lvlPrefix = "Lvl - ";
@@ -32,27 +29,42 @@ public class UIResolution : MonoBehaviour
     private List<Item> items;
     private string itemsString = "Items:\n";
     PlayerBattle player;
+    private Coroutine close;
 
-    // Update is called once per frame
-    void OnEnable()
+    public void Initialize(BattleUIManager battleUIManager, BattleManager battleManager, PlayerBattle player)
     {
-        player = worldManager.GetPlayer();
+        this.player = player;
+        this.battleManager = battleManager;
+        this.battleUIManager = battleUIManager;
+
         characterNameText.text = characterName;
+
         lvl = player.level;
         currentXP = player.experience;
-        nextLvl = playerBatle.XpForLevel();
+        nextLvl = player.XpForLevel();
         xpStatsText.text = lvlPrefix + lvl.ToString() + newLine + xpPrefix + currentXP.ToString() + newLine + nextLvlPrefix + nextLvl.ToString();
+
         items = battleManager.itemDrops;
+        itemsString = "Items:\n";
+
         foreach (Item item in items)
         {
-                itemsString += item.itemName + "\n";
+            itemsString += item.itemName + "\n";
         }
 
         itemListText.text = itemsString;
-    }
 
-    private void OnDisable()
+        if (close != null) close = null;
+
+        close = StartCoroutine(Close());
+    }
+    private IEnumerator Close()
     {
-        itemsString = "Items:\n";
+        while (Input.GetMouseButtonDown(0) == false)
+        {
+            yield return null;
+        }
+
+        battleUIManager.CloseUI();
     }
 }

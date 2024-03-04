@@ -5,7 +5,7 @@ using System.Collections;
 
 public class BattleManager : MonoBehaviour {
     [Header("Managers")]
-    [SerializeField] private WorldManager worldManager;
+    [SerializeField] public WorldManager worldManager;
     [SerializeField] private BattleUIManager battleUIManager;
 
     [Header("Other Variables")]
@@ -357,11 +357,9 @@ public class BattleManager : MonoBehaviour {
     //     }
     // }
 
-    private void EndBattle()
+    public void EndBattle()
     {
         player.EndCombat();
-
-        StopAllCoroutines();
 
         enemies.Clear();
 
@@ -371,10 +369,13 @@ public class BattleManager : MonoBehaviour {
         comboLength = 0;
         activeCharacterCombo.Clear();
         absorb = false;
+    }
+
+    private void Resolution()
+    { 
+        StopAllCoroutines();
 
         battleUIManager.EndBattle();
-
-        gameObject.SetActive(false);
     }
 
     private IEnumerator WinBattle()
@@ -402,7 +403,7 @@ public class BattleManager : MonoBehaviour {
 
         worldManager.WinBattle();
 
-        EndBattle();
+        Resolution();
     }
 
     private IEnumerator LoseBattle()

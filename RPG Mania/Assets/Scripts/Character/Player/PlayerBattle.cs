@@ -60,7 +60,7 @@ public class PlayerBattle : CharacterBattle {
 
     private void LevelUp(int xpForLevel)
     {
-        experience -= xpForLevel;
+        // experience -= xpForLevel;
         level++;
 
         SetStats(level);
