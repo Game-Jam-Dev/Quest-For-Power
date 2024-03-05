@@ -102,6 +102,8 @@ public class BattleUIManager : MonoBehaviour {
     public void SelectEscape()
     {
         battleManager.Escape();
+
+        CloseUI();
     }
 
     public void PickCombo(string combo)

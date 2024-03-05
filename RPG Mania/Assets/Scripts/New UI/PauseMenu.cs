@@ -13,10 +13,17 @@ public class PauseMenu : MonoBehaviour
 
     private void DisplayItems()
     {
+        currentItemListString = "";
+
         Item[] items = ItemManager.GetInstance().GetItems();
         foreach (Item item in items)
         {
-            currentItemListString += item.itemName + "\n";
+            int itemAmount = GameManager.instance.GetItemAmount(item);
+
+            if (itemAmount > 0)
+            {
+                currentItemListString += item.itemName + "\n";
+            }
         }
 
         itemListText.text = currentItemListString;

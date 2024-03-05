@@ -40,7 +40,7 @@ public class ItemContainerManager : MonoBehaviour {
             GameObject skillObject = itemObjects[i].Item1;
             Item item = itemObjects[i].Item2;
 
-            if (GameManager.instance.GetItems().Contains(item))
+            if (GameManager.instance.GetItemAmount(item) > 0)
             {
                 skillObject.SetActive(true);
                 activeItems.Add(skillObject);
