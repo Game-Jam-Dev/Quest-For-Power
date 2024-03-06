@@ -6,26 +6,58 @@ using static UnityEditor.Progress;
 
 public class PauseMenu : MonoBehaviour
 {
-    [SerializeField]
-    TextMeshProUGUI itemListText;
+    //[SerializeField]
+    //TextMeshProUGUI itemNameTemplate;
+    //[SerializeField]
+    //TextMeshProUGUI itemQuantityTemplateText;
 
-    string currentItemListString;
 
-    private void DisplayItems()
+    Transform ItemContainer;
+    Transform itemSlotTemplate;
+    Transform itemQuantityTemplate;
+
+    private void Awake()
     {
-        currentItemListString = "";
+        ItemContainer = transform.Find("ItemsContainer");
+        itemSlotTemplate = ItemContainer.Find("ItemSlotText");
+        itemQuantityTemplate = ItemContainer.Find("ItemSlotQuantityTemplate");
+    }
 
+    public void DisplayItems()
+    {
+        
         Item[] items = ItemManager.GetInstance().GetItems();
+        int y = 0;
+        float itemSlotCellSize = 30f;
+
         foreach (Item item in items)
         {
             int itemAmount = GameManager.instance.GetItemAmount(item);
 
             if (itemAmount > 0)
             {
-                currentItemListString += item.itemName + "\n";
+                RectTransform itemSlotRectTransform = Instantiate(itemSlotTemplate, ItemContainer).GetComponent<RectTransform>();
+                itemSlotRectTransform.gameObject.SetActive(true);
+                itemSlotRectTransform.anchoredPosition = new Vector2(38, -80 - y * itemSlotCellSize);
+                RectTransform itemQtyRectTransform = Instantiate(itemQuantityTemplate, ItemContainer).GetComponent<RectTransform>();
+                itemQtyRectTransform.gameObject.SetActive(true);
+                itemQtyRectTransform.anchoredPosition = new Vector2(70, -8 - y * itemSlotCellSize);
+                y++;
+                itemSlotRectTransform.gameObject.GetComponent<TMPro.TextMeshProUGUI>().text = item.itemName;
+                itemQtyRectTransform.gameObject.GetComponent<TMPro.TextMeshProUGUI>().text = itemAmount.ToString();
             }
         }
+    }
 
-        itemListText.text = currentItemListString;
+    public void ClearItems()
+    {
+        foreach (Transform child in ItemContainer)
+        {
+            if (child == itemSlotTemplate | child == itemQuantityTemplate) 
+            {
+                continue;
+            }
+            Destroy(child.gameObject);
+        }
     }
 }

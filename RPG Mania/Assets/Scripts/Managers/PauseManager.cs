@@ -7,6 +7,7 @@ using System;
 public class PauseManager : MonoBehaviour {
     [SerializeField] private GameObject pauseUI;
     [SerializeField] private Button resumeButton, saveButton, quitButton;
+    [SerializeField] private GameObject portrait, characterName, itemList, itemQuantities;
 
     public static event Action<bool> pauseEvent;
 
@@ -40,9 +41,15 @@ public class PauseManager : MonoBehaviour {
     }
 
     public void Resume() {
-        Time.timeScale = 1; 
+        Time.timeScale = 1;
+        portrait.SetActive(true);
+        characterName.SetActive(true);
+        itemList.SetActive(false);
+        CloseItems();
+        itemQuantities.SetActive(false);
         pauseUI.SetActive(false);
         pauseEvent(false);
+
     }
 
     private void Pause() {
@@ -66,5 +73,20 @@ public class PauseManager : MonoBehaviour {
     public void DisablePausing()
     {
         actions.Gameplay.Pause.performed -= TogglePause;
+    }
+
+    public void OpenItems()
+    {
+        CloseItems();
+        portrait.SetActive(false);
+        characterName.SetActive(false);
+        itemList.SetActive(true);
+        itemQuantities.SetActive(true);
+        pauseUI.GetComponent<PauseMenu>().DisplayItems();
+    }
+
+    public void CloseItems()
+    {
+        pauseUI.GetComponent<PauseMenu>().ClearItems();
     }
 }
