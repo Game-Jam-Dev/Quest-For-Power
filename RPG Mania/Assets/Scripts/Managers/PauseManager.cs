@@ -7,7 +7,8 @@ using System;
 public class PauseManager : MonoBehaviour {
     [SerializeField] private GameObject pauseUI;
     [SerializeField] private Button resumeButton, saveButton, quitButton;
-    [SerializeField] private GameObject portrait, characterName, itemList, itemQuantities;
+    [SerializeField] private GameObject portrait, characterName, itemList, itemQuantities, itemDescription, 
+        itemBackground, itemContainer, spellsBackground, miniPortrait, spellColumnName, spellColumnQty, miniDescription;
 
     public static event Action<bool> pauseEvent;
 
@@ -42,10 +43,7 @@ public class PauseManager : MonoBehaviour {
 
     public void Resume() {
         Time.timeScale = 1;
-        portrait.SetActive(true);
-        characterName.SetActive(true);
-        itemList.SetActive(false);
-        CloseItems();
+        CloseUI();
         itemQuantities.SetActive(false);
         pauseUI.SetActive(false);
         pauseEvent(false);
@@ -77,16 +75,79 @@ public class PauseManager : MonoBehaviour {
 
     public void OpenItems()
     {
-        CloseItems();
-        portrait.SetActive(false);
-        characterName.SetActive(false);
-        itemList.SetActive(true);
-        itemQuantities.SetActive(true);
+        ClearItemInstances();
+        OpenItemUI();
+        CloseStandardUI();
+        CloseSpellsUI();
         pauseUI.GetComponent<PauseMenu>().DisplayItems();
     }
 
-    public void CloseItems()
+    public void ClearItemInstances()
     {
         pauseUI.GetComponent<PauseMenu>().ClearItems();
+    }
+
+    public void OpenSpells()
+    {
+        ClearItemInstances();
+        CloseItemUI();
+        CloseStandardUI();
+        OpenSpellsUI();
+        pauseUI.GetComponent<PauseMenu>().DisplaySpells();
+    }
+
+    public void OpenItemUI()
+    {
+        itemList.SetActive(true);
+        itemDescription.SetActive(true);
+        itemQuantities.SetActive(true);
+        itemBackground.SetActive(true);
+        itemContainer.SetActive(true);
+    }
+    public void CloseItemUI()
+    {
+        itemList.SetActive(false);
+        itemDescription.SetActive(false);
+        itemQuantities.SetActive(false);
+        itemBackground.SetActive(false);
+        itemContainer.SetActive(false);
+    }
+
+    public void OpenStandardUI()
+    {
+        portrait.SetActive(true);
+        characterName.SetActive(true);
+    }
+    
+    public void CloseStandardUI()
+    {
+        portrait.SetActive(false);
+        characterName.SetActive(false);
+    }
+
+    public void CloseUI()
+    {
+        OpenStandardUI();
+        CloseItemUI();
+        CloseSpellsUI();
+    }
+
+    public void OpenSpellsUI()
+    {
+        spellsBackground.SetActive(true);
+        miniPortrait.SetActive(true);
+        spellColumnName.SetActive(true);
+        spellColumnQty.SetActive(true);
+        miniDescription.SetActive(true);
+    }
+
+    public void CloseSpellsUI()
+    {
+        spellsBackground.SetActive(false);
+        miniPortrait.SetActive(false);
+        spellColumnName.SetActive(false);
+        spellColumnQty.SetActive(false);
+        miniDescription.SetActive(false);
+
     }
 }

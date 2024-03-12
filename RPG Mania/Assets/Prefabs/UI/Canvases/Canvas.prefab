@@ -212,8 +212,16 @@ MonoBehaviour:
   saveButton: {fileID: 5734691836032710734}
   quitButton: {fileID: 4411214921965365325}
   portrait: {fileID: 6397130428987385899}
+  characterName: {fileID: 0}
   itemList: {fileID: 7978331287091240060}
-  itemQuantities: {fileID: 3788971043878349002}
+  itemQuantities: {fileID: 0}
+  itemDescription: {fileID: 0}
+  itemBackground: {fileID: 0}
+  spellsBackground: {fileID: 0}
+  miniPortrait: {fileID: 0}
+  spellColumnName: {fileID: 0}
+  spellColumnQty: {fileID: 0}
+  miniDescription: {fileID: 0}
 --- !u!114 &7825545954615205506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,6 +248,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4676544588567442429}
     m_Modifications:
+    - target: {fileID: 797329456927624668, guid: 4c25e34a2e3fb0a47b486bbdd36ca368,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.71313477
+      objectReference: {fileID: 0}
     - target: {fileID: 1285458097559623452, guid: 4c25e34a2e3fb0a47b486bbdd36ca368,
         type: 3}
       propertyPath: m_text
@@ -515,6 +528,16 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8062978624191381263, guid: 4c25e34a2e3fb0a47b486bbdd36ca368,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -62.636963
+      objectReference: {fileID: 0}
+    - target: {fileID: 8062978624191381263, guid: 4c25e34a2e3fb0a47b486bbdd36ca368,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -14.429031
+      objectReference: {fileID: 0}
     - target: {fileID: 8625133879033834584, guid: 4c25e34a2e3fb0a47b486bbdd36ca368,
         type: 3}
       propertyPath: m_text
@@ -537,12 +560,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4c25e34a2e3fb0a47b486bbdd36ca368, type: 3}
---- !u!1 &3788971043878349002 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4456555269963478347, guid: 4c25e34a2e3fb0a47b486bbdd36ca368,
-    type: 3}
-  m_PrefabInstance: {fileID: 670469482120830337}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &4411214921965365325 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3781393010334938572, guid: 4c25e34a2e3fb0a47b486bbdd36ca368,
