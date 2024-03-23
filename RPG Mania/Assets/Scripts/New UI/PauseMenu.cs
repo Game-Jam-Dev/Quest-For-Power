@@ -16,21 +16,27 @@ public class PauseMenu : MonoBehaviour
     Transform itemSlotTemplate;
     Transform itemQuantityTemplate;
 
+    Transform spellsList;
     Transform spellsContainer;
     Transform spellsSlotTemplate;
     Transform spellsQuantityTemplate;
 
     GameObject itemDescriptionObject;
+    GameObject player;
+    //GameObject skillDescrionObject;
 
-    private void Awake()
+    private void Start()
     {
         itemContainer = transform.Find("ItemsContainer");
         itemSlotTemplate = itemContainer.Find("ItemSlotText");
         itemQuantityTemplate = itemContainer.Find("ItemSlotQuantityTemplate");
 
-        spellsContainer = transform.Find("SpellList");
+        spellsList = transform.Find("SpellList");
+        spellsContainer = spellsList.Find("Spells");
         spellsSlotTemplate = spellsContainer.Find("SpellSlotText");
         spellsQuantityTemplate = spellsContainer.Find("SpellSlotQuantityTemplate");
+
+        player = GameObject.Find("Arkanos");
     }
 
     public void DisplaySpells()
@@ -43,17 +49,27 @@ public class PauseMenu : MonoBehaviour
 
         foreach (SkillAction skill in skills) 
         {
-            RectTransform itemSlotRectTransform = Instantiate(spellsSlotTemplate, spellsContainer).GetComponent<RectTransform>();
-            itemSlotRectTransform.gameObject.SetActive(true);
-            itemSlotRectTransform.anchoredPosition = new Vector2(-81, 200 - y * itemSlotCellSize);
-            itemSlotRectTransform.gameObject.GetComponent<TextMeshProUGUI>().text = skill.Name;
-            y++;
+            if (player.GetComponent<PlayerBattle>().CanUseSkill(skill))
+            {
+                RectTransform itemSlotRectTransform = Instantiate(spellsSlotTemplate, spellsContainer).GetComponent<RectTransform>();
+                itemSlotRectTransform.gameObject.SetActive(true);
+                itemSlotRectTransform.anchoredPosition = new Vector2(-27, -30 - y * itemSlotCellSize);
+                itemSlotRectTransform.gameObject.GetComponent<TextMeshProUGUI>().text = skill.Name;
+                y++;
+            }            
         }
     }
 
     public void ClearSpells()
     {
-
+        foreach (Transform child in spellsContainer)
+        {
+            if (child == spellsSlotTemplate | child == spellsQuantityTemplate)
+            {
+                continue;
+            }
+            Destroy(child.gameObject);
+        }
     }
 
     public void DisplayItems()

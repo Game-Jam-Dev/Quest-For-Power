@@ -23,7 +23,7 @@ public class SkillList
     {
         if (skillList.ContainsKey(key)) return skillList[key];
 
-        else return new SkillAction("Null", EmptyAction);
+        else return new SkillAction("Null", EmptyAction, "Null");
     }
 
     public SkillAction[] GetActions()
@@ -38,10 +38,10 @@ public class SkillList
     {
         skillList = new Dictionary<string, SkillAction>()
         {
-            {"water", new SkillAction("Water", InfuseWater)},
-            {"wind", new SkillAction("Wind", InfuseWind)},
-            {"earth", new SkillAction("Earth", InfuseEarth)},
-            {"fire", new SkillAction("Fire", InfuseFire)},
+            {"water", new SkillAction("Water", InfuseWater, "Do extra damage against fire and less against earth")},
+            {"wind", new SkillAction("Wind", InfuseWind, "Do extra damage against earth and less against fire")},
+            {"earth", new SkillAction("Earth", InfuseEarth, "Do extra damage against water and less against wind")},
+            {"fire", new SkillAction("Fire", InfuseFire, "Do extra damage against wind and less against water")},
         };
     }
 

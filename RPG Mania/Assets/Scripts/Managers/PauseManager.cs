@@ -75,6 +75,7 @@ public class PauseManager : MonoBehaviour {
 
     public void OpenItems()
     {
+        ClearSpellInstances();
         ClearItemInstances();
         OpenItemUI();
         CloseStandardUI();
@@ -90,10 +91,16 @@ public class PauseManager : MonoBehaviour {
     public void OpenSpells()
     {
         ClearItemInstances();
+        ClearSpellInstances();
         CloseItemUI();
         CloseStandardUI();
         OpenSpellsUI();
         pauseUI.GetComponent<PauseMenu>().DisplaySpells();
+    }
+
+    public void ClearSpellInstances()
+    {
+        pauseUI.GetComponent<PauseMenu>().ClearSpells();
     }
 
     public void OpenItemUI()
