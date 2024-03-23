@@ -8,7 +8,8 @@ public class PauseManager : MonoBehaviour {
     [SerializeField] private GameObject pauseUI;
     [SerializeField] private Button resumeButton, saveButton, quitButton;
     [SerializeField] private GameObject portrait, characterName, itemList, itemQuantities, itemDescription, 
-        itemBackground, itemContainer, spellsBackground, miniPortrait, spellColumnName, spellColumnQty, miniDescription;
+        itemBackground, itemContainer, focusedBackground, miniPortrait, spellColumnName, spellColumnQty, miniDescription,
+        StatusDetails;
 
     public static event Action<bool> pauseEvent;
 
@@ -54,6 +55,7 @@ public class PauseManager : MonoBehaviour {
         Time.timeScale = 0; 
         pauseUI.SetActive(true);
         pauseEvent(true);
+        CloseStatusUI();
         Utility.SetActiveButton(resumeButton);
     }
 
@@ -76,10 +78,11 @@ public class PauseManager : MonoBehaviour {
     public void OpenItems()
     {
         ClearSpellInstances();
-        ClearItemInstances();
-        OpenItemUI();
+        ClearItemInstances();        
         CloseStandardUI();
         CloseSpellsUI();
+        CloseStatusUI();
+        OpenItemUI();
         pauseUI.GetComponent<PauseMenu>().DisplayItems();
     }
 
@@ -94,6 +97,7 @@ public class PauseManager : MonoBehaviour {
         ClearSpellInstances();
         CloseItemUI();
         CloseStandardUI();
+        CloseStatusUI();
         OpenSpellsUI();
         pauseUI.GetComponent<PauseMenu>().DisplaySpells();
     }
@@ -101,6 +105,30 @@ public class PauseManager : MonoBehaviour {
     public void ClearSpellInstances()
     {
         pauseUI.GetComponent<PauseMenu>().ClearSpells();
+    }
+
+    public void OpenStatus()
+    {
+        CloseStatusUI();
+        ClearItemInstances();
+        ClearSpellInstances();
+        CloseItemUI();
+        CloseStandardUI();
+        CloseSpellsUI();
+        OpenStatusUI();
+        pauseUI.GetComponent<PauseMenu>().DisplayStatus();
+    }
+
+    public void OpenStatusUI()
+    {
+        focusedBackground.SetActive(true);
+        StatusDetails.SetActive(true);
+    }
+
+    public void CloseStatusUI()
+    {
+        focusedBackground.SetActive(false);
+        StatusDetails.SetActive(false);
     }
 
     public void OpenItemUI()
@@ -141,7 +169,7 @@ public class PauseManager : MonoBehaviour {
 
     public void OpenSpellsUI()
     {
-        spellsBackground.SetActive(true);
+        focusedBackground.SetActive(true);
         miniPortrait.SetActive(true);
         spellColumnName.SetActive(true);
         spellColumnQty.SetActive(true);
@@ -150,7 +178,7 @@ public class PauseManager : MonoBehaviour {
 
     public void CloseSpellsUI()
     {
-        spellsBackground.SetActive(false);
+        focusedBackground.SetActive(false);
         miniPortrait.SetActive(false);
         spellColumnName.SetActive(false);
         spellColumnQty.SetActive(false);

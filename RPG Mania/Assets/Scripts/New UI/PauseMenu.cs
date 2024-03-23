@@ -11,6 +11,10 @@ public class PauseMenu : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI skillDescription;
 
+    [SerializeField]
+    TextMeshProUGUI lvlValue, xp, xpForNextLvl, CPValue, HPValue, AttValue, DefValue,
+        AccValue, EvaValue;
+
 
     Transform itemContainer;
     Transform itemSlotTemplate;
@@ -37,9 +41,22 @@ public class PauseMenu : MonoBehaviour
         player = GameObject.Find("Arkanos");
     }
 
+    public void DisplayStatus()
+    {
+        int level = player.GetComponent<PlayerBattle>().level;
+        lvlValue.text = level.ToString();
+        xp.text = player.GetComponent<PlayerBattle>().experience.ToString();
+        xpForNextLvl.text = player.GetComponent<PlayerBattle>().XpForLevel().ToString();
+        CPValue.text = player.GetComponent<PlayerBattle>().combo.ToString();
+        HPValue.text = player.GetComponent<PlayerBattle>().maxHealth.ToString();
+        AttValue.text = player.GetComponent<PlayerBattle>().attack.ToString();
+        DefValue.text = player.GetComponent<PlayerBattle>().defense.ToString();
+        AccValue.text = (player.GetComponent<PlayerBattle>().accuracy * 100).ToString() + '%';
+        EvaValue.text = (player.GetComponent<PlayerBattle>().evasion * 100).ToString() + '%';
+    }
+
     public void DisplaySpells()
     {
-        //PlayerBattle - GetSkillAmount
         SkillAction[] skills = SkillList.GetInstance().GetActions();
         if (skills == null) return;
         int y = 0;
