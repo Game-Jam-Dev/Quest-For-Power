@@ -4242,6 +4242,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 701441991947617585, guid: ebe76a19dc889d84b94b0d40aa7fcb1f,
+        type: 3}
+      propertyPath: m_text
+      value: ???
+      objectReference: {fileID: 0}
     - target: {fileID: 719305420546075502, guid: ebe76a19dc889d84b94b0d40aa7fcb1f,
         type: 3}
       propertyPath: m_fontSize
@@ -5741,6 +5746,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9079287851932138580, guid: ebe76a19dc889d84b94b0d40aa7fcb1f,
+        type: 3}
+      propertyPath: m_Name
+      value: Demons
       objectReference: {fileID: 0}
     - target: {fileID: 9106022480688684982, guid: ebe76a19dc889d84b94b0d40aa7fcb1f,
         type: 3}
