@@ -8,6 +8,8 @@ public class PauseMenu : MonoBehaviour
 {
     [SerializeField]
     TextMeshProUGUI itemDescription;
+    //[SerializeField]
+    //GameObject skillContainer;
 
 
     Transform itemContainer;
@@ -17,6 +19,8 @@ public class PauseMenu : MonoBehaviour
     Transform spellsContainer;
     Transform spellsSlotTemplate;
     Transform spellsQuantityTemplate;
+
+    GameObject itemDescriptionObject;
 
     private void Awake()
     {
@@ -30,6 +34,24 @@ public class PauseMenu : MonoBehaviour
     }
 
     public void DisplaySpells()
+    {
+        //PlayerBattle - GetSkillAmount
+        SkillAction[] skills = SkillList.GetInstance().GetActions();
+        if (skills == null) return;
+        int y = 0;
+        float itemSlotCellSize = 30f;
+
+        foreach (SkillAction skill in skills) 
+        {
+            RectTransform itemSlotRectTransform = Instantiate(spellsSlotTemplate, spellsContainer).GetComponent<RectTransform>();
+            itemSlotRectTransform.gameObject.SetActive(true);
+            itemSlotRectTransform.anchoredPosition = new Vector2(-81, 200 - y * itemSlotCellSize);
+            itemSlotRectTransform.gameObject.GetComponent<TextMeshProUGUI>().text = skill.Name;
+            y++;
+        }
+    }
+
+    public void ClearSpells()
     {
 
     }
@@ -49,7 +71,7 @@ public class PauseMenu : MonoBehaviour
             {
                 if (y == 0)
                 {
-                    //itemDescription.textStyle = 
+                    itemDescription.text = item.description;
                 }
 
                 RectTransform itemSlotRectTransform = Instantiate(itemSlotTemplate, itemContainer).GetComponent<RectTransform>();
@@ -61,12 +83,9 @@ public class PauseMenu : MonoBehaviour
                 y++;
                 itemSlotRectTransform.gameObject.GetComponent<TMPro.TextMeshProUGUI>().text = item.itemName;
                 itemQtyRectTransform.gameObject.GetComponent<TMPro.TextMeshProUGUI>().text = itemAmount.ToString();
-
-                // click for Item description
             }
         }
     }
-
     public void ClearItems()
     {
         foreach (Transform child in itemContainer)

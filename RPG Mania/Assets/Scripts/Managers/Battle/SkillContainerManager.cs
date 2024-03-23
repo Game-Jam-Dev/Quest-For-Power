@@ -10,9 +10,10 @@ public class SkillContainerManager : MonoBehaviour {
 
     private List<(GameObject, SkillAction)> skillObjects = new();
     private GameObject absorbObject;
+    public SkillAction[] skills;
 
     public void Initialize() {
-        SkillAction[] skills = SkillList.GetInstance().GetActions();
+        skills = SkillList.GetInstance().GetActions();
 
         absorbObject = Instantiate(skillObjectPrefab, transform);
         absorbObject.GetComponent<Button>().onClick.AddListener(UseAbsorb);
