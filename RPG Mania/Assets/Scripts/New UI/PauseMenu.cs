@@ -8,8 +8,8 @@ public class PauseMenu : MonoBehaviour
 {
     [SerializeField]
     TextMeshProUGUI itemDescription;
-    //[SerializeField]
-    //GameObject skillContainer;
+    [SerializeField]
+    TextMeshProUGUI skillDescription;
 
 
     Transform itemContainer;
@@ -21,9 +21,7 @@ public class PauseMenu : MonoBehaviour
     Transform spellsSlotTemplate;
     Transform spellsQuantityTemplate;
 
-    GameObject itemDescriptionObject;
     GameObject player;
-    //GameObject skillDescrionObject;
 
     private void Start()
     {
@@ -45,16 +43,26 @@ public class PauseMenu : MonoBehaviour
         SkillAction[] skills = SkillList.GetInstance().GetActions();
         if (skills == null) return;
         int y = 0;
-        float itemSlotCellSize = 30f;
+        float SlotCellSize = 30f;
 
         foreach (SkillAction skill in skills) 
         {
             if (player.GetComponent<PlayerBattle>().CanUseSkill(skill))
             {
-                RectTransform itemSlotRectTransform = Instantiate(spellsSlotTemplate, spellsContainer).GetComponent<RectTransform>();
-                itemSlotRectTransform.gameObject.SetActive(true);
-                itemSlotRectTransform.anchoredPosition = new Vector2(-27, -30 - y * itemSlotCellSize);
-                itemSlotRectTransform.gameObject.GetComponent<TextMeshProUGUI>().text = skill.Name;
+                if (y==0)
+                {
+                    skillDescription.text = skill.Description;
+                }
+                RectTransform skillSlotRectTransform = Instantiate(spellsSlotTemplate, spellsContainer).GetComponent<RectTransform>();
+                skillSlotRectTransform.gameObject.SetActive(true);
+                skillSlotRectTransform.anchoredPosition = new Vector2(-27, -30 - y * SlotCellSize);
+                RectTransform skillQtyRectTransform = Instantiate(spellsQuantityTemplate, spellsContainer).GetComponent<RectTransform>();
+                skillQtyRectTransform.gameObject.SetActive(true);
+                skillQtyRectTransform.anchoredPosition = new Vector2(76, -53 - y * SlotCellSize);
+
+                skillSlotRectTransform.gameObject.GetComponent<TextMeshProUGUI>().text = skill.Name;
+                string skillQuantity = player.GetComponent<PlayerBattle>().GetSkillAmount(skill).ToString();
+                skillQtyRectTransform.gameObject.GetComponent<TextMeshProUGUI>().text = skillQuantity;
                 y++;
             }            
         }

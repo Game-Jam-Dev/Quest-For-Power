@@ -9,10 +9,10 @@ public class SkillAction
 
     public string Description { get; private set; }
 
-    public SkillAction(string name, ActionDelegate action, string Description)
+    public SkillAction(string name, ActionDelegate action, string description)
     {
         Name = name;
         Action = action;
-        Description = Description;
+        Description = description;
     }
 }
