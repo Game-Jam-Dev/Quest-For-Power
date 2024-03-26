@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17276844, g: 0.21589246, b: 0.2978263, a: 1}
+  m_IndirectSpecularColor: {r: 0.172768, g: 0.21589169, b: 0.29782546, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -170,6 +170,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7265379138703556458, guid: 9d7d7ac18fa203d40b1f5518b20b35bb,
     type: 3}
   m_PrefabInstance: {fileID: 536707990}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &184997154 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1252103350850792360, guid: ebe76a19dc889d84b94b0d40aa7fcb1f,
+    type: 3}
+  m_PrefabInstance: {fileID: 457790895}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &186989827
 PrefabInstance:
@@ -432,6 +438,16 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1252103352244012354, guid: ebe76a19dc889d84b94b0d40aa7fcb1f,
+        type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 184997154}
+    - target: {fileID: 1252103352244012354, guid: ebe76a19dc889d84b94b0d40aa7fcb1f,
+        type: 3}
+      propertyPath: battleCamera
+      value: 
+      objectReference: {fileID: 1053527090}
     - target: {fileID: 1252103352355666352, guid: ebe76a19dc889d84b94b0d40aa7fcb1f,
         type: 3}
       propertyPath: m_Name
@@ -1152,6 +1168,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7265379138703556458, guid: 9d7d7ac18fa203d40b1f5518b20b35bb,
     type: 3}
   m_PrefabInstance: {fileID: 234730835}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1053527090 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1252103350602238257, guid: ebe76a19dc889d84b94b0d40aa7fcb1f,
+    type: 3}
+  m_PrefabInstance: {fileID: 457790895}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1060699810
 PrefabInstance:
