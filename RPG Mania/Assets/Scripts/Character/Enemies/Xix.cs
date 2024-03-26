@@ -22,6 +22,14 @@ public class Xix : EnemyBattle {
 
         health = maxHealth;
     }
+
+    public override int XPFromKill(int playerLevel)
+    {
+        int xp = playerLevel * 20;
+
+        return xp;
+    }
+
     protected override void OnTriggerEnter(Collider other) {
         if (other.gameObject.CompareTag("Player"))
         {

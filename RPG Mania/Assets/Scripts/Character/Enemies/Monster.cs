@@ -21,6 +21,13 @@ public class Monster : EnemyBattle {
         health = maxHealth;
     }
 
+    public override int XPFromKill(int playerLevel)
+    {
+        int xp = playerLevel * 3;
+
+        return xp;
+    }
+
     private void AssignElement()
     {
         if (element == ElementManager.Element.None)
