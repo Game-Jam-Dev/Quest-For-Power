@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17311338, g: 0.20771761, b: 0.24923122, a: 1}
+  m_IndirectSpecularColor: {r: 0.17311287, g: 0.20771697, b: 0.24923033, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -950,6 +950,16 @@ PrefabInstance:
       propertyPath: boss
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1162201115079004936, guid: d3eae42654a3eee4890c1b3043ef4ae0,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 194.17676
+      objectReference: {fileID: 0}
+    - target: {fileID: 1162201115079004936, guid: d3eae42654a3eee4890c1b3043ef4ae0,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -344.3103
+      objectReference: {fileID: 0}
     - target: {fileID: 1273308280969695541, guid: d3eae42654a3eee4890c1b3043ef4ae0,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1060,10 +1070,50 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas Throne
       objectReference: {fileID: 0}
+    - target: {fileID: 1275251964012984042, guid: d3eae42654a3eee4890c1b3043ef4ae0,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -18
+      objectReference: {fileID: 0}
     - target: {fileID: 2020556041866827843, guid: d3eae42654a3eee4890c1b3043ef4ae0,
         type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2020556041866827843, guid: d3eae42654a3eee4890c1b3043ef4ae0,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.040283203
+      objectReference: {fileID: 0}
+    - target: {fileID: 5858584587039737465, guid: d3eae42654a3eee4890c1b3043ef4ae0,
+        type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 1958486158}
+    - target: {fileID: 5858584587039737465, guid: d3eae42654a3eee4890c1b3043ef4ae0,
+        type: 3}
+      propertyPath: battleCamera
+      value: 
+      objectReference: {fileID: 1958486158}
+    - target: {fileID: 5985439209630495381, guid: d3eae42654a3eee4890c1b3043ef4ae0,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.7133789
+      objectReference: {fileID: 0}
+    - target: {fileID: 5995229914470768418, guid: d3eae42654a3eee4890c1b3043ef4ae0,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -3.1103516
+      objectReference: {fileID: 0}
+    - target: {fileID: 5995229914470768418, guid: d3eae42654a3eee4890c1b3043ef4ae0,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 1.446167
+      objectReference: {fileID: 0}
+    - target: {fileID: 7746498403620657227, guid: d3eae42654a3eee4890c1b3043ef4ae0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3eae42654a3eee4890c1b3043ef4ae0, type: 3}
