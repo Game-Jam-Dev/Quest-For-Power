@@ -19,6 +19,8 @@ public class EnemyBattle : CharacterBattle {
     public bool itemDrops = true;
     public Item itemDrop;
 
+    public int absorbs = 0;
+
     protected override void Start()
     {
         base.Start();
@@ -41,7 +43,7 @@ public class EnemyBattle : CharacterBattle {
     public override void PrepareCombat()
     {
         level = GameManager.instance.GetPlayerLevel();
-        
+        absorbs = 0;
         SetStats();
         ea.StartFighting();
     }
@@ -151,5 +153,10 @@ public class EnemyBattle : CharacterBattle {
     public Item ItemDrop()
     {
         return itemDrop;
+    }
+
+    public void IncreaseAbsorbs()
+    {
+        absorbs++;
     }
 }

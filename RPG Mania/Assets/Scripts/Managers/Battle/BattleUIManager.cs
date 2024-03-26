@@ -160,7 +160,15 @@ public class BattleUIManager : MonoBehaviour {
         }
         else if (absorb)
         {
-            SendAbsorbAction(enemy);
+            if (enemy.absorbs >= absorbCounterMax)
+            {
+                SetText("You can't absorb from this enemy anymore.");
+                BackFromTarget();
+            }
+            else
+            {
+                SendAbsorbAction(enemy);
+            }
         }
         else
         {
@@ -237,9 +245,10 @@ public class BattleUIManager : MonoBehaviour {
 
     private void SendAbsorbAction(EnemyBattle target)
     {
-        absorbCounter++;
+        //absorbCounter++;
         absorb = false;
         battleManager.SetAbsorbAction(target);
+        target.IncreaseAbsorbs();
         EndTurn();
     }
 
