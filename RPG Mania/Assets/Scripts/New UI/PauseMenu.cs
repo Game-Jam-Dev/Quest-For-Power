@@ -117,10 +117,10 @@ public class PauseMenu : MonoBehaviour
 
                 RectTransform itemSlotRectTransform = Instantiate(itemSlotTemplate, itemContainer).GetComponent<RectTransform>();
                 itemSlotRectTransform.gameObject.SetActive(true);
-                itemSlotRectTransform.anchoredPosition = new Vector2(38, -159 - y * itemSlotCellSize);
+                itemSlotRectTransform.anchoredPosition = new Vector2(-2, -32f - y * itemSlotCellSize);
                 RectTransform itemQtyRectTransform = Instantiate(itemQuantityTemplate, itemContainer).GetComponent<RectTransform>();
                 itemQtyRectTransform.gameObject.SetActive(true);
-                itemQtyRectTransform.anchoredPosition = new Vector2(70, -87 - y * itemSlotCellSize);
+                itemQtyRectTransform.anchoredPosition = new Vector2(0.7f, 5f - y * itemSlotCellSize);
                 y++;
                 itemSlotRectTransform.gameObject.GetComponent<TMPro.TextMeshProUGUI>().text = item.itemName;
                 itemQtyRectTransform.gameObject.GetComponent<TMPro.TextMeshProUGUI>().text = itemAmount.ToString();

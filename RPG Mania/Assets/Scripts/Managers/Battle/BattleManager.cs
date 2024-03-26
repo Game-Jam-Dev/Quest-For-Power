@@ -144,7 +144,7 @@ public class BattleManager : MonoBehaviour {
                         if (!hit)
                         {
                             battleUIManager.SetText($"{activeCharacter.characterName} missed");
-                            break;
+                            //break;
                         }
 
                         // update enemy's health ui
@@ -190,7 +190,7 @@ public class BattleManager : MonoBehaviour {
                     if (!hit)
                     {
                         battleUIManager.SetText($"{activeCharacter.characterName} missed");
-                        break;
+                        //break;
                     }
 
                     // updates player's health
