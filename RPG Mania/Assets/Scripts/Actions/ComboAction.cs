@@ -15,7 +15,8 @@ public class ComboAction
         Action = action;
     }
 
-    public static bool DoAttack(CharacterBattle self, CharacterBattle target, int comboDepth, string attackName, float accuracy, float damageMultiplier)
+    public static bool DoAttack(CharacterBattle self, CharacterBattle target, int comboDepth, string attackName, 
+        float accuracy, float damageMultiplier)
     {
         self.SetAnimationTrigger(attackName);
 

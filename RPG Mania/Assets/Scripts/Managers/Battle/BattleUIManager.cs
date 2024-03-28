@@ -31,10 +31,25 @@ public class BattleUIManager : MonoBehaviour {
         this.player = player;
         this.enemies = enemies;
 
+        GenerateComboUI();
+
         playerContainerManager.SetPlayer(player);
         enemyContainerManager.SetEnemies(enemies, this);
         skillContainerManager.UpdateSkills(player);
         itemContainerManager.UpdateItems();
+    }
+
+    public void GenerateComboUI()
+    {
+        foreach (EnemyBattle enemy in enemies)
+        {
+            enemy.GenerateUIQuestionMarkers();
+            enemy.GenerateComboWeakness();
+            if (enemy.stunned) 
+            {
+                enemy.ChangeStunCounter();
+            }
+        }
     }
 
     private void ResetUI()
@@ -66,6 +81,8 @@ public class BattleUIManager : MonoBehaviour {
         comboContainer.SetActive(false);
         skillContainer.SetActive(false);
         itemContainer.SetActive(false);
+
+        GenerateComboUI();
     }
 
     public void StartCombatResolutionUI()
@@ -137,11 +154,11 @@ public class BattleUIManager : MonoBehaviour {
 
     public void PickAbsorb()
     {
-        if (absorbCounter > absorbCounterMax) 
-        {
-            SetText("You can't absorb from these enemies anymore.");
-            return;
-        }
+        //if (absorbCounter > absorbCounterMax) 
+        //{
+        //    SetText("You can't absorb from these enemies anymore.");
+        //    return;
+        //}
 
         absorb = true;
         enemyContainerManager.TargetEnemies();
@@ -232,7 +249,7 @@ public class BattleUIManager : MonoBehaviour {
 
     private void SendComboAction()
     {
-        battleManager.SetComboAction(target, playerCombo);
+        battleManager.SetComboAction(target, playerCombo, target);
         EndTurn();
     }
 

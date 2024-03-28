@@ -12,6 +12,8 @@ public class PlayerBattle : CharacterBattle {
     [SerializeField] public float baseAccuracy, baseEvasion;
 
     private List<(AudioClip, float)> elementClips;
+
+    static string characterName = "Arkanos";
     protected override void Start() {
         base.Start();
 
