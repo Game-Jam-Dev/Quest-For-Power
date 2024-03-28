@@ -182,6 +182,11 @@ public class BattleUIManager : MonoBehaviour {
                 SetText("You can't absorb from this enemy anymore.");
                 BackFromTarget();
             }
+            else if (!enemy.stunned)
+            {
+                SetText("You can only absorb stunned enemies");
+                BackFromTarget();
+            }
             else
             {
                 SendAbsorbAction(enemy);

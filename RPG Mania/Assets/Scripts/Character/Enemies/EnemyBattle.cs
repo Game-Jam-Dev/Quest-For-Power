@@ -100,7 +100,7 @@ public class EnemyBattle : CharacterBattle {
     public void ChangeStunCounter()
     {
         stunCount++;
-        if (stunLimit <= stunCount) 
+        if (stunLimit < stunCount) 
         {
             ToggleStun();
         }
