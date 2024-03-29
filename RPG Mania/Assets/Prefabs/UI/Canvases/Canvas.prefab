@@ -103,6 +103,7 @@ GameObject:
   - component: {fileID: 4676544588567442418}
   - component: {fileID: 4676544588567442430}
   - component: {fileID: 7825545954615205506}
+  - component: {fileID: 1275094193}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Canvas
@@ -212,16 +213,18 @@ MonoBehaviour:
   saveButton: {fileID: 5734691836032710734}
   quitButton: {fileID: 4411214921965365325}
   portrait: {fileID: 6397130428987385899}
-  characterName: {fileID: 0}
+  characterNameTag: {fileID: 0}
   itemList: {fileID: 7978331287091240060}
   itemQuantities: {fileID: 0}
   itemDescription: {fileID: 0}
   itemBackground: {fileID: 0}
-  spellsBackground: {fileID: 0}
-  miniPortrait: {fileID: 0}
-  spellColumnName: {fileID: 0}
-  spellColumnQty: {fileID: 0}
+  itemContainer: {fileID: 0}
+  characterDetailsBackground: {fileID: 0}
+  miniPortraitBackground: {fileID: 0}
+  spellsContainer: {fileID: 0}
+  spellQuantity: {fileID: 0}
   miniDescription: {fileID: 0}
+  StatusDetails: {fileID: 0}
 --- !u!114 &7825545954615205506
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,6 +244,28 @@ MonoBehaviour:
   skipButton: {fileID: 3390424321594151662}
   clicked: 0
   fullLine: 0
+--- !u!114 &1275094193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4676544588567442417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f527d8314e6de843b6854bd854a2dab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  battleUI: {fileID: 4236982236964321923}
+  dialogManager: {fileID: 7825545954615205506}
+  mainCamera: {fileID: 0}
+  battleCamera: {fileID: 0}
+  wildsTheme: {fileID: 8300000, guid: ab3377f648fc99c43968f21043ab7c9e, type: 3}
+  battleTheme: {fileID: 8300000, guid: 3324ab6b015b7f24991aa574ddaeb5ee, type: 3}
+  dialogObjectPre: {fileID: 11400000, guid: 127ab6a6a28a87343933b59bd00d707f, type: 2}
+  dialogObjectPreboss: {fileID: 11400000, guid: 78a767884cfb68346ba054806d438e05,
+    type: 2}
+  dialogObjectPost: {fileID: 11400000, guid: 53fdd61ed4b51f44d8c0869e4e5c3213, type: 2}
 --- !u!1001 &670469482120830337
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -797,6 +822,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -55
       objectReference: {fileID: 0}
+    - target: {fileID: 3358185840713108526, guid: c431bf0b70fa11842a35783388143adb,
+        type: 3}
+      propertyPath: worldManager
+      value: 
+      objectReference: {fileID: 1275094193}
     - target: {fileID: 5078236308826466538, guid: c431bf0b70fa11842a35783388143adb,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -1094,6 +1124,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c431bf0b70fa11842a35783388143adb, type: 3}
+--- !u!1 &4236982236964321923 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 43845293706618308, guid: c431bf0b70fa11842a35783388143adb,
+    type: 3}
+  m_PrefabInstance: {fileID: 4203844078356488007}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &8209516230731739009 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5456395097203601606, guid: c431bf0b70fa11842a35783388143adb,
@@ -1120,7 +1156,7 @@ PrefabInstance:
     - target: {fileID: 4667181137088410413, guid: 0d656edda9fefca43a2c23de9f04b7c4,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4807914412954148173, guid: 0d656edda9fefca43a2c23de9f04b7c4,
         type: 3}

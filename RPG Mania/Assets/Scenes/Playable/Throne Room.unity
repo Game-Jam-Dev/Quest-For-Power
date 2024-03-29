@@ -292,6 +292,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 352a55b1762d3d24b818de152ba88525, type: 3}
+--- !u!1 &416654563 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9189691735970521223, guid: 9334cbd0edbb47a4c8164f360d17ecf9,
+    type: 3}
+  m_PrefabInstance: {fileID: 7911771196610856594}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &536881971 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9189691734812834010, guid: 9334cbd0edbb47a4c8164f360d17ecf9,
+    type: 3}
+  m_PrefabInstance: {fileID: 7911771196610856594}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &586107115
 GameObject:
   m_ObjectHideFlags: 0
@@ -432,6 +444,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8148494516188841141}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &790182274 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9189691735180016180, guid: 9334cbd0edbb47a4c8164f360d17ecf9,
+    type: 3}
+  m_PrefabInstance: {fileID: 7911771196610856594}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &793358094 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9189691736391997516, guid: 9334cbd0edbb47a4c8164f360d17ecf9,
+    type: 3}
+  m_PrefabInstance: {fileID: 7911771196610856594}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &921400668 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -5711052370896006010, guid: 352a55b1762d3d24b818de152ba88525,
@@ -451,6 +475,12 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.17999999, y: 0.17999998, z: 0}
   m_Center: {x: 0, y: 0.07999998, z: 0}
+--- !u!1 &1121177016 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9189691735992757583, guid: 9334cbd0edbb47a4c8164f360d17ecf9,
+    type: 3}
+  m_PrefabInstance: {fileID: 7911771196610856594}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1333946311
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -525,6 +555,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9078216f21c1b474194b8c667902f36d, type: 3}
+--- !u!1 &1424340131 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9189691734820205549, guid: 9334cbd0edbb47a4c8164f360d17ecf9,
+    type: 3}
+  m_PrefabInstance: {fileID: 7911771196610856594}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1468721262 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 352a55b1762d3d24b818de152ba88525,
@@ -1398,6 +1434,48 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4600024616435205422, guid: 9334cbd0edbb47a4c8164f360d17ecf9,
+        type: 3}
+      propertyPath: TotalCost
+      value: 
+      objectReference: {fileID: 416654563}
+    - target: {fileID: 4600024616435205422, guid: 9334cbd0edbb47a4c8164f360d17ecf9,
+        type: 3}
+      propertyPath: FirstAttack
+      value: 
+      objectReference: {fileID: 536881971}
+    - target: {fileID: 4600024616435205422, guid: 9334cbd0edbb47a4c8164f360d17ecf9,
+        type: 3}
+      propertyPath: ThirdAttack
+      value: 
+      objectReference: {fileID: 1424340131}
+    - target: {fileID: 4600024616435205422, guid: 9334cbd0edbb47a4c8164f360d17ecf9,
+        type: 3}
+      propertyPath: SecondAttack
+      value: 
+      objectReference: {fileID: 1121177016}
+    - target: {fileID: 4600024616435205422, guid: 9334cbd0edbb47a4c8164f360d17ecf9,
+        type: 3}
+      propertyPath: ShieldSprite
+      value: 
+      objectReference: {fileID: -776679173, guid: ef980a999d8265249b3595d8701d36c1,
+        type: 3}
+    - target: {fileID: 4600024616435205422, guid: 9334cbd0edbb47a4c8164f360d17ecf9,
+        type: 3}
+      propertyPath: ShieldUIImage
+      value: 
+      objectReference: {fileID: 793358094}
+    - target: {fileID: 4600024616435205422, guid: 9334cbd0edbb47a4c8164f360d17ecf9,
+        type: 3}
+      propertyPath: ShieldUIValue
+      value: 
+      objectReference: {fileID: 790182274}
+    - target: {fileID: 4600024616435205422, guid: 9334cbd0edbb47a4c8164f360d17ecf9,
+        type: 3}
+      propertyPath: BrokenShieldSprite
+      value: 
+      objectReference: {fileID: 1595733391, guid: ef980a999d8265249b3595d8701d36c1,
+        type: 3}
     - target: {fileID: 5790511307614038026, guid: 9334cbd0edbb47a4c8164f360d17ecf9,
         type: 3}
       propertyPath: m_RootOrder

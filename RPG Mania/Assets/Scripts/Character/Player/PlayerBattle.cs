@@ -50,11 +50,6 @@ public class PlayerBattle : CharacterBattle {
     public void AddExtraComboPoints(int extraPoints)
     {
         extraComboPoints += extraPoints;
-        //// Cap the amount of extra points
-        //if (extraComboPoints > 1 * characterComboPoints)
-        //{
-        //    extraComboPoints = (int)Mathf.Round(1 * characterComboPoints);
-        //}
         Debug.Log("Adding extra points: " + extraComboPoints);
     }
 

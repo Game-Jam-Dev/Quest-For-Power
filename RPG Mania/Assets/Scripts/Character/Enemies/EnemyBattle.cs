@@ -26,6 +26,8 @@ public class EnemyBattle : CharacterBattle {
 
     public int absorbs = 0;
 
+    [SerializeField] GameObject comboOrder;
+
     public int firstComboValue = 1;
     public int secondComboValue = 2;
     public int thirdComboValue = 3;
@@ -141,12 +143,16 @@ public class EnemyBattle : CharacterBattle {
         absorbs = 0;
         SetStats();
         ea.StartFighting();
+        comboOrder.SetActive(true);
+        ShieldUIImage.SetActive(true);
     }
 
     public void ResetFromFight()
     {
         gameObject.SetActive(true);
         ea.StopFighting();
+        comboOrder.SetActive(false);
+        ShieldUIImage.SetActive(false);
     }
 
     protected virtual void SetStats(){}

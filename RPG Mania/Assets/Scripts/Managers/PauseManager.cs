@@ -7,8 +7,8 @@ using System;
 public class PauseManager : MonoBehaviour {
     [SerializeField] private GameObject pauseUI;
     [SerializeField] private Button resumeButton, saveButton, quitButton;
-    [SerializeField] private GameObject portrait, characterName, itemList, itemQuantities, itemDescription, 
-        itemBackground, itemContainer, focusedBackground, miniPortrait, spellColumnName, spellColumnQty, miniDescription,
+    [SerializeField] private GameObject portrait, characterNameTag, itemList, itemQuantities, itemDescription, 
+        itemBackground, itemContainer, characterDetailsBackground, miniPortraitBackground, spellsContainer, spellQuantity, spellDescription,
         StatusDetails;
 
     public static event Action<bool> pauseEvent;
@@ -121,13 +121,13 @@ public class PauseManager : MonoBehaviour {
 
     public void OpenStatusUI()
     {
-        focusedBackground.SetActive(true);
+        characterDetailsBackground.SetActive(true);
         StatusDetails.SetActive(true);
     }
 
     public void CloseStatusUI()
     {
-        focusedBackground.SetActive(false);
+        characterDetailsBackground.SetActive(false);
         StatusDetails.SetActive(false);
     }
 
@@ -151,13 +151,13 @@ public class PauseManager : MonoBehaviour {
     public void OpenStandardUI()
     {
         portrait.SetActive(true);
-        characterName.SetActive(true);
+        characterNameTag.SetActive(true);
     }
     
     public void CloseStandardUI()
     {
         portrait.SetActive(false);
-        characterName.SetActive(false);
+        characterNameTag.SetActive(false);
     }
 
     public void CloseUI()
@@ -169,20 +169,20 @@ public class PauseManager : MonoBehaviour {
 
     public void OpenSpellsUI()
     {
-        focusedBackground.SetActive(true);
-        miniPortrait.SetActive(true);
-        spellColumnName.SetActive(true);
-        spellColumnQty.SetActive(true);
-        miniDescription.SetActive(true);
+        characterDetailsBackground.SetActive(true);
+        miniPortraitBackground.SetActive(true);
+        spellsContainer.SetActive(true);
+        spellQuantity.SetActive(true);
+        spellDescription.SetActive(true);
     }
 
     public void CloseSpellsUI()
     {
-        focusedBackground.SetActive(false);
-        miniPortrait.SetActive(false);
-        spellColumnName.SetActive(false);
-        spellColumnQty.SetActive(false);
-        miniDescription.SetActive(false);
+        characterDetailsBackground.SetActive(false);
+        miniPortraitBackground.SetActive(false);
+        spellsContainer.SetActive(false);
+        spellQuantity.SetActive(false);
+        spellDescription.SetActive(false);
 
     }
 }

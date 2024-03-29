@@ -29,11 +29,11 @@ public class PauseMenu : MonoBehaviour
 
     private void Start()
     {
-        itemContainer = transform.Find("ItemsContainer");
+        itemContainer = transform.Find("Items Container");
         itemSlotTemplate = itemContainer.Find("ItemSlotText");
         itemQuantityTemplate = itemContainer.Find("ItemSlotQuantityTemplate");
 
-        spellsList = transform.Find("SpellList");
+        spellsList = transform.Find("Spells Container");
         spellsContainer = spellsList.Find("Spells");
         spellsSlotTemplate = spellsContainer.Find("SpellSlotText");
         spellsQuantityTemplate = spellsContainer.Find("SpellSlotQuantityTemplate");

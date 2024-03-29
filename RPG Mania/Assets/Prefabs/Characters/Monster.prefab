@@ -139,11 +139,30 @@ MonoBehaviour:
   combo: 0
   hitTarget: 0
   attackClip: {fileID: 8300000, guid: a3f952095cec84440a88eb462db52486, type: 3}
+  FirstAttack: {fileID: 0}
+  SecondAttack: {fileID: 0}
+  ThirdAttack: {fileID: 0}
+  TotalCost: {fileID: 0}
+  ShieldUIImage: {fileID: 0}
+  ShieldUIValue: {fileID: 0}
   level: 1
   detectRange: 7
   ea: {fileID: 3641008635405992323}
   itemDrops: 1
   itemDrop: {fileID: 0}
+  absorbs: 0
+  comboOrder: {fileID: 0}
+  firstComboValue: 1
+  secondComboValue: 2
+  thirdComboValue: 3
+  shieldDefault: 0
+  currentShieldsValue: 0
+  stunned: 0
+  stunCount: 0
+  stunLimit: 0
+  ShieldSprite: {fileID: 0}
+  BrokenShieldSprite: {fileID: 0}
+  defaultDefense: 0
 --- !u!114 &3641008635405992323 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2966693440811833630, guid: f9c545364aad19f4bb9f85d04902751c,
