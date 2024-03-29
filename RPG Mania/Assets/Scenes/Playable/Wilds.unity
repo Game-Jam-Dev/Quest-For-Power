@@ -5511,6 +5511,16 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0.040527344
       objectReference: {fileID: 0}
+    - target: {fileID: 6748454431040536800, guid: ebe76a19dc889d84b94b0d40aa7fcb1f,
+        type: 3}
+      propertyPath: baseAttack
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6748454431040536800, guid: ebe76a19dc889d84b94b0d40aa7fcb1f,
+        type: 3}
+      propertyPath: baseMaxHealth
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 6767109029108076666, guid: ebe76a19dc889d84b94b0d40aa7fcb1f,
         type: 3}
       propertyPath: m_IsActive
