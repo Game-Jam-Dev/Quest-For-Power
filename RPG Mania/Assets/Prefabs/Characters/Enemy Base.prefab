@@ -1192,6 +1192,7 @@ GameObject:
   - component: {fileID: 1707788593647079610}
   - component: {fileID: 7007879344559388374}
   - component: {fileID: 286914051976275691}
+  - component: {fileID: 3040572897613120600}
   m_Layer: 0
   m_Name: Enemy Base
   m_TagString: Enemy
@@ -1256,12 +1257,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 937211cdd4900ff4eb4f2e2e3eca58fe, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ce52a4c811146e841a59e153f8dda508, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 5.12, y: 5.12}
+  m_Size: {x: 2.8444445, y: 2.8444445}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -1279,7 +1280,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e10645ac2c0aa8b42b83e09055397b20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  combatPositionHeightAdjustment: 0
+  combatPositionHeightAdjustment: 0.5
   isAttacking: 0
   isFighting: 1
 --- !u!95 &6777435114762703956
@@ -1292,7 +1293,7 @@ Animator:
   m_GameObject: {fileID: 3036269658535557653}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 5c1237cb24d90c74a9103c56002f3360, type: 2}
+  m_Controller: {fileID: 9100000, guid: e9f3617b9fd6e17429584c25d315480c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1482,7 +1483,7 @@ MonoBehaviour:
   itemDrops: 1
   itemDrop: {fileID: 0}
   absorbs: 0
-  comboOrder: {fileID: 0}
+  comboOrder: {fileID: 1667953556}
   firstComboValue: 1
   secondComboValue: 2
   thirdComboValue: 3
@@ -1491,8 +1492,57 @@ MonoBehaviour:
   stunned: 0
   stunCount: 0
   stunLimit: 0
-  ShieldSprite: {fileID: 0}
-  BrokenShieldSprite: {fileID: 0}
+  ShieldSprite: {fileID: -776679173, guid: ef980a999d8265249b3595d8701d36c1, type: 3}
+  BrokenShieldSprite: {fileID: 1595733391, guid: ef980a999d8265249b3595d8701d36c1,
+    type: 3}
+  defaultDefense: 0
+--- !u!114 &3040572897613120600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3036269658535557653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8df667204d041db498e8ae19462101d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterName: Soldier
+  maxHealth: 0
+  health: 0
+  element: 0
+  attack: 0
+  defense: 0
+  accuracy: 0
+  evasion: 0
+  combo: 2
+  hitTarget: 0
+  attackClip: {fileID: 8300000, guid: a3f952095cec84440a88eb462db52486, type: 3}
+  FirstAttack: {fileID: 896276842}
+  SecondAttack: {fileID: 1921010943}
+  ThirdAttack: {fileID: 889033309}
+  TotalCost: {fileID: 1886191927}
+  ShieldUIImage: {fileID: 1531738620}
+  ShieldUIValue: {fileID: 51370884}
+  level: 1
+  detectRange: 5.2
+  ea: {fileID: 2966693440811833630}
+  itemDrops: 1
+  itemDrop: {fileID: 0}
+  absorbs: 0
+  comboOrder: {fileID: 1667953556}
+  firstComboValue: 1
+  secondComboValue: 2
+  thirdComboValue: 3
+  shieldDefault: 0
+  currentShieldsValue: 0
+  stunned: 0
+  stunCount: 0
+  stunLimit: 0
+  ShieldSprite: {fileID: -776679173, guid: ef980a999d8265249b3595d8701d36c1, type: 3}
+  BrokenShieldSprite: {fileID: 1595733391, guid: ef980a999d8265249b3595d8701d36c1,
+    type: 3}
   defaultDefense: 0
 --- !u!1 &6054422591417054965
 GameObject:

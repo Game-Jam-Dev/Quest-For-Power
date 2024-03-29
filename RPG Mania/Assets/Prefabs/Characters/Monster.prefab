@@ -51,12 +51,12 @@ PrefabInstance:
     - target: {fileID: 3446468312287349178, guid: f9c545364aad19f4bb9f85d04902751c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 41.48
       objectReference: {fileID: 0}
     - target: {fileID: 3446468312287349178, guid: f9c545364aad19f4bb9f85d04902751c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 7.14
       objectReference: {fileID: 0}
     - target: {fileID: 3446468312287349178, guid: f9c545364aad19f4bb9f85d04902751c,
         type: 3}
@@ -110,6 +110,48 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 5c1237cb24d90c74a9103c56002f3360, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9c545364aad19f4bb9f85d04902751c, type: 3}
+--- !u!1 &1994173136957741482 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1886191927, guid: f9c545364aad19f4bb9f85d04902751c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1994173138829777053}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1994173136975909986 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1921010943, guid: f9c545364aad19f4bb9f85d04902751c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1994173138829777053}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1994173137276234505 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1667953556, guid: f9c545364aad19f4bb9f85d04902751c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1994173138829777053}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1994173137408713057 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1531738620, guid: f9c545364aad19f4bb9f85d04902751c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1994173138829777053}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1994173138089183936 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 889033309, guid: f9c545364aad19f4bb9f85d04902751c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1994173138829777053}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1994173138115428855 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 896276842, guid: f9c545364aad19f4bb9f85d04902751c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1994173138829777053}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1994173138880742169 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 51370884, guid: f9c545364aad19f4bb9f85d04902751c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1994173138829777053}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3570869403515740808 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3036269658535557653, guid: f9c545364aad19f4bb9f85d04902751c,
@@ -139,19 +181,19 @@ MonoBehaviour:
   combo: 0
   hitTarget: 0
   attackClip: {fileID: 8300000, guid: a3f952095cec84440a88eb462db52486, type: 3}
-  FirstAttack: {fileID: 0}
-  SecondAttack: {fileID: 0}
-  ThirdAttack: {fileID: 0}
-  TotalCost: {fileID: 0}
-  ShieldUIImage: {fileID: 0}
-  ShieldUIValue: {fileID: 0}
+  FirstAttack: {fileID: 1994173138115428855}
+  SecondAttack: {fileID: 1994173136975909986}
+  ThirdAttack: {fileID: 1994173138089183936}
+  TotalCost: {fileID: 1994173136957741482}
+  ShieldUIImage: {fileID: 1994173137408713057}
+  ShieldUIValue: {fileID: 1994173138880742169}
   level: 1
   detectRange: 7
   ea: {fileID: 3641008635405992323}
   itemDrops: 1
   itemDrop: {fileID: 0}
   absorbs: 0
-  comboOrder: {fileID: 0}
+  comboOrder: {fileID: 1994173137276234505}
   firstComboValue: 1
   secondComboValue: 2
   thirdComboValue: 3
@@ -160,8 +202,9 @@ MonoBehaviour:
   stunned: 0
   stunCount: 0
   stunLimit: 0
-  ShieldSprite: {fileID: 0}
-  BrokenShieldSprite: {fileID: 0}
+  ShieldSprite: {fileID: -776679173, guid: ef980a999d8265249b3595d8701d36c1, type: 3}
+  BrokenShieldSprite: {fileID: 1595733391, guid: ef980a999d8265249b3595d8701d36c1,
+    type: 3}
   defaultDefense: 0
 --- !u!114 &3641008635405992323 stripped
 MonoBehaviour:
