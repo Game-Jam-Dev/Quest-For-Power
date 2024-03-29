@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class PlayerBattle : CharacterBattle {
     public int experience = 0;
-    public int level {get; private set;}
+    public int level { get; private set; }
 
 
     [SerializeField] private PlayerAnimation pa;
@@ -17,6 +17,9 @@ public class PlayerBattle : CharacterBattle {
     public int characterComboPoints;
 
     static string characterName = "Arkanos";
+    [SerializeField] float bonusAttackPercentage = .175f, bonusDefensePercentage = .35f, bonusAccuracy = 0.09f, bonusEvasion = 0.09f;
+    bool fireBonus = false, waterBonus = false, windBonus = false, earthBonus = false;
+    private float oldValue1, oldValue2;
     protected override void Start() {
         base.Start();
 
@@ -34,7 +37,7 @@ public class PlayerBattle : CharacterBattle {
             skillActions.Add((skillList.GetAction(skillKeys[i]), playerSkillUses[i]));
         }
 
-        elementClips = new List<(AudioClip, float)>(){(drainClip, 2.45f), (waterClip, 1.03f), (fireClip, .7f), (windClip, 2.2f), (earthClip, .93f)};
+        elementClips = new List<(AudioClip, float)>() { (drainClip, 2.45f), (waterClip, 1.03f), (fireClip, .7f), (windClip, 2.2f), (earthClip, .93f) };
     }
 
     public override void PrepareCombat()
@@ -63,12 +66,16 @@ public class PlayerBattle : CharacterBattle {
 
     public void UpdateComboPoints()
     {
-        combo = characterComboPoints + (int)Mathf.Ceil(extraComboPoints/2);
+        if (element == ElementManager.Element.Wind)
+        {
+            extraComboPoints += 2;
+        }
+        combo = characterComboPoints + (int)Mathf.Ceil(extraComboPoints / 2);
         if (combo > 1.5 * characterComboPoints)
         {
             combo = (int)Mathf.Ceil(1.5f * characterComboPoints);
         }
-        Debug.Log("Updating combo:" + combo.ToString() + " character base points: " + characterComboPoints + 
+        Debug.Log("Updating combo:" + combo.ToString() + " character base points: " + characterComboPoints +
             "Extra points: " + extraComboPoints);
     }
 
@@ -77,7 +84,7 @@ public class PlayerBattle : CharacterBattle {
         int xpForLevel = XpForLevel();
 
         experience += xp;
-        
+
         if (experience >= xpForLevel) LevelUp(xpForLevel);
 
         GameManager.instance.SetPlayerExperience(experience);
@@ -121,7 +128,7 @@ public class PlayerBattle : CharacterBattle {
         accuracy = baseAccuracy + level / 2000f;
         evasion = baseEvasion + level / 1000f;
 
-        characterComboPoints = baseComboPoints + (int)Mathf.Log(.475f*level) + 
+        characterComboPoints = baseComboPoints + (int)Mathf.Log(.475f * level) +
             (int).02f * level;
     }
 
@@ -145,7 +152,7 @@ public class PlayerBattle : CharacterBattle {
     {
         this.level = level;
         this.experience = experience;
-        
+
         SetStats(level);
 
         for (int i = 0; i < skillActions.Count; i++)
@@ -162,28 +169,80 @@ public class PlayerBattle : CharacterBattle {
     public override void SelectSkill(SkillAction skill)
     {
         activeSkill = skill;
-        
+        //check if the interactions with items may break these calculations
         if (activeSkill == SkillList.GetInstance().GetAction("water"))
         {
             element = ElementManager.Element.Water;
+
+            ResetElementBonus();
+            oldValue1 = accuracy;
+            oldValue2 = evasion;
+            accuracy += bonusAccuracy;
+            evasion += bonusEvasion;
+            waterBonus = true;
+
         } else if (activeSkill == SkillList.GetInstance().GetAction("fire"))
         {
             element = ElementManager.Element.Fire;
+
+            ResetElementBonus();
+            oldValue1 = attack;
+            attack += (int)Mathf.Round(bonusAttackPercentage * attack);
+            fireBonus = true;
+
         } else if (activeSkill == SkillList.GetInstance().GetAction("wind"))
         {
             element = ElementManager.Element.Wind;
+
+            ResetElementBonus();
+            windBonus = true;
+
         } else if (activeSkill == SkillList.GetInstance().GetAction("earth"))
         {
             element = ElementManager.Element.Earth;
-        } else {
+
+            ResetElementBonus();
+            oldValue1 = defense;
+            defense += (int)Mathf.Round(bonusDefensePercentage * defense);
+            earthBonus = true;
+
+        } else
+        {
             element = ElementManager.Element.None;
+
+            ResetElementBonus();
+
         }
 
         pa.SetElement(element);
 
-        audioSource.clip = elementClips[(int) element].Item1;
-        audioSource.time = elementClips[(int) element].Item2;
+        audioSource.clip = elementClips[(int)element].Item1;
+        audioSource.time = elementClips[(int)element].Item2;
         audioSource?.Play();
+    }
+
+    public void ResetElementBonus()
+    {
+        if (waterBonus)
+        {
+            accuracy = oldValue1;
+            evasion = oldValue2;
+            waterBonus = false;
+        }
+        if (fireBonus)
+        {
+            attack = (int)oldValue1;
+            fireBonus = false;
+        }
+        if (windBonus)
+        {
+            windBonus = false;
+        }
+        if (earthBonus)
+        {
+            defense = (int)oldValue1;
+            earthBonus = false;
+        }
     }
 
     public bool CanUseSkill(SkillAction skill)

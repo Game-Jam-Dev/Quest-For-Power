@@ -1384,6 +1384,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Soldier Water
       objectReference: {fileID: 0}
+    - target: {fileID: 1620773351398068173, guid: 9078216f21c1b474194b8c667902f36d,
+        type: 3}
+      propertyPath: element
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9078216f21c1b474194b8c667902f36d, type: 3}
 --- !u!1001 &7911771196610856594
@@ -1481,6 +1486,11 @@ PrefabInstance:
         type: 3}
       propertyPath: baseAttack
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1432249075295030602, guid: 19c9f2a71fa419f4e964f78ed2b81ef1,
+        type: 3}
+      propertyPath: baseComboPoints
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8148494517345017233, guid: 19c9f2a71fa419f4e964f78ed2b81ef1,
         type: 3}
