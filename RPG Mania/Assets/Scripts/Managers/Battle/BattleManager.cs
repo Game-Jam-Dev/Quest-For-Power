@@ -160,7 +160,7 @@ public class BattleManager : MonoBehaviour {
                         if (characterToAttack.health <= 0)
                         {
                             // refund remaining combo points if enemy died
-                            player.extraComboPoints += (player.combo - used_combo_points)/2;
+                            player.AddExtraComboPoints(player.combo - used_combo_points);
 
                             DefeatedEnemy();
 

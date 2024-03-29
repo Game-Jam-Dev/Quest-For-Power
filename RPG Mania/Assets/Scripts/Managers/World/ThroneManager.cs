@@ -13,8 +13,8 @@ public class ThroneManager : WorldManager {
     protected override void Start() {
         base.Start();
 
-        gameManager.SetPlayerLevel(99);
-        gameManager.SetPlayerSkills(new List<int>(Enumerable.Repeat(99, 5)));
+        gameManager.SetPlayerLevel(40);
+        gameManager.SetPlayerSkills(new List<int>(Enumerable.Repeat(40, 5)));
 
         gameManager.SetPlayer(player);
 

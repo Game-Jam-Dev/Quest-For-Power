@@ -50,11 +50,11 @@ public class PlayerBattle : CharacterBattle {
     public void AddExtraComboPoints(int extraPoints)
     {
         extraComboPoints += extraPoints;
-        // Cap the amount of extra points
-        if (extraComboPoints > 1 * characterComboPoints)
-        {
-            extraComboPoints = (int)Mathf.Ceil(1 * characterComboPoints);
-        }
+        //// Cap the amount of extra points
+        //if (extraComboPoints > 1 * characterComboPoints)
+        //{
+        //    extraComboPoints = (int)Mathf.Round(1 * characterComboPoints);
+        //}
         Debug.Log("Adding extra points: " + extraComboPoints);
     }
 
@@ -68,15 +68,15 @@ public class PlayerBattle : CharacterBattle {
     {
         if (element == ElementManager.Element.Wind)
         {
-            extraComboPoints += 2;
+            extraComboPoints += 3;
         }
-        combo = characterComboPoints + (int)Mathf.Ceil(extraComboPoints / 2);
-        if (combo > 1.5 * characterComboPoints)
+        combo = characterComboPoints + (int)Mathf.Round(extraComboPoints / 3f);
+        if (combo > 1.5f * characterComboPoints)
         {
-            combo = (int)Mathf.Ceil(1.5f * characterComboPoints);
+            combo = (int)Mathf.Round(1.5f * characterComboPoints);
         }
         Debug.Log("Updating combo:" + combo.ToString() + " character base points: " + characterComboPoints +
-            "Extra points: " + extraComboPoints);
+            " extra points: " + extraComboPoints);
     }
 
     public void WinBattle(int xp, int kills, List<Item> itemDrops)
