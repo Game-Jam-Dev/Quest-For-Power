@@ -13,6 +13,9 @@ public class PlayerBattle : CharacterBattle {
 
     private List<(AudioClip, float)> elementClips;
 
+    public int extraComboPoints;
+    public int characterComboPoints;
+
     static string characterName = "Arkanos";
     protected override void Start() {
         base.Start();
@@ -38,6 +41,35 @@ public class PlayerBattle : CharacterBattle {
     {
         pa.SwitchToCombat();
         GetComponent<PlayerMovement>().enabled = false;
+        combo = characterComboPoints;
+    }
+
+    public void AddExtraComboPoints(int extraPoints)
+    {
+        extraComboPoints += extraPoints;
+        // Cap the amount of extra points
+        if (extraComboPoints > 1 * characterComboPoints)
+        {
+            extraComboPoints = (int)Mathf.Ceil(1 * characterComboPoints);
+        }
+        Debug.Log("Adding extra points: " + extraComboPoints);
+    }
+
+    public void ResetExtraComboPoints()
+    {
+        extraComboPoints = 0;
+        Debug.Log("Reseting extra points: " + extraComboPoints);
+    }
+
+    public void UpdateComboPoints()
+    {
+        combo = characterComboPoints + (int)Mathf.Ceil(extraComboPoints/2);
+        if (combo > 1.5 * characterComboPoints)
+        {
+            combo = (int)Mathf.Ceil(1.5f * characterComboPoints);
+        }
+        Debug.Log("Updating combo:" + combo.ToString() + " character base points: " + characterComboPoints + 
+            "Extra points: " + extraComboPoints);
     }
 
     public void WinBattle(int xp, int kills, List<Item> itemDrops)
@@ -89,7 +121,7 @@ public class PlayerBattle : CharacterBattle {
         accuracy = baseAccuracy + level / 2000f;
         evasion = baseEvasion + level / 1000f;
 
-        combo = baseComboPoints + (int)Mathf.Log(.475f*level) + 
+        characterComboPoints = baseComboPoints + (int)Mathf.Log(.475f*level) + 
             (int).02f * level;
     }
 

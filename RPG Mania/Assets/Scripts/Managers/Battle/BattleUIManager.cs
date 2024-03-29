@@ -83,6 +83,7 @@ public class BattleUIManager : MonoBehaviour {
         itemContainer.SetActive(false);
 
         GenerateComboUI();
+        playerContainerManager.UpdateComboPoints();
     }
 
     public void StartCombatResolutionUI()
@@ -278,6 +279,8 @@ public class BattleUIManager : MonoBehaviour {
     {
         enemyContainerManager.UntargetEnemies();
         playerContainerManager.ResetCombo();
+        player.ResetExtraComboPoints();
+        playerContainerManager.UpdateComboPoints();
     }
 
     public void EndBattle()

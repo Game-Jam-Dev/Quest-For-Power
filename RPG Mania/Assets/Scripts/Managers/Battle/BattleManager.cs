@@ -127,11 +127,15 @@ public class BattleManager : MonoBehaviour {
                 {
                     // track the index of the attack in the combo
                     int i = 0;
+
+                    int used_combo_points = 0;
                     foreach (ComboAction a in activeCharacterCombo)
                     {
                         // do the attack and save whether it hit or not
                         bool hit = Attack(activeCharacter, a, i);
-                            
+
+                        used_combo_points += a.Cost;
+
                         // wait for the attack animation to play
                         while (activeCharacter.GetIsAttacking())
                         {
@@ -155,13 +159,19 @@ public class BattleManager : MonoBehaviour {
                         // handle enemy's death
                         if (characterToAttack.health <= 0)
                         {
+                            // refund remaining combo points if enemy died
+                            player.extraComboPoints += (player.combo - used_combo_points)/2;
+
                             DefeatedEnemy();
 
                             // break out of combo when enemy dies
                             break;
+
+                            
                         }
                         i++;
                     }
+                    (activeCharacter as PlayerBattle).UpdateComboPoints();
                 }
                 UpdateSkillCounter();
             } else {
@@ -261,14 +271,17 @@ public class BattleManager : MonoBehaviour {
             if (hitNumber == 0 & comboAction.Cost == enemyToAttack.firstComboValue) 
             {
                 enemyToAttack.ReduceShields();
+                (activeCharacter as PlayerBattle).AddExtraComboPoints(comboAction.Cost);
             }
             else if (hitNumber == 1 & comboAction.Cost == enemyToAttack.secondComboValue)
             {
                 enemyToAttack.ReduceShields();
+                (activeCharacter as PlayerBattle).AddExtraComboPoints(comboAction.Cost);
             }
             else if (hitNumber == 2 & comboAction.Cost == enemyToAttack.thirdComboValue)
             {
                 enemyToAttack.ReduceShields();
+                (activeCharacter as PlayerBattle).AddExtraComboPoints(comboAction.Cost);
             }
         }
         else

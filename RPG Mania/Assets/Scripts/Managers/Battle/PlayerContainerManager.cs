@@ -16,6 +16,11 @@ public class PlayerContainerManager : MonoBehaviour {
         playerHealthManager.SetHealth(this.player);
     }
 
+    public void UpdateComboPoints()
+    {
+        comboManager.SetComboLength(this.player.combo);
+    }
+
     public void UpdateElement(SkillAction skill)
     {
         element.SetElement(skill);
