@@ -32,6 +32,20 @@ public class CutsceneManager : MonoBehaviour {
         NextImage();
     }
 
+    private void OnEnable() {
+        if (PauseManager.Instance != null)
+        {
+            PauseManager.Instance.DisablePausing();
+        }
+    }
+
+    private void OnDisable() {
+        if (PauseManager.Instance != null)
+        {
+            PauseManager.Instance.EnablePausing();
+        }
+    }
+
     private IEnumerator DoDialog(DialogObject dialogObject)
     {
         dialogManager.enabled = true;

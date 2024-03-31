@@ -56,6 +56,11 @@ public class DialogManager : MonoBehaviour
 
     public void DisplayDialog(DialogObject dialogObject)
     {
+        if (PauseManager.Instance != null)
+        {
+            PauseManager.Instance.DisablePausing();
+        }
+        
         currentDialog = StartCoroutine(MoveThroughDialog(dialogObject));
     }
 
@@ -66,6 +71,11 @@ public class DialogManager : MonoBehaviour
 
     private void OnDisable() {
         dialogBox.SetActive(false);
+
+        if (PauseManager.Instance != null)
+        {
+            PauseManager.Instance.EnablePausing();
+        }
     }
 
     private void Update() {

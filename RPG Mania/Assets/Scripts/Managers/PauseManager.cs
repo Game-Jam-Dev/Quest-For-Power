@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 using System;
 
 public class PauseManager : MonoBehaviour {
+    public static PauseManager Instance;
     [SerializeField] private GameObject pauseUI;
     [SerializeField] private Button resumeButton, saveButton, quitButton;
     [SerializeField] private GameObject portrait, characterNameTag, itemList, itemQuantities, itemDescription, 
@@ -18,6 +19,9 @@ public class PauseManager : MonoBehaviour {
     private int mainMenuSceneIndex = 0;
 
     private void Awake() {
+        
+        Instance = this;
+
         actions = new InputActions();
 
         actions.Gameplay.Enable();
@@ -73,6 +77,11 @@ public class PauseManager : MonoBehaviour {
     public void DisablePausing()
     {
         actions.Gameplay.Pause.performed -= TogglePause;
+    }
+
+    public void EnablePausing()
+    {
+        actions.Gameplay.Pause.performed += TogglePause;
     }
 
     public void OpenItems()

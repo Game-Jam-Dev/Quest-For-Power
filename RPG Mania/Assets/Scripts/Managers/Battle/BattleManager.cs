@@ -40,6 +40,11 @@ public class BattleManager : MonoBehaviour {
     
     private void OnEnable() 
     {
+        if (PauseManager.Instance != null)
+        {
+            PauseManager.Instance.DisablePausing();
+        }
+
         // Setup Characters
         InitializeCharacters();
 
@@ -48,6 +53,14 @@ public class BattleManager : MonoBehaviour {
 
         // start the battle loop
         battleLoop = StartCoroutine(BattleLoop());
+    }
+
+    private void OnDisable() 
+    {
+        if (PauseManager.Instance != null)
+        {
+            PauseManager.Instance.EnablePausing();
+        }
     }
 
     private void InitializeCharacters()
