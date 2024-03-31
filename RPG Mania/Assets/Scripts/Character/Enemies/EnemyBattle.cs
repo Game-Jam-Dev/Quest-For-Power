@@ -35,7 +35,7 @@ public class EnemyBattle : CharacterBattle {
     public int currentShieldsValue;
     public bool stunned = false;
     public int stunCount = 0;
-    [SerializeField] public int stunLimit;
+    [SerializeField] public int stunLimit = 1;
     [SerializeField] public Sprite ShieldSprite, BrokenShieldSprite;
     public int defaultDefense;
 

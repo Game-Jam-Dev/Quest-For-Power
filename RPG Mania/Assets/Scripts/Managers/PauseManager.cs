@@ -17,12 +17,15 @@ public class PauseManager : MonoBehaviour {
     
     private int mainMenuSceneIndex = 0;
 
-    private void Awake() {
-        actions = new InputActions();
+    public bool pauseAllowed = true;
 
-        actions.Gameplay.Enable();
+    private void Awake() 
+    {
+            actions = new InputActions();
 
-        actions.Gameplay.Pause.performed += TogglePause;
+            actions.Gameplay.Enable();
+
+            actions.Gameplay.Pause.performed += TogglePause;
     }
 
     private void OnEnable() {

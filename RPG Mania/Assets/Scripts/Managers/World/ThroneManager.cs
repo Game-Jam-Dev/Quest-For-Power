@@ -52,7 +52,9 @@ public class ThroneManager : WorldManager {
     private void BossFight()
     {
         player.transform.position += Vector3.forward * 5;
-        Camera.main.transform.position += Vector3.forward * 4;
+        Camera.main.transform.position += Vector3.forward * 5;
+        Camera.main.transform.position += Camera.main.transform.up * 1.5f;
+        Camera.main.transform.Rotate(new Vector3(1, 0, 0) * 5, Space.World);
 
         enemies = new List<EnemyBattle>{GameObject.FindGameObjectWithTag("Boss").GetComponent<EnemyBattle>()};
 

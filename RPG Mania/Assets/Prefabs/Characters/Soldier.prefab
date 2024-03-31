@@ -160,7 +160,7 @@ MonoBehaviour:
   currentShieldsValue: 0
   stunned: 0
   stunCount: 0
-  stunLimit: 0
+  stunLimit: 1
   ShieldSprite: {fileID: -776679173, guid: ef980a999d8265249b3595d8701d36c1, type: 3}
   BrokenShieldSprite: {fileID: 1595733391, guid: ef980a999d8265249b3595d8701d36c1,
     type: 3}

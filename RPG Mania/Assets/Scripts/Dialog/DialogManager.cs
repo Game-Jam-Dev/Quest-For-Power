@@ -10,6 +10,7 @@ public class DialogManager : MonoBehaviour
     [SerializeField] private TMP_Text dialogName;
     [SerializeField] private float textSpeed = .035f;
     [SerializeField] private Button skipButton;
+    [SerializeField] private GameObject pauseManager;
     private Coroutine currentDialog;
     public bool clicked = false;
     public bool fullLine = false;
@@ -59,12 +60,16 @@ public class DialogManager : MonoBehaviour
         currentDialog = StartCoroutine(MoveThroughDialog(dialogObject));
     }
 
-    private void OnEnable() {
+    private void OnEnable() 
+    {
+        pauseManager.GetComponent<PauseManager>().pauseAllowed = false;
         dialogBox.SetActive(true);
         Utility.SetActiveButton(skipButton);
     }
 
-    private void OnDisable() {
+    private void OnDisable() 
+    {
+        pauseManager.GetComponent<PauseManager>().pauseAllowed = true;
         dialogBox.SetActive(false);
     }
 
