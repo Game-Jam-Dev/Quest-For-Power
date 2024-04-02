@@ -8,8 +8,9 @@ public class PlayerBattle : CharacterBattle {
 
     [SerializeField] private PlayerAnimation pa;
     [SerializeField] private AudioClip waterClip, fireClip, windClip, earthClip, drainClip;
-    [SerializeField] public int baseAttack, baseMaxHealth, baseDefense, baseComboPoints;
-    [SerializeField] public float baseAccuracy, baseEvasion;
+    [SerializeField] public int baseAttack = 6, baseMaxHealth = 60, baseDefense = 5, 
+        baseComboPoints = 4;
+    [SerializeField] public float baseAccuracy = .975f, baseEvasion = 0.025f;
 
     private List<(AudioClip, float)> elementClips;
 
@@ -87,6 +88,7 @@ public class PlayerBattle : CharacterBattle {
         GameManager.instance.AddItems(itemDrops);
 
         SaveSystem.SaveGameData(GameManager.instance.GetGameData());
+        combo = characterComboPoints;
     }
 
     public int XpForLevel()

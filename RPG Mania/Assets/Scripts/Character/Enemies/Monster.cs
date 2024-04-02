@@ -10,9 +10,9 @@ public class Monster : EnemyBattle {
 
     protected override void SetStats()
     {
-        maxHealth = 18 + (int)(level * 2.85f);
+        maxHealth = 48 + (int)(level * 2.85f);
         attack = 10 + (int)(level * .75f);
-        defense = 9 + (int)(level * .6f);
+        defense = 6 + (int)(level * .6f);
         accuracy = .5f + level / 3500f;
         evasion = .005f + level / 10000f;
 

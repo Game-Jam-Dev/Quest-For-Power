@@ -87,7 +87,8 @@ public class EnemyBattle : CharacterBattle {
         stunned = !stunned;
         if (stunned)
         {
-            defense = Mathf.RoundToInt(defaultDefense * .7f);
+            defaultDefense = defense;
+            defense = Mathf.RoundToInt(defaultDefense * .5f);
             stunCount = 0;
             ShieldUIImage.GetComponent<Image>().sprite = BrokenShieldSprite;
             ShieldUIValue.GetComponent<TextMeshProUGUI>().text = "";

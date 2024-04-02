@@ -1073,8 +1073,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy1: {fileID: 933836255}
   enemy2: {fileID: 176074404}
-  enemy1Location: {x: -1.51, y: 0.397, z: 46.6}
-  enemy2Location: {x: 2.49, y: 0.397, z: 46.6}
+  enemy1Location: {x: -1.71, y: 0.2, z: 46}
+  enemy2Location: {x: 2.79, y: 0.2, z: 46}
 --- !u!1 &780146703 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9001598274419808174, guid: e6f348e3e4a20c14d8ba4c660d5f8985,
