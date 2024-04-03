@@ -151,6 +151,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 965662146459774334, guid: 9078216f21c1b474194b8c667902f36d,
+        type: 3}
+      propertyPath: element
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1435828258833122929, guid: 9078216f21c1b474194b8c667902f36d,
         type: 3}
       propertyPath: m_RootOrder
@@ -210,6 +215,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Soldier Wind
+      objectReference: {fileID: 0}
+    - target: {fileID: 1593071059626538462, guid: 9078216f21c1b474194b8c667902f36d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1620773351398068173, guid: 9078216f21c1b474194b8c667902f36d,
         type: 3}
@@ -488,6 +498,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 965662146459774334, guid: 9078216f21c1b474194b8c667902f36d,
+        type: 3}
+      propertyPath: element
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1435828258833122929, guid: 9078216f21c1b474194b8c667902f36d,
         type: 3}
       propertyPath: m_RootOrder
@@ -547,6 +562,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Soldier Fire
+      objectReference: {fileID: 0}
+    - target: {fileID: 1593071059626538462, guid: 9078216f21c1b474194b8c667902f36d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1620773351398068173, guid: 9078216f21c1b474194b8c667902f36d,
         type: 3}
@@ -798,6 +818,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e0ec9b27d5afb847925b1a95bffe950, type: 3}
+--- !u!1 &1705999760 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9189691735718646308, guid: 9334cbd0edbb47a4c8164f360d17ecf9,
+    type: 3}
+  m_PrefabInstance: {fileID: 7911771196610856594}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1763282611
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -805,6 +831,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 965662146459774334, guid: 9078216f21c1b474194b8c667902f36d,
+        type: 3}
+      propertyPath: element
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1435828258833122929, guid: 9078216f21c1b474194b8c667902f36d,
         type: 3}
       propertyPath: m_RootOrder
@@ -864,6 +895,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Soldier Earth
+      objectReference: {fileID: 0}
+    - target: {fileID: 1593071059626538462, guid: 9078216f21c1b474194b8c667902f36d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9078216f21c1b474194b8c667902f36d, type: 3}
@@ -1360,6 +1396,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 965662146459774334, guid: 9078216f21c1b474194b8c667902f36d,
+        type: 3}
+      propertyPath: element
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1435828258833122929, guid: 9078216f21c1b474194b8c667902f36d,
         type: 3}
       propertyPath: m_RootOrder
@@ -1441,6 +1482,16 @@ PrefabInstance:
       objectReference: {fileID: 416654563}
     - target: {fileID: 4600024616435205422, guid: 9334cbd0edbb47a4c8164f360d17ecf9,
         type: 3}
+      propertyPath: stunLimit
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4600024616435205422, guid: 9334cbd0edbb47a4c8164f360d17ecf9,
+        type: 3}
+      propertyPath: comboOrder
+      value: 
+      objectReference: {fileID: 1705999760}
+    - target: {fileID: 4600024616435205422, guid: 9334cbd0edbb47a4c8164f360d17ecf9,
+        type: 3}
       propertyPath: FirstAttack
       value: 
       objectReference: {fileID: 536881971}
@@ -1472,10 +1523,20 @@ PrefabInstance:
       objectReference: {fileID: 790182274}
     - target: {fileID: 4600024616435205422, guid: 9334cbd0edbb47a4c8164f360d17ecf9,
         type: 3}
+      propertyPath: shieldDefault
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4600024616435205422, guid: 9334cbd0edbb47a4c8164f360d17ecf9,
+        type: 3}
       propertyPath: BrokenShieldSprite
       value: 
       objectReference: {fileID: 1595733391, guid: ef980a999d8265249b3595d8701d36c1,
         type: 3}
+    - target: {fileID: 4600024616435205422, guid: 9334cbd0edbb47a4c8164f360d17ecf9,
+        type: 3}
+      propertyPath: currentShieldsValue
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 5790511307614038026, guid: 9334cbd0edbb47a4c8164f360d17ecf9,
         type: 3}
       propertyPath: m_RootOrder

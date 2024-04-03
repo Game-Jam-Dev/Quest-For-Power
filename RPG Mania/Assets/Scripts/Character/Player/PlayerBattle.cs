@@ -8,8 +8,9 @@ public class PlayerBattle : CharacterBattle {
 
     [SerializeField] private PlayerAnimation pa;
     [SerializeField] private AudioClip waterClip, fireClip, windClip, earthClip, drainClip;
-    [SerializeField] public int baseAttack, baseMaxHealth, baseDefense, baseComboPoints;
-    [SerializeField] public float baseAccuracy, baseEvasion;
+    [SerializeField] public int baseAttack = 5, baseMaxHealth = 65, baseDefense = 3, 
+        baseComboPoints = 4;
+    [SerializeField] public float baseAccuracy = .975f, baseEvasion = .025f;
 
     private List<(AudioClip, float)> elementClips;
 
