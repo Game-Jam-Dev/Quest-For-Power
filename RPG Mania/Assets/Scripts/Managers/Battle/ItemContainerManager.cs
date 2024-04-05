@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,6 +20,8 @@ public class ItemContainerManager : MonoBehaviour {
             GameObject itemObj = Instantiate(itemObjectPrefab, transform);
 
             itemObj.GetComponent<Button>().onClick.AddListener(() => UseItem(item));
+            uiManager.AddHoverEventByScript(itemObj, item.description);
+            uiManager.AddExitEventByScript(itemObj);
             itemObj.GetComponentInChildren<TextMeshProUGUI>().text = item.itemName;
             itemObjects.Add((itemObj, item));
             itemObj.SetActive(false);

@@ -15,7 +15,10 @@ public class EnemyAnimation : MonoBehaviour {
         TryGetComponent(out anim);
         TryGetComponent(out sr);
 
-        AssignElement(element);
+        if (element != null) 
+        {
+            AssignElement(element);
+        }        
 
         originalPositionHeight = transform.position.y;
         combatPositionHeight = originalPositionHeight + combatPositionHeightAdjustment;
@@ -52,7 +55,7 @@ public class EnemyAnimation : MonoBehaviour {
 
     public void AssignElement(ElementManager.Element e)
     {
-        if (anim != null) anim.SetInteger("Element", (int)e);
+        if (anim != null & e != null) anim.SetInteger("Element", (int)e);
 
         element = e;
     }

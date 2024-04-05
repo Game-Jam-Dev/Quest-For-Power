@@ -38,10 +38,10 @@ public class SkillList
     {
         skillList = new Dictionary<string, SkillAction>()
         {
-            {"water", new SkillAction("Water", InfuseWater, "Do extra damage against fire and less against earth")},
-            {"wind", new SkillAction("Wind", InfuseWind, "Do extra damage against earth and less against fire")},
-            {"earth", new SkillAction("Earth", InfuseEarth, "Do extra damage against water and less against wind")},
-            {"fire", new SkillAction("Fire", InfuseFire, "Do extra damage against wind and less against water")},
+            {"water", new SkillAction("Water", InfuseWater, "Extra dmg vs fire, less dmg vs earth and bonus to acc and eva.")},
+            {"wind", new SkillAction("Wind", InfuseWind, "Extra dmg vs earth, less dmg vs fire and bonus to combo points.")},
+            {"earth", new SkillAction("Earth", InfuseEarth, "Extra dmg vs water, less dmg vs wind and bonus to defense.")},
+            {"fire", new SkillAction("Fire", InfuseFire, "Extra dmg vs wind, less dmg vs water and bonus to attack.")},
         };
     }
 

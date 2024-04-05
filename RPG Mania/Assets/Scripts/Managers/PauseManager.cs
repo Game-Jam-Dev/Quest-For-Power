@@ -49,7 +49,10 @@ public class PauseManager : MonoBehaviour {
     public void Resume() {
         Time.timeScale = 1;
         CloseUI();
-        itemQuantities.SetActive(false);
+        if (itemQuantities != null)
+        {
+            itemQuantities.SetActive(false);
+        }        
         pauseUI.SetActive(false);
         pauseEvent(false);
 
@@ -150,17 +153,25 @@ public class PauseManager : MonoBehaviour {
     }
     public void CloseItemUI()
     {
-        itemList.SetActive(false);
-        itemDescription.SetActive(false);
-        itemQuantities.SetActive(false);
-        itemBackground.SetActive(false);
-        itemContainer.SetActive(false);
+        if (itemList != null & itemDescription != null &
+            itemQuantities != null & itemBackground != null &
+            itemContainer != null)
+        {
+            itemList.SetActive(false);
+            itemDescription.SetActive(false);
+            itemQuantities.SetActive(false);
+            itemBackground.SetActive(false);
+            itemContainer.SetActive(false);
+        }            
     }
 
     public void OpenStandardUI()
     {
-        portrait.SetActive(true);
-        characterNameTag.SetActive(true);
+        if (characterNameTag != null & portrait != null) 
+        {
+            portrait.SetActive(true);
+            characterNameTag.SetActive(true);
+        }        
     }
     
     public void CloseStandardUI()
@@ -187,11 +198,14 @@ public class PauseManager : MonoBehaviour {
 
     public void CloseSpellsUI()
     {
-        characterDetailsBackground.SetActive(false);
-        miniPortraitBackground.SetActive(false);
-        spellsContainer.SetActive(false);
-        spellQuantity.SetActive(false);
-        spellDescription.SetActive(false);
-
+        if (characterDetailsBackground != null & miniPortraitBackground != null & spellsContainer != null &
+            spellQuantity != null & spellDescription != null)
+        {
+            characterDetailsBackground.SetActive(false);
+            miniPortraitBackground.SetActive(false);
+            spellsContainer.SetActive(false);
+            spellQuantity.SetActive(false);
+            spellDescription.SetActive(false);
+        }
     }
 }

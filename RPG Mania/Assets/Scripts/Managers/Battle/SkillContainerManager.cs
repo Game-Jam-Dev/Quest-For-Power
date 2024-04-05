@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class SkillContainerManager : MonoBehaviour {
@@ -17,10 +19,14 @@ public class SkillContainerManager : MonoBehaviour {
 
         absorbObject = Instantiate(skillObjectPrefab, transform);
         absorbObject.GetComponent<Button>().onClick.AddListener(UseAbsorb);
+        uiManager.AddHoverEventByScript(absorbObject, "Heal yourself and steal elemental energy");
+        uiManager.AddExitEventByScript(absorbObject);
         absorbObject.GetComponentInChildren<TextMeshProUGUI>().text = "Absorb";
 
         foreach (SkillAction skill in skills) {
             GameObject skillObj = Instantiate(skillObjectPrefab, transform);
+            uiManager.AddHoverEventByScript(skillObj, skill.Description);
+            uiManager.AddExitEventByScript(skillObj);
             skillObj.GetComponent<Button>().onClick.AddListener(() => UseSkill(skill));
             skillObj.GetComponentInChildren<TextMeshProUGUI>().text = skill.Name;
 

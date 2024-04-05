@@ -45,7 +45,7 @@ public class ComboList
     public bool LightAttack(CharacterBattle self, CharacterBattle target, int comboDepth)
     {
         string attackName = "Light Attack";
-        float accuracy = 1f;
+        float accuracy =.95f;
         float damageMultiplier = 1;
         
         return ComboAction.DoAttack(self, target, comboDepth, attackName, accuracy, damageMultiplier);
@@ -54,8 +54,8 @@ public class ComboList
     public bool MediumAttack(CharacterBattle self, CharacterBattle target, int comboDepth)
     {
         string attackName = "Medium Attack";
-        float accuracy = .9f;
-        float damageMultiplier = 1.5f;
+        float accuracy = .81f;
+        float damageMultiplier = 2.5f;
 
         return ComboAction.DoAttack(self, target, comboDepth, attackName, accuracy, damageMultiplier);
     }
@@ -63,8 +63,8 @@ public class ComboList
     public bool HeavyAttack(CharacterBattle self, CharacterBattle target, int comboDepth)
     {
         string attackName = "Heavy Attack";
-        float accuracy = .8f;
-        float damageMultiplier = 2f;
+        float accuracy = .7f;
+        float damageMultiplier = 4.5f;
 
         return ComboAction.DoAttack(self, target, comboDepth, attackName, accuracy, damageMultiplier);
     }

@@ -331,9 +331,6 @@ MonoBehaviour:
   characterNameText: {fileID: 5807660289920038944}
   xpStatsText: {fileID: 5807660288307663111}
   itemListText: {fileID: 4913323908317070389}
-  worldManager: {fileID: 0}
-  playerBatle: {fileID: 0}
-  battleManager: {fileID: 0}
   lvl: 1
   currentXP: 0
   nextLvl: 0
