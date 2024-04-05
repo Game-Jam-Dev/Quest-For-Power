@@ -13,8 +13,8 @@ public class ThroneManager : WorldManager {
     protected override void Start() {
         base.Start();
 
-        gameManager.SetPlayerLevel(99);
-        gameManager.SetPlayerSkills(new List<int>(Enumerable.Repeat(99, 5)));
+        gameManager.SetPlayerLevel(40);
+        gameManager.SetPlayerSkills(new List<int>(Enumerable.Repeat(40, 5)));
 
         gameManager.SetPlayer(player);
 
@@ -51,8 +51,9 @@ public class ThroneManager : WorldManager {
 
     private void BossFight()
     {
-        player.transform.position += Vector3.forward * 5;
-        Camera.main.transform.position += Vector3.forward * 4;
+        player.transform.position += Vector3.forward * 5f;
+        Camera.main.transform.position += Vector3.forward * 5f + Vector3.up * 1.5f;
+        Camera.main.transform.Rotate(10, 0, 0);
 
         enemies = new List<EnemyBattle>{GameObject.FindGameObjectWithTag("Boss").GetComponent<EnemyBattle>()};
 

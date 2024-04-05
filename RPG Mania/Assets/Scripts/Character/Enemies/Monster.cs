@@ -10,15 +10,22 @@ public class Monster : EnemyBattle {
 
     protected override void SetStats()
     {
-        maxHealth = 18 + (int)(level * 2.85f);
-        attack = 10 + (int)(level * .75f);
-        defense = 9 + (int)(level * .6f);
+        maxHealth = 45 + (int)(level * 2.85f);
+        attack = 8 + (int)(level * .75f);
+        defense = 4 + (int)(level * .6f);
         accuracy = .5f + level / 3500f;
         evasion = .005f + level / 10000f;
 
         combo = 3 + (int)Mathf.Pow(level, .25f);
 
         health = maxHealth;
+    }
+
+    public override int XPFromKill(int playerLevel)
+    {
+        int xp = playerLevel * 3;
+
+        return xp;
     }
 
     private void AssignElement()
