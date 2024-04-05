@@ -108,6 +108,12 @@ public class BattleManager : MonoBehaviour {
                 if (absorb)
                 {
                     Absorb(activeCharacter);
+
+                    while (activeCharacter.GetIsAttacking())
+                    {
+                        
+                        yield return null;
+                    }
                 } else if (item != null)
                 {
                     ItemManager.UseItem(item, this);
@@ -467,6 +473,8 @@ public class BattleManager : MonoBehaviour {
     private IEnumerator LoseBattle()
     {
         StopCoroutine(battleLoop);
+
+        player.SetAnimationTrigger("Death");
 
         battleUIManager.SetText("You were defeated!");
 
