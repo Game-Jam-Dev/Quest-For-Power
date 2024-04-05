@@ -333,7 +333,7 @@ public class OldBattleUIManager : MonoBehaviour {
 
     private void SendComboAction()
     {
-        battleManager.SetComboAction(characterToAttack, playerCombo);
+        battleManager.SetComboAction(characterToAttack, playerCombo, null);
     }
     
     private void SendAbsorbAction()

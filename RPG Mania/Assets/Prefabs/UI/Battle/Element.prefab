@@ -28,7 +28,7 @@ RectTransform:
   m_GameObject: {fileID: 4334391783035192947}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -89,8 +89,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 808ef9418e91aef4d9d0681b22f51923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  image: {fileID: 5245323547775730838}
   water: {fileID: 21300000, guid: d3a1c7639afc35946a805ac30f054bd1, type: 3}
   fire: {fileID: 21300000, guid: 773559e27fff6a940abde8df4ef20a66, type: 3}
   wind: {fileID: 21300000, guid: 4df2d3baabe660c4ead0056a09c41eca, type: 3}
   earth: {fileID: 21300000, guid: 7a753990cf43f4b4db716685de83a6ae, type: 3}
-  image: {fileID: 5245323547775730838}
