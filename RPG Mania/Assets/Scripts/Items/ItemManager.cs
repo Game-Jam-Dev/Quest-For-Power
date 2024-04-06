@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -17,6 +18,15 @@ public class ItemManager {
             if (a is StatChanger && !(b is Potion || b is Essence || b is StatChanger)) return -1;
             return 1;
         });
+
+        IDictionary<Item, int> inventory = new Dictionary<Item, int>();
+
+        foreach (Item item in items)
+        {
+            inventory.Add(item, 0);
+        }
+
+        GameManager.instance.SetItemDictionary(inventory);
     }
 
     public static ItemManager GetInstance()

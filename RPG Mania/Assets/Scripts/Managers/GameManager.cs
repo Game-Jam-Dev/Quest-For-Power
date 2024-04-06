@@ -89,31 +89,39 @@ public class GameManager : MonoBehaviour {
         worldState.enemyIsAliveOutskirts = enemyIsAliveOutskirts;
     }
 
+    public void SetItemDictionary(IDictionary<Item, int> items)
+    {
+        playerData.items = items;
+    }
+
     public void AddItem(Item item)
     {
-        playerData.items.Add(item);
+        playerData.items[item]++;
     }
 
     public void AddItems(List<Item> items)
     {
-        playerData.items.AddRange(items);
+        foreach (Item item in items)
+        {
+            playerData.items[item]++;
+        }
     }
 
     public void RemoveItem(Item item)
     {
-        playerData.items.Remove(item);
+        if (playerData.items.ContainsKey(item) && playerData.items[item] > 0) playerData.items[item]--;
     }
 
-    public Item GetItem(int i)
+    public int GetItemAmount(Item item)
     {
-        if (i < playerData.items.Count) return playerData.items[i];
+        if (playerData.items.ContainsKey(item)) return playerData.items[item];
 
-        else return null;
+        else return 0;
     }
 
     public List<Item> GetItems()
     {
-        return playerData.items;
+        return (List<Item>)playerData.items.Keys;
     }
 
     public GameData GetGameData()

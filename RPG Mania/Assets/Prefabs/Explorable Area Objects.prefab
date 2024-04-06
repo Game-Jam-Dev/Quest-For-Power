@@ -617,6 +617,16 @@ PrefabInstance:
       propertyPath: battleCamera
       value: 
       objectReference: {fileID: 1252103350602238257}
+    - target: {fileID: 2529817973808658422, guid: 1a30fe6a4f8232c4f84cc5efc81907a7,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2529817974396243734, guid: 1a30fe6a4f8232c4f84cc5efc81907a7,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2529817974779253348, guid: 1a30fe6a4f8232c4f84cc5efc81907a7,
         type: 3}
       propertyPath: m_Pivot.x
@@ -726,6 +736,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Canvas Wilds
+      objectReference: {fileID: 0}
+    - target: {fileID: 5878844857622863801, guid: 1a30fe6a4f8232c4f84cc5efc81907a7,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9110975128790368639, guid: 1a30fe6a4f8232c4f84cc5efc81907a7,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a30fe6a4f8232c4f84cc5efc81907a7, type: 3}

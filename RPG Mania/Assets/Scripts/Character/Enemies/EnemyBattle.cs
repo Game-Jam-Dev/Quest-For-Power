@@ -1,8 +1,13 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class EnemyBattle : CharacterBattle {
+
+    [SerializeField]
+    GameObject FirstAttack, SecondAttack, ThirdAttack, TotalCost, ShieldUIImage, ShieldUIValue;
+
     public int level = 1;
     public float detectRange = .5f;
     private bool isAlive = true;
@@ -19,6 +24,21 @@ public class EnemyBattle : CharacterBattle {
     public bool itemDrops = true;
     public Item itemDrop;
 
+    public int absorbs = 0;
+
+    [SerializeField] GameObject comboOrder;
+
+    public int firstComboValue = 1;
+    public int secondComboValue = 2;
+    public int thirdComboValue = 3;
+    [SerializeField] public int shieldDefault;
+    public int currentShieldsValue;
+    public bool stunned = false;
+    public int stunCount = 0;
+    [SerializeField] public int stunLimit;
+    [SerializeField] public Sprite ShieldSprite, BrokenShieldSprite;
+    public int defaultDefense;
+
     protected override void Start()
     {
         base.Start();
@@ -27,6 +47,7 @@ public class EnemyBattle : CharacterBattle {
         wildsManager = GameObject.FindGameObjectWithTag("Canvas").GetComponent<WildsManager>();
         cursorDisplay = transform.GetChild(0).GetChild(0).gameObject;
         cursorDisplay.SetActive(false);
+        ResetShields();
 
         if (itemDrops) itemDrop = ItemManager.GetInstance().GetRandomItem();
     }
@@ -36,20 +57,102 @@ public class EnemyBattle : CharacterBattle {
         this.id = id;
         scene = SceneManager.GetActiveScene().buildIndex;
         isAlive = GameManager.instance.CheckEnemyDeath(scene, id);
+        GenerateComboWeakness();
+        defaultDefense = defense;
+    }
+
+    public void ResetShields()
+    {
+        currentShieldsValue = shieldDefault;
+        stunned = false;
+        ShieldUIValue.GetComponent<TextMeshProUGUI>().text = currentShieldsValue.ToString();
+        ShieldUIImage.GetComponent<Image>().sprite = ShieldSprite;
+    }
+
+    public void ReduceShields()
+    {
+        currentShieldsValue--;
+        if (currentShieldsValue == 0)
+        {
+            ToggleStun();
+        }
+        else if (currentShieldsValue >= 1)
+        {
+            ShieldUIValue.GetComponent<TextMeshProUGUI>().text = currentShieldsValue.ToString();
+        }
+    }
+
+    public void ToggleStun() 
+    { 
+        stunned = !stunned;
+        if (stunned)
+        {
+            defense = Mathf.RoundToInt(defaultDefense * .7f);
+            stunCount = 0;
+            ShieldUIImage.GetComponent<Image>().sprite = BrokenShieldSprite;
+            ShieldUIValue.GetComponent<TextMeshProUGUI>().text = "";
+        }
+        else
+        {
+            defense = defaultDefense;
+            ResetShields();
+        }
+    }
+
+    public void ChangeStunCounter()
+    {
+        stunCount++;
+        if (stunLimit < stunCount) 
+        {
+            ToggleStun();
+        }
+    }
+
+    public void GenerateUIQuestionMarkers()
+    {
+        FirstAttack.GetComponent<TextMeshProUGUI>().text = "?";  
+        SecondAttack.GetComponent<TextMeshProUGUI>().text = "?";
+        ThirdAttack.GetComponent<TextMeshProUGUI>().text = "?";
+        TotalCost.GetComponent<TextMeshProUGUI>().text = "?";
+    }
+
+    public void GenerateComboWeakness()
+    {
+        int positionRevealed = Random.Range(0, 3);
+        firstComboValue = Random.Range(1, 4);
+        secondComboValue = Random.Range(1, 4);
+        thirdComboValue = Random.Range(1, 4);
+        if (positionRevealed == 0)
+        {
+            FirstAttack.GetComponent<TextMeshProUGUI>().text = firstComboValue.ToString();
+        }
+        else if (positionRevealed == 1)
+        {
+            SecondAttack.GetComponent<TextMeshProUGUI>().text = secondComboValue.ToString();
+        }
+        else
+        {
+            ThirdAttack.GetComponent<TextMeshProUGUI>().text = thirdComboValue.ToString();
+        }
+        TotalCost.GetComponent<TextMeshProUGUI>().text = (firstComboValue + secondComboValue + thirdComboValue).ToString();
     }
 
     public override void PrepareCombat()
     {
         level = GameManager.instance.GetPlayerLevel();
-        
+        absorbs = 0;
         SetStats();
         ea.StartFighting();
+        comboOrder.SetActive(true);
+        ShieldUIImage.SetActive(true);
     }
 
     public void ResetFromFight()
     {
         gameObject.SetActive(true);
         ea.StopFighting();
+        comboOrder.SetActive(false);
+        ShieldUIImage.SetActive(false);
     }
 
     protected virtual void SetStats(){}
@@ -79,9 +182,9 @@ public class EnemyBattle : CharacterBattle {
             case 1:
             return GetCombo(0);
             case 2:
-            return GetCombo(Random.Range(0,2));
+            return GetCombo(Random.Range(0, 2));
             default:
-            return GetCombo(Random.Range(0,3));
+            return GetCombo(Random.Range(0, 3));
         }
     }
 
@@ -141,7 +244,7 @@ public class EnemyBattle : CharacterBattle {
         }
     }
 
-    public int XPFromKill(int playerLevel)
+    virtual public int XPFromKill(int playerLevel)
     {
         int xp = 5;
 
@@ -151,5 +254,10 @@ public class EnemyBattle : CharacterBattle {
     public Item ItemDrop()
     {
         return itemDrop;
+    }
+
+    public void IncreaseAbsorbs()
+    {
+        absorbs++;
     }
 }

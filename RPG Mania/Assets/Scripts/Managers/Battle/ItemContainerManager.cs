@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,7 +9,7 @@ public class ItemContainerManager : MonoBehaviour {
     [SerializeField] private MenuContainer menuContainer;
     [SerializeField] private BattleUIManager uiManager;
 
-    private List<(GameObject, Item)> itemObjects = new();
+    public List<(GameObject, Item)> itemObjects = new();
 
     public void Initialize()
     {
@@ -19,6 +20,8 @@ public class ItemContainerManager : MonoBehaviour {
             GameObject itemObj = Instantiate(itemObjectPrefab, transform);
 
             itemObj.GetComponent<Button>().onClick.AddListener(() => UseItem(item));
+            uiManager.AddHoverEventByScript(itemObj, item.description);
+            uiManager.AddExitEventByScript(itemObj);
             itemObj.GetComponentInChildren<TextMeshProUGUI>().text = item.itemName;
             itemObjects.Add((itemObj, item));
             itemObj.SetActive(false);
@@ -40,7 +43,7 @@ public class ItemContainerManager : MonoBehaviour {
             GameObject skillObject = itemObjects[i].Item1;
             Item item = itemObjects[i].Item2;
 
-            if (GameManager.instance.GetItems().Contains(item))
+            if (GameManager.instance.GetItemAmount(item) > 0)
             {
                 skillObject.SetActive(true);
                 activeItems.Add(skillObject);

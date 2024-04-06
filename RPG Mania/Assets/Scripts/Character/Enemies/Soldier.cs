@@ -10,15 +10,22 @@ public class Soldier : EnemyBattle {
 
     protected override void SetStats()
     {
-        maxHealth = 12 + (int)(level * 2.5f);
-        attack = 8 + (int)(level * .9f);
-        defense = 6 + (int)(level * .8f);
+        maxHealth = 40 + (int)(level * 2.5f);
+        attack = 6 + (int)(level * .9f);
+        defense = 3 + (int)(level * .8f);
         accuracy = .65f + level / 2000f;
-        evasion = .02f + level / 1500f;
+        evasion = .025f + level / 1500f;
 
-        combo = 2 + (int)Mathf.Pow(level, .2f);
+        combo = 3 + (int)Mathf.Pow(level, .2f);
 
         health = maxHealth;
+    }
+
+    public override int XPFromKill(int playerLevel)
+    {
+        int xp = playerLevel * 2;
+
+        return xp;
     }
 
     private void AssignElement()

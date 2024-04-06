@@ -5,7 +5,7 @@ using System.Collections;
 
 public class BattleManager : MonoBehaviour {
     [Header("Managers")]
-    [SerializeField] private WorldManager worldManager;
+    [SerializeField] public WorldManager worldManager;
     [SerializeField] private BattleUIManager battleUIManager;
 
     [Header("Other Variables")]
@@ -17,24 +17,34 @@ public class BattleManager : MonoBehaviour {
     private Item item;
     private Queue<CharacterBattle> turnOrder = new();
     public CharacterBattle characterToAttack;
+    public EnemyBattle enemyToAttack;
     public List<ComboAction> activeCharacterCombo = new();
     private Coroutine battleLoop;
 
     // tracker variables
     public int killCount = 0;
     private int xpGain = 0;
-    private List<Item> itemDrops = new();
+    public List<Item> itemDrops = new();
     public bool awaitCommand = false;
     private int comboLength = 0;
     public bool absorb = false;
     public int activeSkillCounter = 0;
 
+    GameObject combatResolutionUI;
+    EnemyBattle defeatedEnemy;
+
     private void Awake() {
         gameObject.SetActive(false);
+        combatResolutionUI = GameObject.Find("CombatResolution");
     }
     
     private void OnEnable() 
     {
+        if (PauseManager.Instance != null)
+        {
+            PauseManager.Instance.DisablePausing();
+        }
+
         // Setup Characters
         InitializeCharacters();
 
@@ -43,6 +53,14 @@ public class BattleManager : MonoBehaviour {
 
         // start the battle loop
         battleLoop = StartCoroutine(BattleLoop());
+    }
+
+    private void OnDisable() 
+    {
+        if (PauseManager.Instance != null)
+        {
+            PauseManager.Instance.EnablePausing();
+        }
     }
 
     private void InitializeCharacters()
@@ -128,11 +146,15 @@ public class BattleManager : MonoBehaviour {
                 {
                     // track the index of the attack in the combo
                     int i = 0;
+
+                    int used_combo_points = 0;
                     foreach (ComboAction a in activeCharacterCombo)
                     {
                         // do the attack and save whether it hit or not
                         bool hit = Attack(activeCharacter, a, i);
-                            
+
+                        used_combo_points += a.Cost;
+
                         // wait for the attack animation to play
                         while (activeCharacter.GetIsAttacking())
                         {
@@ -147,7 +169,7 @@ public class BattleManager : MonoBehaviour {
                         if (!hit)
                         {
                             battleUIManager.SetText($"{activeCharacter.characterName} missed");
-                            break;
+                            //break;
                         }
 
                         // update enemy's health ui
@@ -156,57 +178,67 @@ public class BattleManager : MonoBehaviour {
                         // handle enemy's death
                         if (characterToAttack.health <= 0)
                         {
+                            // refund remaining combo points if enemy died
+                            player.AddExtraComboPoints(player.combo - used_combo_points);
+
                             DefeatedEnemy();
 
                             // break out of combo when enemy dies
                             break;
+
+                            
                         }
                         i++;
                     }
+                    (activeCharacter as PlayerBattle).UpdateComboPoints();
                 }
                 UpdateSkillCounter();
             } else {
-                // set enemy combo
-                EnemyComboCreation(activeCharacter as EnemyBattle);
-
-                // enemy targets the player
-                characterToAttack = player;
-
-                // track the index of the attack in the combo
-                int i = 0;
-                foreach (ComboAction a in activeCharacterCombo)
+                EnemyBattle activeEnemy = (EnemyBattle)activeCharacter;
+                if (!activeEnemy.stunned)
                 {
-                    // do the attack and save whether it hit or not
-                    bool hit = Attack(activeCharacter, a, i);
-                        
-                    // wait for the attack animation to play
-                    while (activeCharacter.GetIsAttacking())
+                    // set enemy combo
+                    EnemyComboCreation(activeCharacter as EnemyBattle);
+
+                    // enemy targets the player
+                    characterToAttack = player;
+
+                    // track the index of the attack in the combo
+                    int i = 0;
+                    foreach (ComboAction a in activeCharacterCombo)
                     {
-                        
-                        yield return null;
+                        // do the attack and save whether it hit or not
+                        bool hit = Attack(activeCharacter, a, i);
+
+                        // wait for the attack animation to play
+                        while (activeCharacter.GetIsAttacking())
+                        {
+
+                            yield return null;
+                        }
+
+                        // attacked character resets
+                        characterToAttack.Recover();
+
+                        // handles a miss
+                        if (!hit)
+                        {
+                            battleUIManager.SetText($"{activeCharacter.characterName} missed");
+                            //break;
+                        }
+
+                        // updates player's health
+                        battleUIManager.UpdatePlayerHealth();
+
+                        // lose battle if player dies
+                        if (characterToAttack.health <= 0)
+                        {
+                            StartCoroutine(LoseBattle());
+
+                            break;
+                        }
+                        i++;
                     }
-
-                    // attacked character resets
-                    characterToAttack.Recover();
-
-                    // handles a miss
-                    if (!hit)
-                    {
-                        battleUIManager.SetText($"{activeCharacter.characterName} missed");
-                        break;
-                    }
-
-                    // updates player's health
-                    battleUIManager.UpdatePlayerHealth();
-
-                    // lose battle if player dies
-                    if (characterToAttack.health <= 0)
-                    {
-                        StartCoroutine(LoseBattle());
-
-                        break;
-                    }
-                    i++;
                 }
             }
 
@@ -251,7 +283,34 @@ public class BattleManager : MonoBehaviour {
 
     private bool Attack(CharacterBattle activeCharacter, ComboAction comboAction, int hitNumber = 0)
     {
-        battleUIManager.SetText($"{activeCharacter.characterName} used {comboAction.Name} at {characterToAttack.characterName}");
+        
+        if (activeCharacter.characterName == "Arkanos")
+        {
+            battleUIManager.SetText($"{activeCharacter.characterName} used {comboAction.Name} at {characterToAttack.characterName}");
+            if (hitNumber == 0 & comboAction.Cost == enemyToAttack.firstComboValue) 
+            {
+                enemyToAttack.ReduceShields();
+                (activeCharacter as PlayerBattle).AddExtraComboPoints(comboAction.Cost);
+            }
+            else if (hitNumber == 1 & comboAction.Cost == enemyToAttack.secondComboValue)
+            {
+                enemyToAttack.ReduceShields();
+                (activeCharacter as PlayerBattle).AddExtraComboPoints(comboAction.Cost);
+            }
+            else if (hitNumber == 2 & comboAction.Cost == enemyToAttack.thirdComboValue)
+            {
+                enemyToAttack.ReduceShields();
+                (activeCharacter as PlayerBattle).AddExtraComboPoints(comboAction.Cost);
+            }
+        }
+        else
+        {
+            enemyToAttack = (EnemyBattle)activeCharacter;
+            if (!enemyToAttack.stunned)
+            {
+                battleUIManager.SetText($"{activeCharacter.characterName} used {comboAction.Name} at {characterToAttack.characterName}");
+            }            
+        }
 
         return activeCharacter.DoAction(comboAction, characterToAttack, hitNumber);
     }
@@ -269,7 +328,7 @@ public class BattleManager : MonoBehaviour {
     private void DefeatedEnemy()
     {
         // convert target into the EnemyInfo type
-        EnemyBattle defeatedEnemy = characterToAttack as EnemyBattle;
+        defeatedEnemy = characterToAttack as EnemyBattle;
 
         // take enemy out of battle system
         var newTurnOrder = new Queue<CharacterBattle>(turnOrder.Where(x => x != defeatedEnemy));
@@ -305,9 +364,11 @@ public class BattleManager : MonoBehaviour {
         }
     }
 
-    public void SetComboAction(CharacterBattle characterToAttack, List<ComboAction> activeCharacterCombo)
+    public void SetComboAction(CharacterBattle characterToAttack, List<ComboAction> activeCharacterCombo, 
+        EnemyBattle targetEnemyClass)
     {
         this.characterToAttack = characterToAttack;
+        this.enemyToAttack = targetEnemyClass;
         this.activeCharacterCombo = activeCharacterCombo;
         awaitCommand = false;
     }
@@ -360,11 +421,9 @@ public class BattleManager : MonoBehaviour {
     //     }
     // }
 
-    private void EndBattle()
+    public void EndBattle()
     {
         player.EndCombat();
-
-        StopAllCoroutines();
 
         enemies.Clear();
 
@@ -374,10 +433,13 @@ public class BattleManager : MonoBehaviour {
         comboLength = 0;
         activeCharacterCombo.Clear();
         absorb = false;
+    }
+
+    private void Resolution()
+    { 
+        StopAllCoroutines();
 
         battleUIManager.EndBattle();
-
-        gameObject.SetActive(false);
     }
 
     private IEnumerator WinBattle()
@@ -405,7 +467,7 @@ public class BattleManager : MonoBehaviour {
 
         worldManager.WinBattle();
 
-        EndBattle();
+        Resolution();
     }
 
     private IEnumerator LoseBattle()

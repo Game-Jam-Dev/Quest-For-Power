@@ -21,7 +21,14 @@ public class WildsManager : WorldManager {
     protected override void Start() {
         base.Start();
 
-        battleCameraScript = battleCamera.GetComponent<BattleCamera>();
+        if (battleCamera != null )
+        {
+            battleCameraScript = battleCamera.GetComponent<BattleCamera>();
+        } 
+        else
+        {
+            return;
+        }
 
         audioSource = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioSource>();
 

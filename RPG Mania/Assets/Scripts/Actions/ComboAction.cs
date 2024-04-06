@@ -15,7 +15,8 @@ public class ComboAction
         Action = action;
     }
 
-    public static bool DoAttack(CharacterBattle self, CharacterBattle target, int comboDepth, string attackName, float accuracy, float damageMultiplier)
+    public static bool DoAttack(CharacterBattle self, CharacterBattle target, int comboDepth, string attackName, 
+        float accuracy, float damageMultiplier)
     {
         self.SetAnimationTrigger(attackName);
 
@@ -29,7 +30,7 @@ public class ComboAction
     private static bool AttackCheck(CharacterBattle self, CharacterBattle target, float moveAccuracy, int comboDepth)
     {
         float r = Random.Range(0,1f);
-        float a  = (moveAccuracy * self.accuracy) - target.evasion + (comboDepth * .05f);
+        float a  = moveAccuracy * self.accuracy - target.evasion + (comboDepth * .05f);
         self.hitTarget = r < a;
 
         return self.hitTarget;
@@ -39,7 +40,7 @@ public class ComboAction
     {
         target.SetAnimationTrigger("Attacked");
 
-        int damage = (int)(self.attack * d - target.defense);
+        int damage = (int)d*(self.attack - target.defense);
         if (damage < 0) damage = 0;
 
         damage = SkillCheck(self, target, damage);
