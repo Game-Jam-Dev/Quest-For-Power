@@ -87,8 +87,8 @@ public class WildsManager : WorldManager {
             }
         }
 
-        SwitchToBattleCamera();
-        battleCameraScript.SetDirection(rotationZ);
+        //SwitchToBattleCamera();
+        //battleCameraScript.SetDirection(rotationZ);
 
         StartBattle();
     }
