@@ -9,7 +9,7 @@ public class EnemyBattle : CharacterBattle {
     GameObject FirstAttack, SecondAttack, ThirdAttack, TotalCost, ShieldUIImage, ShieldUIValue;
 
     public int level = 1;
-    public float detectRange = .5f;
+    public float detectRange = .75f;
     private bool isAlive = true;
     private int id = 0;
     private int scene = 0;
@@ -44,7 +44,10 @@ public class EnemyBattle : CharacterBattle {
         base.Start();
 
         player = GameObject.FindGameObjectWithTag("Player");
-        wildsManager = GameObject.FindGameObjectWithTag("Canvas").GetComponent<WildsManager>();
+        if (GameObject.FindGameObjectWithTag("Canvas").GetComponent<WildsManager>() != null ) 
+        {
+            wildsManager = GameObject.FindGameObjectWithTag("Canvas").GetComponent<WildsManager>();
+        }        
         cursorDisplay = transform.GetChild(0).GetChild(0).gameObject;
         cursorDisplay.SetActive(false);
         ResetShields();

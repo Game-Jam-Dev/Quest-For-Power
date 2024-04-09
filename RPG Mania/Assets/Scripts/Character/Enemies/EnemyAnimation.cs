@@ -20,36 +20,36 @@ public class EnemyAnimation : MonoBehaviour {
             AssignElement(element);
         }        
 
-        originalPositionHeight = transform.position.y;
-        combatPositionHeight = originalPositionHeight + combatPositionHeightAdjustment;
+        //originalPositionHeight = transform.position.y;
+        //combatPositionHeight = originalPositionHeight + combatPositionHeightAdjustment;
     }
 
     private void LateUpdate() {
-        Transform camera = Camera.main.transform;
+        //    Transform camera = Camera.main.transform;
 
-        Vector3 direction = camera.position - transform.position;
+        //    Vector3 direction = camera.position - transform.position;
 
-        if (!isFighting)
-            direction.x = direction.z = 0;
+        //    if (!isFighting)
+        //        direction.x = direction.z = 0;
 
-        if (direction != Vector3.zero) {
-            Quaternion lookRotation = Quaternion.LookRotation(-direction);
-            transform.rotation = lookRotation;
-        }
+        //    if (direction != Vector3.zero) {
+        //        Quaternion lookRotation = Quaternion.LookRotation(-direction);
+        //        transform.rotation = lookRotation;
+        //    }
     }
 
     public void StartFighting()
     {
         isFighting = true;
 
-        transform.position = new(transform.position.x, combatPositionHeight, transform.position.z);
+        //transform.position = new(transform.position.x, combatPositionHeight, transform.position.z);
     }
 
     public void StopFighting()
     {
         isFighting = false;
 
-        transform.position = new(transform.position.x, originalPositionHeight, transform.position.z);
+        //transform.position = new(transform.position.x, originalPositionHeight, transform.position.z);
         // transform.rotation = Quaternion.LookRotation(Vector3.zero);
     }
 

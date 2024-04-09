@@ -1,3 +1,4 @@
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -9,6 +10,7 @@ public class ThroneManager : WorldManager {
     private readonly string nextScene = "Throne Cutscene";
     private bool preBattle = false;
     [SerializeField] private DialogObject dialogObjectStart, dialogObjectPreBoss;
+    [SerializeField] private GameObject varian;
 
     protected override void Start() {
         base.Start();
@@ -52,8 +54,9 @@ public class ThroneManager : WorldManager {
     private void BossFight()
     {
         player.transform.position += Vector3.forward * 5f;
-        Camera.main.transform.position += Vector3.forward * 5f + Vector3.up * 1.5f;
-        Camera.main.transform.Rotate(10, 0, 0);
+        varian.transform.position += Vector3.forward * 1.5f;
+        Camera.main.transform.position += Vector3.forward * 4f;
+        //Camera.main.transform.Rotate(10, 0, 0);
 
         enemies = new List<EnemyBattle>{GameObject.FindGameObjectWithTag("Boss").GetComponent<EnemyBattle>()};
 
