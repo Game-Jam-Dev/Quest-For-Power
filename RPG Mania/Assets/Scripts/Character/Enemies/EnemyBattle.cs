@@ -169,7 +169,10 @@ public class EnemyBattle : CharacterBattle {
 
     public override void Defeated()
     {
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
+        ea.SetUpTrigger("Dying");
+        comboOrder.SetActive(false);
+        ShieldUIImage.SetActive(false);
     }
 
     // uncomment if enemy takes damage incorrectly
@@ -196,9 +199,18 @@ public class EnemyBattle : CharacterBattle {
         ea.SetUpTrigger(triggerName);
     }
 
-    public override void Recover()
+    ////public override void Recover()
+    ////{
+    ////    ea.Attacked(false);
+    ////}
+
+    public bool GetIsReady()
     {
-        ea.Attacked(false);
+        if (!ea.isAttacking && !ea.isBlocking && !ea.isAttacked && !ea.isDying)
+            return true;
+        else if (ea.isDead)
+            return true;
+        else return false;
     }
 
     public override bool GetIsAttacking()

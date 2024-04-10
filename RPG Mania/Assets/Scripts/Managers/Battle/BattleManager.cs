@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using System.Collections;
+using System;
 
 public class BattleManager : MonoBehaviour {
     [Header("Managers")]
@@ -104,6 +105,9 @@ public class BattleManager : MonoBehaviour {
                     yield return null;
                 }
 
+                while (!CheckEnemiesReady())
+                    yield return null;
+
                 // do the absorb action
                 if (absorb)
                 {
@@ -156,14 +160,14 @@ public class BattleManager : MonoBehaviour {
                         used_combo_points += a.Cost;
 
                         // wait for the attack animation to play
-                        while (activeCharacter.GetIsAttacking())
+                        while (activeCharacter.GetIsAttacking() | !CheckEnemiesReady())
                         {
                             
                             yield return null;
                         }
 
                         // attacked character resets
-                        characterToAttack.Recover();
+                        //characterToAttack.Recover();
 
                         // handles a miss
                         if (!hit)
@@ -197,6 +201,8 @@ public class BattleManager : MonoBehaviour {
                 EnemyBattle activeEnemy = (EnemyBattle)activeCharacter;
                 if (!activeEnemy.stunned)
                 {
+                    while (!CheckEnemiesReady())
+                        yield return null;
                     // set enemy combo
                     EnemyComboCreation(activeCharacter as EnemyBattle);
 
@@ -211,14 +217,14 @@ public class BattleManager : MonoBehaviour {
                         bool hit = Attack(activeCharacter, a, i);
 
                         // wait for the attack animation to play
-                        while (activeCharacter.GetIsAttacking())
+                        while (!activeEnemy.GetIsReady())
                         {
 
                             yield return null;
                         }
 
                         // attacked character resets
-                        characterToAttack.Recover();
+                        //characterToAttack.Recover();
 
                         // handles a miss
                         if (!hit)
@@ -290,17 +296,24 @@ public class BattleManager : MonoBehaviour {
             if (hitNumber == 0 & comboAction.Cost == enemyToAttack.firstComboValue) 
             {
                 enemyToAttack.ReduceShields();
+                enemyToAttack.SetAnimationTrigger("Attacked");
                 (activeCharacter as PlayerBattle).AddExtraComboPoints(comboAction.Cost);
             }
             else if (hitNumber == 1 & comboAction.Cost == enemyToAttack.secondComboValue)
             {
                 enemyToAttack.ReduceShields();
+                enemyToAttack.SetAnimationTrigger("Attacked");
                 (activeCharacter as PlayerBattle).AddExtraComboPoints(comboAction.Cost);
             }
             else if (hitNumber == 2 & comboAction.Cost == enemyToAttack.thirdComboValue)
             {
                 enemyToAttack.ReduceShields();
+                enemyToAttack.SetAnimationTrigger("Attacked");
                 (activeCharacter as PlayerBattle).AddExtraComboPoints(comboAction.Cost);
+            }
+            else
+            {
+                enemyToAttack.SetAnimationTrigger("Blocked");
             }
         }
         else
@@ -308,6 +321,7 @@ public class BattleManager : MonoBehaviour {
             enemyToAttack = (EnemyBattle)activeCharacter;
             if (!enemyToAttack.stunned)
             {
+                activeCharacter.SetAnimationTrigger("Light Attack");
                 battleUIManager.SetText($"{activeCharacter.characterName} used {comboAction.Name} at {characterToAttack.characterName}");
             }            
         }
@@ -420,6 +434,18 @@ public class BattleManager : MonoBehaviour {
     //         battleUIManager.ClearActiveSkill();
     //     }
     // }
+
+    public Boolean CheckEnemiesReady()
+    {
+        foreach (EnemyBattle enemy in enemies) 
+        { 
+            if (!enemy.GetIsReady())
+            {
+                return false;
+            }
+        }
+        return true;
+    }
 
     public void EndBattle()
     {
