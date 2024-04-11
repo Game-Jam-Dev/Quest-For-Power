@@ -75,6 +75,10 @@ public class EnemyAnimation : MonoBehaviour {
     public bool CheckIfAnimation(string stance)
     {
         animatorinfo = anim.GetCurrentAnimatorClipInfo(0);
+        if (animatorinfo.Length == 0) 
+        { 
+            return false;
+        }
         current_animation = animatorinfo[0].clip.name;
         if (current_animation.Contains(stance))
         {

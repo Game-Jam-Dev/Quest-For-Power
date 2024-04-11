@@ -235,7 +235,8 @@ public class EnemyBattle : CharacterBattle {
 
     protected virtual void OnTriggerEnter(Collider other) 
     {
-        if (other.gameObject.CompareTag("Player"))
+        Scene sceneObject = SceneManager.GetActiveScene();
+        if (other.gameObject.CompareTag("Player") && isAlive && !ea.isDead && sceneObject.name != "Throne Room")
         {
             // Find the rotation for the enemy to face the player
 
