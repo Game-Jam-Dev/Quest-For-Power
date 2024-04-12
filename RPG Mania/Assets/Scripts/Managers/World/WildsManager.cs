@@ -130,6 +130,7 @@ public class WildsManager : WorldManager {
             foreach (EnemyBattle e in liveEnemies)
             {
                 e.gameObject.SetActive(true);
+                // need to reset dead boolean values
             }
         }
 

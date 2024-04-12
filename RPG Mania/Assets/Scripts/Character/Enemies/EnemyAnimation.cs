@@ -61,13 +61,14 @@ public class EnemyAnimation : MonoBehaviour {
             isBlocking = false;
             ResetTrigger("Block");
         }
-        if (CheckIfAnimation("DEATH"))
+        if (CheckIfAnimation("DEATH") && !CheckIfAnimationIsDone())
         {
             isDying = true;
         }
         else if (isDying)
         {
             isDying = false;
+            anim.ResetTrigger("Dying");
             isDead = true;
         }
     }
