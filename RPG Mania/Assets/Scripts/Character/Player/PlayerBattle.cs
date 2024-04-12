@@ -299,9 +299,9 @@ public class PlayerBattle : CharacterBattle {
         pa.SetElement(element);
     }
 
-    public override Animator GetAnimator() {return pa.GetAnimator();}
+    //public override Animator GetAnimator() {return pa.GetAnimator();}
 
     public PlayerAnimation GetPlayerAnimation() { return pa; }
 
-    public override bool GetIsAttacking() {return pa.isAttacking;}
+    //public override bool GetIsAttacking() {return pa.isAttacking;}
 }
