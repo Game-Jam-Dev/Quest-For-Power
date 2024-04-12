@@ -2915,6 +2915,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0.83
       objectReference: {fileID: 0}
+    - target: {fileID: 2415651947269862884, guid: 9334cbd0edbb47a4c8164f360d17ecf9,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 976c14c1f55bca24eb2dce53fe9c9f8f, type: 2}
     - target: {fileID: 4600024616435205422, guid: 9334cbd0edbb47a4c8164f360d17ecf9,
         type: 3}
       propertyPath: TotalCost
@@ -3020,7 +3025,7 @@ PrefabInstance:
     - target: {fileID: 5790511307614038026, guid: 9334cbd0edbb47a4c8164f360d17ecf9,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 12.54
+      value: 12.21
       objectReference: {fileID: 0}
     - target: {fileID: 5790511307614038026, guid: 9334cbd0edbb47a4c8164f360d17ecf9,
         type: 3}
@@ -3071,7 +3076,7 @@ PrefabInstance:
     - target: {fileID: 9189691735718646308, guid: 9334cbd0edbb47a4c8164f360d17ecf9,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9189691735718646309, guid: 9334cbd0edbb47a4c8164f360d17ecf9,
         type: 3}
@@ -3101,7 +3106,7 @@ PrefabInstance:
     - target: {fileID: 9189691736391997516, guid: 9334cbd0edbb47a4c8164f360d17ecf9,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9189691736391997517, guid: 9334cbd0edbb47a4c8164f360d17ecf9,
         type: 3}
