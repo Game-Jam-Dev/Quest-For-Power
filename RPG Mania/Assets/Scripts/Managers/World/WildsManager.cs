@@ -68,6 +68,8 @@ public class WildsManager : WorldManager {
         liveEnemies.Add(xix);
 
         final = true;
+        canEscape = false;
+        hasResolutionUI = false;
 
         StartCoroutine(BossFightDialog(boss));
         
