@@ -289,6 +289,8 @@ public class PlayerBattle : CharacterBattle {
         GameManager.instance.SetPlayerSkill(index, skillActions[index].Item2);
 
         Heal(maxHealth/2);
+
+        combo = characterComboPoints;
     }
 
     public void PlayAbsorbSound()
