@@ -177,7 +177,6 @@ public class CharacterBattle : MonoBehaviour {
 
     public virtual bool GetIsAttacking() 
     {
-        if pa.CheckIfAnimationIsDone()
         return false;
     }
 

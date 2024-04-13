@@ -209,6 +209,7 @@ public class PlayerBattle : CharacterBattle {
             element = ElementManager.Element.Wind;
 
             ResetElementBonus();
+            UpdateComboPoints();
             windBonus = true;
 
         } else if (activeSkill == SkillList.GetInstance().GetAction("earth"))
