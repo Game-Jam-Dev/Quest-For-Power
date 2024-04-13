@@ -7,6 +7,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1275094193, guid: 4c63db1762ae4a943b5f1f9fc35d49ad, type: 3}
+      propertyPath: canEscape
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1275094193, guid: 4c63db1762ae4a943b5f1f9fc35d49ad, type: 3}
+      propertyPath: hasResolutionUI
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 501632137623662408, guid: 4c63db1762ae4a943b5f1f9fc35d49ad,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -689,6 +697,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   battleUI: {fileID: 7746498403620657227}
   dialogManager: {fileID: 4455242219326078026}
+  canEscape: 0
+  hasResolutionUI: 0
   dialogObjectStart: {fileID: 11400000, guid: 24750a0b3d6716d428a98d9e4370e106, type: 2}
   dialogObjectPreBoss: {fileID: 11400000, guid: b8cf5446c3edc5840bdd08a343f0ba48,
     type: 2}

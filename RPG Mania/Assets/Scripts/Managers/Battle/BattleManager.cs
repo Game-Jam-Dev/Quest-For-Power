@@ -270,9 +270,11 @@ public class BattleManager : MonoBehaviour {
 
     public void Escape()
     {
-        if (worldManager is ThroneManager)
+        bool canEscape = worldManager.canEscape;
+
+        if (!canEscape)
         {
-            battleUIManager.SetText("You can't run! The kingdom is at stake!");
+            battleUIManager.SetText("You can't escape!");
             return;
         }
 

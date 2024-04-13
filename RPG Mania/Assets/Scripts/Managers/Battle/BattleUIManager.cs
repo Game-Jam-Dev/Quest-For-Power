@@ -177,7 +177,7 @@ public class BattleUIManager : MonoBehaviour {
     {
         CloseMenus();
 
-        if (battleManager.worldManager is not ThroneManager)
+        if (battleManager.worldManager.hasResolutionUI)
         {
             combatResolution.SetActive(true);
             combatResolution.GetComponent<UIResolution>().Initialize(this, battleManager, player);
@@ -207,8 +207,6 @@ public class BattleUIManager : MonoBehaviour {
     public void SelectEscape()
     {
         battleManager.Escape();
-
-        CloseUI();
     }
 
     public void PickCombo(string combo)
