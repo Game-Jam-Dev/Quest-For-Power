@@ -105,7 +105,7 @@ public class BattleManager : MonoBehaviour {
                     yield return null;
                 }
 
-                while (!CheckEnemiesReady())
+                while (!CheckEnemiesReady() || !player.CheckPlayerReady())
                     yield return null;
 
                 // do the absorb action
@@ -159,8 +159,13 @@ public class BattleManager : MonoBehaviour {
 
                         used_combo_points += a.Cost;
 
+                        if (a == activeCharacterCombo.Last())
+                        {
+                            (activeCharacter as PlayerBattle).SetAnimationTrigger("Attack Done");
+                        }
+
                         // wait for the attack animation to play
-                        while (activeCharacter.GetIsAttacking() | !CheckEnemiesReady())
+                        while (!(activeCharacter as PlayerBattle).CheckPlayerReady() | !CheckEnemiesReady())
                         {
                             
                             yield return null;
@@ -194,6 +199,7 @@ public class BattleManager : MonoBehaviour {
                         }
                         i++;
                     }
+                    (activeCharacter as PlayerBattle).SetAttackFinished();
                     (activeCharacter as PlayerBattle).UpdateComboPoints();
                 }
                 UpdateSkillCounter();
@@ -201,7 +207,7 @@ public class BattleManager : MonoBehaviour {
                 EnemyBattle activeEnemy = (EnemyBattle)activeCharacter;
                 if (!activeEnemy.stunned)
                 {
-                    while (!CheckEnemiesReady())
+                    while (!CheckEnemiesReady() || !player.CheckPlayerReady())
                         yield return null;
                     // set enemy combo
                     EnemyComboCreation(activeCharacter as EnemyBattle);
@@ -315,6 +321,8 @@ public class BattleManager : MonoBehaviour {
             {
                 enemyToAttack.SetAnimationTrigger("Blocked");
             }
+            //(activeCharacter as PlayerBattle).SetAnimationTrigger("Jump");
+            (activeCharacter as PlayerBattle).SetAnimationTrigger(comboAction.Name);
         }
         else
         {

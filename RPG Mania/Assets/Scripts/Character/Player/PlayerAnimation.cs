@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour {
 
-    protected Animator battleAnimator;
+    public Animator battleAnimator;
     protected SpriteRenderer sr;
     protected bool isFighting = false;
 
@@ -16,6 +16,17 @@ public class PlayerAnimation : MonoBehaviour {
     protected virtual void Start() {
         TryGetComponent(out battleAnimator);
         TryGetComponent(out sr);
+    }
+
+    private void Update()
+    {
+        if (battleAnimator != null) 
+        { 
+            if (CheckIfAnimation("Idle", battleAnimator) || CheckIfAnimationIsDone(battleAnimator))
+            {
+                ResetTrigger();
+            }
+        }
     }
 
     public void SwitchToCombat()

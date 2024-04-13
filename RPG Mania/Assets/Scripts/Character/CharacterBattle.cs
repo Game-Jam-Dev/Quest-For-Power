@@ -175,7 +175,11 @@ public class CharacterBattle : MonoBehaviour {
 
     public virtual Animator GetAnimator() {return null;}
 
-    public virtual bool GetIsAttacking() {return false;}
+    public virtual bool GetIsAttacking() 
+    {
+        if pa.CheckIfAnimationIsDone()
+        return false;
+    }
 
     ////public virtual void Recover(){}
 

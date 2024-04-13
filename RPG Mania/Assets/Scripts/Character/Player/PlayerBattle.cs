@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 public class PlayerBattle : CharacterBattle {
     public int experience = 0;
@@ -79,6 +80,8 @@ public class PlayerBattle : CharacterBattle {
     {
         int xpForLevel = XpForLevel();
 
+        pa.SetUpTrigger("Absorb");
+
         experience += xp;
 
         if (experience >= xpForLevel) LevelUp(xpForLevel);
@@ -142,6 +145,21 @@ public class PlayerBattle : CharacterBattle {
     public override void SetAnimationTrigger(string triggerName)
     {
         pa.SetUpTrigger(triggerName);
+    }
+
+    public Boolean CheckPlayerReady()
+    {
+        if (pa.CheckIfAnimation("Idle", pa.battleAnimator) || pa.CheckIfAnimation("Light", pa.battleAnimator)
+            || pa.CheckIfAnimation("Medium", pa.battleAnimator) || pa.CheckIfAnimation("Heavy", pa.battleAnimator))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public void SetAttackFinished()
+    {
+        pa.SetUpTrigger("Attack Done");
     }
 
     public void SetData(int level, int experience, List<int> skillUses)
@@ -239,6 +257,7 @@ public class PlayerBattle : CharacterBattle {
             defense = (int)oldValue1;
             earthBonus = false;
         }
+        pa.SetElement(ElementManager.Element.None);
     }
 
     public bool CanUseSkill(SkillAction skill)
@@ -260,7 +279,7 @@ public class PlayerBattle : CharacterBattle {
     public void AbsorbSkill(ElementManager.Element e)
     {
         int index = (int)e;
-        int spellsTaken = Random.Range(1,4);
+        int spellsTaken = UnityEngine.Random.Range(1,4);
 
         skillActions[index] = (skillActions[index].Item1, skillActions[index].Item2 + spellsTaken);
 
