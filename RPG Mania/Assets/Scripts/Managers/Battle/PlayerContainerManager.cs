@@ -23,12 +23,24 @@ public class PlayerContainerManager : MonoBehaviour {
 
     public void UpdateElement(SkillAction skill)
     {
-        element.SetElement(skill);
+        ElementManager.Element element = ElementManager.GetElement(skill);
+
+        UpdateElement(element);
     }
 
     public void UpdateElement(ElementManager.Element element)
     {
+        UpdateElement();
+
         this.element.SetElement(element);
+    }
+
+    private void UpdateElement()
+    {
+        if (player.element == ElementManager.Element.Wind)
+        {
+            UpdateComboPoints();
+        }
     }
 
     public void UpdateHealth()

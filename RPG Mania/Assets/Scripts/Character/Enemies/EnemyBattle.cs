@@ -53,6 +53,10 @@ public class EnemyBattle : CharacterBattle {
         ResetShields();
 
         if (itemDrops) itemDrop = ItemManager.GetInstance().GetRandomItem();
+
+
+        // Slow down game
+        Time.timeScale = 0.5f;
     }
 
     public void InitializeEnemy(int id)
@@ -169,7 +173,10 @@ public class EnemyBattle : CharacterBattle {
 
     public override void Defeated()
     {
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
+        ea.SetUpTrigger("Dying");
+        comboOrder.SetActive(false);
+        ShieldUIImage.SetActive(false);
     }
 
     // uncomment if enemy takes damage incorrectly
@@ -196,9 +203,18 @@ public class EnemyBattle : CharacterBattle {
         ea.SetUpTrigger(triggerName);
     }
 
-    public override void Recover()
+    ////public override void Recover()
+    ////{
+    ////    ea.Attacked(false);
+    ////}
+
+    public bool GetIsReady()
     {
-        ea.Attacked(false);
+        if (!ea.isAttacking && !ea.isBlocking && !ea.isAttacked && !ea.isDying)
+            return true;
+        else if (ea.isDead)
+            return true;
+        else return false;
     }
 
     public override bool GetIsAttacking()
@@ -223,7 +239,8 @@ public class EnemyBattle : CharacterBattle {
 
     protected virtual void OnTriggerEnter(Collider other) 
     {
-        if (other.gameObject.CompareTag("Player"))
+        Scene sceneObject = SceneManager.GetActiveScene();
+        if (other.gameObject.CompareTag("Player") && isAlive && !ea.isDead && sceneObject.name != "Throne Room")
         {
             // Find the rotation for the enemy to face the player
 

@@ -856,55 +856,55 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Light Attack
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Medium Attack
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Heavy Attack
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Moving
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Combat
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Element
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Death
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Absorb
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -995,34 +995,34 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -3104745058064029780}
-    m_Position: {x: 130, y: -10, z: 0}
+    m_Position: {x: -80, y: 0, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3928087063532491069}
-    m_Position: {x: -110, y: -100, z: 0}
+    m_Position: {x: -320, y: -180, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 270502713407007753}
-    m_Position: {x: 750, y: 160, z: 0}
+    m_Position: {x: 790, y: 100, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3714885882686582988}
-    m_Position: {x: 680, y: -40, z: 0}
+    m_Position: {x: 790, y: -100, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7321720724469918137}
-    m_Position: {x: 760, y: 60, z: 0}
+    m_Position: {x: 790, y: 10, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2254869001493348041}
     m_Position: {x: -20, y: -360, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2674698133514300531}
-    m_Position: {x: 860, y: -390, z: 0}
+    m_Position: {x: 630, y: -590, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7812895676703982026}
-    m_Position: {x: 1080, y: -330, z: 0}
+    m_Position: {x: 860, y: -590, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -88131102549703569}
-    m_Position: {x: 550, y: -390, z: 0}
+    m_Position: {x: 380, y: -590, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4205473480579111179}
-    m_Position: {x: 250, y: -400, z: 0}
+    m_Position: {x: 100, y: -590, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5194949641434488459}
     m_Position: {x: 370, y: -110, z: 0}
@@ -1034,7 +1034,7 @@ AnimatorStateMachine:
     m_Position: {x: 80, y: 240, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6043617368705635234}
-    m_Position: {x: 430, y: 30, z: 0}
+    m_Position: {x: 330, y: 40, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: -3853564071864885476}
@@ -1042,9 +1042,9 @@ AnimatorStateMachine:
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 250, y: 80, z: 0}
-  m_EntryPosition: {x: 50, y: 120, z: 0}
-  m_ExitPosition: {x: 980, y: 300, z: 0}
+  m_AnyStatePosition: {x: 100, y: 120, z: 0}
+  m_EntryPosition: {x: -480, y: 360, z: 0}
+  m_ExitPosition: {x: 390, y: 350, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: -3104745058064029780}
 --- !u!1101 &827177980972877315

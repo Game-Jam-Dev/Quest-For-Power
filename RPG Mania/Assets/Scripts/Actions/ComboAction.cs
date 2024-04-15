@@ -18,7 +18,7 @@ public class ComboAction
     public static bool DoAttack(CharacterBattle self, CharacterBattle target, int comboDepth, string attackName, 
         float accuracy, float damageMultiplier)
     {
-        self.SetAnimationTrigger(attackName);
+        ////self.SetAnimationTrigger(attackName);
 
         bool hitAttack = AttackCheck(self, target, accuracy, comboDepth);
 
@@ -38,7 +38,7 @@ public class ComboAction
 
     private static void HitEnemy(CharacterBattle self, CharacterBattle target, float d)
     {
-        target.SetAnimationTrigger("Attacked");
+        //target.SetAnimationTrigger("Attacked");
 
         int damage = (int)d*(self.attack - target.defense);
         if (damage < 0) damage = 0;

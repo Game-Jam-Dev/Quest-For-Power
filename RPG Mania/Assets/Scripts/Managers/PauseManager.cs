@@ -54,7 +54,10 @@ public class PauseManager : MonoBehaviour {
             itemQuantities.SetActive(false);
         }        
         pauseUI.SetActive(false);
-        pauseEvent(false);
+        if (pauseEvent != null)
+        {
+            pauseEvent(false);
+        }        
 
     }
 
