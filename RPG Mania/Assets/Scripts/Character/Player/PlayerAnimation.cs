@@ -126,7 +126,7 @@ public class PlayerAnimation : MonoBehaviour {
 
     public void ResetTrigger()
     {
-        if (battleAnimator != null)
+        if (battleAnimator != null && TriggerExists(currentTrigger, battleAnimator))
         {
             battleAnimator.ResetTrigger(currentTrigger);
             //isAttacking = false;

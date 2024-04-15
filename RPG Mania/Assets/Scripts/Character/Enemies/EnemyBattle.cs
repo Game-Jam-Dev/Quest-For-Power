@@ -53,6 +53,10 @@ public class EnemyBattle : CharacterBattle {
         ResetShields();
 
         if (itemDrops) itemDrop = ItemManager.GetInstance().GetRandomItem();
+
+
+        // Slow down game
+        Time.timeScale = 0.5f;
     }
 
     public void InitializeEnemy(int id)

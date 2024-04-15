@@ -18,7 +18,7 @@ public class PlayerBattle : CharacterBattle {
     public int extraComboPoints;
     public int characterComboPoints;
 
-    static string characterName = "Arkanos";
+    new static string characterName = "Arkanos";
     [SerializeField] float bonusAttackPercentage = .175f, bonusDefensePercentage = .35f, bonusAccuracy = 0.09f, bonusEvasion = 0.09f;
     bool fireBonus = false, waterBonus = false, windBonus = false, earthBonus = false;
     private float oldValue1, oldValue2;

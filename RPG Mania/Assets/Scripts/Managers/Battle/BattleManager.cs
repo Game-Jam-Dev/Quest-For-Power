@@ -105,8 +105,8 @@ public class BattleManager : MonoBehaviour {
                     yield return null;
                 }
 
-                // while (!CheckEnemiesReady() || !player.CheckPlayerReady())
-                //     yield return null;
+                while (!CheckEnemiesReady())
+                    yield return null;
 
                 // do the absorb action
                 if (absorb)
@@ -165,11 +165,11 @@ public class BattleManager : MonoBehaviour {
                         }
 
                         // wait for the attack animation to play
-                        // while (!(activeCharacter as PlayerBattle).CheckPlayerReady() | !CheckEnemiesReady())
-                        // {
-                            
-                        //     yield return null;
-                        // }
+                        while (!CheckEnemiesReady())
+                        {
+
+                            yield return null;
+                        }
 
                         // attacked character resets
                         //characterToAttack.Recover();
@@ -207,8 +207,8 @@ public class BattleManager : MonoBehaviour {
                 EnemyBattle activeEnemy = (EnemyBattle)activeCharacter;
                 if (!activeEnemy.stunned)
                 {
-                    // while (!CheckEnemiesReady() || !player.CheckPlayerReady())
-                    //     yield return null;
+                    while (!CheckEnemiesReady())
+                        yield return null;
                     // set enemy combo
                     EnemyComboCreation(activeCharacter as EnemyBattle);
 

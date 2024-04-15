@@ -131,7 +131,7 @@ public class EnemyAnimation : MonoBehaviour {
 
     public void AssignElement(ElementManager.Element e)
     {
-        if (anim != null) anim.SetInteger("Element", (int)e);
+        if (anim != null && (int)e != 0) anim.SetInteger("Element", (int)e);
 
         element = e;
     }
