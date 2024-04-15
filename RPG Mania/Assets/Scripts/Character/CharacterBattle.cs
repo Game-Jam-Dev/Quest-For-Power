@@ -175,9 +175,12 @@ public class CharacterBattle : MonoBehaviour {
 
     public virtual Animator GetAnimator() {return null;}
 
-    public virtual bool GetIsAttacking() {return false;}
+    public virtual bool GetIsAttacking() 
+    {
+        return false;
+    }
 
-    public virtual void Recover(){}
+    ////public virtual void Recover(){}
 
     public virtual ComboAction PickEnemyCombo(int currentComboLength){ return GetCombo(0); }
 

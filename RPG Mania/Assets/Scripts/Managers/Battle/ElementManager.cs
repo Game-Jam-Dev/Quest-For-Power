@@ -32,13 +32,6 @@ public class ElementManager : MonoBehaviour {
         }
     }
 
-    public void SetElement(SkillAction skill)
-    {
-        Element element = GetElement(skill);
-
-        SetElement(element);
-    }
-
     public void Highlight()
     {
         image.color = Color.yellow;

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 public class PlayerBattle : CharacterBattle {
     public int experience = 0;
@@ -17,7 +18,7 @@ public class PlayerBattle : CharacterBattle {
     public int extraComboPoints;
     public int characterComboPoints;
 
-    static string characterName = "Arkanos";
+    new static string characterName = "Arkanos";
     [SerializeField] float bonusAttackPercentage = .175f, bonusDefensePercentage = .35f, bonusAccuracy = 0.09f, bonusEvasion = 0.09f;
     bool fireBonus = false, waterBonus = false, windBonus = false, earthBonus = false;
     private float oldValue1, oldValue2;
@@ -78,6 +79,8 @@ public class PlayerBattle : CharacterBattle {
     public void WinBattle(int xp, int kills, List<Item> itemDrops)
     {
         int xpForLevel = XpForLevel();
+
+        pa.SetUpTrigger("Absorb");
 
         experience += xp;
 
@@ -144,6 +147,21 @@ public class PlayerBattle : CharacterBattle {
         pa.SetUpTrigger(triggerName);
     }
 
+    public Boolean CheckPlayerReady()
+    {
+        if (pa.CheckIfAnimation("Idle", pa.battleAnimator) || pa.CheckIfAnimation("Light", pa.battleAnimator)
+            || pa.CheckIfAnimation("Medium", pa.battleAnimator) || pa.CheckIfAnimation("Heavy", pa.battleAnimator))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public void SetAttackFinished()
+    {
+        pa.SetUpTrigger("Attack Done");
+    }
+
     public void SetData(int level, int experience, List<int> skillUses)
     {
         this.level = level;
@@ -191,6 +209,7 @@ public class PlayerBattle : CharacterBattle {
             element = ElementManager.Element.Wind;
 
             ResetElementBonus();
+            UpdateComboPoints();
             windBonus = true;
 
         } else if (activeSkill == SkillList.GetInstance().GetAction("earth"))
@@ -239,6 +258,7 @@ public class PlayerBattle : CharacterBattle {
             defense = (int)oldValue1;
             earthBonus = false;
         }
+        pa.SetElement(ElementManager.Element.None);
     }
 
     public bool CanUseSkill(SkillAction skill)
@@ -260,7 +280,7 @@ public class PlayerBattle : CharacterBattle {
     public void AbsorbSkill(ElementManager.Element e)
     {
         int index = (int)e;
-        int spellsTaken = Random.Range(1,4);
+        int spellsTaken = UnityEngine.Random.Range(1,4);
 
         skillActions[index] = (skillActions[index].Item1, skillActions[index].Item2 + spellsTaken);
 
@@ -269,6 +289,8 @@ public class PlayerBattle : CharacterBattle {
         GameManager.instance.SetPlayerSkill(index, skillActions[index].Item2);
 
         Heal(maxHealth/2);
+
+        combo = characterComboPoints;
     }
 
     public void PlayAbsorbSound()
@@ -299,9 +321,9 @@ public class PlayerBattle : CharacterBattle {
         pa.SetElement(element);
     }
 
-    public override Animator GetAnimator() {return pa.GetAnimator();}
+    //public override Animator GetAnimator() {return pa.GetAnimator();}
 
     public PlayerAnimation GetPlayerAnimation() { return pa; }
 
-    public override bool GetIsAttacking() {return pa.isAttacking;}
+    //public override bool GetIsAttacking() {return pa.isAttacking;}
 }

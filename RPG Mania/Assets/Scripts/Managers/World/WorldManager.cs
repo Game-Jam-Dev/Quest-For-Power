@@ -12,6 +12,9 @@ public abstract class WorldManager : MonoBehaviour {
     protected PlayerMovement playerMovement;
     protected List<EnemyBattle> enemies = new();
 
+    public bool canEscape = true;
+    public bool hasResolutionUI = true;
+
     protected virtual void Start() {
         GameObject gameController = GameObject.FindGameObjectWithTag("GameController");
         gameManager = gameController.GetComponent<GameManager>();
