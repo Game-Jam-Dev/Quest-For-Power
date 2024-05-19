@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7bd1feec42d5ea0499de180fddebef22
+guid: 8951bbd696922ab41a5c67177c320ea2
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,13 +105,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Emperor_Fight_Hurt_0
+      name: emperor_FIGHT_jump_to may 2024_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 76
-        height: 77
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -119,20 +119,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cd4f592f5862e7f47828fcd08e9f797f
-      internalID: 2146908290
+      spriteID: b5c471b7d9c13af4a87993ff2439bbda
+      internalID: -447024494
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Emperor_Fight_Hurt_1
+      name: emperor_FIGHT_jump_to may 2024_1
       rect:
         serializedVersion: 2
-        x: 76
+        x: 64
         y: 0
-        width: 76
-        height: 77
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,20 +140,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d6ef2a6f83163144ea8a8838f036cb9b
-      internalID: 935351992
+      spriteID: eb042f7ceb0174f4eaf729d1d0445cb8
+      internalID: 273731731
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Emperor_Fight_Hurt_2
+      name: emperor_FIGHT_jump_to may 2024_2
       rect:
         serializedVersion: 2
-        x: 152
+        x: 128
         y: 0
-        width: 76
-        height: 77
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -161,20 +161,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d0c9fecd391858c47900000835d26766
-      internalID: 469369202
+      spriteID: 9cdd4a11430932f4ab5abb505abad0f1
+      internalID: -1456541842
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Emperor_Fight_Hurt_3
+      name: emperor_FIGHT_jump_to may 2024_3
       rect:
         serializedVersion: 2
-        x: 228
+        x: 192
         y: 0
-        width: 76
-        height: 77
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -182,8 +182,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 36a4dd6bc2e60e74c83a70e5ab88d14b
-      internalID: -378812035
+      spriteID: e622deb25101a884390b09bf52fffaf8
+      internalID: -168372991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: emperor_FIGHT_jump_to may 2024_4
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b838856125f38b04fa872d6c20ca57a9
+      internalID: 1632464156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: emperor_FIGHT_jump_to may 2024_5
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4e9a7f30bfc5f34b962f05c67d44d84
+      internalID: -1724734899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: emperor_FIGHT_jump_to may 2024_6
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c85de6e9a8149404fa4eaafabaf90dfe
+      internalID: 970194262
       vertices: []
       indices: 
       edges: []
@@ -191,7 +254,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: b05f2e708dea87f4dbb4c8b1c44bf141
+    spriteID: eeb0bee7a94ac9d468767fbb135ffc35
     internalID: 0
     vertices: []
     indices: 
@@ -199,10 +262,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Emperor_Fight_Hurt_0: 2146908290
-      Emperor_Fight_Hurt_1: 935351992
-      Emperor_Fight_Hurt_2: 469369202
-      Emperor_Fight_Hurt_3: -378812035
+      emperor_FIGHT_jump_to may 2024_0: -447024494
+      emperor_FIGHT_jump_to may 2024_1: 273731731
+      emperor_FIGHT_jump_to may 2024_2: -1456541842
+      emperor_FIGHT_jump_to may 2024_3: -168372991
+      emperor_FIGHT_jump_to may 2024_4: 1632464156
+      emperor_FIGHT_jump_to may 2024_5: -1724734899
+      emperor_FIGHT_jump_to may 2024_6: 970194262
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

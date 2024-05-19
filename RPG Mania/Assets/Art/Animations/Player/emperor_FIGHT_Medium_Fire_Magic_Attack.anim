@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: emperor_FIGHT_Heavy_Air_Magic_Attack
+  m_Name: emperor_FIGHT_Medium_Fire_Magic_Attack
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,31 +20,19 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 622143697, guid: 99e3b3dea75df404284bc567a8118b02, type: 3}
+      value: {fileID: -1137046732, guid: 0fa686e5c2eadb0479e1aead11ce2175, type: 3}
     - time: 0.083333336
-      value: {fileID: -848175762, guid: 99e3b3dea75df404284bc567a8118b02, type: 3}
+      value: {fileID: -1499099083, guid: 0fa686e5c2eadb0479e1aead11ce2175, type: 3}
     - time: 0.16666667
-      value: {fileID: 1308159341, guid: 99e3b3dea75df404284bc567a8118b02, type: 3}
+      value: {fileID: -1296844241, guid: 0fa686e5c2eadb0479e1aead11ce2175, type: 3}
     - time: 0.25
-      value: {fileID: -935784985, guid: 99e3b3dea75df404284bc567a8118b02, type: 3}
+      value: {fileID: -856604622, guid: 0fa686e5c2eadb0479e1aead11ce2175, type: 3}
     - time: 0.33333334
-      value: {fileID: 789789403, guid: 99e3b3dea75df404284bc567a8118b02, type: 3}
+      value: {fileID: 1912429388, guid: 0fa686e5c2eadb0479e1aead11ce2175, type: 3}
     - time: 0.41666666
-      value: {fileID: 2017837908, guid: 99e3b3dea75df404284bc567a8118b02, type: 3}
+      value: {fileID: -1353791632, guid: 0fa686e5c2eadb0479e1aead11ce2175, type: 3}
     - time: 0.5
-      value: {fileID: -79555033, guid: 99e3b3dea75df404284bc567a8118b02, type: 3}
-    - time: 0.5833333
-      value: {fileID: 376323040, guid: 99e3b3dea75df404284bc567a8118b02, type: 3}
-    - time: 0.6666667
-      value: {fileID: -183420867, guid: 99e3b3dea75df404284bc567a8118b02, type: 3}
-    - time: 0.75
-      value: {fileID: -586544579, guid: 99e3b3dea75df404284bc567a8118b02, type: 3}
-    - time: 0.8333333
-      value: {fileID: -646797028, guid: 99e3b3dea75df404284bc567a8118b02, type: 3}
-    - time: 0.9166667
-      value: {fileID: -780713767, guid: 99e3b3dea75df404284bc567a8118b02, type: 3}
-    - time: 1
-      value: {fileID: 1484140051, guid: 99e3b3dea75df404284bc567a8118b02, type: 3}
+      value: {fileID: 62297536, guid: 0fa686e5c2eadb0479e1aead11ce2175, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -62,7 +50,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.0833334
+    m_StopTime: 0.5833333
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
