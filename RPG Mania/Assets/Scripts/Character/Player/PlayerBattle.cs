@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using TMPro;
 
 public class PlayerBattle : CharacterBattle {
     public int experience = 0;
@@ -149,17 +150,20 @@ public class PlayerBattle : CharacterBattle {
 
     public Boolean CheckPlayerReady()
     {
-        if (pa.CheckIfAnimation("Idle", pa.battleAnimator) || pa.CheckIfAnimation("Light", pa.battleAnimator)
-            || pa.CheckIfAnimation("Medium", pa.battleAnimator) || pa.CheckIfAnimation("Heavy", pa.battleAnimator))
+        if (pa.CheckIfAnimation("Idle", pa.battleAnimator))
+        {
+            return true;
+        }
+        else if (pa.CheckIfAnimation("Death", pa.battleAnimator) && pa.CheckIfAnimationIsDone(pa.battleAnimator))
         {
             return true;
         }
         return false;
     }
 
-    public void SetAttackFinished()
+    public void ToggleNormalAttack(Vector3 targetPosition, bool moveAllTheWay)
     {
-        pa.SetUpTrigger("Attack Done");
+        pa.ToggleNormalAttack(targetPosition, moveAllTheWay);
     }
 
     public void SetData(int level, int experience, List<int> skillUses)

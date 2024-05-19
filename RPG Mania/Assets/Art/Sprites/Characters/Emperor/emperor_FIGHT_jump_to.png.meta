@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0fa686e5c2eadb0479e1aead11ce2175
+guid: 9986a0250e03028439120a85f53c235e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -47,7 +47,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 25
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -105,13 +105,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Emperor_Fight_MEDIUMmagic_FIRE_0
+      name: emperor_FIGHT_jump_to_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 76
-        height: 77
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -119,20 +119,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b3b8864c7d2db4442b22a6c76c43d7b3
-      internalID: -1137046732
+      spriteID: b3263050b1c946548bb39dd1c0d62a31
+      internalID: 2004784304
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Emperor_Fight_MEDIUMmagic_FIRE_1
+      name: emperor_FIGHT_jump_to_1
       rect:
         serializedVersion: 2
-        x: 76
+        x: 64
         y: 0
-        width: 76
-        height: 77
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,20 +140,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ecc6a213de06b074c81b4d9020df77b0
-      internalID: -1499099083
+      spriteID: bf88eef0bd584da40a5c084a06e6d16b
+      internalID: -1448336700
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Emperor_Fight_MEDIUMmagic_FIRE_2
+      name: emperor_FIGHT_jump_to_2
       rect:
         serializedVersion: 2
-        x: 152
+        x: 128
         y: 0
-        width: 76
-        height: 77
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -161,20 +161,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7f31e0925ca5cc74ab12ce59374f500b
-      internalID: -1296844241
+      spriteID: d7ea6d3dd00906b439c0a464905ab015
+      internalID: -498545438
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Emperor_Fight_MEDIUMmagic_FIRE_3
+      name: emperor_FIGHT_jump_to_3
       rect:
         serializedVersion: 2
-        x: 228
+        x: 192
         y: 0
-        width: 76
-        height: 77
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -182,20 +182,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 21df959b646f90a44bfc1a8fa5bb989b
-      internalID: -856604622
+      spriteID: c0492e9198fcb4e479a8a656ce614544
+      internalID: -1292404062
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Emperor_Fight_MEDIUMmagic_FIRE_4
+      name: emperor_FIGHT_jump_to_4
       rect:
         serializedVersion: 2
-        x: 304
+        x: 256
         y: 0
-        width: 76
-        height: 77
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -203,20 +203,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7adacd1412c7863428bd7c66c163ce1a
-      internalID: 1912429388
+      spriteID: 701aa172dc99b5b448879521da8f3965
+      internalID: 409278079
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Emperor_Fight_MEDIUMmagic_FIRE_5
+      name: emperor_FIGHT_jump_to_5
       rect:
         serializedVersion: 2
-        x: 380
+        x: 320
         y: 0
-        width: 76
-        height: 77
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -224,20 +224,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 065fe949f88953d499a2533720429806
-      internalID: -1353791632
+      spriteID: c583de380b0f53f41af3ab838aec9be1
+      internalID: -1977846463
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Emperor_Fight_MEDIUMmagic_FIRE_6
+      name: emperor_FIGHT_jump_to_6
       rect:
         serializedVersion: 2
-        x: 456
+        x: 384
         y: 0
-        width: 76
-        height: 77
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -245,8 +245,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c2ad603215a1d524f8279125e0f4be59
-      internalID: 62297536
+      spriteID: e604d970fd57a7f49adb0dc2b274b044
+      internalID: 618369479
       vertices: []
       indices: 
       edges: []
@@ -254,7 +254,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 15c0e8f530f166e44bc8554b6e5e3ce5
     internalID: 0
     vertices: []
     indices: 
@@ -262,13 +262,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Emperor_Fight_MEDIUMmagic_FIRE_0: -1137046732
-      Emperor_Fight_MEDIUMmagic_FIRE_1: -1499099083
-      Emperor_Fight_MEDIUMmagic_FIRE_2: -1296844241
-      Emperor_Fight_MEDIUMmagic_FIRE_3: -856604622
-      Emperor_Fight_MEDIUMmagic_FIRE_4: 1912429388
-      Emperor_Fight_MEDIUMmagic_FIRE_5: -1353791632
-      Emperor_Fight_MEDIUMmagic_FIRE_6: 62297536
+      emperor_FIGHT_jump_to_0: 2004784304
+      emperor_FIGHT_jump_to_1: -1448336700
+      emperor_FIGHT_jump_to_2: -498545438
+      emperor_FIGHT_jump_to_3: -1292404062
+      emperor_FIGHT_jump_to_4: 409278079
+      emperor_FIGHT_jump_to_5: -1977846463
+      emperor_FIGHT_jump_to_6: 618369479
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

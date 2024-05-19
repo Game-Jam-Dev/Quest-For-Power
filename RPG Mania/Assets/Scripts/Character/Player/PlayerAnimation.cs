@@ -1,3 +1,5 @@
+using TMPro;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour {
@@ -7,11 +9,16 @@ public class PlayerAnimation : MonoBehaviour {
     protected bool isFighting = false;
 
     public string currentTrigger = "";
-    //public bool isAttacking = false;
+    public bool isAttacking = false;
     public bool isIdle = true;
-
+    public bool needsJumping = false;
+    public Vector3 direction;
+    public Vector3 targetPosition;
     AnimatorClipInfo[] animatorinfo;
     string current_animation;
+    float speed = 10f;
+    float proportionToJump = 5 / 7;
+    Vector3 jumpHeight = Vector3.forward;
 
     protected virtual void Start() {
         TryGetComponent(out battleAnimator);
@@ -22,11 +29,35 @@ public class PlayerAnimation : MonoBehaviour {
     {
         if (battleAnimator != null) 
         { 
-            if (CheckIfAnimation("Idle", battleAnimator) || CheckIfAnimationIsDone(battleAnimator))
+            if (CheckIfAnimation("Idle", battleAnimator))
             {
-                ResetTrigger();
+                ResetTrigger(currentTrigger);
+                isIdle = true;
             }
         }
+
+        //if (battleAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime > proportionToJump && needsJumping &&
+        //    CheckIfAnimation("Jump", battleAnimator))
+        //{
+        //    if (Vector3.Distance(targetPosition, transform.position) > .025)
+        //    {
+        //        var step = speed * Time.deltaTime;
+        //        transform.position += direction * step;
+
+        //        //if (battleAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime <=  1.5f * proportionToJump)
+        //        //{
+        //        //    transform.position += jumpHeight * step/2.5f;
+        //        //}
+        //        //else
+        //        //{
+        //        //    transform.position -= jumpHeight * step/2.5f;
+        //        //}
+        //    }
+        //    else
+        //    {
+        //        needsJumping = false;
+        //    }
+        //}
     }
 
     public void SwitchToCombat()
@@ -37,16 +68,35 @@ public class PlayerAnimation : MonoBehaviour {
             //anim.SetBool("Combat", true);
             isFighting = true;
             isIdle = true;
+            direction = Vector3.zero;
         }
     }
 
     public void SwitchFromCombat()
     {
-        //if (anim != null)
-        //{
-        //    anim.SetBool("Combat", false);
-        //    isFighting = false;
-        //} 
+        isFighting = false;
+    }
+
+    public void ToggleNormalAttack(Vector3 argumentTargetPosition, bool moveAllTheWay)
+    {
+        if (battleAnimator != null)
+        {
+            battleAnimator.SetBool("Normal Attack", !isAttacking);
+            isAttacking = !isAttacking;
+            //needsJumping = true;
+            direction = argumentTargetPosition - transform.position;
+            if (moveAllTheWay) 
+            {
+                targetPosition = argumentTargetPosition;
+                //proportionToJump = 7 / 5;
+            }
+            else
+            {
+                direction = (argumentTargetPosition - transform.position);
+                targetPosition = argumentTargetPosition - .33f * direction;
+                //proportionToJump *= Vector2.Distance(transform.position, argumentTargetPosition);
+            }
+        }
     }
 
     public void SetElement(ElementManager.Element element)
@@ -124,13 +174,13 @@ public class PlayerAnimation : MonoBehaviour {
         }
     }
 
-    public void ResetTrigger()
+    public void ResetTrigger(string triggerName)
     {
-        if (battleAnimator != null && TriggerExists(currentTrigger, battleAnimator))
+        if (battleAnimator != null && TriggerExists(triggerName, battleAnimator))
         {
-            battleAnimator.ResetTrigger(currentTrigger);
+            battleAnimator.ResetTrigger(triggerName);
             //isAttacking = false;
-            isIdle = true;
+            //isIdle = true;
         }
     }
 

@@ -34,6 +34,8 @@ public class BattleManager : MonoBehaviour {
     GameObject combatResolutionUI;
     EnemyBattle defeatedEnemy;
 
+    Vector3 originalPosition = Vector3.zero;
+
     private void Awake() {
         gameObject.SetActive(false);
         combatResolutionUI = GameObject.Find("CombatResolution");
@@ -86,6 +88,9 @@ public class BattleManager : MonoBehaviour {
 
     private IEnumerator BattleLoop()
     {
+        // Slow down game
+        //Time.timeScale = 0.1f;
+
         while (turnOrder.Count > 0) {
             // get next character in order
             CharacterBattle activeCharacter = turnOrder.Peek();
@@ -148,6 +153,8 @@ public class BattleManager : MonoBehaviour {
                 // standard action
                 else
                 {
+                    originalPosition = activeCharacter.transform.position;
+                    (activeCharacter as PlayerBattle).ToggleNormalAttack(characterToAttack.transform.position, false);
                     // track the index of the attack in the combo
                     int i = 0;
 
@@ -159,13 +166,8 @@ public class BattleManager : MonoBehaviour {
 
                         used_combo_points += a.Cost;
 
-                        if (a == activeCharacterCombo.Last())
-                        {
-                            (activeCharacter as PlayerBattle).SetAnimationTrigger("Attack Done");
-                        }
-
                         // wait for the attack animation to play
-                        while (!CheckEnemiesReady())
+                        while (!CheckEnemiesReady() || !(activeCharacter as PlayerBattle).CheckPlayerReady())
                         {
 
                             yield return null;
@@ -199,7 +201,7 @@ public class BattleManager : MonoBehaviour {
                         }
                         i++;
                     }
-                    (activeCharacter as PlayerBattle).SetAttackFinished();
+                    (activeCharacter as PlayerBattle).ToggleNormalAttack(originalPosition, true);
                     (activeCharacter as PlayerBattle).UpdateComboPoints();
                 }
                 UpdateSkillCounter();
