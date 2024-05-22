@@ -150,11 +150,11 @@ public class PlayerBattle : CharacterBattle {
 
     public Boolean CheckPlayerReady()
     {
-        if (pa.CheckIfAnimation("Idle", pa.battleAnimator))
+        if (pa.CheckIfAnimation("Idle", pa.anim))
         {
             return true;
         }
-        else if (pa.CheckIfAnimation("Death", pa.battleAnimator) && pa.CheckIfAnimationIsDone(pa.battleAnimator))
+        else if (pa.CheckIfAnimation("Death", pa.anim) && pa.CheckIfAnimationIsDone(pa.anim))
         {
             return true;
         }

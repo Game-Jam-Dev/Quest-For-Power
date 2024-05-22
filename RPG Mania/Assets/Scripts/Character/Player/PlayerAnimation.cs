@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour {
 
-    public Animator battleAnimator;
+    public Animator anim;
     protected SpriteRenderer sr;
     protected bool isFighting = false;
 
@@ -19,32 +19,33 @@ public class PlayerAnimation : MonoBehaviour {
     float speed = 10f;
     float proportionToJump = 5 / 7;
     Vector3 jumpHeight = Vector3.forward;
+    public RuntimeAnimatorController combatController;
 
     protected virtual void Start() {
-        TryGetComponent(out battleAnimator);
+        TryGetComponent(out anim);
         TryGetComponent(out sr);
     }
 
     private void Update()
     {
-        if (battleAnimator != null) 
+        if (anim != null) 
         { 
-            if (CheckIfAnimation("Idle", battleAnimator))
+            if (CheckIfAnimation("Idle", anim))
             {
                 ResetTrigger(currentTrigger);
                 isIdle = true;
             }
         }
 
-        //if (battleAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime > proportionToJump && needsJumping &&
-        //    CheckIfAnimation("Jump", battleAnimator))
+        //if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime > proportionToJump && needsJumping &&
+        //    CheckIfAnimation("Jump", anim))
         //{
         //    if (Vector3.Distance(targetPosition, transform.position) > .025)
         //    {
         //        var step = speed * Time.deltaTime;
         //        transform.position += direction * step;
 
-        //        //if (battleAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime <=  1.5f * proportionToJump)
+        //        //if (anim.GetCurrentAnimatorStateInfo(0).normalizedTime <=  1.5f * proportionToJump)
         //        //{
         //        //    transform.position += jumpHeight * step/2.5f;
         //        //}
@@ -62,8 +63,9 @@ public class PlayerAnimation : MonoBehaviour {
 
     public void SwitchToCombat()
     {
-        if (battleAnimator != null)
+        if (anim != null)
         {
+            anim.runtimeAnimatorController = combatController;
             sr.flipX = false;
             //anim.SetBool("Combat", true);
             isFighting = true;
@@ -79,9 +81,9 @@ public class PlayerAnimation : MonoBehaviour {
 
     public void ToggleNormalAttack(Vector3 argumentTargetPosition, bool moveAllTheWay)
     {
-        if (battleAnimator != null)
+        if (anim != null)
         {
-            battleAnimator.SetBool("Normal Attack", !isAttacking);
+            anim.SetBool("Normal Attack", !isAttacking);
             isAttacking = !isAttacking;
             //needsJumping = true;
             direction = argumentTargetPosition - transform.position;
@@ -104,26 +106,26 @@ public class PlayerAnimation : MonoBehaviour {
         //anim.SetInteger("Element", (int)element);
         if ((int)element == 0)
         {
-            battleAnimator.SetBool("Air", false);
-            battleAnimator.SetBool("Earth", false);
-            battleAnimator.SetBool("Fire", false);
-            battleAnimator.SetBool("Water", false);
+            anim.SetBool("Air", false);
+            anim.SetBool("Earth", false);
+            anim.SetBool("Fire", false);
+            anim.SetBool("Water", false);
         }
         else if ((int)element == 1)
         {
-            battleAnimator.SetBool("Water", true);
+            anim.SetBool("Water", true);
         }
         else if ((int)element == 2)
         {
-            battleAnimator.SetBool("Fire", true);
+            anim.SetBool("Fire", true);
         }
         else if ((int)element == 3)
         {
-            battleAnimator.SetBool("Air", true);
+            anim.SetBool("Air", true);
         }
         else if ((int)element == 4)
         {
-            battleAnimator.SetBool("Earth", true);
+            anim.SetBool("Earth", true);
         }
     }
 
@@ -160,25 +162,25 @@ public class PlayerAnimation : MonoBehaviour {
     public void SetUpTrigger(string triggerName)
     {
         //Debug.Log(triggerName);
-        if (battleAnimator != null && TriggerExists(triggerName, battleAnimator))
+        if (anim != null && TriggerExists(triggerName, anim))
         {
 
             //if (triggerName == "Light Attack" || triggerName == "Medium Attack" || triggerName == "Heavy Attack" || triggerName == "Absorb")
             //{
-            //    battleAnimator.SetTrigger("Attack");
+            //    anim.SetTrigger("Attack");
             //    isAttacking = true;
             //}
             currentTrigger = triggerName;
-            battleAnimator.SetTrigger(triggerName);
+            anim.SetTrigger(triggerName);
             isIdle = false;
         }
     }
 
     public void ResetTrigger(string triggerName)
     {
-        if (battleAnimator != null && TriggerExists(triggerName, battleAnimator))
+        if (anim != null && TriggerExists(triggerName, anim))
         {
-            battleAnimator.ResetTrigger(triggerName);
+            anim.ResetTrigger(triggerName);
             //isAttacking = false;
             //isIdle = true;
         }
