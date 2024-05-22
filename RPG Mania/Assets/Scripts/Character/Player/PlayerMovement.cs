@@ -15,6 +15,15 @@ public class PlayerMovement : MonoBehaviour {
 
     private AudioSource audioSource;
     [SerializeField] private AudioClip walkSound;
+    public RuntimeAnimatorController explorationController;
+
+    private string currentState;
+    //Animation States
+    const string PLAYER_IDLE = "Exploration_Idle";
+    const string PLAYER_WALK_RIGHT = "Walk_Right";
+    const string PLAYER_WALK_LEFT = "Walk_Left";
+    const string PLAYER_WALK_UP = "Walk_Up";
+    const string PLAYER_WALK_DOWN = "Walk_Down";
 
     private void Awake()
     {
@@ -28,6 +37,7 @@ public class PlayerMovement : MonoBehaviour {
 
     private void OnEnable()
     {
+        anim.runtimeAnimatorController = explorationController;
         actions.Gameplay.Enable();
 
         actions.Gameplay.Move.performed += MoveCharacter;
@@ -39,6 +49,10 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void OnDisable() {
+        if (anim.runtimeAnimatorController != explorationController)
+        {
+            return;
+        }
         actions.Gameplay.Move.performed -= MoveCharacter;
         actions.Gameplay.Move.canceled -= StopCharacter;
         actions.Gameplay.Sprint.performed -= context => isSprinting = true;
@@ -50,17 +64,49 @@ public class PlayerMovement : MonoBehaviour {
 
         CancelMovement();
         
-        rb.velocity = Vector3.zero;
+    }
+
+    void ChangeAnimationState(string newState)
+    {
+        if (currentState == newState) return;
+
+        anim.Play(newState);
+
+        currentState = newState;
     }
 
     private void MoveCharacter(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
-        anim.SetBool("Moving", true);
+        //anim.SetBool("Moving", true);
 
-        if (moveInput.x > 0) sr.flipX = false;
+        if (currentState == PLAYER_IDLE || moveInput.y == 0)
+        {
+            if (moveInput.x >= 0)
+            {
+                sr.flipX = false;
+                ChangeAnimationState(PLAYER_WALK_RIGHT);
+            }
 
-        if (moveInput.x < 0) sr.flipX = true;
+            if (moveInput.x < 0)
+            {
+                sr.flipX = true;
+                ChangeAnimationState(PLAYER_WALK_LEFT);
+            }
+        }
+
+        if (currentState == PLAYER_IDLE || moveInput.x == 0)
+        { 
+            if (moveInput.y >= 0) 
+            {
+                ChangeAnimationState(PLAYER_WALK_UP);
+            }
+
+            if (moveInput.y <= 0)
+            {
+                ChangeAnimationState(PLAYER_WALK_DOWN);
+            }
+        }        
     }
     private void StopCharacter(InputAction.CallbackContext context)
     {
@@ -69,8 +115,9 @@ public class PlayerMovement : MonoBehaviour {
 
     private void CancelMovement()
     {
+        rb.velocity = Vector3.zero;
         moveInput = Vector2.zero;
-        anim.SetBool("Moving", false);
+        ChangeAnimationState(PLAYER_IDLE);
     }
 
     private void FixedUpdate()
