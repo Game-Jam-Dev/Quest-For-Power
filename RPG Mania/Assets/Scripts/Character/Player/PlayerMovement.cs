@@ -49,10 +49,6 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     private void OnDisable() {
-        if (anim.runtimeAnimatorController != explorationController)
-        {
-            return;
-        }
         actions.Gameplay.Move.performed -= MoveCharacter;
         actions.Gameplay.Move.canceled -= StopCharacter;
         actions.Gameplay.Sprint.performed -= context => isSprinting = true;

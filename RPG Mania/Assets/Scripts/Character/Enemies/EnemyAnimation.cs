@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class EnemyAnimation : MonoBehaviour {
@@ -146,6 +147,17 @@ public class EnemyAnimation : MonoBehaviour {
         {
             anim.SetBool("Attacked", attacked);
         }
+    }
+
+    public IEnumerator Blink()
+    {
+        float blinktime = 0.5f;
+
+        sr.color = Color.clear;
+
+        yield return new WaitForSeconds(blinktime);
+
+        sr.color = Color.white;
     }
 
     public void SetUpTrigger(string triggerName)

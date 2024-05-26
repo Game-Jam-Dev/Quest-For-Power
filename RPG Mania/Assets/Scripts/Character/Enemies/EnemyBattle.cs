@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -39,6 +40,9 @@ public class EnemyBattle : CharacterBattle {
     [SerializeField] public Sprite ShieldSprite, BrokenShieldSprite;
     public int defaultDefense;
     float currentTime;
+
+    bool inCombat = false;
+    public float resetTimer = 1f;
 
     protected override void Start()
     {
@@ -162,6 +166,7 @@ public class EnemyBattle : CharacterBattle {
         ea.StartFighting();
         comboOrder.SetActive(true);
         ShieldUIImage.SetActive(true);
+        ToggleCollider(false);
     }
 
     public void ResetFromFight()
@@ -170,6 +175,14 @@ public class EnemyBattle : CharacterBattle {
         ea.StopFighting();
         comboOrder.SetActive(false);
         ShieldUIImage.SetActive(false);
+
+        StartCoroutine(ResetCombat());
+    }
+
+    private IEnumerator ResetCombat()
+    {
+        yield return new WaitForSeconds(resetTimer);
+        ToggleCollider(true);
     }
 
     protected virtual void SetStats(){}
@@ -178,7 +191,7 @@ public class EnemyBattle : CharacterBattle {
     {
         isAlive = false;
         GameManager.instance.SetEnemyDeath(scene, id);
-        Destroy(gameObject);
+        // Destroy(gameObject);
     }
 
     public override void Defeated()
@@ -250,6 +263,8 @@ public class EnemyBattle : CharacterBattle {
 
     protected virtual void OnTriggerEnter(Collider other) 
     {
+        // if (inCombat) return;
+
         Scene sceneObject = SceneManager.GetActiveScene();
         if (other.gameObject.CompareTag("Player") && isAlive && !ea.isDead && sceneObject.name != "Throne Room")
         {
@@ -291,9 +306,8 @@ public class EnemyBattle : CharacterBattle {
     {
         absorbs++;
     }
-    public void TemporaryDisableCollider()
+    public void ToggleCollider(bool b)
     {
-        currentTime = Time.time;
-        this.GetComponent<CapsuleCollider>().enabled = false;
+        GetComponent<CapsuleCollider>().enabled = b;
     }
 }
