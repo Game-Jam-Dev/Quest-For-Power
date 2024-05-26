@@ -69,6 +69,8 @@ public class BattleManager : MonoBehaviour {
     private void InitializeCharacters()
     {
         // set enemies, end battle if none
+        // set enemies to a copy of the list to avoid modifying the original
+        
         enemies = worldManager.GetBattleEnemies();
         if (enemies.Count <= 0) EndBattle();
 
@@ -295,6 +297,7 @@ public class BattleManager : MonoBehaviour {
         StopCoroutine(battleLoop);
         worldManager.EscapeBattle();
         EndBattle();
+        battleUIManager.Escape();
     }
 
     private bool Attack(CharacterBattle activeCharacter, ComboAction comboAction, int hitNumber = 0)

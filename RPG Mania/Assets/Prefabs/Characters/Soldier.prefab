@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1531738620, guid: f9c545364aad19f4bb9f85d04902751c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1531738621, guid: f9c545364aad19f4bb9f85d04902751c, type: 3}
       propertyPath: m_LocalScale.x
@@ -29,7 +29,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1667953556, guid: f9c545364aad19f4bb9f85d04902751c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1667953557, guid: f9c545364aad19f4bb9f85d04902751c, type: 3}
       propertyPath: m_LocalScale.x
@@ -245,6 +245,7 @@ MonoBehaviour:
   BrokenShieldSprite: {fileID: 1595733391, guid: ef980a999d8265249b3595d8701d36c1,
     type: 3}
   defaultDefense: 0
+  escapeTime: 0.5
 --- !u!114 &7074117665683435470 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2966693440811833630, guid: f9c545364aad19f4bb9f85d04902751c,

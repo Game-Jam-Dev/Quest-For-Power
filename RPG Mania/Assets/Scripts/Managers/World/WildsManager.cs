@@ -139,6 +139,7 @@ public class WildsManager : WorldManager {
         }
         
         battleEnemies.Reverse();
+        enemyPositions.Reverse();
 
         audioSource.clip = battleTheme;
         audioSource.time = 2.7f;
@@ -169,6 +170,15 @@ public class WildsManager : WorldManager {
             }
         }
 
+        for (int i = 0; i < battleEnemies.Count; i++)
+        {
+            Debug.Log("Enemy position: " + enemyPositions[i]);
+            battleEnemies[i].gameObject.transform.position = enemyPositions[i];
+        }
+
+        battleEnemies.Clear();
+        enemyPositions.Clear();
+
         playerBattle.GetPlayerAnimation().EscapeFromEnemy();
 
         SwitchToMainCamera();
@@ -184,8 +194,6 @@ public class WildsManager : WorldManager {
 
     public override void WinBattle()
     {
-        battleEnemies.Clear();
-        
         if (final)
         {
             StartCoroutine(BossFightWinDialog());
@@ -196,15 +204,15 @@ public class WildsManager : WorldManager {
 
     public override void EscapeBattle()
     {
-        EndBattle();
-
-        playerBattle.ResetHealth();
-
         foreach (EnemyBattle e in battleEnemies)
         {
             e.ResetFromFight();
             liveEnemies.Add(e);
         }
+
+        EndBattle();
+
+        playerBattle.ResetHealth();
     }
 
     private IEnumerator BossFightDialog(GameObject boss)
