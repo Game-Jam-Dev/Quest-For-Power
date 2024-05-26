@@ -2,7 +2,7 @@ using TMPro;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class PlayerCombatAnimation : MonoBehaviour {
+public class PlayerAnimation : MonoBehaviour {
 
     public Animator anim;
     protected SpriteRenderer sr;
@@ -16,9 +16,9 @@ public class PlayerCombatAnimation : MonoBehaviour {
     public Vector3 targetPosition;
     AnimatorClipInfo[] animatorinfo;
     string current_animation;
-    float speed = 10f;
-    float proportionToJump = 5 / 7;
-    Vector3 jumpHeight = Vector3.forward;
+    //float speed = 10f;
+    //float proportionToJump = 5 / 7;
+    //Vector3 jumpHeight = Vector3.forward;
     public RuntimeAnimatorController combatController;
 
     protected virtual void Start() {

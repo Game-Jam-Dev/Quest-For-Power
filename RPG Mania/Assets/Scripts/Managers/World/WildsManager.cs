@@ -17,6 +17,14 @@ public class WildsManager : WorldManager {
   
     [SerializeField] private DialogObject dialogObjectPre, dialogObjectPreboss, dialogObjectPost;
     private bool final = false;
+    [SerializeField] GameObject wildsMapObject;
+    [SerializeField] GameObject playerObject;
+    private WildsMapsManager wildsMapsManagerScript;
+    private Vector3 previousPosition;
+    List<Vector3> enemyPositions;
+
+    float index;
+    float numberEnemies;
 
     protected override void Start() {
         base.Start();
@@ -40,6 +48,10 @@ public class WildsManager : WorldManager {
         {
             dialogManager.enabled = false;
         }
+
+        wildsMapsManagerScript = wildsMapObject.GetComponent<WildsMapsManager>();
+
+        mainCamera.GetComponent<FollowCamera>().SetCameraFollow(true);
     }
 
     protected override void SpawnEnemies()
@@ -97,10 +109,31 @@ public class WildsManager : WorldManager {
 
     private void StartBattle() 
     {
+        previousPosition = player.transform.position;
+        wildsMapsManagerScript.ChangeToCombat();
+        mainCamera.GetComponent<FollowCamera>().SetCameraFollow(false);
+        Vector3 referecePosition = Camera.main.transform.position;
+        player.transform.position = new Vector2(referecePosition.x, referecePosition.y - 5);
         playerBattle.PrepareCombat();
 
-        foreach(EnemyBattle e in battleEnemies)
+        index = 0;
+        numberEnemies = battleEnemies.Count;
+        enemyPositions = new List<Vector3>();
+
+        foreach (EnemyBattle e in battleEnemies)
         {
+            enemyPositions.Add(e.transform.position);
+
+            if (numberEnemies == 1)
+            {
+                e.transform.position = new Vector3(referecePosition.x - .15f, referecePosition.y + 5, e.transform.position.z);
+            }
+            else
+            {
+                e.transform.position = new Vector3(referecePosition.x + ((-(numberEnemies / 2) + index) * 3) + 1.5f, referecePosition.y + 5, e.transform.position.z);
+            }
+
+            index ++;
             liveEnemies.Remove(e);
             e.PrepareCombat();
         }
@@ -143,6 +176,10 @@ public class WildsManager : WorldManager {
         audioSource.clip = wildsTheme;
         audioSource.time = 0;
         audioSource.Play();
+        wildsMapsManagerScript.ChangeToExploration();
+        player.transform.position = previousPosition;
+        Camera.main.transform.position = new Vector3(previousPosition.x, previousPosition.y, Camera.main.transform.position.z);
+        mainCamera.GetComponent<FollowCamera>().SetCameraFollow(true);
     }
 
     public override void WinBattle()

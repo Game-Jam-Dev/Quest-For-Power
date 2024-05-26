@@ -38,6 +38,7 @@ public class EnemyBattle : CharacterBattle {
     [SerializeField] public int stunLimit;
     [SerializeField] public Sprite ShieldSprite, BrokenShieldSprite;
     public int defaultDefense;
+    float currentTime;
 
     protected override void Start()
     {
@@ -54,6 +55,18 @@ public class EnemyBattle : CharacterBattle {
 
         if (itemDrops) itemDrop = ItemManager.GetInstance().GetRandomItem();
 
+    }
+
+    private void Update()
+    {
+        if (currentTime != null && currentTime != 0)
+        {
+            if (Time.time >= currentTime + 5)
+            {
+                currentTime = 0;
+                this.GetComponent<CapsuleCollider>().enabled = true;
+            }
+        }
     }
 
     public void InitializeEnemy(int id)
@@ -174,6 +187,7 @@ public class EnemyBattle : CharacterBattle {
         ea.SetUpTrigger("Dying");
         comboOrder.SetActive(false);
         ShieldUIImage.SetActive(false);
+        this.GetComponent<CapsuleCollider>().enabled = false;
     }
 
     // uncomment if enemy takes damage incorrectly
@@ -276,5 +290,10 @@ public class EnemyBattle : CharacterBattle {
     public void IncreaseAbsorbs()
     {
         absorbs++;
+    }
+    public void TemporaryDisableCollider()
+    {
+        currentTime = Time.time;
+        this.GetComponent<CapsuleCollider>().enabled = false;
     }
 }

@@ -600,8 +600,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07fe4e6bc47587042bcd7dbdc1f9e410, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  anim: {fileID: 0}
   currentTrigger: 
   isAttacking: 0
+  isIdle: 1
+  needsJumping: 0
+  direction: {x: 0, y: 0, z: 0}
+  targetPosition: {x: 0, y: 0, z: 0}
+  combatController: {fileID: 0}
 --- !u!1001 &8258908821944991850
 PrefabInstance:
   m_ObjectHideFlags: 0

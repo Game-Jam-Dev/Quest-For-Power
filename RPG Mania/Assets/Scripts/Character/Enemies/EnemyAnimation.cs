@@ -15,7 +15,7 @@ public class EnemyAnimation : MonoBehaviour {
     public bool isDead = false;
 
     AnimatorClipInfo[] animatorinfo;
-    string current_animation;
+    string current_animation;    
 
     private void Start()
     {
