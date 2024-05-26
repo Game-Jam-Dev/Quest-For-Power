@@ -127,11 +127,12 @@ public class PlayerMovement : MonoBehaviour {
 
     private void Movement()
     {
-        Vector3 moveDirection = new Vector3(moveInput.x, 0, moveInput.y).normalized;
+        //rb.constraints = RigidbodyConstraints.None;
+        Vector3 moveDirection = new Vector3(moveInput.x, moveInput.y, 0).normalized;
 
         float speedToUse = isSprinting ? speed * sprint : speed;
-
-        rb.velocity = moveDirection * speedToUse;
+        Vector3 vel = new Vector3(moveDirection.x * speedToUse, moveDirection.y * speedToUse, 0);
+        rb.velocity =  vel;
     }
 
     public void PlayMoveSound()

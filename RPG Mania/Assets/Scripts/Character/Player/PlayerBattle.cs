@@ -53,13 +53,11 @@ public class PlayerBattle : CharacterBattle {
     public void AddExtraComboPoints(int extraPoints)
     {
         extraComboPoints += extraPoints;
-        Debug.Log("Adding extra points: " + extraComboPoints);
     }
 
     public void ResetExtraComboPoints()
     {
         extraComboPoints = 0;
-        Debug.Log("Reseting extra points: " + extraComboPoints);
     }
 
     public void UpdateComboPoints()
@@ -73,8 +71,6 @@ public class PlayerBattle : CharacterBattle {
         {
             combo = (int)Mathf.Round(1.5f * characterComboPoints);
         }
-        Debug.Log("Updating combo:" + combo.ToString() + " character base points: " + characterComboPoints +
-            " extra points: " + extraComboPoints);
     }
 
     public void WinBattle(int xp, int kills, List<Item> itemDrops)
