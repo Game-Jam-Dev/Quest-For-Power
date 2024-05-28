@@ -123,7 +123,6 @@ public class PlayerMovement : MonoBehaviour {
 
     private void Movement()
     {
-        //rb.constraints = RigidbodyConstraints.None;
         Vector3 moveDirection = new Vector3(moveInput.x, moveInput.y, 0).normalized;
 
         float speedToUse = isSprinting ? speed * sprint : speed;

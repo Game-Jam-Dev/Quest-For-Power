@@ -191,7 +191,7 @@ public class EnemyBattle : CharacterBattle {
     {
         isAlive = false;
         GameManager.instance.SetEnemyDeath(scene, id);
-        // Destroy(gameObject);
+        //Destroy(gameObject);
     }
 
     public override void Defeated()
