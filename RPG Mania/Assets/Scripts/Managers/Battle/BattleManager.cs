@@ -35,6 +35,7 @@ public class BattleManager : MonoBehaviour {
     EnemyBattle defeatedEnemy;
 
     Vector3 originalPosition = Vector3.zero;
+    List<EnemyBattle> battleEnemies;
 
     private void Awake() {
         gameObject.SetActive(false);
@@ -71,7 +72,13 @@ public class BattleManager : MonoBehaviour {
         // set enemies, end battle if none
         // set enemies to a copy of the list to avoid modifying the original
         
-        enemies = worldManager.GetBattleEnemies();
+
+        battleEnemies = worldManager.GetBattleEnemies();
+        foreach (EnemyBattle e in battleEnemies)
+        {
+            enemies.Add(e);
+        }
+
         if (enemies.Count <= 0) EndBattle();
 
         // save player reference

@@ -16,7 +16,10 @@ public class EnemyAnimation : MonoBehaviour {
     public bool isDead = false;
 
     AnimatorClipInfo[] animatorinfo;
-    string current_animation;    
+    string current_animation;
+
+    float blinktime = 0.25f;
+    int numBlinks = 9;
 
     private void Start()
     {
@@ -151,13 +154,16 @@ public class EnemyAnimation : MonoBehaviour {
 
     public IEnumerator Blink()
     {
-        float blinktime = 0.5f;
+        for (int i = 0; i < numBlinks; i++)
+        {
+            
 
-        sr.color = Color.clear;
+            sr.color = Color.clear;
 
-        yield return new WaitForSeconds(blinktime);
+            yield return new WaitForSeconds(blinktime);
 
-        sr.color = Color.white;
+            sr.color = Color.white;
+        }            
     }
 
     public void SetUpTrigger(string triggerName)
