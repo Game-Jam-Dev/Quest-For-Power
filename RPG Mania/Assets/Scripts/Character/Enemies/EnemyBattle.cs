@@ -222,6 +222,11 @@ public class EnemyBattle : CharacterBattle {
         }
     }
 
+    public void ResetAnimationTags()
+    {
+        ea.ResetFlags();
+    }
+
     public override void SetAnimationTrigger(string triggerName)
     {
         ea.SetUpTrigger(triggerName);
