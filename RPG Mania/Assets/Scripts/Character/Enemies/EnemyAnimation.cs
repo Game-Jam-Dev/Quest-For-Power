@@ -185,7 +185,7 @@ public class EnemyAnimation : MonoBehaviour {
         isDead = true;
     }
 
-    void ResetFlags()
+    public void ResetFlags()
     {
         isAttacking = false;
         isBlocking = false;
@@ -198,19 +198,23 @@ public class EnemyAnimation : MonoBehaviour {
     {
         if (element == ElementManager.Element.Earth)
         {
+            Debug.Log("Earth_" + newState);
             ChangeAnimationState("Earth_" + newState);
         }
         else if (element == ElementManager.Element.Fire)
         {
+            Debug.Log("Fire_" + newState);
             ChangeAnimationState("Fire_" + newState);
 
         }
         else if (element == ElementManager.Element.Water)
         {
+            Debug.Log("Water_" + newState);
             ChangeAnimationState("Water_" + newState);
         }
         else if (element == ElementManager.Element.Wind)
         {
+            Debug.Log("Wind_" + newState);
             ChangeAnimationState("Wind_" + newState);
         }
     }
@@ -294,25 +298,27 @@ public class EnemyAnimation : MonoBehaviour {
     {
         isFighting = true;
 
+        if (anim != null && (int)element != 0)
+        {
+            ChangeAnimationStateWithElement(element, "idle");
+        };
+
         //transform.position = new(transform.position.x, combatPositionHeight, transform.position.z);
     }
 
     public void StopFighting()
     {
         isFighting = false;
-
+        ChangeAnimationState("New State");
         //transform.position = new(transform.position.x, originalPositionHeight, transform.position.z);
         // transform.rotation = Quaternion.LookRotation(Vector3.zero);
     }
 
     public void AssignElement(ElementManager.Element e)
     {
+        Debug.Log(this.gameObject.name);
+        Debug.Log(e);
         element = e;
-
-        if (anim != null && (int)e != 0)
-        {
-            ChangeAnimationStateWithElement(e, "idle");
-        };
 
         
     }
