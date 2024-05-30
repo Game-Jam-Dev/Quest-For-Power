@@ -21,6 +21,36 @@ public class EnemyAnimation : MonoBehaviour {
     float blinktime = 0.25f;
     int numBlinks = 9;
 
+    //Animation states
+    
+    const string EARTH_IDLE = "Earth_idle";
+    const string FIRE_IDLE = "Fire_idle";
+    const string WATER_IDLE = "Water_idle";
+    const string WIND_IDLE = "Wind_idle";
+
+    const string EARTH_DAMAGED = "Earth_damaged";
+    const string FIRE_DAMAGED = "Fire_damaged";
+    const string WATER_DAMAGED = "Water_damaged";
+    const string WIND_DAMAGED = "Wind_damaged";
+
+    const string EARTH_ATTACK = "Earth_attack";
+    const string FIRE_ATTACK = "Fire_attack";
+    const string WATER_ATTACK = "Water_attack";
+    const string WIND_ATTACK = "Wind_attack";
+
+    const string EARTH_BLOCK = "Earth_block";
+    const string FIRE_BLOCK = "Fire_block";
+    const string WATER_BLOCK = "Water_block";
+    const string WIND_BLOCK = "Wind_block";
+
+    const string EARTH_DEATH = "Earth_death";
+    const string FIRE_DEATH = "Fire_death";
+    const string WATER_DEATH = "Water_death";
+    const string WIND_DEATH = "Wind_death";
+
+    private string currentState;
+    float delay;
+
     private void Start()
     {
         TryGetComponent(out anim);
@@ -32,46 +62,159 @@ public class EnemyAnimation : MonoBehaviour {
         //combatPositionHeight = originalPositionHeight + combatPositionHeightAdjustment;
     }
 
-    private void Update()
-    {
+    //private void Update()
+    //{
         
-        if (CheckIfAnimation("ATTACK"))
+    //    if (CheckIfAnimation("ATTACK"))
+    //    {
+    //        isAttacking = true;
+    //    }
+    //    else if (isAttacking)
+    //    {
+    //        isAttacking = false;
+    //        ResetTrigger("Attack");
+    //    }
+    //    if (CheckIfAnimation("DAMAGED"))
+    //    {
+    //        isAttacked = true;
+    //    }
+    //    else if (isAttacked)
+    //    {
+    //        isAttacked = false;
+    //        ResetTrigger("Attacked");
+    //    }
+    //    if (CheckIfAnimation("BLOCK"))
+    //    {
+    //        isBlocking = true;
+    //    }
+    //    else if (isBlocking)
+    //    {
+    //        isBlocking = false;
+    //        ResetTrigger("Block");
+    //    }
+    //    if (CheckIfAnimation("DEATH") && !CheckIfAnimationIsDone())
+    //    {
+    //        isDying = true;
+    //    }
+    //    else if (isDying)
+    //    {
+    //        isDying = false;
+    //        anim.ResetTrigger("Dying");
+    //        isDead = true;
+    //    }
+    //}
+
+    void ChangeAnimationState(string newState)
+    {
+        if (currentState == newState) return;
+
+        Debug.Log(newState);
+        Debug.Log(newState.Contains("attack"));
+
+        anim.Play(newState);
+
+        Debug.Log(GetCurrentAnimation());
+
+        currentState = newState;
+        
+        if (newState.Contains("attack"))
         {
+            Debug.Log("what");
+            delay = anim.GetCurrentAnimatorStateInfo(0).length;
+            Debug.Log(delay);
             isAttacking = true;
+            Debug.Log("attacking flag");
+            Debug.Log(isAttacking);
+
+            Debug.Log(GetCurrentAnimation());
+
+            Invoke("ResetFlags", delay);
         }
-        else if (isAttacking)
+        else if (newState.Contains("block"))
         {
-            isAttacking = false;
-            ResetTrigger("Attack");
-        }
-        if (CheckIfAnimation("DAMAGED"))
-        {
-            isAttacked = true;
-        }
-        else if (isAttacked)
-        {
-            isAttacked = false;
-            ResetTrigger("Attacked");
-        }
-        if (CheckIfAnimation("BLOCK"))
-        {
+            delay = anim.GetCurrentAnimatorStateInfo(0).length;
             isBlocking = true;
+            Invoke("ResetFlags", delay);
         }
-        else if (isBlocking)
+        else if (newState.Contains("damaged"))
         {
-            isBlocking = false;
-            ResetTrigger("Block");
+            delay = anim.GetCurrentAnimatorStateInfo(0).length;
+            isAttacked = true;
+            Invoke("ResetFlags", delay);
         }
-        if (CheckIfAnimation("DEATH") && !CheckIfAnimationIsDone())
+        else if (newState.Contains("dying"))
         {
+            delay = anim.GetCurrentAnimatorStateInfo(0).length;
             isDying = true;
+            Invoke("Dead", delay);
         }
-        else if (isDying)
+    }
+
+    void Dead()
+    {
+        isDying = false;
+        isDead = true;
+    }
+
+    void ResetFlags()
+    {
+        isAttacking = false;
+        isBlocking = false;
+        isAttacked = false;
+        Debug.Log("Reset flags");
+        ChangeAnimationStateWithElement(element, "idle");
+    }
+
+    void ChangeAnimationStateWithElement(ElementManager.Element element, string newState)
+    {
+        if (element == ElementManager.Element.Earth)
         {
-            isDying = false;
-            anim.ResetTrigger("Dying");
-            isDead = true;
+            ChangeAnimationState("Earth_" + newState);
         }
+        else if (element == ElementManager.Element.Fire)
+        {
+            ChangeAnimationState("Fire_" + newState);
+
+        }
+        else if (element == ElementManager.Element.Water)
+        {
+            ChangeAnimationState("Water_" + newState);
+        }
+        else if (element == ElementManager.Element.Wind)
+        {
+            ChangeAnimationState("Wind_" + newState);
+        }
+    }
+
+    public void PlayAttack()
+    {
+        ChangeAnimationStateWithElement(element, "attack");
+    }
+
+    public void PlayDamaged()
+    {
+        ChangeAnimationStateWithElement(element, "damaged");
+    }
+
+    public void PlayBlock()
+    {
+        ChangeAnimationStateWithElement(element, "block");
+    }
+
+    public void PlayDeath()
+    {
+        ChangeAnimationStateWithElement(element, "death");
+    }
+
+    private string GetCurrentAnimation()
+    {
+        animatorinfo = anim.GetCurrentAnimatorClipInfo(0);
+        if (animatorinfo.Length == 0)
+        {
+            return "Not playing anything";
+        }
+        current_animation = animatorinfo[0].clip.name;
+        return current_animation;
     }
 
     public bool CheckIfAnimation(string stance)
@@ -135,10 +278,17 @@ public class EnemyAnimation : MonoBehaviour {
 
     public void AssignElement(ElementManager.Element e)
     {
-        if (anim != null && (int)e != 0) anim.SetInteger("Element", (int)e);
-
         element = e;
+
+        if (anim != null && (int)e != 0)
+        {
+            ChangeAnimationStateWithElement(e, "idle");
+        };
+
+        
     }
+
+
 
     private void OnEnable() {
         AssignElement(element);
