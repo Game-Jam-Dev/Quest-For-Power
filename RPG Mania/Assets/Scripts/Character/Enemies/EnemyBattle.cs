@@ -197,7 +197,7 @@ public class EnemyBattle : CharacterBattle {
     public override void Defeated()
     {
         //gameObject.SetActive(false);
-        ea.SetUpTrigger("Dying");
+        ea.PlayDeath();
         comboOrder.SetActive(false);
         ShieldUIImage.SetActive(false);
         this.GetComponent<CapsuleCollider>().enabled = false;
@@ -225,6 +225,26 @@ public class EnemyBattle : CharacterBattle {
     public override void SetAnimationTrigger(string triggerName)
     {
         ea.SetUpTrigger(triggerName);
+    }
+
+    public void PlayAttackedAnimation()
+    {
+        ea.PlayDamaged();
+    }
+
+    public void PlayAttackAnimation()
+    {
+        ea.PlayAttack();
+    }
+
+    public void PlayBlockAnimation()
+    {
+        ea.PlayBlock();
+    }
+
+    public void PlayDeathAnimation()
+    {
+        ea.PlayDeath();
     }
 
     ////public override void Recover()

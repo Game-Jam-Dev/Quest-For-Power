@@ -316,24 +316,24 @@ public class BattleManager : MonoBehaviour {
             if (hitNumber == 0 & comboAction.Cost == enemyToAttack.firstComboValue) 
             {
                 enemyToAttack.ReduceShields();
-                enemyToAttack.SetAnimationTrigger("Attacked");
+                enemyToAttack.PlayAttackedAnimation();
                 (activeCharacter as PlayerBattle).AddExtraComboPoints(comboAction.Cost);
             }
             else if (hitNumber == 1 & comboAction.Cost == enemyToAttack.secondComboValue)
             {
                 enemyToAttack.ReduceShields();
-                enemyToAttack.SetAnimationTrigger("Attacked");
+                enemyToAttack.PlayAttackedAnimation();
                 (activeCharacter as PlayerBattle).AddExtraComboPoints(comboAction.Cost);
             }
             else if (hitNumber == 2 & comboAction.Cost == enemyToAttack.thirdComboValue)
             {
                 enemyToAttack.ReduceShields();
-                enemyToAttack.SetAnimationTrigger("Attacked");
+                enemyToAttack.PlayAttackedAnimation();
                 (activeCharacter as PlayerBattle).AddExtraComboPoints(comboAction.Cost);
             }
             else
             {
-                enemyToAttack.SetAnimationTrigger("Blocked");
+                enemyToAttack.PlayBlockAnimation();
             }
             //(activeCharacter as PlayerBattle).SetAnimationTrigger("Jump");
             (activeCharacter as PlayerBattle).SetAnimationTrigger(comboAction.Name);
@@ -343,7 +343,7 @@ public class BattleManager : MonoBehaviour {
             enemyToAttack = (EnemyBattle)activeCharacter;
             if (!enemyToAttack.stunned)
             {
-                activeCharacter.SetAnimationTrigger("Light Attack");
+                (activeCharacter as EnemyBattle).PlayAttackAnimation();
                 battleUIManager.SetText($"{activeCharacter.characterName} used {comboAction.Name} at {characterToAttack.characterName}");
             }            
         }
