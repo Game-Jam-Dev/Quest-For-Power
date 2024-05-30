@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -7,7 +8,6 @@ public class EnemyAnimation : MonoBehaviour {
     private ElementManager.Element element;
 
     public float combatPositionHeightAdjustment = 1;
-    private float combatPositionHeight, originalPositionHeight;
     public bool isAttacking = false;
     public bool isBlocking = false;
     public bool isAttacked = false;
@@ -21,50 +21,26 @@ public class EnemyAnimation : MonoBehaviour {
     float blinktime = 0.25f;
     int numBlinks = 9;
 
-    //Animation states
-    
-    const string EARTH_IDLE = "Earth_idle";
-    const string FIRE_IDLE = "Fire_idle";
-    const string WATER_IDLE = "Water_idle";
-    const string WIND_IDLE = "Wind_idle";
-
-    const string EARTH_DAMAGED = "Earth_damaged";
-    const string FIRE_DAMAGED = "Fire_damaged";
-    const string WATER_DAMAGED = "Water_damaged";
-    const string WIND_DAMAGED = "Wind_damaged";
-
-    const string EARTH_ATTACK = "Earth_attack";
-    const string FIRE_ATTACK = "Fire_attack";
-    const string WATER_ATTACK = "Water_attack";
-    const string WIND_ATTACK = "Wind_attack";
-
-    const string EARTH_BLOCK = "Earth_block";
-    const string FIRE_BLOCK = "Fire_block";
-    const string WATER_BLOCK = "Water_block";
-    const string WIND_BLOCK = "Wind_block";
-
-    const string EARTH_DEATH = "Earth_death";
-    const string FIRE_DEATH = "Fire_death";
-    const string WATER_DEATH = "Water_death";
-    const string WIND_DEATH = "Wind_death";
-
     private string currentState;
-    float delay;
+
+
+    public float attackDuration;
+    public float damagedDuration;
+    public float blockDuration;
+    public float deathDuration;
 
     private void Start()
     {
         TryGetComponent(out anim);
         TryGetComponent(out sr);
 
-            AssignElement(element);
-
-        //originalPositionHeight = transform.position.y;
-        //combatPositionHeight = originalPositionHeight + combatPositionHeightAdjustment;
+        AssignElement(element);
+        UpdateAnimClipTimes();
     }
 
     //private void Update()
     //{
-        
+
     //    if (CheckIfAnimation("ATTACK"))
     //    {
     //        isAttacking = true;
@@ -104,49 +80,102 @@ public class EnemyAnimation : MonoBehaviour {
     //    }
     //}
 
+    public void UpdateAnimClipTimes()
+    {
+        AnimationClip[] clips = anim.runtimeAnimatorController.animationClips;
+        foreach (AnimationClip clip in clips)
+        {
+            //Debug.Log("Clip name");
+            //Debug.Log(clip.name);
+            if (clip.name.Contains("attack"))
+            {
+                attackDuration = clip.length;
+                //Debug.Log(attackDuration);
+            }
+            else if (clip.name.Contains("damaged"))
+            {
+                damagedDuration = clip.length;
+                //Debug.Log(damagedDuration);
+            }
+            else if (clip.name.Contains("block"))
+            {
+                blockDuration = clip.length;
+                //Debug.Log(blockDuration);
+            }
+            else if (clip.name.Contains("death"))
+            {
+                deathDuration = clip.length;
+                //Debug.Log(deathDuration);
+            }
+        }
+    }
+
     void ChangeAnimationState(string newState)
     {
         if (currentState == newState) return;
 
-        Debug.Log(newState);
-        Debug.Log(newState.Contains("attack"));
+        //Debug.Log("Current state: " + currentState);
+        //Debug.Log("New state: " + newState);
+
+        //Debug.Log("Current animation (b4 play): " + GetCurrentAnimation());
 
         anim.Play(newState);
 
-        Debug.Log(GetCurrentAnimation());
+        //Debug.Log("Current animation (after play): " + GetCurrentAnimation());
 
         currentState = newState;
         
         if (newState.Contains("attack"))
         {
-            Debug.Log("what");
-            delay = anim.GetCurrentAnimatorStateInfo(0).length;
-            Debug.Log(delay);
+            //Debug.Log("Attack state recognized");
+            //Debug.Log("Delay duration: " + attackDuration);
             isAttacking = true;
-            Debug.Log("attacking flag");
-            Debug.Log(isAttacking);
+            //Debug.Log("attacking flag: " + isAttacking);
 
-            Debug.Log(GetCurrentAnimation());
+            //Debug.Log("Current animation (b4 invoke): " + GetCurrentAnimation());
 
-            Invoke("ResetFlags", delay);
+            Invoke("ResetFlags", attackDuration);
         }
         else if (newState.Contains("block"))
         {
-            delay = anim.GetCurrentAnimatorStateInfo(0).length;
+            //Debug.Log("block state recognized");
+            //Debug.Log("Delay duration: " + blockDuration);
             isBlocking = true;
-            Invoke("ResetFlags", delay);
+            //Debug.Log("blocking flag: " + isBlocking);
+
+            //Debug.Log("Current animation (b4 invoke): " + GetCurrentAnimation());
+
+            //delay = anim.GetCurrentAnimatorStateInfo(0).length;
+            //isBlocking = true;
+            Invoke("ResetFlags", blockDuration);
         }
         else if (newState.Contains("damaged"))
         {
-            delay = anim.GetCurrentAnimatorStateInfo(0).length;
+            //Debug.Log("damaged state recognized");
+            //Debug.Log("Delay duration: " + damagedDuration);
             isAttacked = true;
-            Invoke("ResetFlags", delay);
+            //Debug.Log("attacked flag: " + isAttacked);
+
+            //Debug.Log("Current animation (b4 invoke): " + GetCurrentAnimation());
+
+
+            //delay = anim.GetCurrentAnimatorStateInfo(0).length;
+            //isAttacked = true;
+            Invoke("ResetFlags", damagedDuration);
         }
         else if (newState.Contains("dying"))
         {
-            delay = anim.GetCurrentAnimatorStateInfo(0).length;
-            isDying = true;
-            Invoke("Dead", delay);
+            //Debug.Log("dying state recognized");
+            //Debug.Log("Delay duration: " + deathDuration);
+            isAttacked = true;
+            //Debug.Log("blocking flag: " + isAttacked);
+
+            //Debug.Log("Current animation (b4 invoke): " + GetCurrentAnimation());
+
+
+            //delay = anim.GetCurrentAnimatorStateInfo(0).length;
+            //isDying = true;
+            Invoke("Dead", deathDuration);
         }
     }
 
@@ -161,7 +190,7 @@ public class EnemyAnimation : MonoBehaviour {
         isAttacking = false;
         isBlocking = false;
         isAttacked = false;
-        Debug.Log("Reset flags");
+        //Debug.Log("Reseting flags");
         ChangeAnimationStateWithElement(element, "idle");
     }
 

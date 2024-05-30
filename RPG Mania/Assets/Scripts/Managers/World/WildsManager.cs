@@ -172,7 +172,6 @@ public class WildsManager : WorldManager {
 
         for (int i = 0; i < battleEnemies.Count; i++)
         {
-            Debug.Log("Enemy position: " + enemyPositions[i]);
             battleEnemies[i].gameObject.transform.position = enemyPositions[i];
         }
 
