@@ -253,6 +253,9 @@ public class BattleManager : MonoBehaviour {
                         // updates player's health
                         battleUIManager.UpdatePlayerHealth();
 
+                        while (!CheckEnemiesReady())
+                            yield return null;
+
                         // lose battle if player dies
                         if (characterToAttack.health <= 0)
                         {
