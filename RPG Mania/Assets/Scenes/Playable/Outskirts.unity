@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.172768, g: 0.21589169, b: 0.29782546, a: 1}
+  m_IndirectSpecularColor: {r: 0.17276844, g: 0.21589246, b: 0.2978263, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -176,6 +176,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7265379138703556458, guid: 9d7d7ac18fa203d40b1f5518b20b35bb,
     type: 3}
   m_PrefabInstance: {fileID: 536707990}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &180257525 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4562790639759249469, guid: ebe76a19dc889d84b94b0d40aa7fcb1f,
+    type: 3}
+  m_PrefabInstance: {fileID: 457790895}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &186989827
 PrefabInstance:
@@ -479,6 +485,16 @@ PrefabInstance:
       propertyPath: battleCamera
       value: 
       objectReference: {fileID: 936754111}
+    - target: {fileID: 1252103352244012354, guid: ebe76a19dc889d84b94b0d40aa7fcb1f,
+        type: 3}
+      propertyPath: playerObject
+      value: 
+      objectReference: {fileID: 180257525}
+    - target: {fileID: 1252103352244012354, guid: ebe76a19dc889d84b94b0d40aa7fcb1f,
+        type: 3}
+      propertyPath: wildsMapObject
+      value: 
+      objectReference: {fileID: 1068003201}
     - target: {fileID: 1252103352355666352, guid: ebe76a19dc889d84b94b0d40aa7fcb1f,
         type: 3}
       propertyPath: m_Name
@@ -1251,7 +1267,7 @@ SpriteRenderer:
   m_Size: {x: 2.56, y: 2.56}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!4 &673442970
@@ -1494,8 +1510,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1068003201}
-  m_LocalRotation: {x: 0.70710677, y: 0, z: 0, w: 0.70710677}
-  m_LocalPosition: {x: 12.87, y: 0, z: 28.17}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

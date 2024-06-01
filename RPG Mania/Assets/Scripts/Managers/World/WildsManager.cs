@@ -95,9 +95,6 @@ public class WildsManager : WorldManager {
             {
                 battleEnemies.Add(e);
                 if (!e.gameObject.activeSelf) e.gameObject.SetActive(true);
-            } else 
-            {
-                e.gameObject.SetActive(false);
             }
         }
 
