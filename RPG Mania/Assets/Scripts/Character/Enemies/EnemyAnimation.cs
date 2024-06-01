@@ -22,8 +22,6 @@ public class EnemyAnimation : MonoBehaviour {
     int numBlinks = 9;
 
     private string currentState;
-
-
     public float attackDuration;
     public float damagedDuration;
     public float blockDuration;
@@ -37,48 +35,6 @@ public class EnemyAnimation : MonoBehaviour {
         AssignElement(element);
         UpdateAnimClipTimes();
     }
-
-    //private void Update()
-    //{
-
-    //    if (CheckIfAnimation("ATTACK"))
-    //    {
-    //        isAttacking = true;
-    //    }
-    //    else if (isAttacking)
-    //    {
-    //        isAttacking = false;
-    //        ResetTrigger("Attack");
-    //    }
-    //    if (CheckIfAnimation("DAMAGED"))
-    //    {
-    //        isAttacked = true;
-    //    }
-    //    else if (isAttacked)
-    //    {
-    //        isAttacked = false;
-    //        ResetTrigger("Attacked");
-    //    }
-    //    if (CheckIfAnimation("BLOCK"))
-    //    {
-    //        isBlocking = true;
-    //    }
-    //    else if (isBlocking)
-    //    {
-    //        isBlocking = false;
-    //        ResetTrigger("Block");
-    //    }
-    //    if (CheckIfAnimation("DEATH") && !CheckIfAnimationIsDone())
-    //    {
-    //        isDying = true;
-    //    }
-    //    else if (isDying)
-    //    {
-    //        isDying = false;
-    //        anim.ResetTrigger("Dying");
-    //        isDead = true;
-    //    }
-    //}
 
     public void UpdateAnimClipTimes()
     {
@@ -167,7 +123,7 @@ public class EnemyAnimation : MonoBehaviour {
         {
             //Debug.Log("dying state recognized");
             //Debug.Log("Delay duration: " + deathDuration);
-            isAttacked = true;
+            isDying = true;
             //Debug.Log("blocking flag: " + isAttacked);
 
             //Debug.Log("Current animation (b4 invoke): " + GetCurrentAnimation());
@@ -198,23 +154,23 @@ public class EnemyAnimation : MonoBehaviour {
     {
         if (element == ElementManager.Element.Earth)
         {
-            Debug.Log("Earth_" + newState);
+            //Debug.Log("Earth_" + newState);
             ChangeAnimationState("Earth_" + newState);
         }
         else if (element == ElementManager.Element.Fire)
         {
-            Debug.Log("Fire_" + newState);
+            //Debug.Log("Fire_" + newState);
             ChangeAnimationState("Fire_" + newState);
 
         }
         else if (element == ElementManager.Element.Water)
         {
-            Debug.Log("Water_" + newState);
+            //Debug.Log("Water_" + newState);
             ChangeAnimationState("Water_" + newState);
         }
         else if (element == ElementManager.Element.Wind)
         {
-            Debug.Log("Wind_" + newState);
+            //Debug.Log("Wind_" + newState);
             ChangeAnimationState("Wind_" + newState);
         }
     }

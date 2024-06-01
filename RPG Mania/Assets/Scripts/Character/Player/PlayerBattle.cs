@@ -7,8 +7,7 @@ public class PlayerBattle : CharacterBattle {
     public int experience = 0;
     public int level { get; private set; }
 
-
-    [SerializeField] private PlayerAnimation pa;
+    [SerializeField] private PlayerCombatAnimation playerAnimationScript;
     [SerializeField] private AudioClip waterClip, fireClip, windClip, earthClip, drainClip;
     [SerializeField] public int baseAttack = 5, baseMaxHealth = 65, baseDefense = 3, 
         baseComboPoints = 4;
@@ -45,7 +44,7 @@ public class PlayerBattle : CharacterBattle {
 
     public override void PrepareCombat()
     {
-        pa.SwitchToCombat();
+        playerAnimationScript.SwitchToCombat();
         GetComponent<PlayerMovement>().enabled = false;
         combo = characterComboPoints;
     }
@@ -77,7 +76,7 @@ public class PlayerBattle : CharacterBattle {
     {
         int xpForLevel = XpForLevel();
 
-        pa.SetUpTrigger("Absorb");
+        playerAnimationScript.ChangeAnimationState("Absorb");
 
         experience += xp;
 
@@ -109,15 +108,6 @@ public class PlayerBattle : CharacterBattle {
 
     public void SetStats(int level)
     {
-        // Old stats:
-        //maxHealth = 20 + level * 5;
-        //attack = 9 + (int)(level * 1.5f);
-        //defense = 5 + (int)(level * 1.1f);
-        //accuracy = .85f + level / 2000f;
-        //evasion = .05f + level / 1000f;
-        //combo = 3 + (int)Mathf.Pow(level, .3f);
-        //baseAttack, baseMaxHealth, baseDefense, baseAccuracy, baseEvasion, baseComboPoints
-
         maxHealth = baseMaxHealth + level * 5;
         attack = baseAttack + (int)(level * 1.5f);
         defense = baseDefense + (int)(level * 1.1f);
@@ -130,7 +120,7 @@ public class PlayerBattle : CharacterBattle {
 
     public void EndCombat()
     {
-        pa.SwitchFromCombat();
+        playerAnimationScript.SwitchFromCombat();
 
         DeactivateSkill();
 
@@ -139,28 +129,24 @@ public class PlayerBattle : CharacterBattle {
         SetStats(level);
     }
 
-    public override void SetAnimationTrigger(string triggerName)
-    {
-        pa.SetUpTrigger(triggerName);
-    }
-
     public Boolean CheckPlayerReady()
     {
-        if (pa.CheckIfAnimation("Idle", pa.anim))
+        // Use flags instead
+        if (playerAnimationScript.CheckIfAnimation("Idle", playerAnimationScript.anim))
         {
             return true;
         }
-        else if (pa.CheckIfAnimation("Death", pa.anim) && pa.CheckIfAnimationIsDone(pa.anim))
+        else if (playerAnimationScript.CheckIfAnimation("Death", playerAnimationScript.anim) && playerAnimationScript.CheckIfAnimationIsDone(playerAnimationScript.anim))
         {
             return true;
         }
         return false;
     }
 
-    public void ToggleNormalAttack(Vector3 targetPosition, bool moveAllTheWay)
-    {
-        pa.ToggleNormalAttack(targetPosition, moveAllTheWay);
-    }
+    //public void ToggleNormalAttack(Vector3 targetPosition, bool moveAllTheWay)
+    //{
+    //    playerAnimationScript.ToggleNormalAttack(targetPosition, moveAllTheWay);
+    //}
 
     public void SetData(int level, int experience, List<int> skillUses)
     {
@@ -183,11 +169,12 @@ public class PlayerBattle : CharacterBattle {
     public override void SelectSkill(SkillAction skill)
     {
         activeSkill = skill;
+
         //check if the interactions with items may break these calculations
         if (activeSkill == SkillList.GetInstance().GetAction("water"))
         {
             element = ElementManager.Element.Water;
-
+            
             ResetElementBonus();
             oldValue1 = accuracy;
             oldValue2 = evasion;
@@ -229,7 +216,7 @@ public class PlayerBattle : CharacterBattle {
 
         }
 
-        pa.SetElement(element);
+        playerAnimationScript.ChangeAnimationStateWithElement(element, "idle");
 
         audioSource.clip = elementClips[(int)element].Item1;
         audioSource.time = elementClips[(int)element].Item2;
@@ -258,7 +245,8 @@ public class PlayerBattle : CharacterBattle {
             defense = (int)oldValue1;
             earthBonus = false;
         }
-        pa.SetElement(ElementManager.Element.None);
+        playerAnimationScript.SetElement(ElementManager.Element.None);
+        playerAnimationScript.ChangeAnimationStateWithElement(element, "idle");
     }
 
     public bool CanUseSkill(SkillAction skill)
@@ -284,7 +272,7 @@ public class PlayerBattle : CharacterBattle {
 
         skillActions[index] = (skillActions[index].Item1, skillActions[index].Item2 + spellsTaken);
 
-        SetAnimationTrigger("Absorb");
+        playerAnimationScript.ChangeAnimationState("Absorb");
 
         GameManager.instance.SetPlayerSkill(index, skillActions[index].Item2);
 
@@ -318,12 +306,12 @@ public class PlayerBattle : CharacterBattle {
     {
         element = ElementManager.Element.None;
         activeSkill = null;
-        pa.SetElement(element);
+        playerAnimationScript.SetElement(element);
     }
 
     //public override Animator GetAnimator() {return pa.GetAnimator();}
 
-    public PlayerAnimation GetPlayerAnimation() { return pa; }
+    public PlayerCombatAnimation GetPlayerAnimation() { return playerAnimationScript; }
 
     //public override bool GetIsAttacking() {return pa.isAttacking;}
 }
