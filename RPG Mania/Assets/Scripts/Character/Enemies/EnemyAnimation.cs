@@ -256,7 +256,7 @@ public class EnemyAnimation : MonoBehaviour {
 
         if (anim != null && (int)element != 0)
         {
-            ChangeAnimationStateWithElement(element, "idle");
+            ToggleAnimMovement(true);
         };
 
         //transform.position = new(transform.position.x, combatPositionHeight, transform.position.z);
@@ -265,7 +265,8 @@ public class EnemyAnimation : MonoBehaviour {
     public void StopFighting()
     {
         isFighting = false;
-        ChangeAnimationState("New State");
+        ChangeAnimationStateWithElement(element, "idle");
+        ToggleAnimMovement(false);
         //transform.position = new(transform.position.x, originalPositionHeight, transform.position.z);
         // transform.rotation = Quaternion.LookRotation(Vector3.zero);
     }
@@ -275,7 +276,11 @@ public class EnemyAnimation : MonoBehaviour {
         Debug.Log(this.gameObject.name);
         Debug.Log(e);
         element = e;
-
+        if (anim != null && (int)element != 0)
+        {
+            ChangeAnimationStateWithElement(element, "idle");
+            ToggleAnimMovement(false);
+        };
         
     }
 
@@ -344,4 +349,9 @@ public class EnemyAnimation : MonoBehaviour {
     }
 
     public Animator GetAnimator() {return anim;}
+
+    public void ToggleAnimMovement(bool b)
+    {
+        anim.speed = b ? 1 : 0;
+    }
 }
