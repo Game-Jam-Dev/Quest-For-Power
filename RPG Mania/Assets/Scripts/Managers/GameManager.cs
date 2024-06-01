@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour {
 
     public void SetGameData(GameData gameData)
     {
+        this.gameData = gameData;
         playerData = gameData.playerData;
         worldState = gameData.worldState;
     }
@@ -121,7 +122,7 @@ public class GameManager : MonoBehaviour {
 
     public List<Item> GetItems()
     {
-        return (List<Item>)playerData.items.Keys;
+        return new List<Item>(playerData.items.Keys);
     }
 
     public GameData GetGameData()

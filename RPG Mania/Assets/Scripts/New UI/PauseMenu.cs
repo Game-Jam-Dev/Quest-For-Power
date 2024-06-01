@@ -41,6 +41,11 @@ public class PauseMenu : MonoBehaviour
         player = GameObject.Find("Arkanos");
     }
 
+    public void SaveGame()
+    {
+        SaveSystem.SaveGameData(GameManager.instance.GetGameData());
+    }
+
     public void DisplayStatus()
     {
         int level = player.GetComponent<PlayerBattle>().level;

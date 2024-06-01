@@ -78,8 +78,15 @@ public class EnemyBattle : CharacterBattle {
         this.id = id;
         scene = SceneManager.GetActiveScene().buildIndex;
         isAlive = GameManager.instance.CheckEnemyDeath(scene, id);
+
         GenerateComboWeakness();
         defaultDefense = defense;
+
+        if (!isAlive)
+        {
+            Defeated();
+            Kill();
+        }
     }
 
     public void ResetShields()
