@@ -163,7 +163,7 @@ public class BattleManager : MonoBehaviour {
                 else
                 {
                     originalPosition = activeCharacter.transform.position;
-                    (activeCharacter as PlayerBattle).ToggleNormalAttack(characterToAttack.transform.position, false);
+                    //(activeCharacter as PlayerBattle).ToggleNormalAttack(characterToAttack.transform.position, false);
                     // track the index of the attack in the combo
                     int i = 0;
 
@@ -210,7 +210,7 @@ public class BattleManager : MonoBehaviour {
                         }
                         i++;
                     }
-                    (activeCharacter as PlayerBattle).ToggleNormalAttack(originalPosition, true);
+                    //(activeCharacter as PlayerBattle).ToggleNormalAttack(originalPosition, true);
                     (activeCharacter as PlayerBattle).UpdateComboPoints();
                 }
                 UpdateSkillCounter();
@@ -357,6 +357,7 @@ public class BattleManager : MonoBehaviour {
     private void Absorb(CharacterBattle activeCharacter)
     {
         (activeCharacter as PlayerBattle).AbsorbSkill(characterToAttack.element);
+
 
         battleUIManager.SetText($"{player.characterName} absorbed the {characterToAttack.element} element from {characterToAttack.characterName}");
 
