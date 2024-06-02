@@ -249,6 +249,8 @@ public class BattleManager : MonoBehaviour {
                             battleUIManager.SetText($"{activeCharacter.characterName} missed");
                             //break;
                         }
+                        else
+                            (characterToAttack as PlayerBattle).PlayDamagedAnimation();
 
                         // updates player's health
                         battleUIManager.UpdatePlayerHealth();
@@ -527,7 +529,7 @@ public class BattleManager : MonoBehaviour {
     {
         StopCoroutine(battleLoop);
 
-        player.SetAnimationTrigger("Death");
+        player.PlayDeathAnimation();
 
         battleUIManager.SetText("You were defeated!");
 
