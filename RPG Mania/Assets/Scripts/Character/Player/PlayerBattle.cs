@@ -74,11 +74,11 @@ public class PlayerBattle : CharacterBattle {
 
     public void PlayAttackAnimation(ComboAction comboAction)
     {
-        Debug.Log("Combo Action name:");
-        Debug.Log(comboAction.Name);
+        //Debug.Log("Combo Action name:");
+        //Debug.Log(comboAction.Name);
 
-        Debug.Log("Active element");
-        Debug.Log(playerAnimationScript.element);
+        //Debug.Log("Active element");
+        //Debug.Log(playerAnimationScript.element);
 
         if (comboAction.Name == "Light Attack")
         {
@@ -307,6 +307,16 @@ public class PlayerBattle : CharacterBattle {
         int index = skillActions.FindIndex(item => item.Item1 == skill);
 
         return skillActions[index].Item2;
+    }
+
+    public void PlayDamagedAnimation()
+    {
+        playerAnimationScript.ChangeAnimationState("Damaged");
+    }
+
+    public void PlayDeathAnimation() 
+    {
+        playerAnimationScript.ChangeAnimationState("Death");
     }
 
     public void AbsorbSkill(ElementManager.Element e)
