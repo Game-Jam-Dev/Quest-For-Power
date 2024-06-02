@@ -273,8 +273,8 @@ public class EnemyAnimation : MonoBehaviour {
 
     public void AssignElement(ElementManager.Element e)
     {
-        Debug.Log(this.gameObject.name);
-        Debug.Log(e);
+        //Debug.Log(this.gameObject.name);
+        //Debug.Log(e);
         element = e;
         if (anim != null && (int)element != 0)
         {

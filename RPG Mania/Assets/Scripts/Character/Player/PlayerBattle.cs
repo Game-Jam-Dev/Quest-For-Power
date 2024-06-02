@@ -72,6 +72,49 @@ public class PlayerBattle : CharacterBattle {
         }
     }
 
+    public void PlayAttackAnimation(ComboAction comboAction)
+    {
+        Debug.Log("Combo Action name:");
+        Debug.Log(comboAction.Name);
+
+        Debug.Log("Active element");
+        Debug.Log(playerAnimationScript.element);
+
+        if (comboAction.Name == "Light Attack")
+        {
+            if (playerAnimationScript.element == ElementManager.Element.None)
+            {
+                playerAnimationScript.ChangeAnimationState("Light_Attack");
+            }
+            else
+            {
+                playerAnimationScript.ChangeAnimationStateWithElement(playerAnimationScript.element, "Light_Attack");
+            }            
+        }
+        else if (comboAction.Name == "Medium Attack")
+        {
+            if (playerAnimationScript.element == ElementManager.Element.None)
+            {
+                playerAnimationScript.ChangeAnimationState("Medium_Attack");
+            }
+            else
+            {
+                playerAnimationScript.ChangeAnimationStateWithElement(playerAnimationScript.element, "Medium_Attack");
+            }
+        }
+        else if (comboAction.Name == "Heavy Attack")
+        {
+            if (playerAnimationScript.element == ElementManager.Element.None)
+            {
+                playerAnimationScript.ChangeAnimationState("Heavy_Attack");
+            }
+            else
+            {
+                playerAnimationScript.ChangeAnimationStateWithElement(playerAnimationScript.element, "Heavy_Attack");
+            }
+        }
+    }
+
     public void WinBattle(int xp, int kills, List<Item> itemDrops)
     {
         int xpForLevel = XpForLevel();
@@ -216,7 +259,8 @@ public class PlayerBattle : CharacterBattle {
 
         }
 
-        playerAnimationScript.ChangeAnimationStateWithElement(element, "idle");
+        playerAnimationScript.ChangeAnimationStateWithElement(element, "Idle");
+        playerAnimationScript.SetElement(element);
 
         audioSource.clip = elementClips[(int)element].Item1;
         audioSource.time = elementClips[(int)element].Item2;
@@ -246,7 +290,7 @@ public class PlayerBattle : CharacterBattle {
             earthBonus = false;
         }
         playerAnimationScript.SetElement(ElementManager.Element.None);
-        playerAnimationScript.ChangeAnimationStateWithElement(element, "idle");
+        playerAnimationScript.ChangeAnimationStateWithElement(element, "Idle");
     }
 
     public bool CanUseSkill(SkillAction skill)

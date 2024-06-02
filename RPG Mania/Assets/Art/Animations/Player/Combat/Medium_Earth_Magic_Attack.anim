@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: emperor_FIGHT_Heavy_Water_Magic_Attack
+  m_Name: Medium_Earth_Magic_Attack
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,31 +20,19 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: -568549923, guid: bc21665c1b3eba240a7e87cbc0d1da38, type: 3}
+      value: {fileID: -1619080868, guid: ec2ead94438fb0e458046c82efccfff8, type: 3}
     - time: 0.083333336
-      value: {fileID: -1630856440, guid: bc21665c1b3eba240a7e87cbc0d1da38, type: 3}
+      value: {fileID: 260083501, guid: ec2ead94438fb0e458046c82efccfff8, type: 3}
     - time: 0.16666667
-      value: {fileID: -1264892740, guid: bc21665c1b3eba240a7e87cbc0d1da38, type: 3}
+      value: {fileID: -2067255200, guid: ec2ead94438fb0e458046c82efccfff8, type: 3}
     - time: 0.25
-      value: {fileID: -1537985658, guid: bc21665c1b3eba240a7e87cbc0d1da38, type: 3}
+      value: {fileID: -1296043295, guid: ec2ead94438fb0e458046c82efccfff8, type: 3}
     - time: 0.33333334
-      value: {fileID: 26112410, guid: bc21665c1b3eba240a7e87cbc0d1da38, type: 3}
+      value: {fileID: -215733750, guid: ec2ead94438fb0e458046c82efccfff8, type: 3}
     - time: 0.41666666
-      value: {fileID: 1326391433, guid: bc21665c1b3eba240a7e87cbc0d1da38, type: 3}
+      value: {fileID: 581396726, guid: ec2ead94438fb0e458046c82efccfff8, type: 3}
     - time: 0.5
-      value: {fileID: -448476730, guid: bc21665c1b3eba240a7e87cbc0d1da38, type: 3}
-    - time: 0.5833333
-      value: {fileID: 214546687, guid: bc21665c1b3eba240a7e87cbc0d1da38, type: 3}
-    - time: 0.6666667
-      value: {fileID: 1957326273, guid: bc21665c1b3eba240a7e87cbc0d1da38, type: 3}
-    - time: 0.75
-      value: {fileID: -804739496, guid: bc21665c1b3eba240a7e87cbc0d1da38, type: 3}
-    - time: 0.8333333
-      value: {fileID: 85995368, guid: bc21665c1b3eba240a7e87cbc0d1da38, type: 3}
-    - time: 0.9166667
-      value: {fileID: -154594311, guid: bc21665c1b3eba240a7e87cbc0d1da38, type: 3}
-    - time: 1
-      value: {fileID: 1690089287, guid: bc21665c1b3eba240a7e87cbc0d1da38, type: 3}
+      value: {fileID: -418723375, guid: ec2ead94438fb0e458046c82efccfff8, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -62,7 +50,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.0833334
+    m_StopTime: 0.5833333
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0

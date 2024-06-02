@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: emperor_FIGHT_Medium_Air_Magic_Attack
+  m_Name: Medium_Water_Magic_Attack
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,19 +20,19 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: -2053926571, guid: 3386dd59e1c39f44ebfe311053d453fc, type: 3}
+      value: {fileID: -114470624, guid: 2f1297230c7018546b9e6aaa23c0e9a3, type: 3}
     - time: 0.083333336
-      value: {fileID: 587959373, guid: 3386dd59e1c39f44ebfe311053d453fc, type: 3}
+      value: {fileID: 399567680, guid: 2f1297230c7018546b9e6aaa23c0e9a3, type: 3}
     - time: 0.16666667
-      value: {fileID: -1924570932, guid: 3386dd59e1c39f44ebfe311053d453fc, type: 3}
+      value: {fileID: -1598097564, guid: 2f1297230c7018546b9e6aaa23c0e9a3, type: 3}
     - time: 0.25
-      value: {fileID: 408292463, guid: 3386dd59e1c39f44ebfe311053d453fc, type: 3}
+      value: {fileID: -1859272927, guid: 2f1297230c7018546b9e6aaa23c0e9a3, type: 3}
     - time: 0.33333334
-      value: {fileID: 2013260058, guid: 3386dd59e1c39f44ebfe311053d453fc, type: 3}
+      value: {fileID: -1810357272, guid: 2f1297230c7018546b9e6aaa23c0e9a3, type: 3}
     - time: 0.41666666
-      value: {fileID: 660162040, guid: 3386dd59e1c39f44ebfe311053d453fc, type: 3}
+      value: {fileID: -465650165, guid: 2f1297230c7018546b9e6aaa23c0e9a3, type: 3}
     - time: 0.5
-      value: {fileID: 224022197, guid: 3386dd59e1c39f44ebfe311053d453fc, type: 3}
+      value: {fileID: -1620193976, guid: 2f1297230c7018546b9e6aaa23c0e9a3, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
