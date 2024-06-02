@@ -315,6 +315,7 @@ public class BattleManager : MonoBehaviour {
         
         if (activeCharacter.characterName == "Arkanos")
         {
+            (activeCharacter as PlayerBattle).PlayAttackAnimation(comboAction);
             battleUIManager.SetText($"{activeCharacter.characterName} used {comboAction.Name} at {characterToAttack.characterName}");
             if (hitNumber == 0 & comboAction.Cost == enemyToAttack.firstComboValue) 
             {
@@ -339,7 +340,7 @@ public class BattleManager : MonoBehaviour {
                 enemyToAttack.PlayBlockAnimation();
             }
             //(activeCharacter as PlayerBattle).SetAnimationTrigger("Jump");
-            (activeCharacter as PlayerBattle).SetAnimationTrigger(comboAction.Name);
+            //(activeCharacter as PlayerBattle).SetAnimationTrigger(comboAction.Name);
         }
         else
         {
