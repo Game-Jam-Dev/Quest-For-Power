@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using static UnityEditor.Progress;
+//using static UnityEditor.Progress;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -39,6 +39,11 @@ public class PauseMenu : MonoBehaviour
         spellsQuantityTemplate = spellsContainer.Find("SpellSlotQuantityTemplate");
 
         player = GameObject.Find("Arkanos");
+    }
+
+    public void SaveGame()
+    {
+        SaveSystem.SaveGameData(GameManager.instance.GetGameData());
     }
 
     public void DisplayStatus()

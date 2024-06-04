@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEditorInternal.VersionControl;
+//using UnityEditorInternal.VersionControl;
 
 public class UIResolution : MonoBehaviour
 {

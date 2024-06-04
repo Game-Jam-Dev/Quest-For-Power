@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -38,6 +39,10 @@ public class EnemyBattle : CharacterBattle {
     [SerializeField] public int stunLimit;
     [SerializeField] public Sprite ShieldSprite, BrokenShieldSprite;
     public int defaultDefense;
+    float currentTime;
+
+    bool inCombat = false;
+    public float resetTimer = 1f;
 
     protected override void Start()
     {
@@ -54,9 +59,18 @@ public class EnemyBattle : CharacterBattle {
 
         if (itemDrops) itemDrop = ItemManager.GetInstance().GetRandomItem();
 
+    }
 
-        // Slow down game
-        Time.timeScale = 0.5f;
+    private void Update()
+    {
+        if (currentTime != null && currentTime != 0)
+        {
+            if (Time.time >= currentTime + 5)
+            {
+                currentTime = 0;
+                this.GetComponent<CapsuleCollider>().enabled = true;
+            }
+        }
     }
 
     public void InitializeEnemy(int id)
@@ -64,8 +78,15 @@ public class EnemyBattle : CharacterBattle {
         this.id = id;
         scene = SceneManager.GetActiveScene().buildIndex;
         isAlive = GameManager.instance.CheckEnemyDeath(scene, id);
+
         GenerateComboWeakness();
         defaultDefense = defense;
+
+        if (!isAlive)
+        {
+            Defeated();
+            Kill();
+        }
     }
 
     public void ResetShields()
@@ -152,6 +173,7 @@ public class EnemyBattle : CharacterBattle {
         ea.StartFighting();
         comboOrder.SetActive(true);
         ShieldUIImage.SetActive(true);
+        ToggleCollider(false);
     }
 
     public void ResetFromFight()
@@ -160,6 +182,14 @@ public class EnemyBattle : CharacterBattle {
         ea.StopFighting();
         comboOrder.SetActive(false);
         ShieldUIImage.SetActive(false);
+
+        StartCoroutine(ResetCombat());
+    }
+
+    private IEnumerator ResetCombat()
+    {
+        yield return new WaitForSeconds(resetTimer);
+        ToggleCollider(true);
     }
 
     protected virtual void SetStats(){}
@@ -168,15 +198,16 @@ public class EnemyBattle : CharacterBattle {
     {
         isAlive = false;
         GameManager.instance.SetEnemyDeath(scene, id);
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 
     public override void Defeated()
     {
         //gameObject.SetActive(false);
-        ea.SetUpTrigger("Dying");
+        ea.PlayDeath();
         comboOrder.SetActive(false);
         ShieldUIImage.SetActive(false);
+        this.GetComponent<CapsuleCollider>().enabled = false;
     }
 
     // uncomment if enemy takes damage incorrectly
@@ -198,9 +229,34 @@ public class EnemyBattle : CharacterBattle {
         }
     }
 
+    public void ResetAnimationTags()
+    {
+        ea.ResetFlags();
+    }
+
     public override void SetAnimationTrigger(string triggerName)
     {
         ea.SetUpTrigger(triggerName);
+    }
+
+    public void PlayAttackedAnimation()
+    {
+        ea.PlayDamaged();
+    }
+
+    public void PlayAttackAnimation()
+    {
+        ea.PlayAttack();
+    }
+
+    public void PlayBlockAnimation()
+    {
+        ea.PlayBlock();
+    }
+
+    public void PlayDeathAnimation()
+    {
+        ea.PlayDeath();
     }
 
     ////public override void Recover()
@@ -239,6 +295,8 @@ public class EnemyBattle : CharacterBattle {
 
     protected virtual void OnTriggerEnter(Collider other) 
     {
+        // if (inCombat) return;
+
         Scene sceneObject = SceneManager.GetActiveScene();
         if (other.gameObject.CompareTag("Player") && isAlive && !ea.isDead && sceneObject.name != "Throne Room")
         {
@@ -279,5 +337,9 @@ public class EnemyBattle : CharacterBattle {
     public void IncreaseAbsorbs()
     {
         absorbs++;
+    }
+    public void ToggleCollider(bool b)
+    {
+        GetComponent<CapsuleCollider>().enabled = b;
     }
 }

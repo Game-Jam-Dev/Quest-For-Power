@@ -1,13 +1,13 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using TMPro;
 
 public class PlayerBattle : CharacterBattle {
     public int experience = 0;
     public int level { get; private set; }
 
-
-    [SerializeField] private PlayerAnimation pa;
+    [SerializeField] private PlayerCombatAnimation playerAnimationScript;
     [SerializeField] private AudioClip waterClip, fireClip, windClip, earthClip, drainClip;
     [SerializeField] public int baseAttack = 5, baseMaxHealth = 65, baseDefense = 3, 
         baseComboPoints = 4;
@@ -44,7 +44,7 @@ public class PlayerBattle : CharacterBattle {
 
     public override void PrepareCombat()
     {
-        pa.SwitchToCombat();
+        playerAnimationScript.SwitchToCombat();
         GetComponent<PlayerMovement>().enabled = false;
         combo = characterComboPoints;
     }
@@ -52,13 +52,11 @@ public class PlayerBattle : CharacterBattle {
     public void AddExtraComboPoints(int extraPoints)
     {
         extraComboPoints += extraPoints;
-        Debug.Log("Adding extra points: " + extraComboPoints);
     }
 
     public void ResetExtraComboPoints()
     {
         extraComboPoints = 0;
-        Debug.Log("Reseting extra points: " + extraComboPoints);
     }
 
     public void UpdateComboPoints()
@@ -72,15 +70,56 @@ public class PlayerBattle : CharacterBattle {
         {
             combo = (int)Mathf.Round(1.5f * characterComboPoints);
         }
-        Debug.Log("Updating combo:" + combo.ToString() + " character base points: " + characterComboPoints +
-            " extra points: " + extraComboPoints);
+    }
+
+    public void PlayAttackAnimation(ComboAction comboAction)
+    {
+        //Debug.Log("Combo Action name:");
+        //Debug.Log(comboAction.Name);
+
+        //Debug.Log("Active element");
+        //Debug.Log(playerAnimationScript.element);
+
+        if (comboAction.Name == "Light Attack")
+        {
+            if (playerAnimationScript.element == ElementManager.Element.None)
+            {
+                playerAnimationScript.ChangeAnimationState("Light_Attack");
+            }
+            else
+            {
+                playerAnimationScript.ChangeAnimationStateWithElement(playerAnimationScript.element, "Light_Attack");
+            }            
+        }
+        else if (comboAction.Name == "Medium Attack")
+        {
+            if (playerAnimationScript.element == ElementManager.Element.None)
+            {
+                playerAnimationScript.ChangeAnimationState("Medium_Attack");
+            }
+            else
+            {
+                playerAnimationScript.ChangeAnimationStateWithElement(playerAnimationScript.element, "Medium_Attack");
+            }
+        }
+        else if (comboAction.Name == "Heavy Attack")
+        {
+            if (playerAnimationScript.element == ElementManager.Element.None)
+            {
+                playerAnimationScript.ChangeAnimationState("Heavy_Attack");
+            }
+            else
+            {
+                playerAnimationScript.ChangeAnimationStateWithElement(playerAnimationScript.element, "Heavy_Attack");
+            }
+        }
     }
 
     public void WinBattle(int xp, int kills, List<Item> itemDrops)
     {
         int xpForLevel = XpForLevel();
 
-        pa.SetUpTrigger("Absorb");
+        playerAnimationScript.ChangeAnimationState("Absorb");
 
         experience += xp;
 
@@ -112,15 +151,6 @@ public class PlayerBattle : CharacterBattle {
 
     public void SetStats(int level)
     {
-        // Old stats:
-        //maxHealth = 20 + level * 5;
-        //attack = 9 + (int)(level * 1.5f);
-        //defense = 5 + (int)(level * 1.1f);
-        //accuracy = .85f + level / 2000f;
-        //evasion = .05f + level / 1000f;
-        //combo = 3 + (int)Mathf.Pow(level, .3f);
-        //baseAttack, baseMaxHealth, baseDefense, baseAccuracy, baseEvasion, baseComboPoints
-
         maxHealth = baseMaxHealth + level * 5;
         attack = baseAttack + (int)(level * 1.5f);
         defense = baseDefense + (int)(level * 1.1f);
@@ -133,7 +163,7 @@ public class PlayerBattle : CharacterBattle {
 
     public void EndCombat()
     {
-        pa.SwitchFromCombat();
+        playerAnimationScript.SwitchFromCombat();
 
         DeactivateSkill();
 
@@ -142,25 +172,24 @@ public class PlayerBattle : CharacterBattle {
         SetStats(level);
     }
 
-    public override void SetAnimationTrigger(string triggerName)
-    {
-        pa.SetUpTrigger(triggerName);
-    }
-
     public Boolean CheckPlayerReady()
     {
-        if (pa.CheckIfAnimation("Idle", pa.battleAnimator) || pa.CheckIfAnimation("Light", pa.battleAnimator)
-            || pa.CheckIfAnimation("Medium", pa.battleAnimator) || pa.CheckIfAnimation("Heavy", pa.battleAnimator))
+        // Use flags instead
+        if (playerAnimationScript.CheckIfAnimation("Idle", playerAnimationScript.anim))
+        {
+            return true;
+        }
+        else if (playerAnimationScript.CheckIfAnimation("Death", playerAnimationScript.anim) && playerAnimationScript.CheckIfAnimationIsDone(playerAnimationScript.anim))
         {
             return true;
         }
         return false;
     }
 
-    public void SetAttackFinished()
-    {
-        pa.SetUpTrigger("Attack Done");
-    }
+    //public void ToggleNormalAttack(Vector3 targetPosition, bool moveAllTheWay)
+    //{
+    //    playerAnimationScript.ToggleNormalAttack(targetPosition, moveAllTheWay);
+    //}
 
     public void SetData(int level, int experience, List<int> skillUses)
     {
@@ -183,11 +212,12 @@ public class PlayerBattle : CharacterBattle {
     public override void SelectSkill(SkillAction skill)
     {
         activeSkill = skill;
+
         //check if the interactions with items may break these calculations
         if (activeSkill == SkillList.GetInstance().GetAction("water"))
         {
             element = ElementManager.Element.Water;
-
+            
             ResetElementBonus();
             oldValue1 = accuracy;
             oldValue2 = evasion;
@@ -229,7 +259,8 @@ public class PlayerBattle : CharacterBattle {
 
         }
 
-        pa.SetElement(element);
+        playerAnimationScript.ChangeAnimationStateWithElement(element, "Idle");
+        playerAnimationScript.SetElement(element);
 
         audioSource.clip = elementClips[(int)element].Item1;
         audioSource.time = elementClips[(int)element].Item2;
@@ -258,7 +289,8 @@ public class PlayerBattle : CharacterBattle {
             defense = (int)oldValue1;
             earthBonus = false;
         }
-        pa.SetElement(ElementManager.Element.None);
+        playerAnimationScript.SetElement(ElementManager.Element.None);
+        playerAnimationScript.ChangeAnimationStateWithElement(element, "Idle");
     }
 
     public bool CanUseSkill(SkillAction skill)
@@ -277,6 +309,16 @@ public class PlayerBattle : CharacterBattle {
         return skillActions[index].Item2;
     }
 
+    public void PlayDamagedAnimation()
+    {
+        playerAnimationScript.ChangeAnimationState("Damaged");
+    }
+
+    public void PlayDeathAnimation() 
+    {
+        playerAnimationScript.ChangeAnimationState("Death");
+    }
+
     public void AbsorbSkill(ElementManager.Element e)
     {
         int index = (int)e;
@@ -284,7 +326,7 @@ public class PlayerBattle : CharacterBattle {
 
         skillActions[index] = (skillActions[index].Item1, skillActions[index].Item2 + spellsTaken);
 
-        SetAnimationTrigger("Absorb");
+        playerAnimationScript.ChangeAnimationState("Absorb");
 
         GameManager.instance.SetPlayerSkill(index, skillActions[index].Item2);
 
@@ -318,12 +360,12 @@ public class PlayerBattle : CharacterBattle {
     {
         element = ElementManager.Element.None;
         activeSkill = null;
-        pa.SetElement(element);
+        playerAnimationScript.SetElement(element);
     }
 
     //public override Animator GetAnimator() {return pa.GetAnimator();}
 
-    public PlayerAnimation GetPlayerAnimation() { return pa; }
+    public PlayerCombatAnimation GetPlayerAnimation() { return playerAnimationScript; }
 
     //public override bool GetIsAttacking() {return pa.isAttacking;}
 }

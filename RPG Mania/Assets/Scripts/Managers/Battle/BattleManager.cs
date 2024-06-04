@@ -34,6 +34,9 @@ public class BattleManager : MonoBehaviour {
     GameObject combatResolutionUI;
     EnemyBattle defeatedEnemy;
 
+    Vector3 originalPosition = Vector3.zero;
+    List<EnemyBattle> battleEnemies;
+
     private void Awake() {
         gameObject.SetActive(false);
         combatResolutionUI = GameObject.Find("CombatResolution");
@@ -67,7 +70,15 @@ public class BattleManager : MonoBehaviour {
     private void InitializeCharacters()
     {
         // set enemies, end battle if none
-        enemies = worldManager.GetBattleEnemies();
+        // set enemies to a copy of the list to avoid modifying the original
+        
+
+        battleEnemies = worldManager.GetBattleEnemies();
+        foreach (EnemyBattle e in battleEnemies)
+        {
+            enemies.Add(e);
+        }
+
         if (enemies.Count <= 0) EndBattle();
 
         // save player reference
@@ -86,6 +97,9 @@ public class BattleManager : MonoBehaviour {
 
     private IEnumerator BattleLoop()
     {
+        // Slow down game
+        //Time.timeScale = 0.1f;
+
         while (turnOrder.Count > 0) {
             // get next character in order
             CharacterBattle activeCharacter = turnOrder.Peek();
@@ -148,6 +162,8 @@ public class BattleManager : MonoBehaviour {
                 // standard action
                 else
                 {
+                    originalPosition = activeCharacter.transform.position;
+                    //(activeCharacter as PlayerBattle).ToggleNormalAttack(characterToAttack.transform.position, false);
                     // track the index of the attack in the combo
                     int i = 0;
 
@@ -159,13 +175,8 @@ public class BattleManager : MonoBehaviour {
 
                         used_combo_points += a.Cost;
 
-                        if (a == activeCharacterCombo.Last())
-                        {
-                            (activeCharacter as PlayerBattle).SetAnimationTrigger("Attack Done");
-                        }
-
                         // wait for the attack animation to play
-                        while (!CheckEnemiesReady())
+                        while (!CheckEnemiesReady() || !(activeCharacter as PlayerBattle).CheckPlayerReady())
                         {
 
                             yield return null;
@@ -199,7 +210,7 @@ public class BattleManager : MonoBehaviour {
                         }
                         i++;
                     }
-                    (activeCharacter as PlayerBattle).SetAttackFinished();
+                    //(activeCharacter as PlayerBattle).ToggleNormalAttack(originalPosition, true);
                     (activeCharacter as PlayerBattle).UpdateComboPoints();
                 }
                 UpdateSkillCounter();
@@ -238,9 +249,14 @@ public class BattleManager : MonoBehaviour {
                             battleUIManager.SetText($"{activeCharacter.characterName} missed");
                             //break;
                         }
+                        else
+                            (characterToAttack as PlayerBattle).PlayDamagedAnimation();
 
                         // updates player's health
                         battleUIManager.UpdatePlayerHealth();
+
+                        while (!CheckEnemiesReady())
+                            yield return null;
 
                         // lose battle if player dies
                         if (characterToAttack.health <= 0)
@@ -293,6 +309,7 @@ public class BattleManager : MonoBehaviour {
         StopCoroutine(battleLoop);
         worldManager.EscapeBattle();
         EndBattle();
+        battleUIManager.Escape();
     }
 
     private bool Attack(CharacterBattle activeCharacter, ComboAction comboAction, int hitNumber = 0)
@@ -300,38 +317,39 @@ public class BattleManager : MonoBehaviour {
         
         if (activeCharacter.characterName == "Arkanos")
         {
+            (activeCharacter as PlayerBattle).PlayAttackAnimation(comboAction);
             battleUIManager.SetText($"{activeCharacter.characterName} used {comboAction.Name} at {characterToAttack.characterName}");
             if (hitNumber == 0 & comboAction.Cost == enemyToAttack.firstComboValue) 
             {
                 enemyToAttack.ReduceShields();
-                enemyToAttack.SetAnimationTrigger("Attacked");
+                enemyToAttack.PlayAttackedAnimation();
                 (activeCharacter as PlayerBattle).AddExtraComboPoints(comboAction.Cost);
             }
             else if (hitNumber == 1 & comboAction.Cost == enemyToAttack.secondComboValue)
             {
                 enemyToAttack.ReduceShields();
-                enemyToAttack.SetAnimationTrigger("Attacked");
+                enemyToAttack.PlayAttackedAnimation();
                 (activeCharacter as PlayerBattle).AddExtraComboPoints(comboAction.Cost);
             }
             else if (hitNumber == 2 & comboAction.Cost == enemyToAttack.thirdComboValue)
             {
                 enemyToAttack.ReduceShields();
-                enemyToAttack.SetAnimationTrigger("Attacked");
+                enemyToAttack.PlayAttackedAnimation();
                 (activeCharacter as PlayerBattle).AddExtraComboPoints(comboAction.Cost);
             }
             else
             {
-                enemyToAttack.SetAnimationTrigger("Blocked");
+                enemyToAttack.PlayBlockAnimation();
             }
             //(activeCharacter as PlayerBattle).SetAnimationTrigger("Jump");
-            (activeCharacter as PlayerBattle).SetAnimationTrigger(comboAction.Name);
+            //(activeCharacter as PlayerBattle).SetAnimationTrigger(comboAction.Name);
         }
         else
         {
             enemyToAttack = (EnemyBattle)activeCharacter;
             if (!enemyToAttack.stunned)
             {
-                activeCharacter.SetAnimationTrigger("Light Attack");
+                (activeCharacter as EnemyBattle).PlayAttackAnimation();
                 battleUIManager.SetText($"{activeCharacter.characterName} used {comboAction.Name} at {characterToAttack.characterName}");
             }            
         }
@@ -342,6 +360,7 @@ public class BattleManager : MonoBehaviour {
     private void Absorb(CharacterBattle activeCharacter)
     {
         (activeCharacter as PlayerBattle).AbsorbSkill(characterToAttack.element);
+
 
         battleUIManager.SetText($"{player.characterName} absorbed the {characterToAttack.element} element from {characterToAttack.characterName}");
 
@@ -510,7 +529,7 @@ public class BattleManager : MonoBehaviour {
     {
         StopCoroutine(battleLoop);
 
-        player.SetAnimationTrigger("Death");
+        player.PlayDeathAnimation();
 
         battleUIManager.SetText("You were defeated!");
 

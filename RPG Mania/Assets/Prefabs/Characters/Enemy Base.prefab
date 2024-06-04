@@ -743,7 +743,7 @@ RectTransform:
   m_GameObject: {fileID: 1531738620}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -1}
-  m_LocalScale: {x: 0.0048, y: 0.0048, z: 1}
+  m_LocalScale: {x: 0.0125, y: 0.0125, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 51370885}
@@ -752,7 +752,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.939, y: -1.296}
+  m_AnchoredPosition: {x: -1.98, y: -2.0100007}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1531738623
@@ -817,8 +817,8 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1667953556}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 993703812}
@@ -827,7 +827,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -0.3}
+  m_AnchoredPosition: {x: -0.075, y: 0.02}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1834684902
@@ -1191,6 +1191,7 @@ GameObject:
   - component: {fileID: 6777435114762703956}
   - component: {fileID: 1707788593647079610}
   - component: {fileID: 6510147656817464827}
+  - component: {fileID: 8815903472726873189}
   m_Layer: 0
   m_Name: Enemy Base
   m_TagString: Enemy
@@ -1207,7 +1208,7 @@ Transform:
   m_GameObject: {fileID: 3036269658535557653}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.575, y: 0.575, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9075268682985583743}
@@ -1255,7 +1256,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ce52a4c811146e841a59e153f8dda508, type: 3}
+  m_Sprite: {fileID: -617278254, guid: b9d55e0d79a612f4e88bba7d789d598f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
@@ -1278,9 +1279,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e10645ac2c0aa8b42b83e09055397b20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  combatPositionHeightAdjustment: 0.5
+  combatPositionHeightAdjustment: 0
   isAttacking: 0
-  isFighting: 1
+  isBlocking: 0
+  isAttacked: 0
+  isFighting: 0
+  isDying: 0
+  isDead: 0
+  attackDuration: 0
+  damagedDuration: 0
+  blockDuration: 0
+  deathDuration: 0
 --- !u!95 &6777435114762703956
 Animator:
   serializedVersion: 5
@@ -1410,8 +1419,57 @@ CapsuleCollider:
   m_Enabled: 1
   m_Radius: 3
   m_Height: 3
-  m_Direction: 1
+  m_Direction: 0
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8815903472726873189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3036269658535557653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8df667204d041db498e8ae19462101d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterName: Soldier
+  maxHealth: 0
+  health: 0
+  element: 0
+  attack: 0
+  defense: 0
+  accuracy: 0
+  evasion: 0
+  combo: 0
+  hitTarget: 0
+  attackClip: {fileID: 8300000, guid: a3f952095cec84440a88eb462db52486, type: 3}
+  FirstAttack: {fileID: 896276842}
+  SecondAttack: {fileID: 1921010943}
+  ThirdAttack: {fileID: 889033309}
+  TotalCost: {fileID: 1886191927}
+  ShieldUIImage: {fileID: 1531738620}
+  ShieldUIValue: {fileID: 51370884}
+  level: 1
+  detectRange: 5
+  ea: {fileID: 2966693440811833630}
+  itemDrops: 1
+  itemDrop: {fileID: 0}
+  absorbs: 0
+  comboOrder: {fileID: 1667953556}
+  firstComboValue: 1
+  secondComboValue: 2
+  thirdComboValue: 3
+  shieldDefault: 1
+  currentShieldsValue: 0
+  stunned: 0
+  stunCount: 0
+  stunLimit: 1
+  ShieldSprite: {fileID: -776679173, guid: ef980a999d8265249b3595d8701d36c1, type: 3}
+  BrokenShieldSprite: {fileID: 1595733391, guid: ef980a999d8265249b3595d8701d36c1,
+    type: 3}
+  defaultDefense: 0
+  resetTimer: 1
 --- !u!1 &6054422591417054965
 GameObject:
   m_ObjectHideFlags: 0
@@ -1619,7 +1677,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9156487442066708596}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1629,7 +1687,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -0.54, y: 1.34}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6502672580246627529

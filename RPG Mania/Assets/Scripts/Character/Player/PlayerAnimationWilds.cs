@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerAnimationWilds : PlayerAnimation {
+//public class PlayerAnimationWilds : PlayerAnimation {
     //private void LateUpdate() {
     //    Transform camera = Camera.main.transform;
 
@@ -14,4 +14,4 @@ public class PlayerAnimationWilds : PlayerAnimation {
     //        transform.rotation = lookRotation;
     //    }
     //}
-}
+//}

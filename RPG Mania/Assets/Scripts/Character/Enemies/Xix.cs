@@ -30,7 +30,8 @@ public class Xix : EnemyBattle {
         return xp;
     }
 
-    protected override void OnTriggerEnter(Collider other) {
+    protected override void OnTriggerEnter(Collider other) 
+    {
         if (other.gameObject.CompareTag("Player"))
         {
             SetStats();
