@@ -110,6 +110,7 @@ public class PlayerMovement : MonoBehaviour {
 
     private void CancelMovement()
     {
+        GameManager.instance.SetPlayerPosition(transform.position);
         rb.velocity = Vector3.zero;
         moveInput = Vector2.zero;
         ChangeAnimationState(PLAYER_IDLE);

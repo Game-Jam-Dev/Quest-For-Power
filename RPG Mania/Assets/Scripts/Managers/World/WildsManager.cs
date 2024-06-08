@@ -65,8 +65,6 @@ public class WildsManager : WorldManager {
             i++;
 
             if (e.GetIsAlive()) liveEnemies.Add(e);
-
-            else Destroy(e.gameObject);
         }
     }
 

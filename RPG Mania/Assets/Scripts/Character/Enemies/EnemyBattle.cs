@@ -84,8 +84,7 @@ public class EnemyBattle : CharacterBattle {
 
         if (!isAlive)
         {
-            Defeated();
-            Kill();
+            Defeated();   
         }
     }
 
@@ -194,13 +193,6 @@ public class EnemyBattle : CharacterBattle {
 
     protected virtual void SetStats(){}
 
-    public override void Kill()
-    {
-        isAlive = false;
-        GameManager.instance.SetEnemyDeath(scene, id);
-        //Destroy(gameObject);
-    }
-
     public override void Defeated()
     {
         //gameObject.SetActive(false);
@@ -208,6 +200,8 @@ public class EnemyBattle : CharacterBattle {
         comboOrder.SetActive(false);
         ShieldUIImage.SetActive(false);
         this.GetComponent<CapsuleCollider>().enabled = false;
+        isAlive = false;
+        GameManager.instance.SetEnemyDeath(scene, id);
     }
 
     // uncomment if enemy takes damage incorrectly

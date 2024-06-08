@@ -5,8 +5,8 @@ public class GameManager : MonoBehaviour {
     public static GameManager instance;
     public PlayerBattle player;
     private GameData gameData;
-    private PlayerData playerData = new();
-    private WorldState worldState = new();
+    private PlayerData playerData;
+    private WorldState worldState;
 
     private readonly int wildsScene = 4;
     private readonly int outskirtsScene = 5;
@@ -53,6 +53,16 @@ public class GameManager : MonoBehaviour {
         worldState.currentScene = currentScene;
     }
 
+    public void SetPlayerPosition(Vector2 playerPosition)
+    {
+        worldState.playerPosition = playerPosition;
+    }
+
+    public Vector2 GetPlayerPosition()
+    {
+        return worldState.playerPosition;
+    }
+
     public bool CheckVisitedWilds()
     {
         return worldState.visitedWilds;
@@ -90,50 +100,57 @@ public class GameManager : MonoBehaviour {
         worldState.enemyIsAliveOutskirts = enemyIsAliveOutskirts;
     }
 
-    public void SetItemDictionary(IDictionary<Item, int> items)
-    {
-        playerData.items = items;
-    }
-
     public void AddItem(Item item)
     {
-        playerData.items[item]++;
+        playerData.itemQuantities[playerData.itemNames.IndexOf(item)]++;
     }
 
     public void AddItems(List<Item> items)
     {
         foreach (Item item in items)
         {
-            playerData.items[item]++;
+            AddItem(item);
         }
     }
 
     public void RemoveItem(Item item)
     {
-        if (playerData.items.ContainsKey(item) && playerData.items[item] > 0) playerData.items[item]--;
+        if (playerData.itemNames.Contains(item) && GetItemAmount(item) > 0) playerData.itemQuantities[playerData.itemNames.IndexOf(item)]--;
+    }
+
+    public void ClearItems()
+    {
+        for (int i = 0; i < playerData.itemQuantities.Count; i++)
+        {
+            playerData.itemQuantities[i] = 0;
+        }
     }
 
     public int GetItemAmount(Item item)
     {
-        if (playerData.items.ContainsKey(item)) return playerData.items[item];
+        if (playerData.itemNames.Contains(item)) return playerData.itemQuantities[playerData.itemNames.IndexOf(item)];
 
         else return 0;
     }
 
     public List<Item> GetItems()
     {
-        return new List<Item>(playerData.items.Keys);
+        return new List<Item>(playerData.itemNames);
     }
 
     public GameData GetGameData()
     {
-        gameData = new GameData{playerData = playerData, worldState = worldState};
+        gameData = new GameData();
+        gameData.playerData = playerData;
+        gameData.worldState = worldState;
+
         return gameData;
     }
 
     public void SetPlayer(GameObject player)
     {
         this.player = player.GetComponent<PlayerBattle>();
+        player.transform.position = worldState.playerPosition;
         this.player.SetData(playerData.level, playerData.experience, playerData.skillActionUses);
         this.player.ResetHealth();
     }
@@ -143,6 +160,7 @@ public class GameManager : MonoBehaviour {
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            SetGameData(new GameData().NewGame());
         }
         else
         {

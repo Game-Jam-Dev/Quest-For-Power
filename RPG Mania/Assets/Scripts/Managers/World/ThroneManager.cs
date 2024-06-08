@@ -81,6 +81,7 @@ public class ThroneManager : WorldManager {
         GameManager.instance.SetPlayerLevel(1);
         GameManager.instance.SetPlayerExperience(0);
         GameManager.instance.SetPlayerSkills(new List<int>{0,0,0,0,0});
+        GameManager.instance.ClearItems();
 
         SceneManager.LoadScene(nextScene);
     }
