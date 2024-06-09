@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 96ed34358e61e9742a50a407949ff458
+=======
+guid: 3ffbd9f43b77bbc43a68bc1c189674c5
+>>>>>>> 239703b2dc38a26287dd088fb4729fc117b4f9ed
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -33,16 +37,28 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
+<<<<<<< HEAD
     filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
     wrapV: 1
+=======
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 0
+>>>>>>> 239703b2dc38a26287dd088fb4729fc117b4f9ed
     wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
+<<<<<<< HEAD
   spriteMode: 2
+=======
+  spriteMode: 1
+>>>>>>> 239703b2dc38a26287dd088fb4729fc117b4f9ed
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -70,7 +86,11 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
+<<<<<<< HEAD
     textureCompression: 1
+=======
+    textureCompression: 0
+>>>>>>> 239703b2dc38a26287dd088fb4729fc117b4f9ed
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -103,6 +123,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
+<<<<<<< HEAD
     sprites:
     - serializedVersion: 2
       name: Varian_Fight_Attack_0
@@ -251,6 +272,9 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+=======
+    sprites: []
+>>>>>>> 239703b2dc38a26287dd088fb4729fc117b4f9ed
     outline: []
     physicsShape: []
     bones: []
@@ -261,6 +285,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+<<<<<<< HEAD
     nameFileIdTable:
       Varian_Fight_Attack_0: -1779011434
       Varian_Fight_Attack_1: 242829684
@@ -269,6 +294,9 @@ TextureImporter:
       Varian_Fight_Attack_4: 1844686183
       Varian_Fight_Attack_5: 1794986965
       Varian_Fight_Attack_6: -726102360
+=======
+    nameFileIdTable: {}
+>>>>>>> 239703b2dc38a26287dd088fb4729fc117b4f9ed
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

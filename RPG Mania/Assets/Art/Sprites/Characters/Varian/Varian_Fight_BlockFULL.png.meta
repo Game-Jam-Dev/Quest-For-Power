@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 4fba25e143553e0489a7ef1eeb66777d
+=======
+guid: 3865228025375b043aca87e6ee02e80b
+>>>>>>> 239703b2dc38a26287dd088fb4729fc117b4f9ed
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -33,16 +37,28 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
+<<<<<<< HEAD
     filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
     wrapV: 1
+=======
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 0
+>>>>>>> 239703b2dc38a26287dd088fb4729fc117b4f9ed
     wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
+<<<<<<< HEAD
   spriteMode: 2
+=======
+  spriteMode: 1
+>>>>>>> 239703b2dc38a26287dd088fb4729fc117b4f9ed
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -70,7 +86,11 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
+<<<<<<< HEAD
     textureCompression: 1
+=======
+    textureCompression: 0
+>>>>>>> 239703b2dc38a26287dd088fb4729fc117b4f9ed
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -103,6 +123,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
+<<<<<<< HEAD
     sprites:
     - serializedVersion: 2
       name: Varian_Fight_BlockFULL_0
@@ -276,12 +297,20 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: ae2bc402c6dcc0c46a2bed458d4e1160
+=======
+    sprites: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+>>>>>>> 239703b2dc38a26287dd088fb4729fc117b4f9ed
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
+<<<<<<< HEAD
     nameFileIdTable:
       Varian_Fight_BlockFULL_0: 734377795
       Varian_Fight_BlockFULL_1: -2091438569
@@ -291,6 +320,9 @@ TextureImporter:
       Varian_Fight_BlockFULL_5: -1599505357
       Varian_Fight_BlockFULL_6: 727965596
       Varian_Fight_BlockFULL_7: -1002377796
+=======
+    nameFileIdTable: {}
+>>>>>>> 239703b2dc38a26287dd088fb4729fc117b4f9ed
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
