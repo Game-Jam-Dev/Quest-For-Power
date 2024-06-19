@@ -28,6 +28,8 @@ public static class SaveSystem
         #else
             File.WriteAllText(path, gameDataString);
         #endif
+
+        Debug.Log("Game data saved");
     }
 
     public static GameData LoadGameData()

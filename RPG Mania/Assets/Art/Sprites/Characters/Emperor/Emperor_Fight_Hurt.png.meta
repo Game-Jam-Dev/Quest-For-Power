@@ -1,20 +1,12 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
-guid: 676ccc2176d01d54bbf0b7c08eeb8ad8
-=======
 guid: 7bd1feec42d5ea0499de180fddebef22
->>>>>>> 239703b2dc38a26287dd088fb4729fc117b4f9ed
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
     mipMapMode: 0
-<<<<<<< HEAD
     enableMipMap: 0
-=======
-    enableMipMap: 1
->>>>>>> 239703b2dc38a26287dd088fb4729fc117b4f9ed
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -44,7 +36,6 @@ TextureImporter:
     filterMode: 1
     aniso: 1
     mipBias: 0
-<<<<<<< HEAD
     wrapU: 1
     wrapV: 1
     wrapW: 0
@@ -52,15 +43,6 @@ TextureImporter:
   lightmap: 0
   compressionQuality: 50
   spriteMode: 2
-=======
-    wrapU: 0
-    wrapV: 0
-    wrapW: 0
-  nPOTScale: 1
-  lightmap: 0
-  compressionQuality: 50
-  spriteMode: 0
->>>>>>> 239703b2dc38a26287dd088fb4729fc117b4f9ed
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -69,15 +51,9 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-<<<<<<< HEAD
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
   textureType: 8
-=======
-  alphaIsTransparency: 0
-  spriteTessellationDetail: -1
-  textureType: 0
->>>>>>> 239703b2dc38a26287dd088fb4729fc117b4f9ed
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -127,7 +103,6 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-<<<<<<< HEAD
     sprites:
     - serializedVersion: 2
       name: Emperor_Fight_Hurt_0
@@ -135,8 +110,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 512
-        height: 512
+        width: 76
+        height: 77
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -144,8 +119,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8b2acb174efbb5d40a50310e3e144355
-      internalID: -1145496609
+      spriteID: cd4f592f5862e7f47828fcd08e9f797f
+      internalID: 2146908290
       vertices: []
       indices: 
       edges: []
@@ -154,10 +129,10 @@ TextureImporter:
       name: Emperor_Fight_Hurt_1
       rect:
         serializedVersion: 2
-        x: 512
+        x: 76
         y: 0
-        width: 512
-        height: 512
+        width: 76
+        height: 77
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -165,8 +140,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f3b1cf64fe528124b901cd744e776827
-      internalID: -435978321
+      spriteID: d6ef2a6f83163144ea8a8838f036cb9b
+      internalID: 935351992
       vertices: []
       indices: 
       edges: []
@@ -175,10 +150,10 @@ TextureImporter:
       name: Emperor_Fight_Hurt_2
       rect:
         serializedVersion: 2
-        x: 1024
+        x: 152
         y: 0
-        width: 512
-        height: 512
+        width: 76
+        height: 77
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -186,8 +161,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1deaddfdff6745b4e946c6c66b3832ee
-      internalID: 1994621986
+      spriteID: d0c9fecd391858c47900000835d26766
+      internalID: 469369202
       vertices: []
       indices: 
       edges: []
@@ -196,10 +171,10 @@ TextureImporter:
       name: Emperor_Fight_Hurt_3
       rect:
         serializedVersion: 2
-        x: 1536
+        x: 228
         y: 0
-        width: 512
-        height: 512
+        width: 76
+        height: 77
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -207,8 +182,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 56c6c66f2d8da5849aebd08d1eeb6cd3
-      internalID: -1284482297
+      spriteID: 36a4dd6bc2e60e74c83a70e5ab88d14b
+      internalID: -378812035
       vertices: []
       indices: 
       edges: []
@@ -216,29 +191,18 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: af80dcf5f93dd6d4eab3acc5f8562b09
-=======
-    sprites: []
-    outline: []
-    physicsShape: []
-    bones: []
-    spriteID: 
->>>>>>> 239703b2dc38a26287dd088fb4729fc117b4f9ed
+    spriteID: b05f2e708dea87f4dbb4c8b1c44bf141
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
-<<<<<<< HEAD
     nameFileIdTable:
-      Emperor_Fight_Hurt_0: -1145496609
-      Emperor_Fight_Hurt_1: -435978321
-      Emperor_Fight_Hurt_2: 1994621986
-      Emperor_Fight_Hurt_3: -1284482297
-=======
-    nameFileIdTable: {}
->>>>>>> 239703b2dc38a26287dd088fb4729fc117b4f9ed
+      Emperor_Fight_Hurt_0: 2146908290
+      Emperor_Fight_Hurt_1: 935351992
+      Emperor_Fight_Hurt_2: 469369202
+      Emperor_Fight_Hurt_3: -378812035
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

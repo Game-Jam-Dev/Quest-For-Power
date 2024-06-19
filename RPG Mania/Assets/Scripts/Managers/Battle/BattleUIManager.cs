@@ -366,6 +366,13 @@ public class BattleUIManager : MonoBehaviour {
         EndTurn();
     }
 
+    public void Escape()
+    {
+        ResetUI();
+
+        gameObject.SetActive(false);
+    }
+
     private void EndTurn()
     {
         enemyContainerManager.UntargetEnemies();
