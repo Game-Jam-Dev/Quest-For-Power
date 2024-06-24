@@ -1,7 +1,11 @@
+using System.Collections.Generic;
 using TMPro;
 using Unity.Barracuda;
+using Unity.VisualScripting;
+
 //using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 using static Unity.Barracuda.TextureAsTensorData;
 
 public class PlayerCombatAnimation : MonoBehaviour {
@@ -35,6 +39,7 @@ public class PlayerCombatAnimation : MonoBehaviour {
     public bool isAttacked = false;
 
     public ElementManager.Element element;
+    private List<string> States = new List<string>();
 
     protected virtual void Start() {
         TryGetComponent(out anim);
@@ -67,6 +72,8 @@ public class PlayerCombatAnimation : MonoBehaviour {
         {
             //Debug.Log("Clip name");
             //Debug.Log(clip.name);
+            States.Add(clip.name);
+
             if (clip.name.Contains("Light"))
             {
                 if (clip.name.Contains("Air") | clip.name.Contains("Earth") | clip.name.Contains("Fire") | clip.name.Contains("Water"))
@@ -116,6 +123,13 @@ public class PlayerCombatAnimation : MonoBehaviour {
             //    //Debug.Log(deathDuration);
             //}
         }
+    }
+
+    public void RandomAnimationChange()
+    {
+        int randomNumber = Random.Range(0, States.Count - 1);
+        string newState = States[randomNumber];
+        ChangeAnimationState(newState);
     }
 
     public void ChangeAnimationState(string newState)
