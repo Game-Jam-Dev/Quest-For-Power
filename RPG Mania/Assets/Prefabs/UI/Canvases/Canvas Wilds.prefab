@@ -141,6 +141,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 2529817974779253351}
+    - target: {fileID: 2106817661569529635, guid: 4c63db1762ae4a943b5f1f9fc35d49ad,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ToggleStatus
       objectReference: {fileID: 0}
     - target: {fileID: 2142897660906432664, guid: 4c63db1762ae4a943b5f1f9fc35d49ad,
         type: 3}
@@ -161,6 +166,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 2529817974779253351}
+    - target: {fileID: 3195365105835690494, guid: 4c63db1762ae4a943b5f1f9fc35d49ad,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Quit
       objectReference: {fileID: 0}
     - target: {fileID: 3915424185363861098, guid: 4c63db1762ae4a943b5f1f9fc35d49ad,
         type: 3}
@@ -536,6 +546,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 2529817974779253351}
+    - target: {fileID: 5343161769156393745, guid: 4c63db1762ae4a943b5f1f9fc35d49ad,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SaveGame
       objectReference: {fileID: 0}
     - target: {fileID: 6152572960140850708, guid: 4c63db1762ae4a943b5f1f9fc35d49ad,
         type: 3}

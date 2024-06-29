@@ -123,9 +123,42 @@ public class PauseManager : MonoBehaviour {
         actions.Gameplay.Pause.performed += TogglePause;
     }
 
+    private void TurnOffScreenBools(string screen)
+    {
+        if (screen != "item")
+        {
+            itemScreen = false;
+        }
+        if (screen != "spell")
+        {
+            spellScreen = false;
+        }
+        if (screen != "status")
+        {
+            statusScreen = false;
+        }
+        if (screen != "equipment")
+        {
+            equipementScreen = false;
+        }
+        if (screen != "story")
+        {
+            storyScreen = false;
+        }
+        if (screen != "tutorial")
+        {
+            tutorialScreen = false;
+        }
+        if (screen != "settings")
+        {
+            settingsScreen = false;
+        }            
+    }
+
     public void ToggleItems()
     {
         GrayOutAllButtons();
+        TurnOffScreenBools("item");
         if (!itemScreen)
         {
             ClearSpellInstances();
@@ -146,7 +179,6 @@ public class PauseManager : MonoBehaviour {
             CloseEnumerationUI();
         }
         itemScreen = !itemScreen;
-        spellScreen = false;
     }
 
     public void ClearItemInstances()
@@ -157,6 +189,7 @@ public class PauseManager : MonoBehaviour {
     public void ToggleSpells()
     {
         GrayOutAllButtons();
+        TurnOffScreenBools("spell");
         if (!spellScreen)
         {
             ClearItemInstances();
@@ -175,9 +208,7 @@ public class PauseManager : MonoBehaviour {
             OpenStandardUI();
             CloseEnumerationUI();
         }
-
-        spellScreen = !spellScreen;
-        itemScreen = false;
+        spellScreen=!spellScreen;
     }
 
     public void ClearSpellInstances()
@@ -185,28 +216,38 @@ public class PauseManager : MonoBehaviour {
         pauseUI.GetComponent<PauseMenu>().ClearSpells();
     }
 
-    public void OpenStatus()
+    public void ToggleStatus()
     {
-        CloseStatusUI();
-        ClearItemInstances();
-        ClearSpellInstances();
-        CloseItemUI();
-        CloseStandardUI();
-        CloseSpellsUI();
-        OpenStatusUI();
-        pauseUI.GetComponent<PauseMenu>().DisplayStatus();
+        GrayOutAllButtons();
+        TurnOffScreenBools("status");
+        if (!statusScreen)
+        {
+            CloseStatusUI();
+            ClearItemInstances();
+            ClearSpellInstances();
+            CloseItemUI();
+            CloseStandardUI();
+            CloseSpellsUI();
+            OpenStatusUI();
+            pauseUI.GetComponent<PauseMenu>().DisplayStatus();
+            statusButtonText.color = Color.white;
+        }
+        else
+        {
+            CloseStatusUI();
+            OpenStandardUI();
+        }
+        statusScreen = !statusScreen;
     }
 
     public void OpenStatusUI()
     {
-        //characterDetailsBackground.SetActive(true);
-        //StatusDetails.SetActive(true);
+        statusContainer.SetActive(true);
     }
 
     public void CloseStatusUI()
     {
-        //characterDetailsBackground.SetActive(false);
-        //StatusDetails.SetActive(false);
+        statusContainer.SetActive(false);
     }
 
     public void OpenEnumerationUI() 
