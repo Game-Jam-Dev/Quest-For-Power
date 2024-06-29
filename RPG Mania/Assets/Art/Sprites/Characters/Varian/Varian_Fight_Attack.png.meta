@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
-guid: 96ed34358e61e9742a50a407949ff458
-=======
 guid: 3ffbd9f43b77bbc43a68bc1c189674c5
->>>>>>> 239703b2dc38a26287dd088fb4729fc117b4f9ed
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -37,28 +33,16 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-<<<<<<< HEAD
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
     wrapV: 1
-=======
-    filterMode: 0
-    aniso: 1
-    mipBias: 0
-    wrapU: 0
-    wrapV: 0
->>>>>>> 239703b2dc38a26287dd088fb4729fc117b4f9ed
     wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-<<<<<<< HEAD
-  spriteMode: 2
-=======
   spriteMode: 1
->>>>>>> 239703b2dc38a26287dd088fb4729fc117b4f9ed
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -86,11 +70,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-<<<<<<< HEAD
-    textureCompression: 1
-=======
     textureCompression: 0
->>>>>>> 239703b2dc38a26287dd088fb4729fc117b4f9ed
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -123,158 +103,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-<<<<<<< HEAD
-    sprites:
-    - serializedVersion: 2
-      name: Varian_Fight_Attack_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 560
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cbee4ed69c461d747b1861118ab053d6
-      internalID: -1779011434
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Varian_Fight_Attack_1
-      rect:
-        serializedVersion: 2
-        x: 560
-        y: 0
-        width: 560
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2894b455ad736c7449fdb31d0baa7391
-      internalID: 242829684
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Varian_Fight_Attack_2
-      rect:
-        serializedVersion: 2
-        x: 1120
-        y: 0
-        width: 560
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cb1e3e180ee99e14285daf0f33a44b8c
-      internalID: 395557845
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Varian_Fight_Attack_3
-      rect:
-        serializedVersion: 2
-        x: 1680
-        y: 0
-        width: 560
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d356441de2624e244bf707c8f09d0a6d
-      internalID: 880496380
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Varian_Fight_Attack_4
-      rect:
-        serializedVersion: 2
-        x: 2240
-        y: 0
-        width: 560
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8537244cabeb5894da3f3d99ce7bb852
-      internalID: 1844686183
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Varian_Fight_Attack_5
-      rect:
-        serializedVersion: 2
-        x: 2800
-        y: 0
-        width: 560
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 800a0508d13c55b4999a19a7d177deb7
-      internalID: 1794986965
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Varian_Fight_Attack_6
-      rect:
-        serializedVersion: 2
-        x: 3360
-        y: 0
-        width: 560
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f8aa232c295cb4c44972c92cd5bb3208
-      internalID: -726102360
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-=======
     sprites: []
->>>>>>> 239703b2dc38a26287dd088fb4729fc117b4f9ed
     outline: []
     physicsShape: []
     bones: []
@@ -285,18 +114,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-<<<<<<< HEAD
-    nameFileIdTable:
-      Varian_Fight_Attack_0: -1779011434
-      Varian_Fight_Attack_1: 242829684
-      Varian_Fight_Attack_2: 395557845
-      Varian_Fight_Attack_3: 880496380
-      Varian_Fight_Attack_4: 1844686183
-      Varian_Fight_Attack_5: 1794986965
-      Varian_Fight_Attack_6: -726102360
-=======
     nameFileIdTable: {}
->>>>>>> 239703b2dc38a26287dd088fb4729fc117b4f9ed
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

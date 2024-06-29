@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
-guid: 17b7c3200ad124a4492807d889c5bf5e
-=======
 guid: 355a32cd4c0509147acc795f95a2eb8e
->>>>>>> 239703b2dc38a26287dd088fb4729fc117b4f9ed
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -37,28 +33,16 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-<<<<<<< HEAD
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
     wrapV: 1
-=======
-    filterMode: 0
-    aniso: 1
-    mipBias: 0
-    wrapU: 0
-    wrapV: 0
->>>>>>> 239703b2dc38a26287dd088fb4729fc117b4f9ed
     wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-<<<<<<< HEAD
-  spriteMode: 2
-=======
   spriteMode: 1
->>>>>>> 239703b2dc38a26287dd088fb4729fc117b4f9ed
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -86,11 +70,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-<<<<<<< HEAD
-    textureCompression: 1
-=======
     textureCompression: 0
->>>>>>> 239703b2dc38a26287dd088fb4729fc117b4f9ed
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -123,206 +103,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-<<<<<<< HEAD
-    sprites:
-    - serializedVersion: 2
-      name: Varian_Fight_Death_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 560
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0e5677fb86865af40a975881253ff6f6
-      internalID: -350848902
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Varian_Fight_Death_1
-      rect:
-        serializedVersion: 2
-        x: 560
-        y: 0
-        width: 560
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a95ffd3cc802bb449a45c601d54f61c6
-      internalID: -1686222722
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Varian_Fight_Death_2
-      rect:
-        serializedVersion: 2
-        x: 1120
-        y: 0
-        width: 560
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 223ae204e94b75c4e94005fed86cef02
-      internalID: 1055448655
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Varian_Fight_Death_3
-      rect:
-        serializedVersion: 2
-        x: 1680
-        y: 0
-        width: 560
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ec42ba380135a6f48bbee6aae5881787
-      internalID: -1313107520
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Varian_Fight_Death_4
-      rect:
-        serializedVersion: 2
-        x: 2240
-        y: 0
-        width: 560
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9f1c58fecabdee343b9b339a7c397d4e
-      internalID: -941673527
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Varian_Fight_Death_5
-      rect:
-        serializedVersion: 2
-        x: 2800
-        y: 0
-        width: 560
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d41590a3ac7379243b2ce0fd15ae83f6
-      internalID: 695282357
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Varian_Fight_Death_6
-      rect:
-        serializedVersion: 2
-        x: 3360
-        y: 0
-        width: 560
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: de2848af6c92df44bac323bb781f594b
-      internalID: -709567089
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Varian_Fight_Death_7
-      rect:
-        serializedVersion: 2
-        x: 3920
-        y: 0
-        width: 560
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4978fd7df0c9efc478bc8ca374c95f34
-      internalID: -927291345
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    outline: []
-    physicsShape: []
-    bones: []
-    spriteID: 3e174708116afe345bea7da5a221d1c6
-=======
     sprites: []
     outline: []
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
->>>>>>> 239703b2dc38a26287dd088fb4729fc117b4f9ed
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
-<<<<<<< HEAD
-    nameFileIdTable:
-      Varian_Fight_Death_0: -350848902
-      Varian_Fight_Death_1: -1686222722
-      Varian_Fight_Death_2: 1055448655
-      Varian_Fight_Death_3: -1313107520
-      Varian_Fight_Death_4: -941673527
-      Varian_Fight_Death_5: 695282357
-      Varian_Fight_Death_6: -709567089
-      Varian_Fight_Death_7: -927291345
-=======
     nameFileIdTable: {}
->>>>>>> 239703b2dc38a26287dd088fb4729fc117b4f9ed
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

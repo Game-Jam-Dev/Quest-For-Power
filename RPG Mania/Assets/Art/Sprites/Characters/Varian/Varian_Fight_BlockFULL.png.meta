@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
-guid: 4fba25e143553e0489a7ef1eeb66777d
-=======
 guid: 3865228025375b043aca87e6ee02e80b
->>>>>>> 239703b2dc38a26287dd088fb4729fc117b4f9ed
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -37,28 +33,16 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-<<<<<<< HEAD
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
     wrapV: 1
-=======
-    filterMode: 0
-    aniso: 1
-    mipBias: 0
-    wrapU: 0
-    wrapV: 0
->>>>>>> 239703b2dc38a26287dd088fb4729fc117b4f9ed
     wrapW: 0
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-<<<<<<< HEAD
-  spriteMode: 2
-=======
   spriteMode: 1
->>>>>>> 239703b2dc38a26287dd088fb4729fc117b4f9ed
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -86,11 +70,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-<<<<<<< HEAD
-    textureCompression: 1
-=======
     textureCompression: 0
->>>>>>> 239703b2dc38a26287dd088fb4729fc117b4f9ed
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -123,206 +103,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-<<<<<<< HEAD
-    sprites:
-    - serializedVersion: 2
-      name: Varian_Fight_BlockFULL_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 560
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 736e38dccf6e9c24a9fd7717ed33f804
-      internalID: 734377795
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Varian_Fight_BlockFULL_1
-      rect:
-        serializedVersion: 2
-        x: 560
-        y: 0
-        width: 560
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e6f87bc58f5404a48999cffd1aae23b5
-      internalID: -2091438569
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Varian_Fight_BlockFULL_2
-      rect:
-        serializedVersion: 2
-        x: 1120
-        y: 0
-        width: 560
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7bb1f84332d55614f9bcaa29b2263314
-      internalID: -1146619456
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Varian_Fight_BlockFULL_3
-      rect:
-        serializedVersion: 2
-        x: 1680
-        y: 0
-        width: 560
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 55873157f0239084fa859d1355f2864f
-      internalID: -2067155712
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Varian_Fight_BlockFULL_4
-      rect:
-        serializedVersion: 2
-        x: 2240
-        y: 0
-        width: 560
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: eb564427ef7631f45ace5abcbd5238f6
-      internalID: -340332702
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Varian_Fight_BlockFULL_5
-      rect:
-        serializedVersion: 2
-        x: 2800
-        y: 0
-        width: 560
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 13f1b0bee24dab04d9fc25ae199ab34b
-      internalID: -1599505357
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Varian_Fight_BlockFULL_6
-      rect:
-        serializedVersion: 2
-        x: 3360
-        y: 0
-        width: 560
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a351ec9d96e88bb45ba24883e7f152a6
-      internalID: 727965596
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Varian_Fight_BlockFULL_7
-      rect:
-        serializedVersion: 2
-        x: 3920
-        y: 0
-        width: 560
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 015997311e90fb04c95b545b1d1bbff4
-      internalID: -1002377796
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    outline: []
-    physicsShape: []
-    bones: []
-    spriteID: ae2bc402c6dcc0c46a2bed458d4e1160
-=======
     sprites: []
     outline: []
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
->>>>>>> 239703b2dc38a26287dd088fb4729fc117b4f9ed
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
-<<<<<<< HEAD
-    nameFileIdTable:
-      Varian_Fight_BlockFULL_0: 734377795
-      Varian_Fight_BlockFULL_1: -2091438569
-      Varian_Fight_BlockFULL_2: -1146619456
-      Varian_Fight_BlockFULL_3: -2067155712
-      Varian_Fight_BlockFULL_4: -340332702
-      Varian_Fight_BlockFULL_5: -1599505357
-      Varian_Fight_BlockFULL_6: 727965596
-      Varian_Fight_BlockFULL_7: -1002377796
-=======
     nameFileIdTable: {}
->>>>>>> 239703b2dc38a26287dd088fb4729fc117b4f9ed
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
