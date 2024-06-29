@@ -3,23 +3,35 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using System;
+using TMPro;
+using System.Collections.Generic;
 
 public class PauseManager : MonoBehaviour {
     public static PauseManager Instance;
     [SerializeField] private GameObject pauseUI;
-    [SerializeField] private Button resumeButton, saveButton, quitButton;
-    [SerializeField] private GameObject itemsContainer, spellsContainer, statusContainer,
-        defaultContainer;
+    [SerializeField] private Button saveButton, quitButton;
+    [SerializeField] private GameObject defaultContainer, itemsContainer, spellsContainer, statusContainer, equipmentContainer, 
+        storyContainer, tutorialContainer, saveContainer, settingsContainer, enumerationBackground, descriptionContainer;
 
+    [SerializeField]
+    private TextMeshProUGUI itemButtonText, spellButtonText, statusButtonText, equipmentButtonText,
+        storyButtonText, tutorialButtonText, saveButtonText, settingsButtonText;
+
+    private List<TextMeshProUGUI> buttonTexts = new List<TextMeshProUGUI>();
 
     public static event Action<bool> pauseEvent;
 
     private InputActions actions;
     
     private int mainMenuSceneIndex = 0;
-    private bool randomAnimations =  false;
-    [SerializeField] private PlayerCombatAnimation pauseAnimatorClass;
-    [SerializeField] private Animator pauseAnim;
+
+    private bool itemScreen = false;
+    private bool spellScreen = false;
+    private bool statusScreen = false;
+    private bool equipementScreen = false;
+    private bool storyScreen = false;
+    private bool tutorialScreen = false;
+    private bool settingsScreen = false;
 
     private void Awake() {
         
@@ -32,11 +44,24 @@ public class PauseManager : MonoBehaviour {
         actions.Gameplay.Pause.performed += TogglePause;
     }
 
-    private void Update()
+    private void Start()
     {
-        if (randomAnimations && pauseAnimatorClass.CheckIfAnimationIsDone(pauseAnim))
+        buttonTexts.Add(itemButtonText);
+        buttonTexts.Add(spellButtonText);
+        buttonTexts.Add(statusButtonText);
+        buttonTexts.Add(equipmentButtonText);
+        buttonTexts.Add(storyButtonText);
+        buttonTexts.Add(tutorialButtonText);
+        buttonTexts.Add(saveButtonText);
+        buttonTexts.Add(settingsButtonText);
+        GrayOutAllButtons();
+    }
+
+    private void GrayOutAllButtons()
+    {
+        foreach (TextMeshProUGUI text in buttonTexts)
         {
-            pauseAnimatorClass.RandomAnimationChange();
+            text.color = Color.gray;
         }
     }
 
@@ -59,24 +84,22 @@ public class PauseManager : MonoBehaviour {
 
     public void Resume() {
         Time.timeScale = 1;
-        randomAnimations = false;
         CloseUI();
         pauseUI.SetActive(false);
         if (pauseEvent != null)
         {
             pauseEvent(false);
-        }        
-
+        }
+        ClearItemInstances();
+        ClearSpellInstances();
     }
 
     private void Pause() {
-        Time.timeScale = 0; 
+        Time.timeScale = 0;
         pauseUI.SetActive(true);
         pauseEvent(true);
         CloseStatusUI();
-        Utility.SetActiveButton(resumeButton);
-        randomAnimations = true;
-        pauseAnimatorClass.ChangeAnimationState("Idle");
+        GrayOutAllButtons();
     }
 
     public void SaveGame()
@@ -88,7 +111,6 @@ public class PauseManager : MonoBehaviour {
         Time.timeScale = 1;
         actions.Gameplay.Disable();
         SceneManager.LoadScene(mainMenuSceneIndex);
-        randomAnimations = false;
     }
 
     public void DisablePausing()
@@ -101,16 +123,30 @@ public class PauseManager : MonoBehaviour {
         actions.Gameplay.Pause.performed += TogglePause;
     }
 
-    public void OpenItems()
+    public void ToggleItems()
     {
-        ClearSpellInstances();
-        ClearItemInstances();        
-        CloseStandardUI();
-        CloseSpellsUI();
-        CloseStatusUI();
-        OpenItemUI();
-        pauseUI.GetComponent<PauseMenu>().DisplayItems();
-        randomAnimations = false;
+        GrayOutAllButtons();
+        if (!itemScreen)
+        {
+            ClearSpellInstances();
+            ClearItemInstances();
+            CloseStandardUI();
+            CloseSpellsUI();
+            CloseStatusUI();
+            OpenItemUI();
+            pauseUI.GetComponent<PauseMenu>().DisplayItems();
+            itemButtonText.color = Color.white;
+            OpenEnumerationUI();
+        }
+        else
+        {
+            CloseItemUI();
+            ClearItemInstances();
+            OpenStandardUI();
+            CloseEnumerationUI();
+        }
+        itemScreen = !itemScreen;
+        spellScreen = false;
     }
 
     public void ClearItemInstances()
@@ -118,16 +154,30 @@ public class PauseManager : MonoBehaviour {
         pauseUI.GetComponent<PauseMenu>().ClearItems();
     }
 
-    public void OpenSpells()
+    public void ToggleSpells()
     {
-        ClearItemInstances();
-        ClearSpellInstances();
-        CloseItemUI();
-        CloseStandardUI();
-        CloseStatusUI();
-        OpenSpellsUI();
-        pauseUI.GetComponent<PauseMenu>().DisplaySpells();
-        randomAnimations = false;
+        GrayOutAllButtons();
+        if (!spellScreen)
+        {
+            ClearItemInstances();
+            ClearSpellInstances();
+            CloseItemUI();
+            CloseStandardUI();
+            CloseStatusUI();
+            OpenSpellsUI();
+            pauseUI.GetComponent<PauseMenu>().DisplaySpells();
+            spellButtonText.color = Color.white;
+        }
+        else
+        {
+            CloseSpellsUI();
+            ClearSpellInstances();
+            OpenStandardUI();
+            CloseEnumerationUI();
+        }
+
+        spellScreen = !spellScreen;
+        itemScreen = false;
     }
 
     public void ClearSpellInstances()
@@ -145,7 +195,6 @@ public class PauseManager : MonoBehaviour {
         CloseSpellsUI();
         OpenStatusUI();
         pauseUI.GetComponent<PauseMenu>().DisplayStatus();
-        randomAnimations = false;
     }
 
     public void OpenStatusUI()
@@ -160,8 +209,21 @@ public class PauseManager : MonoBehaviour {
         //StatusDetails.SetActive(false);
     }
 
+    public void OpenEnumerationUI() 
+    {
+        enumerationBackground.SetActive(true); 
+        descriptionContainer.SetActive(true);
+    }
+
+    public void CloseEnumerationUI()
+    {
+        enumerationBackground.SetActive(false);
+        descriptionContainer.SetActive(false);
+    }
+
     public void OpenItemUI()
     {
+        OpenEnumerationUI();
         itemsContainer.SetActive(true);
     }
     public void CloseItemUI()
@@ -169,7 +231,8 @@ public class PauseManager : MonoBehaviour {
         if (itemsContainer != null)
         {
             itemsContainer.SetActive(false);
-        }            
+        }
+        CloseEnumerationUI();
     }
 
     public void OpenStandardUI()
@@ -187,27 +250,19 @@ public class PauseManager : MonoBehaviour {
         OpenStandardUI();
         CloseItemUI();
         CloseSpellsUI();
+        itemScreen = false;
+        spellScreen = false;
     }
 
     public void OpenSpellsUI()
     {
-        //characterDetailsBackground.SetActive(true);
-        //miniPortraitBackground.SetActive(true);
-        //spellsContainer.SetActive(true);
-        //spellQuantity.SetActive(true);
-        //spellDescription.SetActive(true);
+        OpenEnumerationUI();
+        spellsContainer.SetActive(true);
     }
 
     public void CloseSpellsUI()
     {
-        //if (characterDetailsBackground != null & miniPortraitBackground != null & spellsContainer != null &
-        //    spellQuantity != null & spellDescription != null)
-        //{
-        //    characterDetailsBackground.SetActive(false);
-        //    miniPortraitBackground.SetActive(false);
-        //    spellsContainer.SetActive(false);
-        //    spellQuantity.SetActive(false);
-        //    spellDescription.SetActive(false);
-        //}
+        CloseEnumerationUI();
+        spellsContainer.SetActive(false);
     }
 }

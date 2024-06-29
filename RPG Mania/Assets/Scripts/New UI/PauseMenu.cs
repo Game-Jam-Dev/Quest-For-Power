@@ -7,9 +7,7 @@ using TMPro;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField]
-    TextMeshProUGUI itemDescription;
-    [SerializeField]
-    TextMeshProUGUI skillDescription;
+    TextMeshProUGUI description;
 
     [SerializeField]
     TextMeshProUGUI lvlValue, xp, xpForNextLvl, CPValue, HPValue, AttValue, DefValue,
@@ -72,14 +70,14 @@ public class PauseMenu : MonoBehaviour
             {
                 if (y==0)
                 {
-                    skillDescription.text = skill.Description;
+                    description.text = skill.Description;
                 }
                 RectTransform skillSlotRectTransform = Instantiate(spellsSlotTemplate, spellsGroup).GetComponent<RectTransform>();
                 skillSlotRectTransform.gameObject.SetActive(true);
-                skillSlotRectTransform.anchoredPosition = new Vector2(-27, -30 - y * SlotCellSize);
+                skillSlotRectTransform.anchoredPosition = new Vector2(-467, 90 - y * SlotCellSize);
                 RectTransform skillQtyRectTransform = Instantiate(spellsQuantityTemplate, spellsGroup).GetComponent<RectTransform>();
                 skillQtyRectTransform.gameObject.SetActive(true);
-                skillQtyRectTransform.anchoredPosition = new Vector2(76, -53 - y * SlotCellSize);
+                skillQtyRectTransform.anchoredPosition = new Vector2(-36, 90 - y * SlotCellSize);
 
                 skillSlotRectTransform.gameObject.GetComponent<TextMeshProUGUI>().text = skill.Name;
                 string skillQuantity = player.GetComponent<PlayerBattle>().GetSkillAmount(skill).ToString();
@@ -91,14 +89,17 @@ public class PauseMenu : MonoBehaviour
 
     public void ClearSpells()
     {
-        foreach (Transform child in spellsGroup)
+        if (itemGroup != null)
         {
-            if (child == spellsSlotTemplate | child == spellsQuantityTemplate)
+            foreach (Transform child in spellsGroup)
             {
-                continue;
+                if (child == spellsSlotTemplate | child == spellsQuantityTemplate)
+                {
+                    continue;
+                }
+                Destroy(child.gameObject);
             }
-            Destroy(child.gameObject);
-        }
+        }            
     }
 
     public void DisplayItems()
@@ -116,15 +117,15 @@ public class PauseMenu : MonoBehaviour
             {
                 if (y == 0)
                 {
-                    itemDescription.text = item.description;
+                    description.text = item.description;
                 }
 
                 RectTransform itemSlotRectTransform = Instantiate(itemSlotTemplate, itemGroup).GetComponent<RectTransform>();
                 itemSlotRectTransform.gameObject.SetActive(true);
-                itemSlotRectTransform.anchoredPosition = new Vector2(38, -26 - y * itemSlotCellSize);
+                itemSlotRectTransform.anchoredPosition = new Vector2(128, -92 - y * itemSlotCellSize);
                 RectTransform itemQtyRectTransform = Instantiate(itemQuantityTemplate, itemGroup).GetComponent<RectTransform>();
                 itemQtyRectTransform.gameObject.SetActive(true);
-                itemQtyRectTransform.anchoredPosition = new Vector2(-90, -19 - y * itemSlotCellSize);
+                itemQtyRectTransform.anchoredPosition = new Vector2(560, -92 - y * itemSlotCellSize);
                 y++;
                 itemSlotRectTransform.gameObject.GetComponent<TMPro.TextMeshProUGUI>().text = item.itemName;
                 itemQtyRectTransform.gameObject.GetComponent<TMPro.TextMeshProUGUI>().text = itemAmount.ToString();
@@ -133,13 +134,16 @@ public class PauseMenu : MonoBehaviour
     }
     public void ClearItems()
     {
-        foreach (Transform child in itemGroup)
+        if (itemGroup != null)
         {
-            if (child == itemSlotTemplate | child == itemQuantityTemplate) 
+            foreach (Transform child in itemGroup)
             {
-                continue;
+                if (child == itemSlotTemplate | child == itemQuantityTemplate)
+                {
+                    continue;
+                }
+                Destroy(child.gameObject);
             }
-            Destroy(child.gameObject);
         }
     }
 }

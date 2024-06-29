@@ -125,13 +125,6 @@ public class PlayerCombatAnimation : MonoBehaviour {
         }
     }
 
-    public void RandomAnimationChange()
-    {
-        int randomNumber = Random.Range(0, States.Count - 1);
-        string newState = States[randomNumber];
-        ChangeAnimationState(newState);
-    }
-
     public void ChangeAnimationState(string newState)
     {
         if (currentState == newState) return;
