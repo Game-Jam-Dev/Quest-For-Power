@@ -3,20 +3,35 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using System;
+using TMPro;
+using System.Collections.Generic;
 
 public class PauseManager : MonoBehaviour {
     public static PauseManager Instance;
     [SerializeField] private GameObject pauseUI;
-    [SerializeField] private Button resumeButton, saveButton, quitButton;
-    [SerializeField] private GameObject portrait, characterNameTag, itemList, itemQuantities, itemDescription, 
-        itemBackground, itemContainer, characterDetailsBackground, miniPortraitBackground, spellsContainer, spellQuantity, spellDescription,
-        StatusDetails;
+    [SerializeField] private Button saveButton, quitButton;
+    [SerializeField] private GameObject defaultContainer, itemsContainer, spellsContainer, statusContainer, equipmentContainer, 
+        storyContainer, tutorialContainer, saveContainer, settingsContainer, enumerationBackground, descriptionContainer;
+
+    [SerializeField]
+    private TextMeshProUGUI itemButtonText, spellButtonText, statusButtonText, equipmentButtonText,
+        storyButtonText, tutorialButtonText, saveButtonText, settingsButtonText;
+
+    private List<TextMeshProUGUI> buttonTexts = new List<TextMeshProUGUI>();
 
     public static event Action<bool> pauseEvent;
 
     private InputActions actions;
     
     private int mainMenuSceneIndex = 0;
+
+    private bool itemScreen = false;
+    private bool spellScreen = false;
+    private bool statusScreen = false;
+    private bool equipementScreen = false;
+    private bool storyScreen = false;
+    private bool tutorialScreen = false;
+    private bool settingsScreen = false;
 
     private void Awake() {
         
@@ -27,6 +42,27 @@ public class PauseManager : MonoBehaviour {
         actions.Gameplay.Enable();
 
         actions.Gameplay.Pause.performed += TogglePause;
+    }
+
+    private void Start()
+    {
+        buttonTexts.Add(itemButtonText);
+        buttonTexts.Add(spellButtonText);
+        buttonTexts.Add(statusButtonText);
+        buttonTexts.Add(equipmentButtonText);
+        buttonTexts.Add(storyButtonText);
+        buttonTexts.Add(tutorialButtonText);
+        buttonTexts.Add(saveButtonText);
+        buttonTexts.Add(settingsButtonText);
+        GrayOutAllButtons();
+    }
+
+    private void GrayOutAllButtons()
+    {
+        foreach (TextMeshProUGUI text in buttonTexts)
+        {
+            text.color = Color.gray;
+        }
     }
 
     private void OnEnable() {
@@ -49,24 +85,21 @@ public class PauseManager : MonoBehaviour {
     public void Resume() {
         Time.timeScale = 1;
         CloseUI();
-        if (itemQuantities != null)
-        {
-            itemQuantities.SetActive(false);
-        }        
         pauseUI.SetActive(false);
         if (pauseEvent != null)
         {
             pauseEvent(false);
-        }        
-
+        }
+        ClearItemInstances();
+        ClearSpellInstances();
     }
 
     private void Pause() {
-        Time.timeScale = 0; 
+        Time.timeScale = 0;
         pauseUI.SetActive(true);
         pauseEvent(true);
         CloseStatusUI();
-        Utility.SetActiveButton(resumeButton);
+        GrayOutAllButtons();
     }
 
     public void SaveGame()
@@ -90,15 +123,62 @@ public class PauseManager : MonoBehaviour {
         actions.Gameplay.Pause.performed += TogglePause;
     }
 
-    public void OpenItems()
+    private void TurnOffScreenBools(string screen)
     {
-        ClearSpellInstances();
-        ClearItemInstances();        
-        CloseStandardUI();
-        CloseSpellsUI();
-        CloseStatusUI();
-        OpenItemUI();
-        pauseUI.GetComponent<PauseMenu>().DisplayItems();
+        if (screen != "item")
+        {
+            itemScreen = false;
+        }
+        if (screen != "spell")
+        {
+            spellScreen = false;
+        }
+        if (screen != "status")
+        {
+            statusScreen = false;
+        }
+        if (screen != "equipment")
+        {
+            equipementScreen = false;
+        }
+        if (screen != "story")
+        {
+            storyScreen = false;
+        }
+        if (screen != "tutorial")
+        {
+            tutorialScreen = false;
+        }
+        if (screen != "settings")
+        {
+            settingsScreen = false;
+        }            
+    }
+
+    public void ToggleItems()
+    {
+        GrayOutAllButtons();
+        TurnOffScreenBools("item");
+        if (!itemScreen)
+        {
+            ClearSpellInstances();
+            ClearItemInstances();
+            CloseStandardUI();
+            CloseSpellsUI();
+            CloseStatusUI();
+            OpenItemUI();
+            pauseUI.GetComponent<PauseMenu>().DisplayItems();
+            itemButtonText.color = Color.white;
+            OpenEnumerationUI();
+        }
+        else
+        {
+            CloseItemUI();
+            ClearItemInstances();
+            OpenStandardUI();
+            CloseEnumerationUI();
+        }
+        itemScreen = !itemScreen;
     }
 
     public void ClearItemInstances()
@@ -106,15 +186,29 @@ public class PauseManager : MonoBehaviour {
         pauseUI.GetComponent<PauseMenu>().ClearItems();
     }
 
-    public void OpenSpells()
+    public void ToggleSpells()
     {
-        ClearItemInstances();
-        ClearSpellInstances();
-        CloseItemUI();
-        CloseStandardUI();
-        CloseStatusUI();
-        OpenSpellsUI();
-        pauseUI.GetComponent<PauseMenu>().DisplaySpells();
+        GrayOutAllButtons();
+        TurnOffScreenBools("spell");
+        if (!spellScreen)
+        {
+            ClearItemInstances();
+            ClearSpellInstances();
+            CloseItemUI();
+            CloseStandardUI();
+            CloseStatusUI();
+            OpenSpellsUI();
+            pauseUI.GetComponent<PauseMenu>().DisplaySpells();
+            spellButtonText.color = Color.white;
+        }
+        else
+        {
+            CloseSpellsUI();
+            ClearSpellInstances();
+            OpenStandardUI();
+            CloseEnumerationUI();
+        }
+        spellScreen=!spellScreen;
     }
 
     public void ClearSpellInstances()
@@ -122,65 +216,74 @@ public class PauseManager : MonoBehaviour {
         pauseUI.GetComponent<PauseMenu>().ClearSpells();
     }
 
-    public void OpenStatus()
+    public void ToggleStatus()
     {
-        CloseStatusUI();
-        ClearItemInstances();
-        ClearSpellInstances();
-        CloseItemUI();
-        CloseStandardUI();
-        CloseSpellsUI();
-        OpenStatusUI();
-        pauseUI.GetComponent<PauseMenu>().DisplayStatus();
+        GrayOutAllButtons();
+        TurnOffScreenBools("status");
+        if (!statusScreen)
+        {
+            CloseStatusUI();
+            ClearItemInstances();
+            ClearSpellInstances();
+            CloseItemUI();
+            CloseStandardUI();
+            CloseSpellsUI();
+            OpenStatusUI();
+            pauseUI.GetComponent<PauseMenu>().DisplayStatus();
+            statusButtonText.color = Color.white;
+        }
+        else
+        {
+            CloseStatusUI();
+            OpenStandardUI();
+        }
+        statusScreen = !statusScreen;
     }
 
     public void OpenStatusUI()
     {
-        characterDetailsBackground.SetActive(true);
-        StatusDetails.SetActive(true);
+        statusContainer.SetActive(true);
     }
 
     public void CloseStatusUI()
     {
-        characterDetailsBackground.SetActive(false);
-        StatusDetails.SetActive(false);
+        statusContainer.SetActive(false);
+    }
+
+    public void OpenEnumerationUI() 
+    {
+        enumerationBackground.SetActive(true); 
+        descriptionContainer.SetActive(true);
+    }
+
+    public void CloseEnumerationUI()
+    {
+        enumerationBackground.SetActive(false);
+        descriptionContainer.SetActive(false);
     }
 
     public void OpenItemUI()
     {
-        itemList.SetActive(true);
-        itemDescription.SetActive(true);
-        itemQuantities.SetActive(true);
-        itemBackground.SetActive(true);
-        itemContainer.SetActive(true);
+        OpenEnumerationUI();
+        itemsContainer.SetActive(true);
     }
     public void CloseItemUI()
     {
-        if (itemList != null & itemDescription != null &
-            itemQuantities != null & itemBackground != null &
-            itemContainer != null)
+        if (itemsContainer != null)
         {
-            itemList.SetActive(false);
-            itemDescription.SetActive(false);
-            itemQuantities.SetActive(false);
-            itemBackground.SetActive(false);
-            itemContainer.SetActive(false);
-        }            
+            itemsContainer.SetActive(false);
+        }
+        CloseEnumerationUI();
     }
 
     public void OpenStandardUI()
     {
-        if (characterNameTag != null & portrait != null) 
-        {
-            portrait.SetActive(true);
-            characterNameTag.SetActive(true);
-        }        
+        defaultContainer.SetActive(true);
     }
     
     public void CloseStandardUI()
     {
-        portrait.SetActive(false);
-        characterNameTag.SetActive(false);
+        defaultContainer.SetActive(false);
     }
 
     public void CloseUI()
@@ -188,27 +291,19 @@ public class PauseManager : MonoBehaviour {
         OpenStandardUI();
         CloseItemUI();
         CloseSpellsUI();
+        itemScreen = false;
+        spellScreen = false;
     }
 
     public void OpenSpellsUI()
     {
-        characterDetailsBackground.SetActive(true);
-        miniPortraitBackground.SetActive(true);
+        OpenEnumerationUI();
         spellsContainer.SetActive(true);
-        spellQuantity.SetActive(true);
-        spellDescription.SetActive(true);
     }
 
     public void CloseSpellsUI()
     {
-        if (characterDetailsBackground != null & miniPortraitBackground != null & spellsContainer != null &
-            spellQuantity != null & spellDescription != null)
-        {
-            characterDetailsBackground.SetActive(false);
-            miniPortraitBackground.SetActive(false);
-            spellsContainer.SetActive(false);
-            spellQuantity.SetActive(false);
-            spellDescription.SetActive(false);
-        }
+        CloseEnumerationUI();
+        spellsContainer.SetActive(false);
     }
 }
