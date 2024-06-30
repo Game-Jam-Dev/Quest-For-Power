@@ -42,7 +42,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -70,7 +70,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -103,154 +103,7 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: Emperor_Fight_MEDIUMmagic_AIR_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 76
-        height: 77
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 618b9675e77db9d44996708a1b6465a1
-      internalID: -2053926571
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Emperor_Fight_MEDIUMmagic_AIR_1
-      rect:
-        serializedVersion: 2
-        x: 76
-        y: 0
-        width: 76
-        height: 77
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3e0fbe1e4521e98448d6dd6ca565ee38
-      internalID: 587959373
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Emperor_Fight_MEDIUMmagic_AIR_2
-      rect:
-        serializedVersion: 2
-        x: 152
-        y: 0
-        width: 76
-        height: 77
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 0ad19f71671baaf48a4bb5e42bad9911
-      internalID: -1924570932
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Emperor_Fight_MEDIUMmagic_AIR_3
-      rect:
-        serializedVersion: 2
-        x: 228
-        y: 0
-        width: 76
-        height: 77
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 802db2d3fe2b4c14e913d872ee9d5500
-      internalID: 408292463
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Emperor_Fight_MEDIUMmagic_AIR_4
-      rect:
-        serializedVersion: 2
-        x: 304
-        y: 0
-        width: 76
-        height: 77
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c73d971d937149d47a5d40904c2e42b1
-      internalID: 2013260058
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Emperor_Fight_MEDIUMmagic_AIR_5
-      rect:
-        serializedVersion: 2
-        x: 380
-        y: 0
-        width: 76
-        height: 77
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b451b002c4cc74742abdfe699344834d
-      internalID: 660162040
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Emperor_Fight_MEDIUMmagic_AIR_6
-      rect:
-        serializedVersion: 2
-        x: 456
-        y: 0
-        width: 76
-        height: 77
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 49a2afdbe0f62e645bd328bce7c2bc4d
-      internalID: 224022197
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
@@ -261,14 +114,7 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      Emperor_Fight_MEDIUMmagic_AIR_0: -2053926571
-      Emperor_Fight_MEDIUMmagic_AIR_1: 587959373
-      Emperor_Fight_MEDIUMmagic_AIR_2: -1924570932
-      Emperor_Fight_MEDIUMmagic_AIR_3: 408292463
-      Emperor_Fight_MEDIUMmagic_AIR_4: 2013260058
-      Emperor_Fight_MEDIUMmagic_AIR_5: 660162040
-      Emperor_Fight_MEDIUMmagic_AIR_6: 224022197
+    nameFileIdTable: {}
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
