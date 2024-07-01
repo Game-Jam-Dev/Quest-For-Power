@@ -32,6 +32,7 @@ public class PauseManager : MonoBehaviour {
     private bool storyScreen = false;
     private bool tutorialScreen = false;
     private bool settingsScreen = false;
+    Scene scene;
 
     private void Awake() {
         
@@ -46,15 +47,19 @@ public class PauseManager : MonoBehaviour {
 
     private void Start()
     {
-        buttonTexts.Add(itemButtonText);
-        buttonTexts.Add(spellButtonText);
-        buttonTexts.Add(statusButtonText);
-        buttonTexts.Add(equipmentButtonText);
-        buttonTexts.Add(storyButtonText);
-        buttonTexts.Add(tutorialButtonText);
-        buttonTexts.Add(saveButtonText);
-        buttonTexts.Add(settingsButtonText);
-        GrayOutAllButtons();
+        scene = SceneManager.GetActiveScene();
+        if (scene.name != "Throne Room")
+        {
+            buttonTexts.Add(itemButtonText);
+            buttonTexts.Add(spellButtonText);
+            buttonTexts.Add(statusButtonText);
+            buttonTexts.Add(equipmentButtonText);
+            buttonTexts.Add(storyButtonText);
+            buttonTexts.Add(tutorialButtonText);
+            buttonTexts.Add(saveButtonText);
+            buttonTexts.Add(settingsButtonText);
+            GrayOutAllButtons();
+        }
     }
 
     private void GrayOutAllButtons()
@@ -288,7 +293,7 @@ public class PauseManager : MonoBehaviour {
 
     public void CloseUI()
     {
-        OpenStandardUI();
+        OpenStandardUI();      
         CloseItemUI();
         CloseSpellsUI();
         itemScreen = false;
