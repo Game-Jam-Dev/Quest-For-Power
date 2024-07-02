@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -42,7 +42,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -70,7 +70,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -103,282 +103,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: soldierSWORD_EARTH_Death_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 520
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2fe1014e1ec863d499496e51a0d6e94a
-      internalID: -1728861900
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: soldierSWORD_EARTH_Death_1
-      rect:
-        serializedVersion: 2
-        x: 520
-        y: 0
-        width: 520
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ef95e1d1546082f4abd17791947175f5
-      internalID: -95227504
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: soldierSWORD_EARTH_Death_2
-      rect:
-        serializedVersion: 2
-        x: 1040
-        y: 0
-        width: 520
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 457d42eb81a79154ba0f53e1b2a41b11
-      internalID: -607291920
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: soldierSWORD_EARTH_Death_3
-      rect:
-        serializedVersion: 2
-        x: 1560
-        y: 0
-        width: 520
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1a6ce046581bc95418f61b02625f181c
-      internalID: -2068660653
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: soldierSWORD_EARTH_Death_4
-      rect:
-        serializedVersion: 2
-        x: 2080
-        y: 0
-        width: 520
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f81e54a5a3efb8349b87295e427de517
-      internalID: 1808883912
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: soldierSWORD_EARTH_Death_5
-      rect:
-        serializedVersion: 2
-        x: 2600
-        y: 0
-        width: 520
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: bb684de306fb01a4d88871b33cb84684
-      internalID: -2068910267
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: soldierSWORD_EARTH_Death_6
-      rect:
-        serializedVersion: 2
-        x: 3120
-        y: 0
-        width: 520
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 98353c0e94dc0544bb6b89c81271ebb6
-      internalID: -1383906326
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: soldierSWORD_EARTH_Death_7
-      rect:
-        serializedVersion: 2
-        x: 3640
-        y: 0
-        width: 520
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 39af592a4eadd434a9b9266e04887a8c
-      internalID: 1670080201
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: soldierSWORD_EARTH_Death_8
-      rect:
-        serializedVersion: 2
-        x: 4160
-        y: 0
-        width: 520
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c96b06c8f6980b8418d2070a43055dbd
-      internalID: -23571110
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: soldierSWORD_EARTH_Death_9
-      rect:
-        serializedVersion: 2
-        x: 4680
-        y: 0
-        width: 520
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1a17f5026bf045c41991319344cfa966
-      internalID: -1939841102
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: soldierSWORD_EARTH_Death_10
-      rect:
-        serializedVersion: 2
-        x: 5200
-        y: 0
-        width: 520
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a6870b1fbe0f9cf4397a21cd736f9619
-      internalID: 899807641
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: soldierSWORD_EARTH_Death_11
-      rect:
-        serializedVersion: 2
-        x: 5720
-        y: 0
-        width: 520
-        height: 512
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 94230e85f71bdad448e65d26533cf4e0
-      internalID: 464928187
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 01d0ccdb5a4ca0e45aacdc0539ad7a74
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      soldierSWORD_EARTH_Death_0: -1728861900
-      soldierSWORD_EARTH_Death_1: -95227504
-      soldierSWORD_EARTH_Death_10: 899807641
-      soldierSWORD_EARTH_Death_11: 464928187
-      soldierSWORD_EARTH_Death_2: -607291920
-      soldierSWORD_EARTH_Death_3: -2068660653
-      soldierSWORD_EARTH_Death_4: 1808883912
-      soldierSWORD_EARTH_Death_5: -2068910267
-      soldierSWORD_EARTH_Death_6: -1383906326
-      soldierSWORD_EARTH_Death_7: 1670080201
-      soldierSWORD_EARTH_Death_8: -23571110
-      soldierSWORD_EARTH_Death_9: -1939841102
+    nameFileIdTable: {}
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
