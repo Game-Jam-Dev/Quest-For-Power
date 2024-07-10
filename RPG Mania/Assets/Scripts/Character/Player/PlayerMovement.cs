@@ -79,13 +79,11 @@ public class PlayerMovement : MonoBehaviour {
         {
             if (moveInput.x >= 0)
             {
-                sr.flipX = false;
                 ChangeAnimationState(PLAYER_WALK_RIGHT);
             }
 
             if (moveInput.x < 0)
             {
-                sr.flipX = true;
                 ChangeAnimationState(PLAYER_WALK_LEFT);
             }
         }

@@ -51,7 +51,6 @@ public class PlayerCombatAnimation : MonoBehaviour {
         if (anim != null)
         {
             anim.runtimeAnimatorController = combatController;
-            sr.flipX = false;
             isFighting = true;
             isIdle = true;
             direction = Vector3.zero;
