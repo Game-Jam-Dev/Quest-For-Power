@@ -785,6 +785,31 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas Wilds
       objectReference: {fileID: 0}
+    - target: {fileID: 4994808124561806144, guid: 1a30fe6a4f8232c4f84cc5efc81907a7,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.08312988
+      objectReference: {fileID: 0}
+    - target: {fileID: 5637200813106317082, guid: 1a30fe6a4f8232c4f84cc5efc81907a7,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -1006.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5637200813106317082, guid: 1a30fe6a4f8232c4f84cc5efc81907a7,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 79.9491
+      objectReference: {fileID: 0}
+    - target: {fileID: 5637200813106317082, guid: 1a30fe6a4f8232c4f84cc5efc81907a7,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.01159668
+      objectReference: {fileID: 0}
+    - target: {fileID: 5637200813106317082, guid: 1a30fe6a4f8232c4f84cc5efc81907a7,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -6.872406
+      objectReference: {fileID: 0}
     - target: {fileID: 5878844857622863801, guid: 1a30fe6a4f8232c4f84cc5efc81907a7,
         type: 3}
       propertyPath: m_RootOrder
