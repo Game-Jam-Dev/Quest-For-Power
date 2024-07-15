@@ -342,7 +342,7 @@ public class BattleManager : MonoBehaviour {
                 enemyToAttack.PlayBlockAnimation();
             }
             //(activeCharacter as PlayerBattle).SetAnimationTrigger("Jump");
-            //(activeCharacter as PlayerBattle).SetAnimationTrigger(comboAction.Name);
+            (activeCharacter as PlayerBattle).SetAnimationTrigger(comboAction.Name);
         }
         else
         {
@@ -466,6 +466,7 @@ public class BattleManager : MonoBehaviour {
 
     public Boolean CheckEnemiesReady()
     {
+
         foreach (EnemyBattle enemy in enemies) 
         { 
             if (!enemy.GetIsReady())

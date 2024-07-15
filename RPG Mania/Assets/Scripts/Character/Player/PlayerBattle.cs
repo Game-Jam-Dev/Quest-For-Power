@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 using TMPro;
+using System.Collections;
 
 public class PlayerBattle : CharacterBattle {
     public int experience = 0;
@@ -174,6 +175,7 @@ public class PlayerBattle : CharacterBattle {
 
     public Boolean CheckPlayerReady()
     {
+        waiter(.25f);
         // Use flags instead
         if (playerAnimationScript.CheckIfAnimation("Idle", playerAnimationScript.anim))
         {
@@ -184,6 +186,12 @@ public class PlayerBattle : CharacterBattle {
             return true;
         }
         return false;
+    }
+
+    IEnumerator waiter(float numSeconds)
+    {
+        //Wait for 4 seconds
+        yield return new WaitForSeconds(numSeconds);
     }
 
     //public void ToggleNormalAttack(Vector3 targetPosition, bool moveAllTheWay)

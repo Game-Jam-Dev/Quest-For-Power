@@ -259,18 +259,29 @@ public class EnemyBattle : CharacterBattle {
         ea.PlayDeath();
     }
 
-    ////public override void Recover()
-    ////{
-    ////    ea.Attacked(false);
-    ////}
+    //public override void Recover()
+    //{
+    //    ea.Attacked(false);
+    //}
 
     public bool GetIsReady()
     {
-        if (!ea.isAttacking && !ea.isBlocking && !ea.isAttacked && !ea.isDying)
+        //if (!ea.isAttacking && !ea.isBlocking && !ea.isAttacked && !ea.isDying)
+        //    return true;
+        //else if (ea.isDead)
+        //    return true;
+        waiter(.25f);
+        if (ea.CheckIfAnimation("Idle") | ea.CheckIfAnimation("idle") | ea.CheckIfAnimation("IDLE"))
+        {
             return true;
-        else if (ea.isDead)
-            return true;
+        }
         else return false;
+    }
+
+    IEnumerator waiter(float numSeconds)
+    {
+        //Wait for 4 seconds
+        yield return new WaitForSeconds(numSeconds);
     }
 
     public override bool GetIsAttacking()

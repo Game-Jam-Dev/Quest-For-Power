@@ -128,8 +128,8 @@ public class PlayerCombatAnimation : MonoBehaviour {
     {
         if (currentState == newState) return;
 
-        Debug.Log("Current state: " + currentState);
-        Debug.Log("New state: " + newState);
+        //Debug.Log("Current state: " + currentState);
+        //Debug.Log("New state: " + newState);
 
         anim.Play(newState);
 
