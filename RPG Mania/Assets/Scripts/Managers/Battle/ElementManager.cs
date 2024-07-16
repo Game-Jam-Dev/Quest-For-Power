@@ -21,7 +21,7 @@ public class ElementManager : MonoBehaviour {
 
     public void SetElement(Element element)
     {
-        Debug.Log(element);
+        //Debug.Log(element);
         if ((int)element > 0)
         {
             image.sprite = spriteList[(int)element - 1];

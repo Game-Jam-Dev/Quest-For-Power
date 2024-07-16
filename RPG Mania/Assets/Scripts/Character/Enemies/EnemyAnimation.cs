@@ -70,13 +70,13 @@ public class EnemyAnimation : MonoBehaviour {
     {
         if (currentState == newState) return;
 
-        Debug.Log("Current state: " + currentState);
-        Debug.Log("New state: " + newState);
+        //Debug.Log("Current state: " + currentState);
+        //Debug.Log("New state: " + newState);
 
-        Debug.Log("Current animation (b4 play): " + GetCurrentAnimation());
-        anim.Play(newState);
+        //Debug.Log("Current animation (b4 play): " + GetCurrentAnimation());
+        //anim.Play(newState);
 
-        Debug.Log("Current animation (after play): " + GetCurrentAnimation());
+        //Debug.Log("Current animation (after play): " + GetCurrentAnimation());
 
         currentState = newState;
         

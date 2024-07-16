@@ -32,11 +32,7 @@ public class PlayerCombatAnimation : MonoBehaviour {
     public float mediumAttackDuration;
     public float elementaHeavyAttackDuration;
     public float heavyAttackDuration;
-
-    public bool isAttacking = false;
-    public bool isAbsorbing = false;
-    public bool isIdle = true;
-    public bool isAttacked = false;
+    public float deathDuration;
 
     public ElementManager.Element element;
     private List<string> States = new List<string>();
@@ -52,9 +48,8 @@ public class PlayerCombatAnimation : MonoBehaviour {
         {
             anim.runtimeAnimatorController = combatController;
             isFighting = true;
-            isIdle = true;
             direction = Vector3.zero;
-            ChangeAnimationState("Idle");
+            ChangeAnimationState("idle");
             UpdateAnimClipTimes();
         }
     }
@@ -69,187 +64,166 @@ public class PlayerCombatAnimation : MonoBehaviour {
         AnimationClip[] clips = anim.runtimeAnimatorController.animationClips;
         foreach (AnimationClip clip in clips)
         {
-            //Debug.Log("Clip name");
-            //Debug.Log(clip.name);
+            Debug.Log("Clip name");
+            Debug.Log(clip.name);
             States.Add(clip.name);
 
-            if (clip.name.Contains("Light"))
+            if (clip.name.Contains("light"))
             {
-                if (clip.name.Contains("Air") | clip.name.Contains("Earth") | clip.name.Contains("Fire") | clip.name.Contains("Water"))
+                if (clip.name.Contains("air") | clip.name.Contains("earth") | clip.name.Contains("fire") | clip.name.Contains("water"))
                 {
                     elementalLightAttackDuration = clip.length;
+                    Debug.Log(elementalLightAttackDuration);
                 }
                 else
                 {
                     lightAttackDuration = clip.length;
+                    Debug.Log(lightAttackDuration);
                 }
             }
-            else if (clip.name.Contains("Medium"))
+            else if (clip.name.Contains("medium"))
             {
-                if (clip.name.Contains("Air") | clip.name.Contains("Earth") | clip.name.Contains("Fire") | clip.name.Contains("Water"))
+                if (clip.name.Contains("air") | clip.name.Contains("earth") | clip.name.Contains("fire") | clip.name.Contains("water"))
                 {
                     elementalMediumAttackDuration = clip.length;
+                    Debug.Log(elementalMediumAttackDuration);
                 }
                 else
                 {
                     mediumAttackDuration = clip.length;
+                    Debug.Log(mediumAttackDuration);
                 }
             }
-            else if (clip.name.Contains("Heavy"))
+            else if (clip.name.Contains("heavy"))
             {
-                if (clip.name.Contains("Air") | clip.name.Contains("Earth") | clip.name.Contains("Fire") | clip.name.Contains("Water"))
+                if (clip.name.Contains("air") | clip.name.Contains("earth") | clip.name.Contains("fire") | clip.name.Contains("water"))
                 {
                     elementaHeavyAttackDuration = clip.length;
+                    Debug.Log(elementaHeavyAttackDuration);
                 }
                 else
                 {
                     heavyAttackDuration = clip.length;
+                    Debug.Log(heavyAttackDuration);
                 }
             }
-            else if (clip.name.Contains("Damaged"))
+            else if (clip.name.Contains("damaged"))
             {
                 damagedDuration = clip.length;
-                //Debug.Log(damagedDuration);
+                Debug.Log(damagedDuration);
             }
-            else if (clip.name.Contains("Absorb"))
+            else if (clip.name.Contains("absorb"))
             {
                 absorbDuration = clip.length;
-                //Debug.Log(blockDuration);
+                Debug.Log(absorbDuration);
             }
-            //else if (clip.name.Contains("Death"))
-            //{
-            //    deathDuration = clip.length;
-            //    //Debug.Log(deathDuration);
-            //}
+            else if (clip.name.Contains("death"))
+            {
+                deathDuration = clip.length;
+                Debug.Log(deathDuration);
+            }
+            else
+            {
+                Debug.Log(clip.length);
+            }
         }
     }
 
-    public void ChangeAnimationState(string newState)
+    public float ChangeAnimationState(string newState)
     {
-        if (currentState == newState) return;
+        if (currentState == newState & currentState != "idle") return 0;
 
-        //Debug.Log("Current state: " + currentState);
-        //Debug.Log("New state: " + newState);
+        Debug.Log("Current state: " + currentState);
+        Debug.Log("New state: " + newState);
 
         anim.Play(newState);
 
         currentState = newState;
 
-        if (newState.Contains("Light_Attack"))
+        if (newState.Contains("light"))
         {
-            isAttacking = true;
-            if (newState.Contains("Air") | newState.Contains("Earth") | newState.Contains("Fire") | newState.Contains("Water"))
+            if (newState.Contains("air") | newState.Contains("earth") | newState.Contains("fire") | newState.Contains("water"))
             {
-                Invoke("ResetFlags", elementalLightAttackDuration);
+                return elementalLightAttackDuration;
             }
             else
             {
-                Invoke("ResetFlags", lightAttackDuration);
+                return lightAttackDuration;
             }
         }
-        else if (newState.Contains("Medium_Attack"))
+        else if (newState.Contains("medium"))
         {
-            isAttacking = true;
-            if (newState.Contains("Air") | newState.Contains("Earth") | newState.Contains("Fire") | newState.Contains("Water"))
+            if (newState.Contains("air") | newState.Contains("earth") | newState.Contains("fire") | newState.Contains("water"))
             {
-                Invoke("ResetFlags", elementalMediumAttackDuration);
+                return elementalMediumAttackDuration;
             }
             else
             {
-                Invoke("ResetFlags", mediumAttackDuration);
+                return mediumAttackDuration;
             }
         }
-        else if (newState.Contains("Heavy_Attack"))
+        else if (newState.Contains("heavy"))
         {
-            isAttacking = true;
-            if (newState.Contains("Air") | newState.Contains("Earth") | newState.Contains("Fire") | newState.Contains("Water"))
+            if (newState.Contains("air") | newState.Contains("earth") | newState.Contains("fire") | newState.Contains("water"))
             {
-                Invoke("ResetFlags", elementaHeavyAttackDuration);
+                return elementaHeavyAttackDuration;
             }
             else
             {
-                Invoke("ResetFlags", heavyAttackDuration);
+                return heavyAttackDuration;
             }
         }
 
-        else if (newState.Contains("Absorb"))
+        else if (newState.Contains("absorb"))
         {
-            isAbsorbing = true;
-            Invoke("ResetFlags", absorbDuration);
+            return absorbDuration;
         }
 
-        else if (newState.Contains("Damaged"))
+        else if (newState.Contains("damaged"))
         {
-            //Debug.Log("damaged state recognized");
-            //Debug.Log("Delay duration: " + damagedDuration);
-            isAttacked = true;
-            //Debug.Log("attacked flag: " + isAttacked);
-
-            //Debug.Log("Current animation (b4 invoke): " + GetCurrentAnimation());
-
-
-            //delay = anim.GetCurrentAnimatorStateInfo(0).length;
-            //isAttacked = true;
-            Invoke("ResetFlags", damagedDuration);
+            return damagedDuration;
         }
-        else if (newState.Contains("Death"))
+        else if (newState.Contains("death"))
         {
-            //Debug.Log("dying state recognized");
-            //Debug.Log("Delay duration: " + deathDuration);
-            //isDying = true;
-            //Debug.Log("blocking flag: " + isAttacked);
-
-            //Debug.Log("Current animation (b4 invoke): " + GetCurrentAnimation());
-
-
-            //delay = anim.GetCurrentAnimatorStateInfo(0).length;
-            //isDying = true;
-            //Invoke("Dead", deathDuration);
+            return deathDuration;
         }
+        else if (newState.Contains("idle"))
+        {
+            return 0;
+        }
+        else
+            Debug.Log("ChangeAnimationState function did not get valid input: " + newState);
+            return 0;
     }
 
-    public void ResetFlags()
-    {
-        isAttacking = false;
-        isAttacked = false;
-        //Debug.Log("Reseting flags");
-        ChangeAnimationStateWithElement(element, "Idle");
-    }
-
-    public void ResetFlagsWithElement(ElementManager.Element element)
-    {
-        isAttacking = false;
-        isAttacked = false;
-        //Debug.Log("Reseting flags");
-        ChangeAnimationStateWithElement(element, "Idle");
-    }
-
-    public void ChangeAnimationStateWithElement(ElementManager.Element element, string newState)
+    public float ChangeAnimationStateWithElement(ElementManager.Element element, string newState)
     {
         if (element == ElementManager.Element.Earth)
         {
             //Debug.Log("Earth_" + newState);
-            ChangeAnimationState(newState + "_Earth");
+            return ChangeAnimationState("earth_" + newState);
         }
         else if (element == ElementManager.Element.Fire)
         {
             //Debug.Log("Fire_" + newState);
-            ChangeAnimationState(newState + "_Fire");
+            return ChangeAnimationState("fire_" + newState);
 
         }
         else if (element == ElementManager.Element.Water)
         {
             //Debug.Log("Water_" + newState);
-            ChangeAnimationState(newState + "_Water");
+            return ChangeAnimationState("water_" + newState);
         }
         else if (element == ElementManager.Element.Wind)
         {
             //Debug.Log("Wind_" + newState);
-            ChangeAnimationState(newState + "_Air");
+            return ChangeAnimationState("air_" + newState);
         }
         else
         {
-            ChangeAnimationState(newState);
+            Debug.Log("ChangeAnimationStateWithElement - element: " + element);
+            Debug.Log("ChangeAnimationStateWithElement - new state: " + newState);
+            return ChangeAnimationState(newState);
         }
     }
 
@@ -259,7 +233,7 @@ public class PlayerCombatAnimation : MonoBehaviour {
         //anim.SetInteger("Element", (int)element);
          if ((int)element != 0)
         {
-            ChangeAnimationStateWithElement(element, "Idle");
+            ChangeAnimationStateWithElement(element, "idle");
         }
     }
 
@@ -293,6 +267,11 @@ public class PlayerCombatAnimation : MonoBehaviour {
         }
     }
 
+    public float GetCurrentAnimationDuration() 
+    {
+        return anim.GetCurrentAnimatorStateInfo(0).length;
+    }
+
     public void SetUpTrigger(string triggerName)
     {
         if (anim != null && TriggerExists(triggerName, anim))
@@ -305,7 +284,6 @@ public class PlayerCombatAnimation : MonoBehaviour {
             //}
             currentTrigger = triggerName;
             anim.SetTrigger(triggerName);
-            isIdle = false;
         }
     }
 
@@ -317,6 +295,11 @@ public class PlayerCombatAnimation : MonoBehaviour {
             //isAttacking = false;
             //isIdle = true;
         }
+    }
+
+    public void ResetState()
+    {
+        currentState = "idle";
     }
 
     private bool TriggerExists(string triggerName, Animator anim) 

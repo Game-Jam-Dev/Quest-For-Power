@@ -7,7 +7,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Wind_death
+  m_Name: air_death
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -33,7 +33,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Fire_idle
+  m_Name: fire_idle
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -59,7 +59,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Water_attack
+  m_Name: water_attack
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -85,7 +85,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Water_damaged
+  m_Name: water_damaged
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -127,67 +127,67 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -571706702434795721}
-    m_Position: {x: -100, y: 380, z: 0}
+    m_Position: {x: -100, y: -700, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3568465466043633065}
-    m_Position: {x: -100, y: 670, z: 0}
+    m_Position: {x: -100, y: -300, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7699874073571354735}
     m_Position: {x: -100, y: 50, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2966716271326074541}
-    m_Position: {x: -100, y: -320, z: 0}
+    m_Position: {x: -100, y: 500, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6798134959504084332}
-    m_Position: {x: 230, y: 310, z: 0}
+    m_Position: {x: 200, y: -790, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8277093440167928896}
-    m_Position: {x: 230, y: 620, z: 0}
+    m_Position: {x: 200, y: -390, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5905328961769351584}
-    m_Position: {x: 250, y: -50, z: 0}
+    m_Position: {x: 200, y: 0, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6738430442587173790}
-    m_Position: {x: 240, y: -390, z: 0}
+    m_Position: {x: 200, y: 400, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5122433600550036478}
-    m_Position: {x: 230, y: 360, z: 0}
+    m_Position: {x: 200, y: -740, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3119612977711234440}
-    m_Position: {x: 230, y: 670, z: 0}
+    m_Position: {x: 200, y: -340, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2373250284276191889}
-    m_Position: {x: 250, y: 0, z: 0}
+    m_Position: {x: 200, y: 50, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6807092911788599175}
-    m_Position: {x: 240, y: -340, z: 0}
+    m_Position: {x: 200, y: 450, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2179992028652828920}
     m_Position: {x: -410, y: 200, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 9138899437042997376}
-    m_Position: {x: 230, y: 410, z: 0}
+    m_Position: {x: 200, y: -690, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8218924425582643686}
-    m_Position: {x: 230, y: 460, z: 0}
+    m_Position: {x: 200, y: -640, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1289461585516611697}
-    m_Position: {x: 230, y: 720, z: 0}
+    m_Position: {x: 200, y: -290, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7802854354724134587}
-    m_Position: {x: 230, y: 770, z: 0}
+    m_Position: {x: 200, y: -240, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1004504976646959251}
-    m_Position: {x: 250, y: 50, z: 0}
+    m_Position: {x: 200, y: 100, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3939714918197347585}
-    m_Position: {x: 250, y: 100, z: 0}
+    m_Position: {x: 200, y: 150, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6182304539462756535}
-    m_Position: {x: 240, y: -290, z: 0}
+    m_Position: {x: 200, y: 500, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3630533085454902712}
-    m_Position: {x: 240, y: -240, z: 0}
+    m_Position: {x: 200, y: 550, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -205,7 +205,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Water_death
+  m_Name: water_death
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -231,7 +231,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Earth_idle
+  m_Name: earth_idle
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -257,7 +257,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Water_idle
+  m_Name: water_idle
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -309,7 +309,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Earth_block
+  m_Name: earth_block
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -335,7 +335,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Wind_idle
+  m_Name: air_idle
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -383,7 +383,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Fire_block
+  m_Name: fire_block
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -409,7 +409,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Fire_attack
+  m_Name: fire_attack
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -435,7 +435,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Earth_attack
+  m_Name: earth_attack
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -461,7 +461,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Fire_death
+  m_Name: fire_death
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -487,7 +487,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Wind_attack
+  m_Name: air_attack
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -513,7 +513,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Fire_damaged
+  m_Name: fire_damaged
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -539,7 +539,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Water_block
+  m_Name: water_block
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -565,7 +565,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Wind_damaged
+  m_Name: air_damaged
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -613,7 +613,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Earth_death
+  m_Name: earth_death
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -639,7 +639,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Earth_damaged
+  m_Name: earth_damaged
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -687,7 +687,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Wind_block
+  m_Name: air_block
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []

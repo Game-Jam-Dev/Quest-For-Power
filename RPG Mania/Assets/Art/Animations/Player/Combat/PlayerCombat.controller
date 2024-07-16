@@ -7,7 +7,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Heavy_Attack_Water
+  m_Name: heavy_attack_water
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -80,7 +80,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Idle_Air
+  m_Name: idle_air
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -106,7 +106,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Heavy_Attack_Earth
+  m_Name: heavy_attack_earth
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -154,7 +154,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Idle_Fire
+  m_Name: idle_fire
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -180,7 +180,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Light_Attack_Water
+  m_Name: light_attack_water
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -228,7 +228,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Death
+  m_Name: death
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -276,7 +276,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Light_Attack
+  m_Name: light_attack
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -418,7 +418,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Medium_Attack_Water
+  m_Name: medium_attack_water
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -488,7 +488,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Idle_Water
+  m_Name: idle_water
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -561,7 +561,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Damaged
+  m_Name: damaged
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -634,7 +634,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Heavy_Attack
+  m_Name: heavy_attack
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -660,7 +660,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Light_Attack_Earth
+  m_Name: light_attack_earth
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -686,7 +686,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Medium_Attack_Air
+  m_Name: medium_attack_air
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -712,7 +712,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Light_Attack_Air
+  m_Name: light_attack_air
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -763,7 +763,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Light_Attack_Fire
+  m_Name: light_attack_fire
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -811,7 +811,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Medium_Attack
+  m_Name: medium_attack
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -837,7 +837,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Jump_from
+  m_Name: jump_from
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -863,7 +863,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Absorb
+  m_Name: absorb
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -914,7 +914,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Medium_Attack_Earth
+  m_Name: medium_attack_earth
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -940,7 +940,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Heavy_Attack_Fire
+  m_Name: heavy_attack_fire
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -988,7 +988,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Idle
+  m_Name: idle
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -1014,7 +1014,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Jump_to
+  m_Name: jump_to
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -1040,7 +1040,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Idle_Earth
+  m_Name: idle_earth
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -1066,7 +1066,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Heavy_Attack_Air
+  m_Name: heavy_attack_air
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -1092,7 +1092,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Medium_Attack_Fire
+  m_Name: medium_attack_fire
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []

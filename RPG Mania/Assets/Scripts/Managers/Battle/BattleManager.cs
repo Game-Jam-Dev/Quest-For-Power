@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Collections;
 using System;
+using System.Threading;
 
 public class BattleManager : MonoBehaviour {
     [Header("Managers")]
@@ -36,6 +37,8 @@ public class BattleManager : MonoBehaviour {
 
     Vector3 originalPosition = Vector3.zero;
     List<EnemyBattle> battleEnemies;
+
+    float readyTime = 0;
 
     private void Awake() {
         gameObject.SetActive(false);
@@ -111,28 +114,23 @@ public class BattleManager : MonoBehaviour {
 
                 // activate ui
                 battleUIManager.StartPlayerTurn();
-                
+
                 // make the loop stay here until the player selects their commands in the ui
                 while (awaitCommand)
                 {
-
                     yield return null;
                 }
 
-                while (!CheckEnemiesReady())
+                while (readyTime != 0 & Time.time < readyTime)
+                    
                     yield return null;
 
                 // do the absorb action
                 if (absorb)
                 {
                     Absorb(activeCharacter);
-
-                    while (activeCharacter.GetIsAttacking())
-                    {
-                        
-                        yield return null;
-                    }
-                } else if (item != null)
+                } 
+                else if (item != null)
                 {
                     ItemManager.UseItem(item, this);
 
@@ -176,9 +174,8 @@ public class BattleManager : MonoBehaviour {
                         used_combo_points += a.Cost;
 
                         // wait for the attack animation to play
-                        while (!CheckEnemiesReady() || !(activeCharacter as PlayerBattle).CheckPlayerReady())
+                        while (readyTime != 0 & Time.time <= readyTime)
                         {
-
                             yield return null;
                         }
 
@@ -208,6 +205,8 @@ public class BattleManager : MonoBehaviour {
 
                             
                         }
+                        player.ResetAnimation();
+                        yield return new WaitForSeconds(.125f);
                         i++;
                     }
                     //(activeCharacter as PlayerBattle).ToggleNormalAttack(originalPosition, true);
@@ -218,8 +217,8 @@ public class BattleManager : MonoBehaviour {
                 EnemyBattle activeEnemy = (EnemyBattle)activeCharacter;
                 if (!activeEnemy.stunned)
                 {
-                    while (!CheckEnemiesReady())
-                        yield return null;
+                    //while (!CheckEnemiesReady())
+                    //    yield return null;
                     // set enemy combo
                     EnemyComboCreation(activeCharacter as EnemyBattle);
 
@@ -250,13 +249,13 @@ public class BattleManager : MonoBehaviour {
                             //break;
                         }
                         else
-                            (characterToAttack as PlayerBattle).PlayDamagedAnimation();
+                            //(characterToAttack as PlayerBattle).PlayDamagedAnimation();
 
                         // updates player's health
                         battleUIManager.UpdatePlayerHealth();
 
-                        while (!CheckEnemiesReady())
-                            yield return null;
+                        //while (!CheckEnemiesReady())
+                        //    yield return null;
 
                         // lose battle if player dies
                         if (characterToAttack.health <= 0)
@@ -269,9 +268,8 @@ public class BattleManager : MonoBehaviour {
                     }
                 }
             }
-
             // creates a pause between turns
-            yield return new WaitForSeconds(.5f);
+            yield return new WaitForSeconds(.25f);
 
             NextTurn(activeCharacter);
         }
@@ -282,6 +280,7 @@ public class BattleManager : MonoBehaviour {
         // Prepares player for turn
         awaitCommand = true;
         item = null;
+        player.ResetAnimation();
     }
 
     private void NextTurn(CharacterBattle activeCharacter)
@@ -317,7 +316,11 @@ public class BattleManager : MonoBehaviour {
         
         if (activeCharacter.characterName == "Arkanos")
         {
-            (activeCharacter as PlayerBattle).PlayAttackAnimation(comboAction);
+            Debug.Log("Time: " + Time.time);
+            Debug.Log("Animation duration: " + player.playerAnimationScript.GetCurrentAnimationDuration());
+            Debug.Log("Combo name: " + comboAction.Name);
+            readyTime = Time.time + (activeCharacter as PlayerBattle).PlayAttackAnimation(comboAction);
+            Debug.Log("Ready time after: " + readyTime);
             battleUIManager.SetText($"{activeCharacter.characterName} used {comboAction.Name} at {characterToAttack.characterName}");
             if (hitNumber == 0 & comboAction.Cost == enemyToAttack.firstComboValue) 
             {
@@ -342,7 +345,7 @@ public class BattleManager : MonoBehaviour {
                 enemyToAttack.PlayBlockAnimation();
             }
             //(activeCharacter as PlayerBattle).SetAnimationTrigger("Jump");
-            (activeCharacter as PlayerBattle).SetAnimationTrigger(comboAction.Name);
+            //(activeCharacter as PlayerBattle).SetAnimationTrigger(comboAction.Name);
         }
         else
         {
@@ -359,7 +362,7 @@ public class BattleManager : MonoBehaviour {
 
     private void Absorb(CharacterBattle activeCharacter)
     {
-        (activeCharacter as PlayerBattle).AbsorbSkill(characterToAttack.element);
+        readyTime = Time.time + (activeCharacter as PlayerBattle).AbsorbSkill(characterToAttack.element);
 
 
         battleUIManager.SetText($"{player.characterName} absorbed the {characterToAttack.element} element from {characterToAttack.characterName}");

@@ -23,7 +23,6 @@ public class BattleUIManager : MonoBehaviour {
     public List<ComboAction> playerCombo = new();
 
     private bool absorb = false;
-    private int absorbCounter = 0;
     private int absorbCounterMax = 3;
 
     public void Initialize(PlayerBattle player, List<EnemyBattle> enemies)
@@ -147,8 +146,6 @@ public class BattleUIManager : MonoBehaviour {
         selectedItem = null;
         playerCombo.Clear();
         logManager.ClearLog();
-
-        absorbCounter = 0;
     }
 
     private void CloseMenus()
