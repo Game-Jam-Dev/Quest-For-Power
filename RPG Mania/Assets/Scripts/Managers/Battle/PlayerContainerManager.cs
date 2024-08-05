@@ -37,7 +37,7 @@ public class PlayerContainerManager : MonoBehaviour {
 
     private void UpdateElement()
     {
-        if (player.element == ElementManager.Element.Wind)
+        if (player.element == ElementManager.Element.Air)
         {
             UpdateComboPoints();
         }

@@ -45,7 +45,7 @@ public class Varian : EnemyBattle {
             element = ElementManager.Element.Fire;
         } else if (activeSkill == SkillList.GetInstance().GetAction("wind"))
         {
-            element = ElementManager.Element.Wind;
+            element = ElementManager.Element.Air;
         } else if (activeSkill == SkillList.GetInstance().GetAction("earth"))
         {
             element = ElementManager.Element.Earth;

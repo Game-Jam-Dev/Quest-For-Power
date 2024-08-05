@@ -45,7 +45,7 @@ public class Soldier : EnemyBattle {
             case ElementManager.Element.Fire:
             activeSkill = SkillList.GetInstance().GetAction("fire");
             break;
-            case ElementManager.Element.Wind:
+            case ElementManager.Element.Air:
             activeSkill = SkillList.GetInstance().GetAction("wind");
             break;
             case ElementManager.Element.Earth:

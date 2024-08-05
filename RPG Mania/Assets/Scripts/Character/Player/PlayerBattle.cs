@@ -64,7 +64,7 @@ public class PlayerBattle : CharacterBattle {
 
     public void UpdateComboPoints()
     {
-        if (element == ElementManager.Element.Wind)
+        if (element == ElementManager.Element.Air)
         {
             extraComboPoints += 3;
         }
@@ -251,7 +251,7 @@ public class PlayerBattle : CharacterBattle {
 
         } else if (activeSkill == SkillList.GetInstance().GetAction("wind"))
         {
-            element = ElementManager.Element.Wind;
+            element = ElementManager.Element.Air;
 
             ResetElementBonus();
             UpdateComboPoints();

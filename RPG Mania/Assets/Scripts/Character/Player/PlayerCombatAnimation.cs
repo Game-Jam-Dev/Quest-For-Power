@@ -64,8 +64,8 @@ public class PlayerCombatAnimation : MonoBehaviour {
         AnimationClip[] clips = anim.runtimeAnimatorController.animationClips;
         foreach (AnimationClip clip in clips)
         {
-            Debug.Log("Clip name");
-            Debug.Log(clip.name);
+            // Debug.Log("Clip name");
+            // Debug.Log(clip.name);
             States.Add(clip.name);
 
             if (clip.name.Contains("light"))
@@ -73,12 +73,12 @@ public class PlayerCombatAnimation : MonoBehaviour {
                 if (clip.name.Contains("air") | clip.name.Contains("earth") | clip.name.Contains("fire") | clip.name.Contains("water"))
                 {
                     elementalLightAttackDuration = clip.length;
-                    Debug.Log(elementalLightAttackDuration);
+                    // Debug.Log(elementalLightAttackDuration);
                 }
                 else
                 {
                     lightAttackDuration = clip.length;
-                    Debug.Log(lightAttackDuration);
+                    // Debug.Log(lightAttackDuration);
                 }
             }
             else if (clip.name.Contains("medium"))
@@ -86,12 +86,12 @@ public class PlayerCombatAnimation : MonoBehaviour {
                 if (clip.name.Contains("air") | clip.name.Contains("earth") | clip.name.Contains("fire") | clip.name.Contains("water"))
                 {
                     elementalMediumAttackDuration = clip.length;
-                    Debug.Log(elementalMediumAttackDuration);
+                    // Debug.Log(elementalMediumAttackDuration);
                 }
                 else
                 {
                     mediumAttackDuration = clip.length;
-                    Debug.Log(mediumAttackDuration);
+                    // Debug.Log(mediumAttackDuration);
                 }
             }
             else if (clip.name.Contains("heavy"))
@@ -99,32 +99,32 @@ public class PlayerCombatAnimation : MonoBehaviour {
                 if (clip.name.Contains("air") | clip.name.Contains("earth") | clip.name.Contains("fire") | clip.name.Contains("water"))
                 {
                     elementaHeavyAttackDuration = clip.length;
-                    Debug.Log(elementaHeavyAttackDuration);
+                    // Debug.Log(elementaHeavyAttackDuration);
                 }
                 else
                 {
                     heavyAttackDuration = clip.length;
-                    Debug.Log(heavyAttackDuration);
+                    // Debug.Log(heavyAttackDuration);
                 }
             }
             else if (clip.name.Contains("damaged"))
             {
                 damagedDuration = clip.length;
-                Debug.Log(damagedDuration);
+                // Debug.Log(damagedDuration);
             }
             else if (clip.name.Contains("absorb"))
             {
                 absorbDuration = clip.length;
-                Debug.Log(absorbDuration);
+                // Debug.Log(absorbDuration);
             }
             else if (clip.name.Contains("death"))
             {
                 deathDuration = clip.length;
-                Debug.Log(deathDuration);
+                // Debug.Log(deathDuration);
             }
             else
             {
-                Debug.Log(clip.length);
+                // Debug.Log(clip.length);
             }
         }
     }
@@ -133,8 +133,8 @@ public class PlayerCombatAnimation : MonoBehaviour {
     {
         if (currentState == newState & currentState != "idle") return 0;
 
-        Debug.Log("Current state: " + currentState);
-        Debug.Log("New state: " + newState);
+        // Debug.Log("Current state: " + currentState);
+        // Debug.Log("New state: " + newState);
 
         anim.Play(newState);
 
@@ -214,15 +214,15 @@ public class PlayerCombatAnimation : MonoBehaviour {
             //Debug.Log("Water_" + newState);
             return ChangeAnimationState("water_" + newState);
         }
-        else if (element == ElementManager.Element.Wind)
+        else if (element == ElementManager.Element.Air)
         {
             //Debug.Log("Wind_" + newState);
             return ChangeAnimationState("air_" + newState);
         }
         else
         {
-            Debug.Log("ChangeAnimationStateWithElement - element: " + element);
-            Debug.Log("ChangeAnimationStateWithElement - new state: " + newState);
+            // Debug.Log("ChangeAnimationStateWithElement - element: " + element);
+            // Debug.Log("ChangeAnimationStateWithElement - new state: " + newState);
             return ChangeAnimationState(newState);
         }
     }

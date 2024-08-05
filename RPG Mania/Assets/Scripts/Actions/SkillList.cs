@@ -74,14 +74,14 @@ public class SkillList
     {
         if (target.element == ElementManager.Element.Water) damage += damage/2;
 
-        else if (target.element == ElementManager.Element.Wind) damage -= damage/2;
+        else if (target.element == ElementManager.Element.Air) damage -= damage/2;
 
         return damage;
     }
 
     public int InfuseFire(CharacterBattle self, CharacterBattle target, int damage)
     {
-        if (target.element == ElementManager.Element.Wind) damage += damage/2;
+        if (target.element == ElementManager.Element.Air) damage += damage/2;
 
         else if (target.element == ElementManager.Element.Water) damage -= damage/2;
 

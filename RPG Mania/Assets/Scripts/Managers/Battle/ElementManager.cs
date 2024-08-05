@@ -11,7 +11,7 @@ public class ElementManager : MonoBehaviour {
         None,
         Water,
         Fire,
-        Wind,
+        Air,
         Earth,
     }
 
@@ -49,7 +49,7 @@ public class ElementManager : MonoBehaviour {
         {
             "Water" => Element.Water,
             "Fire" => Element.Fire,
-            "Wind" => Element.Wind,
+            "Wind" => Element.Air,
             "Earth" => Element.Earth,
             _ => Element.None,
         };
@@ -70,12 +70,12 @@ public class ElementManager : MonoBehaviour {
             break;
 
             case Element.Fire:
-            if (defend == Element.Wind) damage += damage/2;
+            if (defend == Element.Air) damage += damage/2;
 
             else if (defend == Element.Water) damage -= damage/2;
             break;
 
-            case Element.Wind:
+            case Element.Air:
             if (defend == Element.Earth) damage += damage/2;
 
             else if (defend == Element.Fire) damage -= damage/2;
@@ -84,7 +84,7 @@ public class ElementManager : MonoBehaviour {
             case Element.Earth:
             if (defend == Element.Water) damage += damage/2;
 
-            else if (defend == Element.Wind) damage -= damage/2;
+            else if (defend == Element.Air) damage -= damage/2;
             break;
         }
 
