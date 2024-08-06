@@ -6,7 +6,7 @@ using UnityEditor.Animations;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
-public class AnimationPlayer : MonoBehaviour
+public class AnimationClipExecuter : MonoBehaviour
 {
     public AnimatorController animatorController;
     
@@ -63,7 +63,7 @@ public class AnimationPlayer : MonoBehaviour
             _onAnimationFinishedHandler = null;
         }
     
-        Debug.Log(gameObject.name+ ": change animation to "+newAnimStateName);
+        // Debug.Log(gameObject.name+ ": change animation to "+newAnimStateName);
     
         _onAnimationFinishedHandler = clip.isLooping ? null : onFinish;
 
@@ -98,17 +98,5 @@ public class AnimationPlayer : MonoBehaviour
     {
         _onAnimationFinishedHandler.Invoke();
         _onAnimationFinishedHandler = null;
-    }
-    
-    private string CreateStateNameFromClipName(string clipName)
-    {
-        var tokens = clipName.Split("_");
-        if (tokens.Length == 3)
-        {
-            return tokens[2].ToLower() + "_" + tokens[1].ToLower();
-        }
-
-        Debug.LogWarning("clip with unknown name format found "+clipName);
-        return clipName;
     }
 }

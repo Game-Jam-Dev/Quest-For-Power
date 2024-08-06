@@ -113,7 +113,7 @@ public class WildsManager : WorldManager {
         wildsMapsManagerScript.ChangeToCombat();
         mainCamera.GetComponent<FollowCamera>().SetCameraFollow(false);
         Vector3 referecePosition = Camera.main.transform.position;
-        player.transform.position = new Vector2(referecePosition.x, referecePosition.y - yCombatOffset);
+        player.transform.position = new Vector3(referecePosition.x, referecePosition.y - yCombatOffset, previousPosition.z);
         player.transform.localScale = new Vector3(combatScale, combatScale, 1);
         playerBattle.PrepareCombat();
 
