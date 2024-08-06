@@ -170,19 +170,4 @@ public class CharacterBattle : MonoBehaviour {
                 break;
         }
     }
-
-    public virtual void SetAnimationTrigger(string triggerName) {}
-
-    public virtual Animator GetAnimator() {return null;}
-
-    public virtual bool GetIsAttacking() 
-    {
-        return false;
-    }
-
-    ////public virtual void Recover(){}
-
-    public virtual ComboAction PickEnemyCombo(int currentComboLength){ return GetCombo(0); }
-
-    public virtual void AddReinforcement(EnemyBattle e){}
 }

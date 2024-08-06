@@ -39,7 +39,7 @@ public class Xix : EnemyBattle {
         }
     }
 
-    public override void AddReinforcement(EnemyBattle e)
+    public void AddReinforcement(EnemyBattle e)
     {
         reinforcements.Add(e);
     }

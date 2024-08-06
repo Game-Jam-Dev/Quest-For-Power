@@ -316,11 +316,11 @@ public class BattleManager : MonoBehaviour {
         
         if (activeCharacter.characterName == "Arkanos")
         {
-            Debug.Log("Time: " + Time.time);
-            Debug.Log("Animation duration: " + player.playerAnimationScript.GetCurrentAnimationDuration());
-            Debug.Log("Combo name: " + comboAction.Name);
+            // Debug.Log("Time: " + Time.time);
+            // Debug.Log("Animation duration: " + player.playerAnimationScript.GetCurrentAnimationDuration());
+            // Debug.Log("Combo name: " + comboAction.Name);
             readyTime = Time.time + (activeCharacter as PlayerBattle).PlayAttackAnimation(comboAction);
-            Debug.Log("Ready time after: " + readyTime);
+            // Debug.Log("Ready time after: " + readyTime);
             battleUIManager.SetText($"{activeCharacter.characterName} used {comboAction.Name} at {characterToAttack.characterName}");
             if (hitNumber == 0 & comboAction.Cost == enemyToAttack.firstComboValue) 
             {
@@ -466,20 +466,7 @@ public class BattleManager : MonoBehaviour {
     //         battleUIManager.ClearActiveSkill();
     //     }
     // }
-
-    public Boolean CheckEnemiesReady()
-    {
-
-        foreach (EnemyBattle enemy in enemies) 
-        { 
-            if (!enemy.GetIsReady())
-            {
-                return false;
-            }
-        }
-        return true;
-    }
-
+    
     public void EndBattle()
     {
         player.EndCombat();

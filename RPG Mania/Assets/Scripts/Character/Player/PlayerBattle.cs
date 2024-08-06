@@ -284,7 +284,7 @@ public class PlayerBattle : CharacterBattle {
 
     public void ResetAnimation()
     {
-        Debug.Log("Reseting, element: " + element);
+        // Debug.Log("Reseting, element: " + element);
         playerAnimationScript.ChangeAnimationStateWithElement(element, "idle");
     }
 

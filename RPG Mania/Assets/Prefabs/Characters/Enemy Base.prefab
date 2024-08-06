@@ -1187,8 +1187,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3446468312287349178}
   - component: {fileID: 1769637154394782135}
-  - component: {fileID: 2966693440811833630}
   - component: {fileID: 6777435114762703956}
+  - component: {fileID: 7090387460450178883}
+  - component: {fileID: 2966693440811833630}
   - component: {fileID: 1707788593647079610}
   - component: {fileID: 6510147656817464827}
   - component: {fileID: 8815903472726873189}
@@ -1264,9 +1265,43 @@ SpriteRenderer:
   m_Size: {x: 5.2012696, y: 5.12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &6777435114762703956
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3036269658535557653}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7090387460450178883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3036269658535557653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 948395e039b6432886600daedec0924e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animatorController: {fileID: 0}
 --- !u!114 &2966693440811833630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1279,38 +1314,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e10645ac2c0aa8b42b83e09055397b20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  combatPositionHeightAdjustment: 0
-  isAttacking: 0
-  isBlocking: 0
-  isAttacked: 0
-  isFighting: 0
-  isDying: 0
-  isDead: 0
-  attackDuration: 0
-  damagedDuration: 0
-  blockDuration: 0
-  deathDuration: 0
---- !u!95 &6777435114762703956
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3036269658535557653}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e9f3617b9fd6e17429584c25d315480c, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!82 &1707788593647079610
 AudioSource:
   m_ObjectHideFlags: 0

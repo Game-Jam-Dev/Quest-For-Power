@@ -216,7 +216,7 @@ public class EnemyBattle : CharacterBattle {
     //     base.Attacked(damage);
     // }
 
-    public override ComboAction PickEnemyCombo(int currentComboLength)
+    public ComboAction PickEnemyCombo(int currentComboLength)
     {
         switch (combo - currentComboLength)
         {
@@ -228,17 +228,7 @@ public class EnemyBattle : CharacterBattle {
             return GetCombo(Random.Range(0, 3));
         }
     }
-
-    public void ResetAnimationTags()
-    {
-        ea.ResetFlags();
-    }
-
-    public override void SetAnimationTrigger(string triggerName)
-    {
-        ea.SetUpTrigger(triggerName);
-    }
-
+    
     public void PlayAttackedAnimation()
     {
         ea.PlayDamaged();
@@ -253,47 +243,18 @@ public class EnemyBattle : CharacterBattle {
     {
         ea.PlayBlock();
     }
-
-    public void PlayDeathAnimation()
-    {
-        ea.PlayDeath();
-    }
-
+    
     //public override void Recover()
     //{
     //    ea.Attacked(false);
     //}
-
-    public bool GetIsReady()
-    {
-        //if (!ea.isAttacking && !ea.isBlocking && !ea.isAttacked && !ea.isDying)
-        //    return true;
-        //else if (ea.isDead)
-        //    return true;
-        waiter(.25f);
-        if (ea.CheckIfAnimation("Idle") | ea.CheckIfAnimation("idle") | ea.CheckIfAnimation("IDLE"))
-        {
-            return true;
-        }
-        else return false;
-    }
-
+    
     IEnumerator waiter(float numSeconds)
     {
         //Wait for 4 seconds
         yield return new WaitForSeconds(numSeconds);
     }
-
-    public override bool GetIsAttacking()
-    {
-        return ea.isAttacking;
-    }
-
-    public override Animator GetAnimator()
-    {
-        return ea.GetAnimator();
-    }
-
+    
     public bool GetIsAlive()
     {
         return isAlive;
@@ -309,7 +270,7 @@ public class EnemyBattle : CharacterBattle {
         // if (inCombat) return;
 
         Scene sceneObject = SceneManager.GetActiveScene();
-        if (other.gameObject.CompareTag("Player") && isAlive && !ea.isDead && sceneObject.name != "Throne Room")
+        if (other.gameObject.CompareTag("Player") && isAlive && sceneObject.name != "Throne Room")
         {
             // Find the rotation for the enemy to face the player
 

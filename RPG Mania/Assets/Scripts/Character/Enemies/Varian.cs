@@ -52,7 +52,7 @@ public class Varian : EnemyBattle {
         }
     }
 
-    public override ComboAction PickEnemyCombo(int currentComboLength)
+    public ComboAction PickEnemyCombo(int currentComboLength)
     {
         // if (currentComboLength == 0 && playerInfo.element != SkillList.Element.None)
         // {

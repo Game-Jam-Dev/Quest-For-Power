@@ -72,6 +72,16 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2966693440811833630, guid: f9c545364aad19f4bb9f85d04902751c,
+        type: 3}
+      propertyPath: AnimatorController
+      value: 
+      objectReference: {fileID: 9100000, guid: e9f3617b9fd6e17429584c25d315480c, type: 2}
+    - target: {fileID: 2966693440811833630, guid: f9c545364aad19f4bb9f85d04902751c,
+        type: 3}
+      propertyPath: animatorController
+      value: 
+      objectReference: {fileID: 9100000, guid: e9f3617b9fd6e17429584c25d315480c, type: 2}
     - target: {fileID: 3036269658535557653, guid: f9c545364aad19f4bb9f85d04902751c,
         type: 3}
       propertyPath: m_Name
@@ -172,5 +182,15 @@ PrefabInstance:
       propertyPath: m_Radius
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6777435114762703956, guid: f9c545364aad19f4bb9f85d04902751c,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7090387460450178883, guid: f9c545364aad19f4bb9f85d04902751c,
+        type: 3}
+      propertyPath: animatorController
+      value: 
+      objectReference: {fileID: 9100000, guid: e9f3617b9fd6e17429584c25d315480c, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9c545364aad19f4bb9f85d04902751c, type: 3}
