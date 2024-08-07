@@ -8,7 +8,6 @@ public class PlayerBattle : CharacterBattle {
     public int experience = 0;
     public int level { get; private set; }
 
-    [SerializeField] public PlayerCombatAnimation playerAnimationScript;
     [SerializeField] private AudioClip waterClip, fireClip, windClip, earthClip, drainClip;
     [SerializeField] public int baseAttack = 5, baseMaxHealth = 65, baseDefense = 3, 
         baseComboPoints = 4;
@@ -23,6 +22,13 @@ public class PlayerBattle : CharacterBattle {
     [SerializeField] float bonusAttackPercentage = .175f, bonusDefensePercentage = .35f, bonusAccuracy = 0.09f, bonusEvasion = 0.09f;
     bool fireBonus = false, waterBonus = false, windBonus = false, earthBonus = false;
     private float oldValue1, oldValue2;
+    
+    private CharacterAnimation _pca;
+
+    private void Awake()
+    {
+        TryGetComponent(out _pca);
+    }
 
     protected override void Start() {
         base.Start();
@@ -46,7 +52,6 @@ public class PlayerBattle : CharacterBattle {
 
     public override void PrepareCombat()
     {
-        playerAnimationScript.SwitchToCombat();
         GetComponent<PlayerMovement>().enabled = false;
         combo = characterComboPoints;
         DeactivateSkill();
@@ -75,59 +80,16 @@ public class PlayerBattle : CharacterBattle {
         }
     }
 
-    public float PlayAttackAnimation(ComboAction comboAction)
+    public void PlayAttackAnimation(ComboAction comboAction)
     {
-        //Debug.Log("Combo Action name:");
-        //Debug.Log(comboAction.Name);
-
-        //Debug.Log("Active element");
-        //Debug.Log(playerAnimationScript.element);
-
-        if (comboAction.Name == "Light Attack")
-        {
-            if (playerAnimationScript.element == ElementManager.Element.None)
-            {
-                return playerAnimationScript.ChangeAnimationState("light_attack");
-            }
-            else
-            {
-                return playerAnimationScript.ChangeAnimationStateWithElement(playerAnimationScript.element, "light_attack");
-            }            
-        }
-        else if (comboAction.Name == "Medium Attack")
-        {
-            if (playerAnimationScript.element == ElementManager.Element.None)
-            {
-                return playerAnimationScript.ChangeAnimationState("medium_attack");
-            }
-            else
-            {
-                return playerAnimationScript.ChangeAnimationStateWithElement(playerAnimationScript.element, "medium_attack");
-            }
-        }
-        else if (comboAction.Name == "Heavy Attack")
-        {
-            if (playerAnimationScript.element == ElementManager.Element.None)
-            {
-                return playerAnimationScript.ChangeAnimationState("heavy_attack");
-            }
-            else
-            {
-                return playerAnimationScript.ChangeAnimationStateWithElement(playerAnimationScript.element, "heavy_attack");
-            }
-        }
-        else
-        {
-            Debug.Log("PlayAttackAnimation function did not receive a valid input: " + comboAction);
-            return 0;
-        }
+        _pca.PlayElementBasedCustomThanIdle(comboAction.AnimState);
     }
 
     public void WinBattle(int xp, int kills, List<Item> itemDrops)
     {
         int xpForLevel = XpForLevel();
 
-        playerAnimationScript.ChangeAnimationState("absorb");
+        _pca.PlayCustomThanIdle("absorb");
 
         experience += xp;
 
@@ -171,40 +133,12 @@ public class PlayerBattle : CharacterBattle {
 
     public void EndCombat()
     {
-        playerAnimationScript.SwitchFromCombat();
-
         DeactivateSkill();
 
         GetComponent<PlayerMovement>().enabled = true;
 
         SetStats(level);
     }
-
-    public Boolean CheckPlayerReady()
-    {
-        waiter(.25f);
-        // Use flags instead
-        if (playerAnimationScript.CheckIfAnimation("Idle", playerAnimationScript.anim))
-        {
-            return true;
-        }
-        else if (playerAnimationScript.CheckIfAnimation("Death", playerAnimationScript.anim) && playerAnimationScript.CheckIfAnimationIsDone(playerAnimationScript.anim))
-        {
-            return true;
-        }
-        return false;
-    }
-
-    IEnumerator waiter(float numSeconds)
-    {
-        //Wait for 4 seconds
-        yield return new WaitForSeconds(numSeconds);
-    }
-
-    //public void ToggleNormalAttack(Vector3 targetPosition, bool moveAllTheWay)
-    //{
-    //    playerAnimationScript.ToggleNormalAttack(targetPosition, moveAllTheWay);
-    //}
 
     public void SetData(int level, int experience, List<int> skillUses)
     {
@@ -274,8 +208,7 @@ public class PlayerBattle : CharacterBattle {
 
         }
 
-        playerAnimationScript.ChangeAnimationStateWithElement(element, "idle");
-        playerAnimationScript.SetElement(element);
+        _pca.AssignElement(element);
 
         audioSource.clip = elementClips[(int)element].Item1;
         audioSource.time = elementClips[(int)element].Item2;
@@ -285,7 +218,7 @@ public class PlayerBattle : CharacterBattle {
     public void ResetAnimation()
     {
         // Debug.Log("Reseting, element: " + element);
-        playerAnimationScript.ChangeAnimationStateWithElement(element, "idle");
+        _pca.Switch2Idle();
     }
 
     public void ResetElementBonus()
@@ -310,8 +243,8 @@ public class PlayerBattle : CharacterBattle {
             defense = (int)oldValue1;
             earthBonus = false;
         }
-        playerAnimationScript.SetElement(ElementManager.Element.None);
-        playerAnimationScript.ChangeAnimationStateWithElement(element, "idle");
+        
+        _pca.AssignElement(ElementManager.Element.None);
     }
 
     public bool CanUseSkill(SkillAction skill)
@@ -332,15 +265,15 @@ public class PlayerBattle : CharacterBattle {
 
     public void PlayDamagedAnimation()
     {
-        playerAnimationScript.ChangeAnimationState("damaged");
+        _pca.PlayDamaged();
     }
 
     public void PlayDeathAnimation() 
     {
-        playerAnimationScript.ChangeAnimationState("death");
+        _pca.PlayDeath();
     }
 
-    public float AbsorbSkill(ElementManager.Element e)
+    public void AbsorbSkill(ElementManager.Element e)
     {
         int index = (int)e;
         int spellsTaken = UnityEngine.Random.Range(1,4);
@@ -353,7 +286,7 @@ public class PlayerBattle : CharacterBattle {
 
         combo = characterComboPoints;
 
-        return playerAnimationScript.ChangeAnimationState("absorb");
+        _pca.PlayCustomThanIdle("absorb");
     }
 
     public void PlayAbsorbSound()
@@ -381,12 +314,17 @@ public class PlayerBattle : CharacterBattle {
     {
         element = ElementManager.Element.None;
         activeSkill = null;
-        playerAnimationScript.SetElement(element);
+        _pca.AssignElement(element);
     }
 
-    //public override Animator GetAnimator() {return pa.GetAnimator();}
+    public void EscapeFromEnemy()
+    {
+        float escapeDistanceMultiplier = .2f;
 
-    public PlayerCombatAnimation GetPlayerAnimation() { return playerAnimationScript; }
+        Transform camera = Camera.main.transform;
 
-    //public override bool GetIsAttacking() {return pa.isAttacking;}
+        Vector3 direction = camera.position - transform.position;
+
+        transform.position += new Vector3(direction.x, 0, direction.z) * escapeDistanceMultiplier;
+    }
 }

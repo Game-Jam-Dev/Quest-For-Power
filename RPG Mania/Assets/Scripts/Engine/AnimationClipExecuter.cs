@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Engine;
 using Unity.VisualScripting;
 using UnityEditor.Animations;
 using UnityEngine;
@@ -8,30 +9,25 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class AnimationClipExecuter : MonoBehaviour
 {
+    public static int NonLoopedPlayingAnimCount;
+    
     public AnimatorController animatorController;
     
-    private Animator anim;
-    private SpriteRenderer sr;
-    private ElementManager.Element element;
-
-    AnimatorClipInfo[] animatorinfo;
-    string current_animation;
-
-    float blinktime = 0.25f;
-    int numBlinks = 9;
+    private Animator _anim;
 
     private string _currentAnimState;
     private Action _onAnimationFinishedHandler;
-    private Dictionary<string, AnimationClip> _animationClips = new(); 
-        
+    private Dictionary<string, AnimationClip> _animationClips = new();
+
+    private ActiveMarker _noneLoopingAnimMarker = new (() => NonLoopedPlayingAnimCount++, () => NonLoopedPlayingAnimCount--);
+
     private void Awake()
     {
-        TryGetComponent(out anim);
-        TryGetComponent(out sr);
+        TryGetComponent(out _anim);
 
         ReadClips();
         
-        anim.runtimeAnimatorController = animatorController;
+        _anim.runtimeAnimatorController = animatorController;
     }
 
     public void ReadClips()
@@ -62,14 +58,19 @@ public class AnimationClipExecuter : MonoBehaviour
             CancelInvoke("OnAnimationFinished");
             _onAnimationFinishedHandler = null;
         }
-    
+
+        _noneLoopingAnimMarker.Cancel();
+
         // Debug.Log(gameObject.name+ ": change animation to "+newAnimStateName);
     
         _onAnimationFinishedHandler = clip.isLooping ? null : onFinish;
 
-        anim.Play(newAnimStateName);
+        _anim.Play(newAnimStateName);
         _currentAnimState = newAnimStateName;
 
+        _noneLoopingAnimMarker.Set(!clip.isLooping);
+        
+        Debug.Log("starting NonLoopedPlayingAnimCount "+NonLoopedPlayingAnimCount);
         if (_onAnimationFinishedHandler != null)
         {
             Invoke("OnAnimationFinished", clip.length);
@@ -87,16 +88,12 @@ public class AnimationClipExecuter : MonoBehaviour
     //         sr.color = Color.white;
     //     }
     // }
-
-    public void ToggleAnimMovement(bool b)
-    {
-        anim.speed = b ? 1 : 0;
-    }
     
-    //called by unity after when the animation is finished. (Implemented with the invoke Methode)
     private void OnAnimationFinished()
     {
         _onAnimationFinishedHandler.Invoke();
         _onAnimationFinishedHandler = null;
+
+        _noneLoopingAnimMarker.Cancel();
     }
 }

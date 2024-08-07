@@ -22,7 +22,7 @@ public class ComboList
     {
         if (actionList.ContainsKey(key)) return actionList[key];
 
-        else return new ComboAction("Null", 0, EmptyAction);
+        else return new ComboAction("Null", "", 0, EmptyAction);
     }
 
 
@@ -30,9 +30,9 @@ public class ComboList
     {
         actionList = new Dictionary<string, ComboAction>()
         {
-            {"light", new ComboAction("Light Attack", 1, LightAttack)},
-            {"medium", new ComboAction("Medium Attack", 2, MediumAttack)},
-            {"heavy", new ComboAction("Heavy Attack", 3, HeavyAttack)},
+            {"light", new ComboAction("Light Attack", "light_attack", 1, LightAttack)},
+            {"medium", new ComboAction("Medium Attack", "medium_attack", 2, MediumAttack)},
+            {"heavy", new ComboAction("Heavy Attack", "heavy_attack", 3, HeavyAttack)},
         };
     }
 

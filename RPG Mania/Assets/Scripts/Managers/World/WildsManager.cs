@@ -183,7 +183,7 @@ public class WildsManager : WorldManager {
         battleEnemies.Clear();
         enemyPositions.Clear();
 
-        playerBattle.GetPlayerAnimation().EscapeFromEnemy();
+        playerBattle.EscapeFromEnemy();
 
         SwitchToMainCamera();
 

@@ -18,7 +18,7 @@ public class EnemyBattle : CharacterBattle {
     protected GameObject player;
     protected bool isAttacking;
 
-    [SerializeField] protected EnemyAnimation ea;
+    [SerializeField] protected CharacterAnimation ea;
     private EnemyBattleManager enemyBattleManager;
     private GameObject cursorDisplay;
 
@@ -170,7 +170,6 @@ public class EnemyBattle : CharacterBattle {
         level = GameManager.instance.GetPlayerLevel();
         absorbs = 0;
         SetStats();
-        ea.StartFighting();
         comboOrder.SetActive(true);
         ShieldUIImage.SetActive(true);
         ToggleCollider(false);
@@ -179,7 +178,6 @@ public class EnemyBattle : CharacterBattle {
     public void ResetFromFight()
     {
         gameObject.SetActive(true);
-        ea.StopFighting();
         comboOrder.SetActive(false);
         ShieldUIImage.SetActive(false);
 

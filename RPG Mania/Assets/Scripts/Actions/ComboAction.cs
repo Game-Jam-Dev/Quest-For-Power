@@ -5,12 +5,15 @@ public class ComboAction
     public delegate bool ActionDelegate(CharacterBattle self, CharacterBattle target, int comboDepth);
 
     public string Name { get; private set; }
+    
+    public string AnimState { get; private set; }
     public int Cost { get; private set; }
     public ActionDelegate Action { get; private set; }
 
-    public ComboAction(string name, int cost, ActionDelegate action)
+    public ComboAction(string name, string animState, int cost, ActionDelegate action)
     {
         Name = name;
+        AnimState = animState;
         Cost = cost;
         Action = action;
     }

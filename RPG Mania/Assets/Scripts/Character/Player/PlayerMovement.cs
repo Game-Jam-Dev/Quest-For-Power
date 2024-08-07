@@ -15,7 +15,6 @@ public class PlayerMovement : MonoBehaviour {
 
     private AudioSource audioSource;
     [SerializeField] private AudioClip walkSound;
-    public RuntimeAnimatorController explorationController;
 
     private string currentState;
     //Animation States
@@ -37,7 +36,6 @@ public class PlayerMovement : MonoBehaviour {
 
     private void OnEnable()
     {
-        anim.runtimeAnimatorController = explorationController;
         actions.Gameplay.Enable();
 
         actions.Gameplay.Move.performed += MoveCharacter;

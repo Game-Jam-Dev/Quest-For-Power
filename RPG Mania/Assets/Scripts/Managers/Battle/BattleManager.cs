@@ -38,8 +38,6 @@ public class BattleManager : MonoBehaviour {
     Vector3 originalPosition = Vector3.zero;
     List<EnemyBattle> battleEnemies;
 
-    float readyTime = 0;
-
     private void Awake() {
         gameObject.SetActive(false);
         combatResolutionUI = GameObject.Find("CombatResolution");
@@ -103,6 +101,7 @@ public class BattleManager : MonoBehaviour {
         // Slow down game
         //Time.timeScale = 0.1f;
 
+        int debug = 0;
         while (turnOrder.Count > 0) {
             // get next character in order
             CharacterBattle activeCharacter = turnOrder.Peek();
@@ -121,10 +120,17 @@ public class BattleManager : MonoBehaviour {
                     yield return null;
                 }
 
-                while (readyTime != 0 & Time.time < readyTime)
-                    
+                debug = 10000;
+                while (AnimationClipExecuter.NonLoopedPlayingAnimCount != 0)
+                {
+                    if (debug-- < 0)
+                    {
+                        Debug.LogError("endless loop");
+                        break;
+                    }
                     yield return null;
-
+                }
+                
                 // do the absorb action
                 if (absorb)
                 {
@@ -174,8 +180,14 @@ public class BattleManager : MonoBehaviour {
                         used_combo_points += a.Cost;
 
                         // wait for the attack animation to play
-                        while (readyTime != 0 & Time.time <= readyTime)
+                        debug = 10000;
+                        while (AnimationClipExecuter.NonLoopedPlayingAnimCount != 0)
                         {
+                            if (debug-- < 0)
+                            {
+                                Debug.LogError("endless loop");
+                                break;
+                            }
                             yield return null;
                         }
 
@@ -319,7 +331,9 @@ public class BattleManager : MonoBehaviour {
             // Debug.Log("Time: " + Time.time);
             // Debug.Log("Animation duration: " + player.playerAnimationScript.GetCurrentAnimationDuration());
             // Debug.Log("Combo name: " + comboAction.Name);
-            readyTime = Time.time + (activeCharacter as PlayerBattle).PlayAttackAnimation(comboAction);
+            // readyTime = Time.time + (activeCharacter as PlayerBattle).PlayAttackAnimation(comboAction);
+            (activeCharacter as PlayerBattle).PlayAttackAnimation(comboAction);
+            
             // Debug.Log("Ready time after: " + readyTime);
             battleUIManager.SetText($"{activeCharacter.characterName} used {comboAction.Name} at {characterToAttack.characterName}");
             if (hitNumber == 0 & comboAction.Cost == enemyToAttack.firstComboValue) 
@@ -362,7 +376,8 @@ public class BattleManager : MonoBehaviour {
 
     private void Absorb(CharacterBattle activeCharacter)
     {
-        readyTime = Time.time + (activeCharacter as PlayerBattle).AbsorbSkill(characterToAttack.element);
+        // readyTime = Time.time + (activeCharacter as PlayerBattle).AbsorbSkill(characterToAttack.element);
+        (activeCharacter as PlayerBattle).AbsorbSkill(characterToAttack.element);
 
 
         battleUIManager.SetText($"{player.characterName} absorbed the {characterToAttack.element} element from {characterToAttack.characterName}");

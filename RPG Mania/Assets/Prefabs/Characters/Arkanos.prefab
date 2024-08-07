@@ -13,10 +13,11 @@ GameObject:
   - component: {fileID: 8148494517345017235}
   - component: {fileID: 8148494517345017232}
   - component: {fileID: 1432249075295030602}
-  - component: {fileID: 2532281425939248415}
   - component: {fileID: 689032297376394089}
   - component: {fileID: 6066780913169009773}
   - component: {fileID: 3022091106377031734}
+  - component: {fileID: 8317338825254759608}
+  - component: {fileID: 3397871436800124912}
   m_Layer: 0
   m_Name: Arkanos
   m_TagString: Player
@@ -88,7 +89,7 @@ SpriteRenderer:
   m_Size: {x: 1.38, y: 2.3}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!54 &8148494517345017235
@@ -148,7 +149,6 @@ MonoBehaviour:
   hitTarget: 0
   attackClip: {fileID: 8300000, guid: a3f952095cec84440a88eb462db52486, type: 3}
   experience: 0
-  playerAnimationScript: {fileID: 2532281425939248415}
   waterClip: {fileID: 8300000, guid: 6f5a909fdf2f53f42acd639bbf5b3146, type: 3}
   fireClip: {fileID: 8300000, guid: 487b8978220de304795ced49f7886af1, type: 3}
   windClip: {fileID: 8300000, guid: 4ccee905f4ca8f14b86b35af5d4b649e, type: 3}
@@ -166,32 +166,6 @@ MonoBehaviour:
   bonusDefensePercentage: 0.35
   bonusAccuracy: 0.09
   bonusEvasion: 0.09
---- !u!114 &2532281425939248415
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8148494517345017239}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29da8816306486c41bb01b3c89b097fc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anim: {fileID: 0}
-  currentTrigger: 
-  needsJumping: 0
-  direction: {x: 0, y: 0, z: 0}
-  targetPosition: {x: 0, y: 0, z: 0}
-  combatController: {fileID: 9100000, guid: 89e9d453600ddb04fab8615a551cbce4, type: 2}
-  attackDuration: 0
-  damagedDuration: 0
-  blockDuration: 0
-  deathDuration: 0
-  isAttacking: 0
-  isIdle: 1
-  isAttacked: 0
-  isDying: 0
 --- !u!95 &689032297376394089
 Animator:
   serializedVersion: 5
@@ -322,3 +296,28 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8317338825254759608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8148494517345017239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 948395e039b6432886600daedec0924e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animatorController: {fileID: 9100000, guid: 89e9d453600ddb04fab8615a551cbce4, type: 2}
+--- !u!114 &3397871436800124912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8148494517345017239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e10645ac2c0aa8b42b83e09055397b20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

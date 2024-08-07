@@ -3581,18 +3581,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.1845932, y: 2.2682514, z: 6.021514}
   m_Center: {x: -1.0434647, y: -0.15760326, z: -0.51075697}
---- !u!114 &1917670389 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6748454431040536800, guid: ebe76a19dc889d84b94b0d40aa7fcb1f,
-    type: 3}
-  m_PrefabInstance: {fileID: 1252103352188329783}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7d0e1b034143bf4fa687c05d41d1e11, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1929873291
 GameObject:
   m_ObjectHideFlags: 0
@@ -5507,6 +5495,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 11.423889
       objectReference: {fileID: 0}
+    - target: {fileID: 4407355968147251474, guid: ebe76a19dc889d84b94b0d40aa7fcb1f,
+        type: 3}
+      propertyPath: animatorController
+      value: 
+      objectReference: {fileID: 9100000, guid: 6e241c13203dd874281ae6703fdf875d, type: 2}
     - target: {fileID: 4411393478548364663, guid: ebe76a19dc889d84b94b0d40aa7fcb1f,
         type: 3}
       propertyPath: m_Name
@@ -5556,7 +5549,7 @@ PrefabInstance:
         type: 3}
       propertyPath: playerBatle
       value: 
-      objectReference: {fileID: 1917670389}
+      objectReference: {fileID: 0}
     - target: {fileID: 4448248608782420136, guid: ebe76a19dc889d84b94b0d40aa7fcb1f,
         type: 3}
       propertyPath: worldManager
@@ -5892,7 +5885,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: c16bd9a7e7746d8419eb9931d2c2d437, type: 2}
+      objectReference: {fileID: 9100000, guid: 6e241c13203dd874281ae6703fdf875d, type: 2}
     - target: {fileID: 5175322976433007081, guid: ebe76a19dc889d84b94b0d40aa7fcb1f,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -6525,6 +6518,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6748454431040536800, guid: ebe76a19dc889d84b94b0d40aa7fcb1f,
         type: 3}
+      propertyPath: pca
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6748454431040536800, guid: ebe76a19dc889d84b94b0d40aa7fcb1f,
+        type: 3}
       propertyPath: attack
       value: 99
       objectReference: {fileID: 0}
@@ -6885,6 +6883,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7882273466272921781, guid: ebe76a19dc889d84b94b0d40aa7fcb1f,
         type: 3}
+      propertyPath: anim
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7882273466272921781, guid: ebe76a19dc889d84b94b0d40aa7fcb1f,
+        type: 3}
       propertyPath: combatController
       value: 
       objectReference: {fileID: 9100000, guid: 89e9d453600ddb04fab8615a551cbce4, type: 2}
@@ -7179,9 +7182,9 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 3979989081111589116, guid: ebe76a19dc889d84b94b0d40aa7fcb1f, type: 3}
-    - {fileID: 1191754227971644647, guid: ebe76a19dc889d84b94b0d40aa7fcb1f, type: 3}
-    - {fileID: 6238347825706117910, guid: ebe76a19dc889d84b94b0d40aa7fcb1f, type: 3}
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: ebe76a19dc889d84b94b0d40aa7fcb1f, type: 3}
 --- !u!1 &1252103352188329786 stripped
 GameObject:
